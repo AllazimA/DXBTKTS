@@ -5,8 +5,7 @@ const nextConfig = {
     unoptimized: true,
   },
   typescript: {
-    // Temporarily ignore type errors since wealthos will be refactored
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
   webpack: (config, { isServer }) => {
