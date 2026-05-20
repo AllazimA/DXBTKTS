@@ -1,5 +1,14 @@
 'use client'
-import StockAnalysisComponent from '@/components/atlas/pages/StockAnalysis'
-export default function StockAnalysisPage() {
-  return <StockAnalysisComponent />
+import dynamic from 'next/dynamic'
+
+const DynamicComponent = dynamic(
+  () => import('@/components/atlas/pages/StockAnalysis'),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-screen bg-slate-900 flex items-center justify-center"><div className="text-gray-400">Loading dashboard...</div></div> 
+  }
+)
+
+export default function Page() {
+  return <DynamicComponent />
 }

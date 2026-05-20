@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
 import { Calendar, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { format, differenceInDays } from "date-fns";
 

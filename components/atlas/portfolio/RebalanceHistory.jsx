@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { base44 } from "@/api/base44Client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { base44 } from "@/lib/base44Client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
 import { Calendar, User, TrendingUp, TrendingDown } from "lucide-react";
 
 export default function RebalanceHistory({ portfolioId }) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/atlas/ui/badge";
 
 export default function StockDetailPanel({ item, onClose }) {
   if (!item) return null;

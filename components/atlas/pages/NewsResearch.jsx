@@ -1,10 +1,10 @@
 import React from "react";
-import MarketNewsWidget from "../components/toolkit/MarketNewsWidget";
-import EarningsCalendar from "../components/toolkit/EarningsCalendar";
-import AdvisorCalculators from "../components/toolkit/AdvisorCalculators";
-import AdvisorNotes from "../components/toolkit/AdvisorNotes";
-import LiveBusinessTV from "../components/toolkit/LiveBusinessTV";
-import AdvisorQuickActions from "../components/toolkit/AdvisorQuickActions";
+import MarketNewsWidget from "@/components/atlas/toolkit/MarketNewsWidget";
+import EarningsCalendar from "@/components/atlas/toolkit/EarningsCalendar";
+import AdvisorCalculators from "@/components/atlas/toolkit/AdvisorCalculators";
+import AdvisorNotes from "@/components/atlas/toolkit/AdvisorNotes";
+import LiveBusinessTV from "@/components/atlas/toolkit/LiveBusinessTV";
+import AdvisorQuickActions from "@/components/atlas/toolkit/AdvisorQuickActions";
 
 export default function AdvisorToolkit() {
   return (

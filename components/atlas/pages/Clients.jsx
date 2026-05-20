@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "../utils";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atlas/ui/avatar";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
 import {
   Search, Plus, ChevronRight, Calendar, Phone, Mail,
   MessageCircle, User, AlertTriangle,
   FileText, X, Edit2, Trash2, ExternalLink
 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import ClientForm from "../components/clients/ClientForm";
+import { Skeleton } from "@/components/atlas/ui/skeleton";
+import ClientForm from "@/components/atlas/clients/ClientForm";
 import { format, isPast } from "date-fns";
 
 // ── colour maps ───────────────────────────────────────────────────────────────

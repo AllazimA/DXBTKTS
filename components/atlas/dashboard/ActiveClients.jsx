@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "../../utils";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { Avatar, AvatarFallback } from "@/components/atlas/ui/avatar";
+import { Badge } from "@/components/atlas/ui/badge";
 import { CheckCircle2 } from "lucide-react";
 
 const profileColors = {

@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
 import { Clock, TrendingUp } from "lucide-react";
 
 export default function NewsCard({ article, onClick }) {

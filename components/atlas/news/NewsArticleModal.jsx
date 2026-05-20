@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { X, ExternalLink, Clock, Tag, AlertTriangle, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/atlas/ui/button";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
 
 export default function NewsArticleModal({ article, onClose, onSave }) {
   const [showSaveForm, setShowSaveForm] = useState(false);

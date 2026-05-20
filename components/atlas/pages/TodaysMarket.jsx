@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
 import { Globe, BarChart3, Activity, Clock, AlertCircle, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
-import { getQuote } from "@/api/alphaVantage";
+import { getQuote } from "@/lib/alphaVantage";
 
 // Sector ETFs — supported by Alpha Vantage GLOBAL_QUOTE
 const SECTOR_ETFS = [

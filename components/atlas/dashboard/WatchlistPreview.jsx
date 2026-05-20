@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "../../utils";
+import Link from "next/link";
+import { createPageUrl } from "@/lib/atlas-utils";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 export default function WatchlistPreview({ items = [] }) {

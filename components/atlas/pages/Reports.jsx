@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ReportGenerator from "../components/reports/ReportGenerator";
-import DocumentLibrary from "../components/reports/DocumentLibrary";
-import RegulatoryDocuments from "../components/reports/RegulatoryDocuments";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atlas/ui/tabs";
+import ReportGenerator from "@/components/atlas/reports/ReportGenerator";
+import DocumentLibrary from "@/components/atlas/reports/DocumentLibrary";
+import RegulatoryDocuments from "@/components/atlas/reports/RegulatoryDocuments";
 import { 
   generateClientSummaryPDF, 
   generateClientInvestmentSummaryPDF, 
@@ -12,7 +12,7 @@ import {
   generateRiskSuitabilityPDF,
   generateOnePageFactsheetPDF,
   generateKIDWrapperPDF
-} from "../components/reports/PDFGenerator";
+} from "@/components/atlas/reports/PDFGenerator";
 import { toast } from "sonner";
 
 export default function Reports() {

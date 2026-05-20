@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Label } from "@/components/atlas/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
 import { X, Loader2, CheckCircle2, AlertCircle, Search, RefreshCw } from "lucide-react";
-import { base44 } from "@/api/base44Client";
-import { getQuote, getOverview } from "@/api/alphaVantage";
+import { base44 } from "@/lib/base44Client";
+import { getQuote, getOverview } from "@/lib/alphaVantage";
 import { toast } from "sonner";
 
 export default function AddStockForm({ onClose, onSuccess }) {

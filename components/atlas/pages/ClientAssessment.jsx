@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Label } from "@/components/atlas/ui/label";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
+import { Slider } from "@/components/atlas/ui/slider";
+import { Avatar, AvatarFallback } from "@/components/atlas/ui/avatar";
+import { Progress } from "@/components/atlas/ui/progress";
 import {
   CheckCircle2, ChevronRight, ChevronLeft, User, DollarSign,
   Shield, Target, FileCheck, ArrowRight
@@ -66,11 +66,24 @@ function getSuggestedAllocation(category) {
 export default function ClientAssessment() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const urlParams = new URLSearchParams(window.location.search);
-  const preselectedClientId = urlParams.get("clientId");
 
-  const [step, setStep] = useState(preselectedClientId ? 2 : 1);
-  const [selectedClientId, setSelectedClientId] = useState(preselectedClientId || "");
+  // Initialize state without accessing window at top level
+  const [preselectedClientId, setPreselectedClientId] = useState("");
+  const [step, setStep] = useState(1);
+  const [selectedClientId, setSelectedClientId] = useState("");
+
+  // Get URL params client-side only
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const clientId = urlParams.get("clientId");
+      if (clientId) {
+        setPreselectedClientId(clientId);
+        setSelectedClientId(clientId);
+        setStep(2);
+      }
+    }
+  }, []);
 
   const [financial, setFinancial] = useState({
     monthly_income: 0, monthly_expenses: 0, net_surplus: 0,

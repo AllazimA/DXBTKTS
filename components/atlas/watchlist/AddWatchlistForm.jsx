@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Label } from "@/components/atlas/ui/label";
+import { Card, CardContent } from "@/components/atlas/ui/card";
 import { X, Loader2 } from "lucide-react";
 
 export default function AddWatchlistForm({ onSave, onCancel, isSaving }) {

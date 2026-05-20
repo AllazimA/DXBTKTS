@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/atlas/ui/badge";
 import { ExternalLink, Tv } from "lucide-react";
 
 const CHANNELS = [

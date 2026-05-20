@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import { STRATEGY_DESCRIPTIONS } from "./ReportTemplates";
-import { BRAND_CONFIG } from "../BrandLogo";
-import { ASSET_COLORS } from "../portfolio/AssetColors";
+import { BRAND_CONFIG } from "@/components/atlas/BrandLogo";
+import { ASSET_COLORS } from "@/components/atlas/portfolio/AssetColors";
 
 // INSTITUTIONAL DOCUMENT TEMPLATE - Bloomberg-Inspired Design
 // Two-column layout with professional headers and footers on every page

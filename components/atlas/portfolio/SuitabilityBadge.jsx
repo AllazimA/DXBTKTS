@@ -1,7 +1,7 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/atlas/ui/badge";
 import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/atlas/ui/tooltip";
 
 export default function SuitabilityBadge({ client, portfolio }) {
   if (!client || !portfolio) return null;

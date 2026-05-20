@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { base44 } from "@/api/base44Client";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { base44 } from "@/lib/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
 import {
   Zap, FileText, RefreshCw, Shield, TrendingUp,
   ChevronRight, AlertTriangle, CheckCircle2

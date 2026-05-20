@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
-import { getChartColors } from "../portfolio/AssetColors";
+import { getChartColors } from "@/components/atlas/portfolio/AssetColors";
 
 const COLORS = getChartColors();
 

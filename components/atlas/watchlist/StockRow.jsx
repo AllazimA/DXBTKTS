@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
 import {
   TrendingUp, TrendingDown, MoreVertical, Trash2, Sparkles,
   PlusCircle, FileText, ExternalLink
 } from "lucide-react";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/atlas/ui/dropdown-menu";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "../../utils";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
 
 const watchReasonMap = {
   earnings_catalyst:   { label: "Earnings",   color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },

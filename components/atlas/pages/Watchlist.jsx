@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
 import {
   Plus, Search, ArrowUpDown, TrendingUp, TrendingDown,
   AlertCircle, Calendar, DollarSign, Eye, Sparkles,
   RefreshCw, Target, Loader2
 } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/atlas/ui/tabs";
 import { toast } from "sonner";
-import StockRow from "../components/watchlist/StockRow";
-import AddStockForm from "../components/watchlist/AddStockForm";
-import EventSidePanel from "../components/watchlist/EventSidePanel";
-import { getQuote } from "@/api/alphaVantage";
+import StockRow from "@/components/atlas/watchlist/StockRow";
+import AddStockForm from "@/components/atlas/watchlist/AddStockForm";
+import EventSidePanel from "@/components/atlas/watchlist/EventSidePanel";
+import { getQuote } from "@/lib/alphaVantage";
 
 export default function AdvisorWatchboard() {
   const [activeView, setActiveView]     = useState("all");

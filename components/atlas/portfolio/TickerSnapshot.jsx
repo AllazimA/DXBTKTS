@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from "react";
-import { base44 } from "@/api/base44Client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { base44 } from "@/lib/base44Client";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
 import { Download, TrendingUp, TrendingDown, Search, X } from "lucide-react";
 import { toast } from "sonner";
 

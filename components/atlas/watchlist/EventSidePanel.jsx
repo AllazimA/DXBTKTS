@@ -3,11 +3,11 @@ import {
   X, TrendingUp, TrendingDown, Sparkles, ExternalLink,
   Loader2, RefreshCw, Target, BarChart3, Info, PlusCircle
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { getFullStock } from "@/api/alphaVantage";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "../../utils";
+import { Button } from "@/components/atlas/ui/button";
+import { Badge } from "@/components/atlas/ui/badge";
+import { getFullStock } from "@/lib/alphaVantage";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
 
 const FMT_USD = (n) => (n != null && !isNaN(parseFloat(n)) ? `$${parseFloat(n).toLocaleString("en-US", { maximumFractionDigits: 2 })}` : "N/A");
 const FMT_PCT = (n) => (n != null && !isNaN(parseFloat(n)) ? `${(parseFloat(n) * 100).toFixed(2)}%` : "N/A");

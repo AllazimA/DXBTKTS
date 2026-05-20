@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
 import { 
   Archive, 
   TrendingUp, 
@@ -18,7 +18,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/atlas/ui/dropdown-menu";
 
 export default function PortfolioCard({ portfolio, onEdit, onArchive, onActivate, onView, onGenerateReport, onDelete, isProcessing }) {
   const isActive = portfolio.status === "active";

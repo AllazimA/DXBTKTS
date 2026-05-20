@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Textarea } from "@/components/atlas/ui/textarea";
 import { TrendingUp, TrendingDown, DollarSign, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 

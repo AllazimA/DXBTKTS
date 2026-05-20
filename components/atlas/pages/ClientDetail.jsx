@@ -1,35 +1,35 @@
 import React, { useState, useRef } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "../utils";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/atlas/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/atlas/ui/avatar";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Skeleton } from "@/components/atlas/ui/skeleton";
 import {
   ArrowLeft, Mail, Phone, Briefcase, Calendar, Target,
   DollarSign, TrendingUp, Shield, FileText, Edit, Download, Camera, MessageSquare
 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import ClientForm from "../components/clients/ClientForm";
-import InteractionLog from "../components/clients/InteractionLog";
-import InteractionHistory from "../components/clients/InteractionHistory";
-import PortfolioAIAssistant from "../components/portfolio/PortfolioAIAssistant";
-import PortfolioIntelligenceReport from "../components/reports/PortfolioIntelligenceReport";
-import PortfolioCard from "../components/portfolio/PortfolioCard";
-import PerformanceAnalysis from "../components/portfolio/PerformanceAnalysis";
-import RebalanceMonitor from "../components/portfolio/RebalanceMonitor";
-import RebalancingSuggestions from "../components/portfolio/RebalancingSuggestions";
-import RebalanceHistory from "../components/portfolio/RebalanceHistory";
+import ClientForm from "@/components/atlas/clients/ClientForm";
+import InteractionLog from "@/components/atlas/clients/InteractionLog";
+import InteractionHistory from "@/components/atlas/clients/InteractionHistory";
+import PortfolioAIAssistant from "@/components/atlas/portfolio/PortfolioAIAssistant";
+import PortfolioIntelligenceReport from "@/components/atlas/reports/PortfolioIntelligenceReport";
+import PortfolioCard from "@/components/atlas/portfolio/PortfolioCard";
+import PerformanceAnalysis from "@/components/atlas/portfolio/PerformanceAnalysis";
+import RebalanceMonitor from "@/components/atlas/portfolio/RebalanceMonitor";
+import RebalancingSuggestions from "@/components/atlas/portfolio/RebalancingSuggestions";
+import RebalanceHistory from "@/components/atlas/portfolio/RebalanceHistory";
 import {
   generateClientInvestmentSummaryPDF,
   generatePerformanceReportPDF,
   generateOnePageFactsheetPDF
-} from "../components/reports/PDFGenerator";
+} from "@/components/atlas/reports/PDFGenerator";
 
 export default function ClientDetail() {
   const urlParams = new URLSearchParams(window.location.search);

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Badge } from "@/components/atlas/ui/badge";
 import { Bot, Send, Sparkles, Loader2 } from "lucide-react";
 
 export default function PortfolioAIAssistant({ portfolio, client, holdings }) {

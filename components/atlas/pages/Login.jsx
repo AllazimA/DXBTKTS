@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
+import { base44 } from '@/lib/base44Client';
 import { useAuth } from '@/lib/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@/components/atlas/ui/button';
+import { Input } from '@/components/atlas/ui/input';
+import { Label } from '@/components/atlas/ui/label';
 import BrandLogo from '@/components/BrandLogo';
 
 export default function Login() {

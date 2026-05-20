@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/atlas/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Badge } from "@/components/atlas/ui/badge";
 import { Paperclip, Maximize, Minimize, Volume2 } from "lucide-react";
 import { format } from "date-fns";
 

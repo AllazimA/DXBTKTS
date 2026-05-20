@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Label } from "@/components/atlas/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
+import { Slider } from "@/components/atlas/ui/slider";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
 import { CheckCircle2, Shield } from "lucide-react";
 
 function calculateRiskScore(answers) {

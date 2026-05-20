@@ -1,8 +1,14 @@
 'use client'
+import dynamic from 'next/dynamic'
 
-import React from 'react'
-import DashboardComponent from '@/components/atlas/pages/Dashboard'
+const DynamicComponent = dynamic(
+  () => import('@/components/atlas/pages/Dashboard'),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-screen bg-slate-900 flex items-center justify-center"><div className="text-gray-400">Loading dashboard...</div></div> 
+  }
+)
 
-export default function DashboardPage() {
-  return <DashboardComponent />
+export default function Page() {
+  return <DynamicComponent />
 }

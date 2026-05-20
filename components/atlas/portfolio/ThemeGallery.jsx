@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/atlas/ui/button";
+import { Badge } from "@/components/atlas/ui/badge";
 import { PORTFOLIO_THEMES, THEME_CATEGORIES, getCategoryBadgeColor, getRiskBadgeColor } from "./ThemeLibrary";
 import { Sparkles, TrendingUp, Shield, Leaf, DollarSign, Coins } from "lucide-react";
 

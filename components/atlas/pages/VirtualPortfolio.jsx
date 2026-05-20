@@ -8,12 +8,12 @@ import {
   Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   ResponsiveContainer, BarChart, Bar
 } from 'recharts';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { getQuote, searchSymbol, getFullStock } from '@/api/alphaVantage';
-import { getCoinGeckoPrice, searchCoinGecko, isCryptoSymbol, getCryptoId } from '@/api/coingecko';
-import { getQuote as tdGetQuote, searchSymbols as tdSearchSymbols } from '@/api/twelvedata';
+import { Input } from '@/components/atlas/ui/input';
+import { Button } from '@/components/atlas/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/atlas/ui/dialog";
+import { getQuote, searchSymbol, getFullStock } from '@/lib/alphaVantage';
+import { getCoinGeckoPrice, searchCoinGecko, isCryptoSymbol, getCryptoId } from '@/lib/coingecko';
+import { getQuote as tdGetQuote, searchSymbols as tdSearchSymbols } from '@/lib/twelvedata';
 import { toast } from 'sonner';
 
 const PORTFOLIO_HISTORY = [

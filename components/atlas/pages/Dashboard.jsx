@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
-import { base44 } from "@/api/base44Client";
+import { base44 } from "@/lib/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { createPageUrl } from "../utils";
-import { Button } from "@/components/ui/button";
+import { useNavigate } from "@/lib/navigation-adapter";
+import { createPageUrl } from "@/lib/atlas-utils";
+import { Button } from "@/components/atlas/ui/button";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { getColorForAsset } from "../components/portfolio/AssetColors";
+import { getColorForAsset } from "@/components/atlas/portfolio/AssetColors";
 import { format, isPast, isWithinInterval, addDays, differenceInDays } from "date-fns";
 import {
   DollarSign, TrendingUp, AlertTriangle, Users, ArrowUp, ArrowDown,

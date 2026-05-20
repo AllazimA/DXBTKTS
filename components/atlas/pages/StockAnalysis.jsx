@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { getFullStock } from "@/api/alphaVantage";
+import { getFullStock } from "@/lib/alphaVantage";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/atlas/ui/button";
+import { Input } from "@/components/atlas/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Skeleton } from "@/components/atlas/ui/skeleton";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/atlas/ui/tabs";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { Search, TrendingUp, TrendingDown, BarChart3, DollarSign, Activity, Percent, Target, Shield, AlertTriangle, CheckCircle, Zap, Bot, Send, X } from "lucide-react";
-import SECFilings from "../components/stock/SECFilings";
+import SECFilings from "@/components/atlas/stock/SECFilings";
 
 export default function StockAnalysis() {
   const [ticker, setTicker] = useState("");

@@ -1,6 +1,6 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Card } from "@/components/atlas/ui/card";
 import { User, Target, TrendingUp, Clock, AlertCircle } from "lucide-react";
 
 export default function ClientContextBar({ client }) {

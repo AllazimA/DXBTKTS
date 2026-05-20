@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/atlas/ui/badge";
 import { User, Target, TrendingUp, Clock, DollarSign, Calendar } from "lucide-react";
 
 export default function ClientSnapshotBar({ client }) {

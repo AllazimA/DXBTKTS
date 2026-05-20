@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atlas/ui/card";
+import { Button } from "@/components/atlas/ui/button";
+import { Textarea } from "@/components/atlas/ui/textarea";
+import { Badge } from "@/components/atlas/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atlas/ui/select";
 import { FileText, Save, Archive, Paperclip, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";

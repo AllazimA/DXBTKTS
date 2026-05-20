@@ -1,5 +1,14 @@
 'use client'
-import PortfolioBuilderComponent from '@/components/atlas/pages/PortfolioBuilder'
-export default function PortfolioBuilderPage() {
-  return <PortfolioBuilderComponent />
+import dynamic from 'next/dynamic'
+
+const DynamicComponent = dynamic(
+  () => import('@/components/atlas/pages/PortfolioBuilder'),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-screen bg-slate-900 flex items-center justify-center"><div className="text-gray-400">Loading dashboard...</div></div> 
+  }
+)
+
+export default function Page() {
+  return <DynamicComponent />
 }
