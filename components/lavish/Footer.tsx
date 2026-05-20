@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Instagram, Facebook, Linkedin } from 'lucide-react'
+import { Instagram, Facebook, Linkedin, MessageCircle } from 'lucide-react'
 
 const services = [
   'Bespoke Travel Planning',
@@ -50,6 +50,11 @@ export default function Footer() {
                 style={{ fontSize: 12, color: '#C8BFA8', textDecoration: 'none', letterSpacing: '0.05em', transition: 'color 0.25s' }}
                 className="hover:text-[#C4A35A]">
                 contact@lavishmorocco.com
+              </a>
+              <a href="https://wa.me/212653905828"
+                style={{ fontSize: 12, color: '#C8BFA8', textDecoration: 'none', letterSpacing: '0.05em', transition: 'color 0.25s' }}
+                className="hover:text-[#C4A35A]">
+                WhatsApp: +212 653 90 58 28
               </a>
               <span style={{ fontSize: 12, color: '#6B6355', letterSpacing: '0.05em' }}>
                 Agadir, Morocco
@@ -122,6 +127,7 @@ export default function Footer() {
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {([
+                  { label: 'WhatsApp', href: 'https://wa.me/212653905828', Icon: MessageCircle },
                   { label: 'Instagram', href: 'https://www.instagram.com/lavishmorocco2024/', Icon: Instagram },
                   { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61556491596473', Icon: Facebook },
                   { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/lavishmorocco/about/', Icon: Linkedin },
