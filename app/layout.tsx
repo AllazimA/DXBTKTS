@@ -4,22 +4,22 @@ import { Providers } from '@/components/providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Lavish Morocco | Bespoke Luxury Concierge & Lifestyle Management',
-  description: 'Experience world-class luxury concierge services in Morocco. Bespoke travel, accommodation, and lifestyle management for those who demand the finest.',
-  keywords: ['Luxury Concierge', 'Morocco', 'Bespoke Services', 'Travel', 'Lifestyle Management', 'Agadir'],
+  title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
+  description: 'Experience premium wealth management with WealthOS and luxury concierge services with Lavish Morocco. Integrated solutions for modern wealth management.',
+  keywords: ['Wealth Management', 'Investment Dashboard', 'Luxury Concierge', 'Financial Planning', 'Real-time Market Data', 'Portfolio Management'],
   authors: [{ name: 'Ahmed Allazim' }],
   openGraph: {
-    title: 'Lavish Morocco | Bespoke Luxury Concierge',
-    description: 'Experience world-class bespoke concierge services in Morocco.',
-    url: 'https://lavish-morocco.vercel.app',
-    siteName: 'Lavish Morocco',
+    title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
+    description: 'Premium wealth management with WealthOS and luxury concierge services with Lavish Morocco.',
+    url: 'https://atlas-wealth.vercel.app',
+    siteName: 'Atlas Wealth',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lavish Morocco | Bespoke Luxury Concierge',
-    description: 'Experience world-class bespoke concierge services in Morocco.',
+    title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
+    description: 'Premium wealth management with WealthOS and luxury concierge services with Lavish Morocco.',
   },
   viewport: 'width=device-width, initial-scale=1',
   themeColor: [

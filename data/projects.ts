@@ -1,5 +1,32 @@
 export const projects = [
   {
+    id: 1,
+    title: 'AI-Powered Wealth Management & CRM Platform',
+    subtitle: 'Fintech Innovation',
+    period: 'Jan 2025 – Feb 2026',
+    tags: ['AI', 'Wealth Management', 'CRM', 'Automation'],
+    color: 'from-gold-500/20 to-amber-500/10',
+    borderColor: 'border-gold-500/30',
+    icon: 'BrainCircuit',
+    iconColor: 'text-gold-400',
+    iconBg: 'bg-gold-500/10 border-gold-500/20',
+    links: [
+      { label: 'WealthOS App', url: 'https://wealth-os-d93bd04e.base44.app/' },
+      { label: 'Neo CRM App', url: 'https://neo-crm-8ab2c17c.base44.app/' },
+      { label: 'CFA L1 Study Coach', url: 'https://cfa-study-coach.base44.app/Dashboard' },
+      { label: 'UAE Mortgage Calculator', url: 'https://uaemorgagecalculator.netlify.app/' },
+    ],
+    problem: 'Traditional CRM systems fail to handle the nuanced, relationship-driven nature of HNWI wealth management — leaving relationship managers with fragmented data and manual workflows.',
+    solution: 'Designed and built three AI-powered business applications focused on productivity, client management, and wealth advisory workflows. Integrated intelligent profiling, automated follow-ups, and portfolio analytics.',
+    impact: [
+      'Streamlined client lifecycle from onboarding to ongoing advisory',
+      'Reduced manual CRM tasks by 60%+ through automation',
+      'Built AI-driven wealth advisory recommendation engine',
+      'Enabled scalable client management for HNWI/UHNWI profiles',
+    ],
+    featured: true,
+  },
+  {
     id: 2,
     title: 'Northern Emirates Market Penetration & Client Acquisition',
     subtitle: 'Strategic Banking Expansion',
