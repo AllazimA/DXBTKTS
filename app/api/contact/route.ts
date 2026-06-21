@@ -90,6 +90,8 @@ export async function POST(request: NextRequest) {
 </div>
     `.trim()
 
+    console.log('Sending email via Resend:', { from: 'hello@lavishmorocco.com', to: 'contact@lavishmorocco.com', name, email })
+
     const result = await resend.emails.send({
       from: 'Lavish Morocco <hello@lavishmorocco.com>',
       to: 'contact@lavishmorocco.com',
@@ -97,6 +99,8 @@ export async function POST(request: NextRequest) {
       subject: `Concierge Request from ${name}`,
       html: emailContent,
     })
+
+    console.log('Resend response:', { success: !result.error, error: result.error, id: result.data?.id })
 
     if (result.error) {
       console.error('Resend error:', result.error)
