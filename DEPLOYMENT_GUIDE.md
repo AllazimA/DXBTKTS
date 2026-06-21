@@ -1,183 +1,177 @@
-# Vercel Deployment Guide - Atlas Wealth
+# DXB TKTS — Deployment Guide
 
-## ✅ Completed
-
-The landing page has been successfully created and tested locally. All core components are ready for deployment:
-
-- ✅ **Landing Page** (`/app/page.tsx`) - Professional landing page introducing both Lavish Morocco and WealthOS
-- ✅ **Routing** (`vercel.json`) - Updated to serve landing page as root
-- ✅ **SEO Metadata** (`/app/layout.tsx`) - Updated with Atlas Wealth branding
-- ✅ **Development Testing** - Landing page loads successfully on `localhost:3000`
+> Production deployment checklist and instructions for launching the luxury concierge website.
 
 ---
 
-## 📋 Deployment Checklist
+## Pre-Deployment Checklist
 
-### Step 1: Configure Environment Variables in Vercel
+### Code Quality
+- [ ] `npm run lint` passes with zero errors
+- [ ] `npm run build` completes without warnings or errors
+- [ ] TypeScript strict mode enabled
+- [ ] All environment variables documented in `.env.example`
+- [ ] No hardcoded secrets in source code
 
-Go to your Vercel project dashboard and add these environment variables:
+### Performance & SEO
+- [ ] Lighthouse score ≥95 
+- [ ] Core Web Vitals: LCP <2.5s, FID <100ms, CLS <0.1
+- [ ] Sitemap at `/sitemap.xml`
+- [ ] `robots.txt` configured
+- [ ] Mobile responsive (320px to 2560px)
 
-**Firebase (WealthOS Authentication):**
-```
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyA5oTl6C94-3GfbnmhCWZ1R6HKkcvrD93M
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=wealthos-cac68.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=wealthos-cac68
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=wealthos-cac68.firebasestorage.app
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=931695057109
-NEXT_PUBLIC_FIREBASE_APP_ID=1:931695057109:web:31b71c5ae0df6d72a9aa5c
-```
+### Accessibility
+- [ ] axe DevTools: zero violations
+- [ ] WCAG 2.1 AA compliance
+- [ ] Visible focus states
+- [ ] Color contrast AAA
+- [ ] `prefers-reduced-motion` respected
 
-**Payment Processing:**
-```
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51TG10VRswW2dpQPkd15FUMueC4T8drMzX1atCvjN8o2TJNidC4mhkxXVQzW2sG3qWN5AUWGeDLM3P8boFQum7sFp00hRiWXG3F
-STRIPE_SECRET_KEY=STRIPE_KEY_REMOVED
-NEXT_PUBLIC_PAYPAL_CLIENT_ID=Afffw2u4QPOT-Q5ELMQ8BILzWN5wV5fcQ0iz-lMdROv2Q29Cq4iX36WKCYzCSa9Vo5fSKn_YUZF_CWgd
-```
+### Internationalization
+- [ ] EN content complete
+- [ ] AR translations with RTL verified
+- [ ] FR translations complete
+- [ ] Locale switcher functional
 
-**Email Service:**
-```
-RESEND_API_KEY=re_ddNfnAFb_PiHEXfU4oEqaNee8X3BKYRaL
-```
+### Forms & API
+- [ ] Contact form validation
+- [ ] API endpoints respond correctly
+- [ ] Error messages clear
+- [ ] Form logging ready for Zoho CRM
 
-**Site Configuration:**
-```
-NEXT_PUBLIC_SITE_URL=https://your-vercel-domain.vercel.app
-```
+### Brand & Design
+- [ ] DXB color palette throughout
+- [ ] Consistent typography
+- [ ] Images optimized
+- [ ] No placeholder content visible
 
-### Step 2: Deploy to Vercel
+### Security
+- [ ] HTTPS enabled (Vercel handles)
+- [ ] Dependencies clean (`npm audit`)
+- [ ] No console errors in production
+- [ ] Secrets in env vars, never in code
 
-Option A: **Automatic Deployment** (Recommended)
+---
+
+## Deployment to Vercel
+
+### 1. Connect Repository
 ```bash
-git add .
-git commit -m "feat: Add landing page and prepare for Vercel deployment"
-git push
+# In Vercel dashboard:
+# 1. Go to https://vercel.com/new
+# 2. Connect GitHub repository
+# 3. Select "Next.js" framework
+# 4. Review build settings
 ```
-Vercel will automatically detect the push and deploy your changes.
 
-Option B: **Manual Deployment**
+### 2. Configure Environment Variables
+Vercel Dashboard → Settings → Environment Variables:
+
+```
+NEXT_PUBLIC_APP_URL=https://dxbtkts.com
+NEXT_PUBLIC_WHATSAPP_NUMBER=+971XXXXXXXXX
+ZOHO_CRM_API_TOKEN=your_token
+NEXT_PUBLIC_ZOHO_ORG_ID=your_org_id
+```
+
+### 3. Deploy
 ```bash
-# Install Vercel CLI if you haven't already
-npm i -g vercel
+# Automatic: Push to main (Vercel auto-deploys)
+git push origin main
 
-# Deploy to production
+# Manual: Use Vercel CLI
+npm install -g vercel
 vercel --prod
 ```
 
-### Step 3: Verify Deployment
+### 4. Configure Custom Domain
+Vercel Dashboard → Settings → Domains:
+- Add `dxbtkts.com`
+- Configure DNS records
+- Wait 24 hours for propagation
 
-After deployment completes:
-
-1. **Test Landing Page**
-   - Navigate to your Vercel domain (e.g., `https://atlas-wealth.vercel.app`)
-   - Verify all sections load correctly
-   - Check responsive design on mobile/tablet/desktop
-
-2. **Test Navigation**
-   - Click "Browse Services" button → Should navigate to `/lavish-morocco`
-   - Click "Access Dashboard" button → Should navigate to `/wealthos`
-   - Verify both apps load properly
-
-3. **Test Sub-Applications**
-   - Visit `/lavish-morocco` → Luxuryfronterior site should load
-   - Visit `/wealthos` → Wealth dashboard with Firebase login should appear
-   - Test Firebase authentication with: `a.allazim@gmail.com`
-
-4. **Check Browser Console**
-   - Open DevTools (F12)
-   - Check Console tab for any errors
-   - Should be clean or only show minor warnings
-
-5. **Test Form Submissions** (if applicable)
-   - Test Lavish Morocco contact form
-   - Verify Resend email service is working
+### 5. Verify
+```bash
+curl https://dxbtkts.com/
+curl https://dxbtkts.com/ar
+curl https://dxbtkts.com/fr
+```
 
 ---
 
-## 🔗 Important URLs
+## Post-Deployment Verification
 
-After deployment, you'll have:
-
-| URL | Purpose |
-|-----|---------|
-| `https://atlas-wealth.vercel.app/` | Landing page (new) |
-| `https://atlas-wealth.vercel.app/lavish-morocco` | Luxury concierge site |
-| `https://atlas-wealth.vercel.app/wealthos` | Wealth dashboard |
-
----
-
-## 📊 Demo Credentials
-
-**Email:** `a.allazim@gmail.com`
-
-Display this prominently to users who want to test WealthOS:
-- Located on landing page in "Demo Access" section
-- Also available on WealthOS login page
-- Valid for Firebase authentication
+- [ ] Homepage loads without errors
+- [ ] Locale switching works (EN/AR/FR)
+- [ ] Contact form submits
+- [ ] Images display correctly
+- [ ] Lighthouse score visible
+- [ ] No console errors
 
 ---
 
-## 🚀 Post-Deployment Steps
+## Zoho CRM Integration
 
-1. **Monitor Performance**
-   - Check Vercel Analytics for page load times
-   - Monitor Core Web Vitals
-   - Check for any errors in Vercel Logs
-
-2. **Update DNS** (if using custom domain)
-   - Go to Vercel project settings
-   - Add custom domain
-   - Update DNS records according to Vercel instructions
-
-3. **Optional Enhancements**
-   - Add Google Analytics
-   - Set up error tracking (Sentry)
-   - Configure CDN caching headers
-
-4. **Backup Plan**
-   - Keep local `.env.local` with all secrets
-   - Document all Vercel environment variables
-   - Set up alerts for failed deployments
+1. Get Zoho credentials (API token, Org ID)
+2. Add to Vercel env vars (never in code)
+3. Uncomment stubs in `lib/api/zoho.ts`
+4. Update `/api/enquiry` to call real API
+5. Test end-to-end form submission
 
 ---
 
-## 🛠️ Troubleshooting
+## Ongoing Maintenance
 
-### Landing page shows 404
-- Check that `/app/page.tsx` exists and has proper exports
-- Verify `vercel.json` doesn't have conflicting redirects
-- Clear Vercel build cache and redeploy
+**Weekly:**
+- Check error logs
+- Verify form submissions to Zoho
+- Spot-check for broken links
 
-### Firebase authentication not working
-- Verify all Firebase environment variables are set correctly
-- Check that Firebase project is not in a restricted region
-- Ensure test email account exists in Firebase console
+**Monthly:**
+- Lighthouse audit
+- Review analytics
+- Test forms/API
 
-### Stripe payments failing
-- Verify API keys are from the correct Stripe account (test vs live)
-- Check that webhook endpoints are configured
-- Review Stripe dashboard for payment logs
-
-### Sub-applications not loading
-- Check that `/app/lavish-morocco/` and `/app/wealthos/` directories exist
-- Verify all imports and dependencies are available
-- Check Vercel deployment logs for specific errors
+**Quarterly:**
+- Accessibility audit
+- Content review
+- Performance optimization
+- Dependencies security update
 
 ---
 
-## 📝 Notes
+## Rollback
 
-- This landing page replaces the previous redirect to `/lavish-morocco`
-- All existing functionality in Lavish Morocco and WealthOS is preserved
-- No database changes required for this deployment
-- All authentication handled by Firebase (WealthOS) and Resend (emails)
+If deployment breaks site:
+
+```bash
+# Vercel Auto-Rollback (easiest)
+# Dashboard → Deployments → Click last-good → Promote
+
+# Manual Rollback
+git revert <commit-hash>
+git push origin main
+```
 
 ---
 
-**Ready to Deploy?**
+## Useful Commands
 
-1. Ensure all environment variables are configured in Vercel
-2. Push changes to main branch (or use `vercel --prod`)
-3. Monitor deployment progress in Vercel dashboard
-4. Run verification tests from "Step 3" above
-5. Celebrate! 🎉
+```bash
+npm run dev          # Dev server
+npm run build        # Production build
+npm run lint         # Lint & type check
+npm audit            # Security audit
+npm audit fix        # Auto-fix vulnerabilities
+vercel --prod        # Deploy to production
+```
 
+---
+
+**Resources:**
+- Vercel: https://vercel.com/support
+- Next.js: https://nextjs.org/docs
+- Zoho CRM API: https://www.zoho.com/crm/developer/docs/
+- Tailwind: https://tailwindcss.com
+
+Last Updated: June 2024
