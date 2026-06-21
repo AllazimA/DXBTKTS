@@ -75,12 +75,25 @@ export default function ContactPage() {
     e.preventDefault()
     setSubmitting(true)
     try {
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-    } catch (_) {}
+      const data = await response.json()
+      console.log('Contact form response:', { status: response.status, data })
+      if (!response.ok) {
+        console.error('Form submission failed:', data)
+        alert('Error submitting form: ' + (data.error || 'Unknown error'))
+        setSubmitting(false)
+        return
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert('Error submitting form: ' + (error instanceof Error ? error.message : 'Unknown error'))
+      setSubmitting(false)
+      return
+    }
     setSubmitting(false)
     setSubmitted(true)
   }
