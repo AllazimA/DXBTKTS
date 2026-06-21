@@ -35,7 +35,10 @@
       "Bash(cp -r out/lavish-morocco lavish-deploy/lavish-morocco)",
       "Bash(cp -r out/lavish lavish-deploy/lavish)",
       "Bash(cp -r out/videos lavish-deploy/videos)",
-      "Bash(cp -r out/images lavish-deploy/images)"
+      "Bash(cp -r out/images lavish-deploy/images)",
+      "Bash(sleep 8 && tail -20 /tmp/dev.log)",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__find"
     ]
   }
 }

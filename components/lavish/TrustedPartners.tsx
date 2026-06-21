@@ -162,7 +162,7 @@ export default function TrustedPartners() {
               { icon: '✦', text: 'Discreet & Personalised Service' },
               { icon: '✦', text: 'Global Concierge Network' },
               { icon: '✦', text: '10+ Years in Luxury Hospitality' },
-              { icon: '✦', text: 'UHNW Client Specialists' },
+              { icon: '✦', text: 'Curated for Discerning Travellers' },
             ].map(({ icon, text }, i) => (
               <motion.div
                 key={text}

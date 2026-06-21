@@ -42,7 +42,7 @@ const team = [
   {
     name: 'Sofia Amrani',
     title: 'Senior Concierge Manager',
-    bio: 'With a background in private banking client services and hospitality management, Sofia ensures that every guest\'s experience is seamless from first contact to fond farewell.',
+    bio: 'With a background in luxury hospitality client services and relationship management, Sofia ensures that every guest\'s experience is seamless from first contact to fond farewell.',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&auto=format&fit=crop',
   },
 ]
@@ -52,7 +52,7 @@ const milestones = [
   { year: '2023', event: 'Completed the operational prototype and established a trusted network of over 150 premium partners and service providers across Morocco.' },
   { year: '2023', event: 'Entered the sandbox phase, successfully curating and delivering services to VVIP clientele.' },
   { year: '2024', event: 'Delivered over 100 curated experiences to an international clientele spanning 15+ nationalities.' },
-  { year: '2025', event: 'Launched an exclusive lifestyle management retainer tailored for UHNW clients, offering end-to-end bespoke services and privileged access.' },
+  { year: '2025', event: 'Launched an exclusive lifestyle management retainer tailored for discerning individuals, offering end-to-end bespoke services and privileged access.' },
 ]
 
 const fadeUp = {
@@ -128,7 +128,7 @@ export default function AboutPage() {
                 </motion.p>
                 <motion.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} custom={3}
                   style={{ fontSize: 15, color: '#C8BFA8', lineHeight: 1.85, marginBottom: 20 }}>
-                  Our founder, Ahmed Allazim, brings over a decade of experience at the intersection of luxury hospitality, lifestyle management, and finance — with leadership roles at Quintessentially and Aspire Lifestyles — to build a concierge service that would show Morocco as it truly deserves to be seen.
+                  Our founder, Ahmed Allazim, brings over a decade of experience in luxury hospitality and lifestyle management — with leadership roles at Quintessentially and Aspire Lifestyles — to build a concierge service that would show Morocco as it truly deserves to be seen.
                 </motion.p>
                 <motion.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} custom={4}
                   style={{ fontSize: 15, color: '#C8BFA8', lineHeight: 1.85, marginBottom: 40 }}>
@@ -310,10 +310,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                 style={{ paddingTop: 8 }}>
                 <p style={{ fontSize: 15, color: '#C8BFA8', lineHeight: 1.9, marginBottom: 20 }}>
-                  Born with a global outlook and a deep appreciation for refined living, Ahmed Allazim brings over a decade of experience at the intersection of luxury hospitality, lifestyle management, and finance. His career spans leading international concierge and lifestyle brands such as Quintessentially and Aspire Lifestyles, where he curated bespoke experiences for high-net-worth individuals across Europe and the Middle East.
+                  Born with a global outlook and a deep appreciation for refined living, Ahmed Allazim brings over a decade of experience in luxury hospitality and lifestyle management. His career spans leading international concierge and lifestyle brands such as Quintessentially and Aspire Lifestyles, where he curated bespoke experiences for discerning clients across Europe and the Middle East.
                 </p>
                 <p style={{ fontSize: 15, color: '#C8BFA8', lineHeight: 1.9, marginBottom: 20 }}>
-                  Throughout his journey, Ahmed has developed an instinct for discretion, personalisation, and excellence — managing complex client portfolios, orchestrating seamless global travel, and delivering highly tailored lifestyle solutions. Complementing this is his strong financial background, providing him with a strategic understanding of wealth, investment priorities, and the expectations of sophisticated clientele.
+                  Throughout his journey, Ahmed has developed an instinct for discretion, personalisation, and excellence — orchestrating seamless global experiences, managing intricate client requirements, and delivering highly tailored lifestyle solutions. His deep understanding of luxury service expectations and sophisticated clientele needs enables him to design experiences that exceed the highest standards.
                 </p>
                 <p style={{ fontSize: 15, color: '#C8BFA8', lineHeight: 1.9, marginBottom: 20 }}>
                   What inspired Lavish Morocco was not just opportunity — but perspective. Having experienced the highest standards of service globally, Ahmed recognised that Morocco's richness — its culture, landscapes, and heritage — was often presented without the level of refinement it truly deserves. He envisioned a new standard: one that merges authentic Moroccan experiences with world-class execution.
@@ -325,7 +325,7 @@ export default function AboutPage() {
                 <div style={{ display: 'flex', gap: 48, paddingTop: 32, borderTop: '1px solid rgba(196,163,90,0.15)' }}>
                   {[
                     { stat: '10+', label: 'Years of Expertise' },
-                    { stat: 'UHNW', label: 'Client Focus' },
+                    { stat: '100+', label: 'Experiences Delivered' },
                     { stat: '2022', label: 'Founded' },
                   ].map(({ stat, label }) => (
                     <div key={label}>

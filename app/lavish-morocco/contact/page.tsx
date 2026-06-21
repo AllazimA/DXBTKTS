@@ -233,8 +233,8 @@ export default function ContactPage() {
                       </button>
                     </motion.div>
                   ) : (
-                    <form name="concierge-request" onSubmit={handleSubmit} data-netlify="true" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                      <input type="hidden" name="form-name" value="concierge-request" />
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+
                       <div style={{
                         border: '1px solid rgba(196,163,90,0.15)',
                         padding: '48px',

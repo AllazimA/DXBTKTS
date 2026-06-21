@@ -4,27 +4,27 @@ import { Providers } from '@/components/providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
-  description: 'Experience premium wealth management with WealthOS and luxury concierge services with Lavish Morocco. Integrated solutions for modern wealth management.',
-  keywords: ['Wealth Management', 'Investment Dashboard', 'Luxury Concierge', 'Financial Planning', 'Real-time Market Data', 'Portfolio Management'],
+  title: 'Lavish Morocco | Luxury Concierge & Lifestyle Management',
+  description: 'Bespoke luxury concierge and lifestyle management in Morocco. VIP experiences, private travel, and exclusive accommodations for discerning travelers.',
+  keywords: ['luxury concierge Morocco', 'VIP travel', 'bespoke experiences', 'private tours', 'Agadir concierge', 'lifestyle management'],
   authors: [{ name: 'Ahmed Allazim' }],
   openGraph: {
-    title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
-    description: 'Premium wealth management with WealthOS and luxury concierge services with Lavish Morocco.',
-    url: 'https://atlas-wealth.vercel.app',
-    siteName: 'Atlas Wealth',
+    title: 'Lavish Morocco | Luxury Concierge & Lifestyle Management',
+    description: 'Bespoke luxury concierge and lifestyle management in Morocco.',
+    url: 'https://lavishmorocco.com',
+    siteName: 'Lavish Morocco',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Atlas Wealth | Luxury Concierge & Wealth Management',
-    description: 'Premium wealth management with WealthOS and luxury concierge services with Lavish Morocco.',
+    title: 'Lavish Morocco | Luxury Concierge & Lifestyle Management',
+    description: 'Bespoke luxury concierge and lifestyle management in Morocco.',
   },
   viewport: 'width=device-width, initial-scale=1',
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#050814' },
-    { media: '(prefers-color-scheme: light)', color: '#f8f7f4' },
+    { media: '(prefers-color-scheme: dark)', color: '#080808' },
+    { media: '(prefers-color-scheme: light)', color: '#f5f0e8' },
   ],
 }
 
