@@ -10,6 +10,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        dxb: {
+          ink: '#0E1B2C',
+          navy: '#13294B',
+          'navy-light': '#1a3a62',
+          'gold': '#B08D3F',
+          'gold-hover': '#8C6E2E',
+          'ivory': '#FBFAF7',
+          'band': '#F3F1EC',
+          'slate': '#5A6B7B',
+          'slate-light': '#7a8b9b',
+        },
         lavish: {
           black: '#080808',
           charcoal: '#111111',

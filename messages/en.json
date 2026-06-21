@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "membership": "Membership",
+    "corporate": "Corporate",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "headline": "Your Time Matters Most",
+    "subheading": "We anticipate what you need before you ask. Discreet. Effortless. Always available.",
+    "cta": "Request an Invitation",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "footer": {
+    "copyright": "© 2024 DXB TKTS. All rights reserved. Discretion is our guarantee.",
+    "contact": "hello@dxbtkts.com"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "membership": "Adhésions",
+    "corporate": "Entreprise",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "headline": "Votre Temps Est Précieux",
+    "subheading": "Nous anticipons vos besoins avant que vous les exprimiez. Discrétion. Élégance. Toujours disponibles.",
+    "cta": "Demander une Invitation",
+    "whatsapp": "Discuter sur WhatsApp"
+  },
+  "footer": {
+    "copyright": "© 2024 DXB TKTS. Tous droits réservés. La discrétion est notre garantie.",
+    "contact": "hello@dxbtkts.com"
+  }
+}

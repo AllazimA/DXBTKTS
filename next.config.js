@@ -1,14 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost', 'images.unsplash.com'],
-    unoptimized: true,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'localhost' },
+    ],
+    unoptimized: false,
   },
-  typescript: {
-    // Temporarily ignore type errors since wealthos will be refactored
-    ignoreBuildErrors: true,
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'disabled'],
+  webpack: (config, { isServer }) => {
+    config.watchOptions = {
+      ignored: ['**/.disabled', '**/node_modules/**'],
+    }
+    return config
   },
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
   webpack: (config, { isServer }) => {
     // Handle libsql bindings and excluded file types
     config.resolve.fallback = {
