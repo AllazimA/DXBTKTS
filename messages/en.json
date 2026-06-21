@@ -13,6 +13,14 @@
     "cta": "Request an Invitation",
     "whatsapp": "Chat on WhatsApp"
   },
+  "whatWeDo": {
+    "anticipate": "Anticipate, Don't React",
+    "anticipateDesc": "We study your preferences, your patterns, your world. Before you need something, we're ready.",
+    "discretion": "Absolute Confidentiality",
+    "discretionDesc": "Your privacy is sacred. Every conversation, every transaction, every detail stays between us and you.",
+    "access": "24/7 Global Access",
+    "accessDesc": "Impossible request at 3 AM? We're here. We find a way. Your clock drives us, not ours."
+  },
   "footer": {
     "copyright": "© 2024 DXB TKTS. All rights reserved. Discretion is our guarantee.",
     "contact": "hello@dxbtkts.com"
