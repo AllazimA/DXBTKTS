@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "portfolio",
+      "name": "dxbtkts",
       "runtimeExecutable": "/opt/homebrew/bin/npm",
-      "runtimeArgs": ["run", "dev", "--", "-p", "3009"],
-      "port": 3009
+      "runtimeArgs": ["run", "dev"],
+      "port": 3006
     },
     {
       "name": "dxbvip",
@@ -18,14 +18,14 @@
       "runtimeExecutable": "/opt/homebrew/bin/npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3001"],
       "port": 3001,
-      "cwd": "/Users/ahmeda/Cowork Playground/Portfolio/nexus-crm"
+      "cwd": "/Users/ahmeda/Cowork Playground/DXBTKTS/nexus-crm"
     }
     ,{
       "name": "wealthos-deploy",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8899"],
       "port": 8899,
-      "cwd": "/Users/ahmeda/Cowork Playground/Portfolio/wealthos-deploy"
+      "cwd": "/Users/ahmeda/Cowork Playground/DXBTKTS/wealthos-deploy"
     }
     ,{
       "name": "atlas-wealth",

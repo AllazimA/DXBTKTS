@@ -8,7 +8,7 @@ echo "📦 Installing PM2..."
 npm install -g pm2 > /dev/null 2>&1
 
 # Go to project directory
-cd "/Users/ahmeda/Cowork Playground/Portfolio"
+cd "/Users/ahmeda/Cowork Playground/DXBTKTS"
 
 # Start the dev server with PM2 on port 3009
 echo "⚙️  Starting dev server..."
