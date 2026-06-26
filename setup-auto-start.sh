@@ -10,9 +10,9 @@ npm install -g pm2 > /dev/null 2>&1
 # Go to project directory
 cd "/Users/ahmeda/Cowork Playground/Portfolio"
 
-# Start the dev server with PM2
+# Start the dev server with PM2 on port 3009
 echo "⚙️  Starting dev server..."
-pm2 start "npm run dev" --name "atlas-wealth" > /dev/null 2>&1
+pm2 start "npm run dev -- -p 3009" --name "atlas-wealth" > /dev/null 2>&1
 
 # Make PM2 restart on system reboot
 echo "🔄 Setting up auto-restart on system reboot..."
@@ -23,7 +23,7 @@ pm2 save > /dev/null 2>&1
 echo "✅ Complete! Your Atlas Wealth dashboard is now set up to run automatically."
 echo ""
 echo "📍 Access your dashboard at:"
-echo "   http://localhost:3000/dashboard"
+echo "   http://localhost:3009/en"
 echo ""
 echo "💾 Bookmark this link for easy access!"
 echo ""

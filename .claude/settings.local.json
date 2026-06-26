@@ -38,7 +38,40 @@
       "Bash(cp -r out/images lavish-deploy/images)",
       "Bash(sleep 8 && tail -20 /tmp/dev.log)",
       "mcp__Claude_in_Chrome__computer",
-      "mcp__Claude_in_Chrome__find"
+      "mcp__Claude_in_Chrome__find",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Read(//Users/ahmeda/**)",
+      "Bash(npx create-next-app@latest financeos --typescript --tailwind --app --no-eslint --no-git --src-dir=false)",
+      "Bash(npx shadcn-ui@latest init -d --yes)",
+      "Bash(npx shadcn@latest init -d --yes)",
+      "Bash(npx tsx *)",
+      "Bash(sqlite3 /Users/ahmeda/Cowork Playground/FinanceOS/prisma/dev.db)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(killall node *)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(tail -30 /tmp/financeos.log)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(curl -s http://localhost:3001/accounts)",
+      "Bash(curl -s http://localhost:3001/api/accounts)",
+      "Bash(curl -s http://localhost:3001/transactions)",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(curl -s http://localhost:3009/)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/ahmeda/Cowork Playground/AtlasWealth\" && npm run dev > /tmp/atlas_dev.log 2>&1 &",
+            "statusMessage": "Starting Atlas Wealth dev server...",
+            "async": true
+          }
+        ]
+      }
     ]
   }
 }

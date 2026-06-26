@@ -1,11 +1,5 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
-import { notFound } from 'next/navigation'
-import { getMessages } from 'next-intl/server'
-import { NextIntlClientProvider } from 'next-intl'
-import { locales, defaultLocale, localeMeta, type Locale } from '@/i18n.config'
-import { ThemeProvider } from 'next-themes'
-import { Providers } from '@/components/providers'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -55,33 +49,15 @@ export const metadata: Metadata = {
   },
 }
 
-type Props = {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode
-  params: { locale: Locale }
-}
-
-export async function generateStaticParams() {
-  return locales.map(locale => ({ locale }))
-}
-
-export default async function LocaleLayout({ children, params: { locale } }: Props) {
-  if (!locales.includes(locale)) {
-    notFound()
-  }
-
-  const messages = await getMessages()
-  const dir = localeMeta[locale].dir
-
+}) {
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={`${cormorant.variable} ${inter.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <NextIntlClientProvider messages={messages}>
-            <Providers>
-              {children}
-            </Providers>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )
