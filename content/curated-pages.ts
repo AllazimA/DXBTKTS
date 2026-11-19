@@ -149,3 +149,13 @@ export const navExtra = {
   nightlife: t('Nightlife', 'Vie nocturne', 'الحياة الليلية'),
   sourcing: t('Limited-edition sourcing', 'Éditions limitées', 'الإصدارات المحدودة'),
 }
+
+export const moodCaptions = {
+  chef: t('Every plate, finished by hand', 'Chaque assiette, finie à la main', 'كل طبق يُكمَّل يدوياً'),
+  table: t('A long table, made for sharing', 'Une longue table, faite pour partager', 'مائدة طويلة للمشاركة'),
+  occasion: t('A table set for the occasion', 'Une table dressée pour l’occasion', 'طاولة مُعدّة للمناسبة'),
+  cocktail: t('The first drink of the night', 'Le premier verre de la soirée', 'أول مشروب في الليلة'),
+  lounge: t('A private box above the show', 'Une loge privée au-dessus du spectacle', 'مقصورة خاصة فوق العرض'),
+  rooftop: t('A table with the city at your feet', 'Une table, la ville à vos pieds', 'طاولة والمدينة عند قدميك'),
+  arrival: t('Your car, waiting at the door', 'Votre voiture, qui vous attend à la porte', 'سيارتك بانتظارك عند الباب'),
+}

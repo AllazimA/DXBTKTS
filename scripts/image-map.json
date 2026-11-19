@@ -73,5 +73,32 @@
   "product-personal-shopping-sourcing": "Personal_shopper_meeting_client_2K.jpg",
   "product-watches-fine-jewellery-discovery": "Client_exploring_luxury_boutique_2K.jpg",
   "product-theme-park-day": "Family_arriving_at_theme_park_a80af10e_2K.jpg",
-  "product-aquaventure-waterpark": "Aquaventure_waterpark_66778330_2K.jpg"
+  "product-aquaventure-waterpark": "Aquaventure_waterpark_66778330_2K.jpg",
+  "dining-hero": "Table_for_two_at_restaurant_bcde22b5_2K.jpg",
+  "dining-strip-chef": {
+    "file": "Chef_plating_food_with_tweezers_c096ec94_2K_crop-plate.jpg",
+    "gravity": "Center"
+  },
+  "dining-strip-table": {
+    "file": "Friends_sharing_dinner_at_table_873da544_2K.jpg",
+    "gravity": "Center"
+  },
+  "dining-strip-occasion": {
+    "file": "Waiter_placing_cake_at_table_df817085_2K_crop-cake.jpg",
+    "gravity": "Center"
+  },
+  "dining-form-bg": "Plated_course_on_dining_table_40f91639_2K_no-camera.jpg",
+  "nightlife-strip-cocktail": {
+    "file": "Bartender_pouring_cocktail_174b8588_2K.jpg",
+    "gravity": "Center"
+  },
+  "nightlife-strip-arrival": {
+    "file": "Chauffeur_opening_luxury_car_door_e6c4c52e_2K_crop-guests.jpg",
+    "gravity": "Center"
+  },
+  "nightlife-hero": "Friends_raising_glasses_at_rooftop_9927add4_2K.jpg",
+  "nightlife-strip-lounge": {
+    "file": "Guests_enjoying_VIP_lounge_2K.jpg",
+    "gravity": "East"
+  }
 }

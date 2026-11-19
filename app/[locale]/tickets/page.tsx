@@ -10,6 +10,8 @@ import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { EventCalendar } from '@/components/whats-on/event-calendar'
 import { ShowsSection } from '@/components/curated/shows-section'
 import { getEvents } from '@/lib/curated'
+import { BackgroundFilm } from '@/components/ui/background-film'
+import { site } from '@/lib/site'
 
 // Dubai Opera events are published from the DXB CRM at any time: read them on every request.
 export const dynamic = 'force-dynamic'
@@ -33,6 +35,7 @@ export default async function WhatsOnPage({ params: { locale } }: { params: { lo
     <>
       <section className="relative min-h-[62vh] flex items-end bg-dxb-ink text-white overflow-hidden">
         <Image src={HERO.src ?? ''} alt={HERO.alt} fill priority sizes="100vw" className="object-cover" />
+        <BackgroundFilm {...site.films.nightlifeLounge} />
         <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink via-dxb-ink/50 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-dxb-ink via-dxb-ink/70 to-transparent rtl:bg-gradient-to-l" />
         <div className="relative w-full max-w-6xl mx-auto px-6 pt-32 pb-14 md:pb-20">

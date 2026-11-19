@@ -10,14 +10,19 @@ const root = fileURLToPath(new URL('..', import.meta.url))
 const map = JSON.parse(readFileSync(`${root}scripts/image-map.json`, 'utf8'))
 mkdirSync(`${root}public/images/ai`, { recursive: true })
 let ok = 0
-for (const [slot, file] of Object.entries(map)) {
+// A slot is "file.jpg", or { file, gravity } for a portrait crop aimed at part of the picture.
+for (const [slot, entry] of Object.entries(map)) {
   if (slot.startsWith('_')) continue
+  const file = typeof entry === 'string' ? entry : entry.file
+  const gravity = typeof entry === 'string' ? 'center' : entry.gravity ?? 'center'
+  // Mood-strip images (*-strip-*) are 4:5 portraits.
   const src = `${root}assets-originals/ai/${file}`
   if (!existsSync(src)) { console.warn(`missing original for ${slot}: ${file}`); continue }
   const out = `${root}public/images/ai/${slot}.webp`
-  const size = slot === 'og-default' ? '1200x630^' : slot === 'section-philosophy' ? '1600x2000^' : '2400x'
+  const portrait = slot === 'section-philosophy' || slot.includes('-strip-')
+  const size = slot === 'og-default' ? '1200x630^' : portrait ? '1600x2000^' : '2400x'
   const args = [src, '-resize', size]
-  if (slot === 'og-default' || slot === 'section-philosophy') args.push('-gravity', 'center', '-extent', size.replace('^', ''))
+  if (slot === 'og-default' || portrait) args.push('-gravity', gravity, '-extent', size.replace('^', ''))
   args.push('-strip', '-quality', '80', '-set', 'comment', '© DXBTKTS. All rights reserved.', out)
   execFileSync('magick', args)
   ok++

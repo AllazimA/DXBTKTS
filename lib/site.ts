@@ -24,6 +24,7 @@ export const site = {
   /** Page-hero films (AI-generated for DXBTKTS). */
   films: {
     diningTerrace: { mp4: '/videos/dining-terrace.mp4', mobile: '/videos/dining-terrace-mobile.mp4', poster: '/images/film-dining-terrace-poster.webp' },
+    nightlifeLounge: { mp4: '/videos/nightlife-lounge.mp4', mobile: '/videos/nightlife-lounge-mobile.mp4', poster: '/images/film-nightlife-lounge-poster.webp' },
   },
   /** Pre-launch announcement bar. Set enabled: false on launch day. */
   comingSoon: { enabled: true },

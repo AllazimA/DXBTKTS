@@ -9,6 +9,7 @@
 - These files are DXBTKTS brand assets. Do not reuse them for any other company or project.
 - Masters live in `assets-originals/` (not served, not in git). Web copies are generated with `node scripts/build-ai-images.mjs`.
 - Each web copy carries the comment "© DXBTKTS. All rights reserved."
+- `Crowd_at_night_beach_party_47976ae8_2K.jpg` is NOT used: banners read "THE COLOSSAL ARENA — WORLD'S BIGGEST CLUB". Regenerate without text if an open-air party image is wanted.
 - Images showing third-party names or text must be regenerated before launch: `Supercar_dubai autodrome_2K.jpg` (venue signage) and `Tailor-made UAE Itinerary.jpg` (unused: garbled whiteboard text).
 
 ## Film
@@ -16,6 +17,8 @@
 |---|---|
 | `public/videos/hero-loop.mp4` (1080p) | `video/Yacht_cruising_Dubai_Marina_1080p.mp4` |
 | `public/videos/hero-loop-mobile.mp4` (960×540) | same master |
+| `public/videos/nightlife-lounge.mp4` (1080p, played forward then backward, no audio; hero film on /tickets) | `video/Animate_image_into_luxury_video_1080p.mp4` |
+| `public/videos/nightlife-lounge-mobile.mp4` (960×540) and `public/images/film-nightlife-lounge-poster.webp` | same master |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |
@@ -79,6 +82,15 @@
 | `public/images/ai/page-membership.webp` | `Guests_enjoying_VIP_lounge_2K.jpg` |
 | `public/images/ai/page-shopping.webp` | `Shopper_assisting_client_2K.jpg` |
 | `public/images/ai/page-proposal.webp` | `Man_proposing_on_beachfront_terrace_2K.jpg` |
+| `public/images/ai/dining-hero.webp` | `Table_for_two_at_restaurant_bcde22b5_2K.jpg` |
+| `public/images/ai/dining-strip-chef.webp` | `Chef_plating_food_with_tweezers_c096ec94_2K_crop-plate.jpg` (crop of `Chef_plating_food_with_tweezers_c096ec94_2K.jpg`) |
+| `public/images/ai/dining-strip-table.webp` | `Friends_sharing_dinner_at_table_873da544_2K.jpg` |
+| `public/images/ai/dining-strip-occasion.webp` | `Waiter_placing_cake_at_table_df817085_2K_crop-cake.jpg` (crop of `Waiter_placing_cake_at_table_df817085_2K.jpg`) |
+| `public/images/ai/dining-form-bg.webp` | `Plated_course_on_dining_table_40f91639_2K_no-camera.jpg` (stray camera cropped out) |
+| `public/images/ai/nightlife-strip-cocktail.webp` | `Bartender_pouring_cocktail_174b8588_2K.jpg` |
+| `public/images/ai/nightlife-hero.webp` | `Friends_raising_glasses_at_rooftop_9927add4_2K.jpg` |
+| `public/images/ai/nightlife-strip-lounge.webp` | `Guests_enjoying_VIP_lounge_2K.jpg` (right-hand portrait crop) |
+| `public/images/ai/nightlife-strip-arrival.webp` | `Chauffeur_opening_luxury_car_door_e6c4c52e_2K_crop-guests.jpg` (crop from x=1090: keeps the guests and chauffeur, leaves out what the full image shows on the left a real hotel's name, "Jumeirah Al Qasr", and car badges — never use the full frame) |
 - 2026-11-19: blog-etiquette, blog-family, blog-where-to-stay, blog-desert-safari — owner's AI images, © DXBTKTS
 - 2026-11-19: blog-old-dubai — owner's AI image, © DXBTKTS
 - 2026-11-19: blog-desert-safari replaced with owner's 'Choosing Dubai desert safari' image, © DXBTKTS
