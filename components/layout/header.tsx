@@ -59,10 +59,10 @@ export function Header() {
     { href: '/about', label: t('about') },
     { href: '/experiences', label: t('experiences') },
     { href: '/services', label: t('services') },
-    { href: '/membership', label: t('membership') },
-    { href: '/tickets', label: t('tickets') },
     { href: '/dining', label: t('restaurants') },
     { href: '/nightlife', label: t('nightlife') },
+    { href: '/tickets', label: t('tickets') },
+    { href: '/membership', label: t('membership') },
     { href: '/blog', label: t('blog') },
     { href: '/contact', label: t('contact') },
   ]
