@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X, Trash2, CalendarDays, MessageCircle, CheckCircle2, Lock } from 'lucide-react'
+import { X, Trash2, CalendarDays,  CheckCircle2, Lock } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { priceItems } from '@/lib/catalogue/pricing'
 import { formatAED } from '@/lib/catalogue/money'
 import { whatsappLink } from '@/lib/site'
 import { usePlan } from './plan-provider'
 import { productHref } from './product-card'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 const input = 'mt-1.5 w-full border border-dxb-band bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-dxb-gold'
 
@@ -211,7 +212,7 @@ export function PlanDrawer() {
                       </div>
                     )}
                     <a href={whatsappLink(whatsappMessage)} target="_blank" rel="noopener noreferrer" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 border border-dxb-ink/20 text-dxb-ink text-sm font-semibold hover:border-dxb-gold">
-                      <MessageCircle className="w-4 h-4" /> {tp('whatsappInstead')}
+                      <WhatsAppIcon className="w-4 h-4 text-[#25D366]" /> {tp('whatsappInstead')}
                     </a>
                   </form>
                 </>

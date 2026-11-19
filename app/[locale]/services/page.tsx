@@ -10,6 +10,7 @@ import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { SceneImage as Picture } from '@/components/ui/scene-image'
 import { site, whatsappLink } from '@/lib/site'
 import { BackgroundFilm } from '@/components/ui/background-film'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 const HERO = aiImage('page-services', 'fineDining', 'A DXB TKTS concierge meeting a client in Dubai')
 
@@ -47,7 +48,8 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
             <Link href="/request" className="px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase text-center hover:bg-dxb-clay-hover transition-colors">
               {c.cta[locale]}
             </Link>
-            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-white/40 text-white text-sm font-semibold tracking-[0.12em] uppercase text-center hover:border-dxb-gold hover:text-dxb-gold transition-colors">
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2.5 px-8 py-4 border border-white/40 text-white text-sm font-semibold tracking-[0.12em] uppercase text-center hover:border-dxb-gold hover:text-dxb-gold transition-colors">
+              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
               WhatsApp
             </a>
           </div>

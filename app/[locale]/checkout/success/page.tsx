@@ -8,6 +8,7 @@ import { recordPaidSession } from '@/lib/payments'
 import { formatAED } from '@/lib/catalogue/money'
 import { whatsappLink } from '@/lib/site'
 import { ClearPlan } from '@/components/checkout/clear-plan'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: { absolute: 'Payment | DXB TKTS' }, robots: { index: false, follow: false } }
@@ -59,7 +60,8 @@ export default async function CheckoutSuccess({ params: { locale }, searchParams
           </>
         )}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover">
+          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover">
+            <WhatsAppIcon className="w-4 h-4" />
             {c.whatsapp[locale]}
           </a>
           <Link href="/" className="px-8 py-4 border border-dxb-ink/20 text-dxb-ink text-sm font-semibold tracking-[0.12em] uppercase hover:border-dxb-gold">

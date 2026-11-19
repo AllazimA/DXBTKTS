@@ -8,6 +8,7 @@ import { ChevronDown, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PlanButton } from '@/components/catalogue/plan-drawer'
+import { Flag } from '@/components/ui/flag'
 
 export function Header() {
   const t = useTranslations('nav')
@@ -79,7 +80,7 @@ export function Header() {
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="hidden xl:flex items-center gap-4 2xl:gap-8">
+          <nav className="hidden xl:flex items-center gap-3 2xl:gap-8">
             {navLinks.map(link => {
               const active = isActive(link.href)
               return (
@@ -108,8 +109,10 @@ export function Header() {
                 onClick={() => setLocaleOpen(!localeOpen)}
                 aria-expanded={localeOpen}
                 aria-haspopup="menu"
-                className="flex items-center gap-1 text-[15px] font-medium text-white/85 hover:text-dxb-gold transition-colors"
+                aria-label={`Language: ${localeMeta[locale].name}`}
+                className="flex items-center gap-1.5 text-[15px] font-medium text-white/85 hover:text-dxb-gold transition-colors"
               >
+                <Flag locale={locale} />
                 <span className="2xl:hidden uppercase text-[13px] tracking-[0.12em]">{locale === 'ar' ? localeMeta[locale].name : locale}</span>
                 <span className="hidden 2xl:inline">{localeMeta[locale].name}</span>
                 <ChevronDown
@@ -118,20 +121,23 @@ export function Header() {
               </button>
 
               {localeOpen && (
-                <div className="absolute top-full end-0 mt-3 min-w-[9rem] bg-dxb-ink border border-white/10 shadow-2xl">
+                <div role="menu" className="absolute top-full end-0 mt-3 min-w-[11rem] bg-dxb-ink border border-white/10 shadow-2xl">
                   {locales.map(l => (
                     <a
                       key={l}
                       href={getLocalizedPath(l)}
                       hrefLang={l}
                       lang={l}
-                      className={`block px-5 py-2.5 text-sm transition-colors ${
+                      role="menuitem"
+                      aria-current={locale === l ? 'true' : undefined}
+                      className={`flex items-center gap-3 px-5 py-2.5 text-sm transition-colors ${
                         locale === l
                           ? 'text-dxb-gold bg-white/5 font-medium'
                           : 'text-white/70 hover:text-white hover:bg-white/5'
                       }`}
                       onClick={() => setLocaleOpen(false)}
                     >
+                      <Flag locale={l} />
                       {localeMeta[l].name}
                     </a>
                   ))}
@@ -141,7 +147,7 @@ export function Header() {
 
             <Link
               href="/request"
-              className="hidden sm:inline-block whitespace-nowrap px-5 2xl:px-7 py-3 bg-dxb-clay text-white text-[12px] font-semibold tracking-[0.14em] uppercase transition-all duration-300 hover:bg-dxb-clay-hover "
+              className="hidden sm:inline-block whitespace-nowrap px-4 2xl:px-7 py-3 bg-dxb-clay text-white text-[12px] font-semibold tracking-[0.14em] uppercase transition-all duration-300 hover:bg-dxb-clay-hover "
             >
               {th('enquire')}
             </Link>
@@ -189,7 +195,7 @@ export function Header() {
                 </motion.div>
               ))}
               <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
                   {locales.map(l => (
                     <a
                       key={l}
@@ -197,10 +203,12 @@ export function Header() {
                       hrefLang={l}
                       lang={l}
                       onClick={() => setMenuOpen(false)}
-                      className={`text-sm ${
+                      aria-current={locale === l ? 'true' : undefined}
+                      className={`inline-flex items-center gap-2 text-sm ${
                         locale === l ? 'text-dxb-gold font-medium' : 'text-white/60'
                       }`}
                     >
+                      <Flag locale={l} />
                       {localeMeta[l].name}
                     </a>
                   ))}

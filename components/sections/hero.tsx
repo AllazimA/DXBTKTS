@@ -8,6 +8,7 @@ import { ChevronDown } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { site, whatsappLink } from '@/lib/site'
 import { heroImage } from '@/lib/images'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 const CHAPTERS = [
   { key: 'sand', href: '/experiences/desert' },
@@ -124,8 +125,11 @@ export function Hero() {
           </Link>
           <a
             href={whatsappLink()}
-            className="px-10 py-4 border border-white/40 text-white font-medium tracking-wide transition-all duration-300 hover:border-dxb-gold hover:text-dxb-gold hover:bg-white/5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2.5 px-10 py-4 border border-white/40 text-white font-medium tracking-wide transition-all duration-300 hover:border-dxb-gold hover:text-dxb-gold hover:bg-white/5"
           >
+            <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
             {t('whatsapp')}
           </a>
         </motion.div>

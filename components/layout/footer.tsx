@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { site, whatsappLink } from '@/lib/site'
 import { SocialLinks } from '@/components/layout/social-links'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 export function Footer() {
   const t = useTranslations('footer')
@@ -99,8 +100,11 @@ export function Footer() {
             </a>
             <a
               href={whatsappLink()}
-              className="mt-3 inline-block text-sm text-white/65 hover:text-dxb-gold transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-sm text-white/65 hover:text-dxb-gold transition-colors"
             >
+              <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
               {t('whatsapp')}
             </a>
             <h4 className="mt-10 text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-4">{tx('follow')}</h4>

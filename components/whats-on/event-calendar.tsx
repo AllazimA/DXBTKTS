@@ -10,6 +10,7 @@ import { whatsappLink } from '@/lib/site'
 import { usePlan } from '@/components/catalogue/plan-provider'
 import { getProduct } from '@/data/catalogue'
 import { formatAED } from '@/lib/catalogue/money'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 const intlLocale: Record<Locale, string> = { en: 'en-GB', fr: 'fr-FR', ar: 'ar-AE-u-nu-latn' }
 const CATEGORIES: EventCategory[] = ['entertainment', 'sport', 'culture', 'lifestyle', 'business']
@@ -161,8 +162,9 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
                     href={whatsappLink(`${c.ticketsWhatsAppMessage[locale]} ${e.name[locale]} — ${e.start ? dateRange(locale, e) : monthLabel(locale, e.month!)}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-semibold text-dxb-ink underline underline-offset-4 hover:text-dxb-gold"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-dxb-ink underline underline-offset-4 hover:text-dxb-gold"
                   >
+                    <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
                     {c.ticketsWhatsApp[locale]}
                   </a>
                 </div>

@@ -2,13 +2,14 @@
 
 import { useMemo, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { Check, Minus, Plus, MessageCircle , Lock } from 'lucide-react'
+import { Check, Minus, Plus,  Lock } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import type { PlanItem, Product } from '@/lib/catalogue/types'
 import { perPersonHint, priceItem } from '@/lib/catalogue/pricing'
 import { approx, formatAED } from '@/lib/catalogue/money'
 import { whatsappLink } from '@/lib/site'
 import { usePlan } from './plan-provider'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 function tomorrow() {
   const d = new Date()
@@ -218,7 +219,7 @@ export function BookingPanel({ product }: { product: Product }) {
           rel="noopener noreferrer"
           className="mt-3 w-full inline-flex items-center justify-center gap-2 px-6 py-3 border border-dxb-ink/20 text-dxb-ink text-sm font-semibold hover:border-dxb-gold hover:text-dxb-gold transition-colors"
         >
-          <MessageCircle className="w-4 h-4" /> {t('askWhatsApp')}
+          <WhatsAppIcon className="w-4 h-4 text-[#25D366]" /> {t('askWhatsApp')}
         </a>
         <p className="mt-4 text-xs text-dxb-slate leading-relaxed">{t('whatHappens')} {t('chargedInAED')}</p>
       </div>

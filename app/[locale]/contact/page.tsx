@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { site, whatsappLink } from '@/lib/site'
 import { SocialLinks } from '@/components/layout/social-links'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'contact', '/contact')
@@ -76,13 +77,15 @@ export default async function Contact() {
 
                 {/* WhatsApp */}
                 <div className="flex gap-4">
-                  <Phone className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
+                  <WhatsAppIcon className="w-6 h-6 text-[#25D366] flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
                       {t('whatsapp')}
                     </p>
                     <a
                       href={whatsappLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-dxb-slate hover:text-dxb-gold transition"
                     >
                       {t('whatsappCta')}

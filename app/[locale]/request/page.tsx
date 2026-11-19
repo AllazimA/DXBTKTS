@@ -6,6 +6,7 @@ import { Clock, ShieldCheck, Sparkles } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { whatsappLink } from '@/lib/site'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'request', '/request')
@@ -65,9 +66,12 @@ export default async function RequestPage() {
 
             <a
               href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-12 inline-flex items-center gap-3 text-sm font-semibold tracking-[0.2em] uppercase text-dxb-gold group"
             >
               <span className="h-px w-10 bg-dxb-gold transition-all duration-300 group-hover:w-16" />
+              <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
               {t('whatsappCta')}
             </a>
           </div>
