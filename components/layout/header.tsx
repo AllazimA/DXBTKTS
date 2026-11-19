@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { locales, localeMeta, type Locale } from '@/i18n.config'
 import { ChevronDown, Menu, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PlanButton } from '@/components/catalogue/plan-drawer'
 import { Flag } from '@/components/ui/flag'
@@ -18,6 +18,8 @@ export function Header() {
   const [localeOpen, setLocaleOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [diningOpen, setDiningOpen] = useState(false)
+  const diningRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -30,7 +32,18 @@ export function Header() {
   useEffect(() => {
     setMenuOpen(false)
     setLocaleOpen(false)
+    setDiningOpen(false)
   }, [pathname])
+
+  // Close the Dining & Nightlife menu on an outside click or Escape
+  useEffect(() => {
+    if (!diningOpen) return
+    const onDown = (e: MouseEvent) => { if (!diningRef.current?.contains(e.target as Node)) setDiningOpen(false) }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setDiningOpen(false) }
+    document.addEventListener('mousedown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey) }
+  }, [diningOpen])
 
   const getLocalizedPath = (newLocale: Locale) => {
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/'
@@ -40,6 +53,7 @@ export function Header() {
     return pathWithoutLocale === '/' ? `/${newLocale}` : `/${newLocale}${pathWithoutLocale}`
   }
 
+  // Home is the wordmark; the desktop bar has no separate Home link, to make room for Dining & Nightlife.
   const navLinks = [
     { href: '/', label: t('home') },
     { href: '/about', label: t('about') },
@@ -47,6 +61,8 @@ export function Header() {
     { href: '/services', label: t('services') },
     { href: '/membership', label: t('membership') },
     { href: '/tickets', label: t('tickets') },
+    { href: '/dining', label: t('restaurants') },
+    { href: '/nightlife', label: t('nightlife') },
     { href: '/blog', label: t('blog') },
     { href: '/contact', label: t('contact') },
   ]
@@ -82,12 +98,51 @@ export function Header() {
           {/* Desktop navigation */}
           <nav className="hidden xl:flex items-center gap-3 2xl:gap-8">
             {navLinks.map(link => {
+              if (link.href === '/' || link.href === '/nightlife') return null
+              if (link.href === '/dining') {
+                const active = isActive('/dining') || isActive('/nightlife')
+                return (
+                  <div key="dining" ref={diningRef} className="relative" onMouseEnter={() => setDiningOpen(true)} onMouseLeave={() => setDiningOpen(false)}>
+                    <button
+                      type="button"
+                      onClick={() => setDiningOpen(o => !o)}
+                      aria-expanded={diningOpen}
+                      aria-haspopup="menu"
+                      className={`group relative flex items-center gap-1 py-1.5 text-[13px] 2xl:text-[14px] font-medium tracking-[0.1em] 2xl:tracking-[0.14em] uppercase whitespace-nowrap transition-colors ${
+                        active ? 'text-dxb-gold' : 'text-white/90 hover:text-dxb-gold'
+                      }`}
+                    >
+                      <span className="2xl:hidden">{t('diningShort')}</span>
+                      <span className="hidden 2xl:inline">{t('diningNightlife')}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${diningOpen ? 'rotate-180' : ''}`} />
+                      <span className={`absolute -bottom-0.5 left-0 h-[2px] bg-dxb-gold transition-all duration-300 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                    </button>
+                    {diningOpen && (
+                      <div role="menu" className="absolute top-full start-0 pt-3 min-w-[12rem]">
+                        <div className="bg-dxb-ink border border-white/10 shadow-2xl">
+                          {[{ href: '/dining', label: t('restaurants') }, { href: '/nightlife', label: t('nightlife') }].map(item => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              role="menuitem"
+                              onClick={() => setDiningOpen(false)}
+                              className={`block px-5 py-3 text-sm tracking-[0.08em] transition-colors ${isActive(item.href) ? 'text-dxb-gold bg-white/5' : 'text-white/75 hover:text-white hover:bg-white/5'}`}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              }
               const active = isActive(link.href)
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`group relative py-1.5 text-[13px] 2xl:text-[14px] font-medium tracking-[0.12em] 2xl:tracking-[0.14em] uppercase transition-colors ${
+                  className={`group relative py-1.5 text-[13px] 2xl:text-[14px] font-medium tracking-[0.1em] 2xl:tracking-[0.14em] uppercase whitespace-nowrap transition-colors ${
                     active ? 'text-dxb-gold' : 'text-white/90 hover:text-dxb-gold'
                   }`}
                 >

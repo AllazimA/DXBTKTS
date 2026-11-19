@@ -10,7 +10,11 @@
     "plan": "الخطة",
     "experiences": "التجارب",
     "membership": "العضوية",
-    "tickets": "التذاكر"
+    "tickets": "التذاكر",
+    "diningNightlife": "المطاعم والسهر",
+    "diningShort": "المطاعم",
+    "restaurants": "المطاعم",
+    "nightlife": "الحياة الليلية"
   },
   "header": {
     "tagline": "كونسيرج خاص · دبي",

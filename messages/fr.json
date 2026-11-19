@@ -10,7 +10,11 @@
     "plan": "Programme",
     "experiences": "Expériences",
     "membership": "Membership",
-    "tickets": "Billets"
+    "tickets": "Billets",
+    "diningNightlife": "Restaurants & Nuits",
+    "diningShort": "Sorties",
+    "restaurants": "Restaurants",
+    "nightlife": "Vie nocturne"
   },
   "header": {
     "tagline": "Conciergerie Privée · Dubaï",

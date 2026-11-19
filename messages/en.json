@@ -10,7 +10,11 @@
     "plan": "Plan",
     "experiences": "Experiences",
     "membership": "Membership",
-    "tickets": "Tickets"
+    "tickets": "Tickets",
+    "diningNightlife": "Dining & Nightlife",
+    "diningShort": "Dining",
+    "restaurants": "Restaurants",
+    "nightlife": "Nightlife"
   },
   "header": {
     "tagline": "Private Concierge · Dubai",
