@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 import { Eyebrow } from '@/components/ui/eyebrow'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | DXB TKTS',
-  description: 'DXB TKTS Terms of Service.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'terms', '/legal/terms')
 }
 
 export default function Terms() {
@@ -27,13 +28,13 @@ export default function Terms() {
 
           <section>
             <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
-              Membership Terms
+              Bookings and Services
             </h2>
             <ul className="list-disc list-inside space-y-2">
-              <li>Membership tiers are subject to application and approval</li>
-              <li>Members agree to provide accurate information</li>
-              <li>Services are provided as described in membership tier details</li>
-              <li>DXB TKTS reserves the right to terminate membership for breach of terms</li>
+              <li>Experiences are delivered by licensed partner operators in Dubai and the UAE</li>
+              <li>You agree to provide accurate information when making an enquiry or booking</li>
+              <li>Details, prices and cancellation terms are confirmed with you in writing before any payment</li>
+              <li>Full booking conditions will be published before online bookings open</li>
             </ul>
           </section>
 

@@ -1,120 +1,128 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Eyebrow } from '@/components/ui/eyebrow'
-import { CTABand } from '@/components/ui/cta-band'
+import { ArrowRight } from 'lucide-react'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
+import { aiImage } from '@/lib/images'
+import { about } from '@/content/about'
+import { ChapterLabel } from '@/components/editorial/chapter-label'
 
-export const metadata: Metadata = {
-  title: 'About Us | DXB TKTS',
-  description: 'Learn about DXB TKTS, our philosophy, and our commitment to excellence.',
+const STORY_IMAGE = aiImage('section-philosophy', 'burjAlArabAerial', 'A DXB TKTS lifestyle manager meeting a client in Dubai')
+
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'about', '/about')
 }
 
-export default function About() {
+export default function About({ params: { locale } }: { params: { locale: Locale } }) {
   return (
     <>
-      {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-dxb-ivory to-dxb-band">
-        <div className="max-w-7xl mx-auto px-6">
-          <Eyebrow className="mb-4">About Us</Eyebrow>
-          <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mb-6 max-w-3xl">
-            Two Decades of Luxury Excellence
+      {/* Opening */}
+      <section className="bg-dxb-ivory pt-20 md:pt-28 pb-16 md:pb-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <ChapterLabel label={about.eyebrow[locale]} />
+          <h1 className="mt-8 font-cormorant font-light text-dxb-ink text-[2.6rem] leading-[1.05] md:text-7xl whitespace-pre-line">
+            {about.title[locale]}
           </h1>
-          <p className="text-lg text-dxb-slate max-w-2xl">
-            DXB TKTS is built on 20+ years of experience serving the region's most discerning families, executives, and organizations.
-          </p>
+          <p className="mt-10 max-w-3xl text-xl md:text-2xl leading-relaxed text-dxb-slate font-light">{about.lede[locale]}</p>
         </div>
       </section>
 
       {/* Story */}
-      <section className="py-20 bg-dxb-ivory">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="space-y-8">
-            <div>
-              <Eyebrow className="mb-3">Our Philosophy</Eyebrow>
-              <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-4">
-                Anticipate, Don't React
-              </h2>
-              <p className="text-lg text-dxb-slate leading-relaxed">
-                We don't wait for requests. We understand your world—your preferences, your priorities, your expectations. We study patterns. We build relationships. We prepare. When you need something, we've already thought three steps ahead.
-              </p>
+      <section className="bg-white border-y border-dxb-band">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="lg:col-span-7">
+            <ChapterLabel index="01" label={about.storyLabel[locale]} />
+            <h2 className="mt-8 font-cormorant font-light text-4xl md:text-5xl text-dxb-ink leading-tight">{about.storyTitle[locale]}</h2>
+            <div className="mt-8 space-y-6 text-lg leading-[1.8] text-dxb-ink/85">
+              {about.story[locale].map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
-
-            <div>
-              <Eyebrow className="mb-3">Discretion is Sacred</Eyebrow>
-              <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-4">
-                Your Privacy, Our Responsibility
-              </h2>
-              <p className="text-lg text-dxb-slate leading-relaxed">
-                What happens between you and DXB TKTS stays confidential. Period. Your preferences, your networks, your transactions—all protected with the same care we'd apply to our own families. We're bound by strict data protection protocols and an unwavering commitment to discretion.
-              </p>
-            </div>
-
-            <div>
-              <Eyebrow className="mb-3">Vetted Excellence</Eyebrow>
-              <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-4">
-                A Curated Network of 500+ Partners
-              </h2>
-              <p className="text-lg text-dxb-slate leading-relaxed">
-                We don't settle for good. Every partner—every chef, hotel concierge, yacht broker, private jet operator, real estate agent—has been personally vetted. We've built relationships across Dubai, the region, and the world's most exclusive destinations.
-              </p>
+          </div>
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden bg-dxb-band">
+              <Image src={STORY_IMAGE.src ?? ''} alt={STORY_IMAGE.alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Grid */}
-      <section className="py-20 bg-dxb-band">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-12 text-center">
-            Our Commitments
-          </h2>
+      {/* What we do */}
+      <section className="bg-dxb-ivory">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
+          <ChapterLabel index="02" label={about.pillarsLabel[locale]} />
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+            {about.pillars.map(p => (
+              <Link key={p.href} href={p.href} className="group border-t border-dxb-ink/15 pt-6">
+                <h3 className="font-cormorant text-3xl md:text-4xl text-dxb-ink group-hover:text-dxb-gold transition-colors">{p.title[locale]}</h3>
+                <p className="mt-3 text-dxb-slate leading-relaxed">{p.copy[locale]}</p>
+                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-dxb-gold">
+                  <ArrowRight className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                label: 'Anticipation',
-                description: 'We don\'t react—we predict and prepare. Your needs are met before you express them.',
-              },
-              {
-                label: 'Reliability',
-                description: 'Response times are guaranteed. 24/7 support means we\'re always here, always ready.',
-              },
-              {
-                label: 'Integrity',
-                description: 'Your trust is everything. We operate with absolute honesty and unwavering discretion.',
-              },
-              {
-                label: 'Quality',
-                description: 'Only the best. Every experience, every introduction, every detail reflects our standards.',
-              },
-              {
-                label: 'Access',
-                description: 'We open doors. Exclusive, off-market, invitation-only—we get you there.',
-              },
-              {
-                label: 'Elegance',
-                description: 'Luxury is restraint. We handle the complex with understated grace.',
-              },
-            ].map(value => (
-              <div key={value.label} className="text-center">
-                <h3 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-2">
-                  {value.label}
-                </h3>
-                <p className="text-dxb-slate">
-                  {value.description}
-                </p>
+      {/* Principles */}
+      <section className="bg-dxb-ink text-white">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+          <ChapterLabel index="03" label={about.principlesLabel[locale]} tone="light" />
+          <h2 className="mt-8 font-cormorant font-light text-4xl md:text-6xl max-w-3xl">{about.principlesTitle[locale]}</h2>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-14">
+            {about.principles.map((p, i) => (
+              <div key={i} className="border-t border-white/15 pt-6">
+                <span className="font-cormorant text-2xl text-dxb-gold" dir="ltr">{`0${i + 1}`}</span>
+                <h3 className="mt-3 font-cormorant text-3xl">{p.title[locale]}</h3>
+                <p className="mt-3 text-white/70 leading-relaxed">{p.copy[locale]}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <CTABand
-        heading="Join a Curated Circle"
-        ctaLabel="Apply for Membership"
-        ctaHref="/contact"
-      />
+      {/* Founder note — short, expertise only */}
+      <section className="bg-white border-b border-dxb-band">
+        <div className="max-w-5xl mx-auto px-6 py-20 md:py-24 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-10 items-start">
+          <div className="relative w-44 md:w-full aspect-[4/5] overflow-hidden bg-dxb-band">
+            <Image
+              src="/images/founder/ahmed-allazim.jpg"
+              alt={`${about.founderName}, ${about.founderRole[locale]} — DXB TKTS`}
+              fill
+              sizes="220px"
+              className="object-cover object-top"
+            />
+          </div>
+          <div>
+            <ChapterLabel index="04" label={about.founderLabel[locale]} />
+            <p className="mt-6 font-cormorant text-2xl md:text-3xl leading-snug text-dxb-ink">{about.founderNote[locale]}</p>
+            <p className="mt-6 text-sm uppercase tracking-[0.25em] text-dxb-gold">
+              {about.founderName} · {about.founderRole[locale]}
+            </p>
+            <p className="mt-4 text-sm text-dxb-ink/80">{about.houses[locale]}</p>
+            <p className="mt-1 text-xs text-dxb-slate">{about.housesNote[locale]}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="bg-dxb-ivory">
+        <div className="max-w-4xl mx-auto px-6 py-20 md:py-28 text-center">
+          <ChapterLabel index="05" label={about.teamLabel[locale]} />
+          <h2 className="mt-8 font-cormorant font-light text-4xl md:text-6xl text-dxb-ink">{about.teamTitle[locale]}</h2>
+          <p className="mt-8 text-lg leading-relaxed text-dxb-slate">{about.teamCopy[locale]}</p>
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/experiences" className="px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover transition-colors">
+              {about.ctaPrimary[locale]}
+            </Link>
+            <Link href="/request" className="px-8 py-4 border border-dxb-ink/25 text-dxb-ink text-sm font-semibold tracking-[0.12em] uppercase hover:border-dxb-gold hover:text-dxb-gold transition-colors">
+              {about.ctaSecondary[locale]}
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

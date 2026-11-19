@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 import { Eyebrow } from '@/components/ui/eyebrow'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | DXB TKTS',
-  description: 'DXB TKTS Privacy Policy.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'privacy', '/legal/privacy')
 }
 
 export default function Privacy() {
@@ -30,7 +31,7 @@ export default function Privacy() {
               Information We Collect
             </h2>
             <p>
-              When you contact us or apply for membership, we collect information such as:
+              When you contact us or make an enquiry, we collect information such as:
             </p>
             <ul className="list-disc list-inside space-y-2 mt-3">
               <li>Name, email, phone number, and contact preferences</li>
@@ -49,7 +50,7 @@ export default function Privacy() {
             </p>
             <ul className="list-disc list-inside space-y-2 mt-3">
               <li>Provide and improve our concierge services</li>
-              <li>Communicate with you about membership and services</li>
+              <li>Communicate with you about your enquiry and bookings</li>
               <li>Process your enquiries and requests</li>
               <li>Enhance website functionality and user experience</li>
               <li>Comply with legal and regulatory requirements</li>

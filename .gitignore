@@ -5,9 +5,6 @@ node_modules/
 .next/
 out/
 
-# Build output
-lavish-deploy/
-
 # Environment variables
 .env
 .env.local
@@ -18,3 +15,10 @@ lavish-deploy/
 
 # Vercel
 .vercel
+
+# Local enquiry / booking-request stores (contain customer data)
+data/*.jsonl
+
+# Master image/film files (large; DXBTKTS brand assets — back up separately)
+assets-originals/ai/
+assets-originals/video/

@@ -2,27 +2,725 @@
   "nav": {
     "home": "Accueil",
     "services": "Services",
-    "membership": "Adhésions",
     "corporate": "Entreprise",
     "about": "À propos",
-    "contact": "Contact"
+    "request": "Demande",
+    "blog": "Blog",
+    "contact": "Contact",
+    "plan": "Programme",
+    "experiences": "Expériences",
+    "membership": "Membership",
+    "tickets": "Billets"
+  },
+  "header": {
+    "tagline": "Conciergerie Privée · Dubaï",
+    "enquire": "Organiser",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "hero": {
-    "headline": "Votre Temps Est Précieux",
-    "subheading": "Nous anticipons vos besoins avant que vous les exprimiez. Discrétion. Élégance. Toujours disponibles.",
-    "cta": "Demander une Invitation",
-    "whatsapp": "Discuter sur WhatsApp"
+    "eyebrow": "Expériences Privées · Dubaï",
+    "headline": "Dubaï, en privé.",
+    "subheading": "Yachts, désert, ciel et chauffeurs — des expériences privées organisées par une équipe basée à Dubaï, qui vous répond sur WhatsApp.",
+    "cta": "Organiser mon expérience",
+    "whatsapp": "Discuter sur WhatsApp",
+    "chaptersLabel": "Explorer par expérience",
+    "chapters": {
+      "sand": {
+        "title": "Sable",
+        "label": "Désert"
+      },
+      "sea": {
+        "title": "Mer",
+        "label": "Yachts"
+      },
+      "sky": {
+        "title": "Ciel",
+        "label": "Hélicoptère"
+      },
+      "city": {
+        "title": "Ville",
+        "label": "Chauffeur"
+      }
+    }
   },
   "whatWeDo": {
     "anticipate": "Anticiper, Ne Pas Réagir",
     "anticipateDesc": "Nous étudions vos préférences, vos habitudes, votre univers. Avant que vous n'ayez besoin de quelque chose, nous sommes prêts.",
     "discretion": "Confidentialité Absolue",
     "discretionDesc": "Votre intimité est sacrée. Chaque conversation, chaque transaction, chaque détail reste entre nous.",
-    "access": "Accès Mondial 24/7",
-    "accessDesc": "Une demande impossible à 3 heures du matin? Nous sommes là. Nous trouvons une solution. C'est votre horaire qui nous guide."
+    "access": "Une Seule Équipe, du Début à la Fin",
+    "accessDesc": "Du premier message au retour à l'hôtel, vous échangez avec la même équipe à Dubaï — sur WhatsApp, par téléphone ou par email."
+  },
+  "philosophy": {
+    "eyebrow": "Notre Philosophie",
+    "title": "L'Art de Vivre <accent>Sans Effort</accent>",
+    "p1": "Dans une ville bâtie sur l'ambition, votre bien le plus précieux est le temps. DXB TKTS existe pour que chacune de vos heures soit vécue exactement comme vous le souhaitez — pendant que nous nous occupons de tout le reste, silencieusement et impeccablement.",
+    "p2": "Nous réunissons la simplicité de la réservation en ligne et l'attention d'une conciergerie privée : des options claires, des conseils honnêtes et une équipe qui reste à vos côtés jusqu'à la fin de l'expérience.",
+    "quote": "« Le vrai luxe, c'est de ne jamais avoir à demander deux fois. »",
+    "imageAlt": "Une lifestyle manager DXB TKTS avec une cliente",
+    "cta": "Découvrir Notre Histoire"
+  },
+  "showcase": {
+    "eyebrow": "Services Signature",
+    "title": "Dubaï, <accent>Organisé pour Vous</accent>",
+    "explore": "Découvrir",
+    "items": [
+      {
+        "title": "Hélicoptère & Ciel",
+        "desc": "Palm Jumeirah, Burj Al Arab et la côte vus d'en haut — de courts vols panoramiques au-dessus des icônes de Dubaï."
+      },
+      {
+        "title": "Location de Yachts",
+        "desc": "Le Golfe à l'heure dorée, avec équipage, préparé pour votre groupe."
+      },
+      {
+        "title": "Restaurants & Soirées",
+        "desc": "Réservations, salons privés et tables du chef, organisés autour de votre soirée."
+      },
+      {
+        "title": "Célébrations",
+        "desc": "Anniversaires, demandes en mariage et fêtes — sur un yacht, dans le désert ou dans une villa privée."
+      },
+      {
+        "title": "Expériences dans le Désert",
+        "desc": "Des dunes privées, une balade au coucher du soleil et un dîner sous les étoiles."
+      },
+      {
+        "title": "Chauffeur & Arrivée",
+        "desc": "Accueil à l'aéroport, transferts privés et chauffeur à l'heure."
+      }
+    ]
+  },
+  "experiences": {
+    "eyebrow": "Expériences Sur Mesure",
+    "title": "Des Moments qui Méritent <accent>d'Être Bien Préparés</accent>",
+    "cta": "Composer Votre Expérience",
+    "stories": [
+      {
+        "eyebrow": "La Soirée",
+        "title": "Une Table au-dessus de la Ville",
+        "copy": "Un dîner haut au-dessus de Downtown, la ville scintillante à vos pieds. La table, l'horaire et la voiture du retour sont organisés à l'avance — vous n'avez envoyé qu'un message le matin."
+      },
+      {
+        "eyebrow": "L'Évasion",
+        "title": "Silence, Sable & Étoiles",
+        "copy": "À une heure de la ville commence un autre monde. Les dunes au coucher du soleil, un camp privé et un dîner sous les étoiles — puis un retour tranquille vers la ville."
+      }
+    ]
+  },
+  "clientele": {
+    "eyebrow": "Trois façons d’entrer",
+    "title": "Réservez, demandez, <accent>ou rejoignez-nous</accent>",
+    "tiers": [
+      {
+        "title": "Expériences",
+        "desc": "Trente-huit expériences privées et haut de gamme aux prix réels — du safari dans le désert en toute élégance au superyacht au large de la Palm.",
+        "cta": "Découvrir les expériences"
+      },
+      {
+        "title": "Conciergerie",
+        "desc": "Tout ce qui ne se réserve pas en un clic : la table complète, la soirée à guichets fermés, l’itinéraire, le cadeau, l’arrivée.",
+        "cta": "Voir les services"
+      },
+      {
+        "title": "Membership",
+        "desc": "Un lifestyle manager attitré et la priorité sur les demandes qui comptent — pour les résidents et les clients qui reviennent.",
+        "cta": "Découvrir le membership"
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Le Dubaï que Nous Ouvrons",
+    "title": "Dubaï, <accent>Sans Filtre</accent>",
+    "cta": "Organiser le Vôtre",
+    "labels": [
+      "Les Icônes",
+      "Sur l'Eau",
+      "Au Cœur des Dunes",
+      "Après la Nuit Tombée",
+      "Le Voyage"
+    ]
+  },
+  "ctaBand": {
+    "eyebrow": "Engageons la Conversation"
+  },
+  "home": {
+    "ctaHeading": "Votre Dubaï, <accent>Organisé</accent>",
+    "ctaSub": "Indiquez-nous vos dates et ce que vous imaginez. Nous répondons personnellement sur WhatsApp ou par email.",
+    "ctaPrimary": "Organiser mon expérience",
+    "ctaSecondary": "Discuter sur WhatsApp",
+    "popularEyebrow": "Expériences Populaires",
+    "popularTitle": "Commencez par <accent>le Meilleur de Dubaï</accent>",
+    "popularCta": "Voir toutes les expériences"
+  },
+  "servicesHero": {
+    "eyebrow": "Services Signature",
+    "title": "Tout Est Organisé. <accent>Une Seule Équipe.</accent>",
+    "sub": "De la mer aux dunes, de la table à l'aéroport — une seule équipe à Dubaï organise tout, à Dubaï et aux Émirats."
+  },
+  "serviceCategories": {
+    "cta": "Organiser",
+    "items": [
+      {
+        "eyebrow": "Expériences",
+        "title": "Le Meilleur de Dubaï",
+        "copy": "Désert, mer et ciel — des expériences privées et haut de gamme, choisies et vérifiées par notre équipe.",
+        "list": [
+          "Safaris et buggys dans le désert",
+          "Yachts et sports nautiques",
+          "Hélicoptère et expériences aériennes"
+        ]
+      },
+      {
+        "eyebrow": "Restaurants & Soirées",
+        "title": "Des Tables et des Nuits à Préparer",
+        "copy": "Réservations de restaurants, dîners privés et sorties, organisés selon vos plans.",
+        "list": [
+          "Réservations de restaurants",
+          "Dîners privés et tables du chef",
+          "Beach clubs et soirées"
+        ]
+      },
+      {
+        "eyebrow": "Transport & Mobilité",
+        "title": "Arriver et Se Déplacer Sans Effort",
+        "copy": "Du hall des arrivées à votre hôtel, et partout où la journée vous mène.",
+        "list": [
+          "Accueil à l'aéroport",
+          "Chauffeur privé à l'heure",
+          "Excursions à Abu Dhabi"
+        ]
+      },
+      {
+        "eyebrow": "Célébrations & Événements",
+        "title": "Des Occasions Soigneusement Organisées",
+        "copy": "Anniversaires, demandes en mariage et réceptions privées — préparés avec vous, réalisés avec des partenaires de confiance.",
+        "list": [
+          "Demandes en mariage et anniversaires",
+          "Fêtes sur l'eau ou dans le désert",
+          "Événements d'entreprise et de groupe"
+        ]
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "Pourquoi DXB TKTS",
+    "title": "Pourquoi Organiser <accent>avec Nous</accent>",
+    "pillars": [
+      {
+        "title": "Une Équipe à Dubaï",
+        "copy": "Nous vivons et travaillons à Dubaï, et nous savons à quels partenaires faire confiance pour chaque expérience."
+      },
+      {
+        "title": "Une Seule Conversation",
+        "copy": "La même équipe, de votre premier message à la fin de votre expérience."
+      },
+      {
+        "title": "Privé par Défaut",
+        "copy": "Des options privées ou haut de gamme, adaptées à votre groupe, à vos horaires et à l'occasion."
+      },
+      {
+        "title": "Des Partenaires Vérifiés",
+        "copy": "Nous travaillons avec des opérateurs agréés et vérifions les détails avant de les recommander."
+      }
+    ]
+  },
+  "featured": {
+    "eyebrow": "Expériences à la Une",
+    "title": "Par Où <accent>Commencer</accent>",
+    "reserve": "Se renseigner",
+    "items": [
+      {
+        "title": "Yacht Privé",
+        "copy": "Le Golfe à l'heure dorée, avec équipage, préparé pour votre groupe."
+      },
+      {
+        "title": "Désert en Privé",
+        "copy": "Les dunes au coucher du soleil, un camp privé et un dîner sous les étoiles."
+      },
+      {
+        "title": "Vols en Hélicoptère",
+        "copy": "Palm Jumeirah, Burj Al Arab et la côte vus d'en haut."
+      },
+      {
+        "title": "Soirées & Événements",
+        "copy": "Concerts, spectacles et sorties, transport compris."
+      },
+      {
+        "title": "Journée à Abu Dhabi",
+        "copy": "La Grande Mosquée et les sites de la capitale, avec chauffeur privé."
+      }
+    ]
+  },
+  "servicesPage": {
+    "ctaHeading": "Dites-Nous Ce Que <accent>Vous Imaginez</accent>",
+    "ctaSub": "Indiquez vos dates et votre groupe. Nous répondons personnellement sur WhatsApp ou par email.",
+    "ctaPrimary": "Organiser mon expérience",
+    "ctaSecondary": "Nous contacter"
+  },
+  "request": {
+    "eyebrow": "Organisons Ensemble",
+    "title": "Un Message. <accent>Tout Est Arrangé.</accent>",
+    "sub": "Dites-nous ce que vous imaginez — un yacht au coucher du soleil, une soirée dans le désert, une célébration ou une journée complète. Notre équipe s'occupe du reste.",
+    "whatsappCta": "Vous préférez WhatsApp ? Nous y sommes aussi",
+    "promises": [
+      {
+        "title": "Une Réponse Personnelle",
+        "copy": "Un membre de notre équipe vous répond personnellement — pas de robot, pas de centre d'appels."
+      },
+      {
+        "title": "Discrétion",
+        "copy": "Vos informations ne sont partagées qu'avec les partenaires qui réalisent votre réservation."
+      },
+      {
+        "title": "Des Réponses Honnêtes",
+        "copy": "Si quelque chose n'est pas possible, nous vous le disons — et proposons la meilleure alternative."
+      }
+    ],
+    "form": {
+      "name": "Nom Complet *",
+      "namePlaceholder": "Votre nom",
+      "phone": "Téléphone / WhatsApp *",
+      "phonePlaceholder": "+971 XX XXX XXXX",
+      "email": "Email *",
+      "emailPlaceholder": "vous@exemple.com",
+      "contactMethod": "Contact Préféré *",
+      "contactMethodPlaceholder": "Choisissez un moyen",
+      "contactOptions": {
+        "whatsapp": "WhatsApp",
+        "phone": "Téléphone",
+        "email": "Email"
+      },
+      "service": "Que Pouvons-Nous Arranger ? *",
+      "servicePlaceholder": "Choisissez un service",
+      "serviceOptions": [
+        "Location de yacht",
+        "Expérience dans le désert",
+        "Hélicoptère & ciel",
+        "Restaurants & soirées",
+        "Célébration ou événement",
+        "Chauffeur & aéroport",
+        "Journée à Abu Dhabi",
+        "Entreprise ou groupe",
+        "Billets d’événements et spectacles",
+        "Shopping de luxe",
+        "Autre demande"
+      ],
+      "date": "Quand ?",
+      "message": "Dites-Nous Tout",
+      "messagePlaceholder": "Nombre de personnes, occasion, préférences — plus nous en savons, mieux nous organisons.",
+      "error": "Une erreur s'est produite. Veuillez réessayer, ou contactez-nous directement sur WhatsApp.",
+      "submit": "Envoyer Votre Demande",
+      "sending": "Envoi en cours…",
+      "assurance": "Traité en toute confidentialité. Nous répondons personnellement sur WhatsApp ou par email.",
+      "successEyebrow": "Bien Reçu",
+      "successTitle": "C'est <accent>En Marche</accent>",
+      "successCopy": "Votre demande est entre les mains de notre équipe. Nous vous répondrons personnellement sur WhatsApp ou par email.",
+      "ticketsOption": "Billets d’événements et spectacles",
+      "ticketsMessage": "Billets pour : {event}\nNombre de personnes : \nPréférence de placement : ",
+      "shoppingOption": "Shopping de luxe",
+      "shoppingMessage": "Personal shopping : {event}\nMarques ou pièces : \nTailles et budget (facultatif) : "
+    }
+  },
+  "blog": {
+    "eyebrow": "Le Journal",
+    "title": "Notes sur l'Art de <accent>Bien Vivre</accent>",
+    "intro": "Des dépêches de l'intérieur du monde que nous ouvrons — la ville, la saison, et les expériences qui méritent vos heures.",
+    "continueReading": "Poursuivre la Lecture",
+    "moreFrom": "Plus du <accent>Journal</accent>",
+    "desk": "La Rédaction",
+    "deskLocation": "DXB TKTS · Dubaï",
+    "arrange": "Arrangez-Moi Cela",
+    "ctaHeading": "Le Lire, ou <accent>Le Vivre</accent>",
+    "ctaSub": "Chaque histoire du Journal a commencé par un simple message à notre équipe de conciergerie.",
+    "ctaPrimary": "Demander un Concierge Privé"
+  },
+  "about": {
+    "eyebrow": "À Propos",
+    "title": "Une Conciergerie à Dubaï, Fondée sur la Clarté",
+    "sub": "DXB TKTS est une conciergerie basée à Dubaï, dédiée aux expériences privées. Nous associons la simplicité de la réservation en ligne à un service personnel : des options claires, des conseils honnêtes et une équipe qui reste à vos côtés.",
+    "sections": [
+      {
+        "eyebrow": "Notre Approche",
+        "title": "Préparer en Amont",
+        "copy": "Nous posons les bonnes questions avant le jour J — groupe, horaires, occasion, préférences — pour que, le moment venu, tout se déroule simplement."
+      },
+      {
+        "eyebrow": "Vos Données",
+        "title": "Traitées avec Soin",
+        "copy": "Nous ne demandons que le nécessaire, et ne partageons avec un partenaire que ce dont il a besoin pour réaliser votre réservation."
+      },
+      {
+        "eyebrow": "Nos Partenaires",
+        "title": "Comment Nous les Choisissons",
+        "copy": "Nous travaillons avec des opérateurs agréés, vérifions leur équipement et leurs conditions, et ne recommandons que des expériences que nous réserverions pour nos propres familles."
+      }
+    ],
+    "commitmentsTitle": "Nos Engagements",
+    "values": [
+      {
+        "label": "Clarté",
+        "description": "Des options et des prix clairs, confirmés avant le paiement."
+      },
+      {
+        "label": "Fiabilité",
+        "description": "Des détails confirmés par écrit, et une équipe joignable pendant votre sortie."
+      },
+      {
+        "label": "Honnêteté",
+        "description": "Si quelque chose ne vous convient pas, nous vous le disons."
+      },
+      {
+        "label": "Qualité",
+        "description": "Des expériences privées et haut de gamme avec des partenaires vérifiés."
+      },
+      {
+        "label": "Connaissance Locale",
+        "description": "Nous connaissons bien Dubaï et mettons ce savoir au service de votre choix."
+      },
+      {
+        "label": "Attention",
+        "description": "Les petits détails — horaires, prise en charge, occasion — traités correctement."
+      }
+    ],
+    "ctaHeading": "Organisez Votre <accent>Dubaï</accent>",
+    "ctaPrimary": "Organiser mon expérience"
+  },
+  "contact": {
+    "eyebrow": "Contactez-Nous",
+    "title": "Organisons Votre Dubaï",
+    "sub": "Dites-nous ce que vous préparez — une expérience, une occasion ou un événement de groupe.",
+    "reachOut": "Nous Joindre",
+    "email": "Email",
+    "phone": "Téléphone",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "Discuter avec nous",
+    "location": "Adresse",
+    "locationValue": "Dubaï, Émirats Arabes Unis",
+    "responseTime": "Délai de Réponse",
+    "responseCopy": "Nous répondons personnellement. Pour une réponse plus rapide, écrivez-nous sur WhatsApp.",
+    "form": {
+      "title": "Envoyez-Nous un Message",
+      "subtitle": "Parlez-nous de vos projets, nous vous répondrons personnellement.",
+      "name": "Nom Complet *",
+      "namePlaceholder": "Votre nom",
+      "email": "Adresse Email *",
+      "emailPlaceholder": "bonjour@exemple.com",
+      "phone": "Numéro de Téléphone *",
+      "phonePlaceholder": "+971 XX XXX XXXX",
+      "contactMethod": "Moyen de Contact Préféré *",
+      "contactMethodPlaceholder": "Choisissez un moyen",
+      "contactOptions": {
+        "phone": "Téléphone",
+        "email": "Email",
+        "whatsapp": "WhatsApp"
+      },
+      "interest": "Qu'est-ce qui vous intéresse ? *",
+      "interestPlaceholder": "Choisissez une option",
+      "interestOptions": {
+        "experience": "Une expérience",
+        "celebration": "Une célébration ou un événement",
+        "transfer": "Chauffeur & transferts",
+        "corporate": "Entreprise ou groupe",
+        "other": "Autre"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Parlez-nous de vous et de votre style de vie...",
+      "referral": "Comment nous avez-vous connus ?",
+      "referralPlaceholder": "Choisissez une option",
+      "referralOptions": {
+        "referral": "Recommandation",
+        "social_media": "Réseaux Sociaux",
+        "google": "Recherche Google",
+        "press": "Presse / Médias",
+        "other": "Autre"
+      },
+      "privacy": "J'accepte la politique de confidentialité et d'être contacté(e) au sujet de ma demande. *",
+      "submit": "Envoyer",
+      "sending": "Envoi en cours...",
+      "successTitle": "Merci",
+      "successCopy": "Votre message a bien été reçu. Nous vous répondrons personnellement."
+    }
   },
   "footer": {
-    "copyright": "© 2024 DXB TKTS. Tous droits réservés. La discrétion est notre garantie.",
+    "tagline": "Conciergerie Privée · Dubaï",
+    "story": "Une conciergerie basée à Dubaï pour des expériences privées — désert, mer, ciel et ville — organisées avec clarté et suivies par une vraie équipe.",
+    "appointment": "Dubaï · Émirats Arabes Unis",
+    "columns": {
+      "house": "DXB TKTS",
+      "ourStory": "À propos",
+      "signatureServices": "Expériences",
+      "contact": "Contact",
+      "membership": "Conciergerie",
+      "privateMembers": "Membership",
+      "requestService": "Services",
+      "journal": "Le Journal",
+      "legal": "Mentions Légales",
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "cookies": "Cookies"
+    },
+    "reachUs": "Nous Joindre",
+    "whatsapp": "WhatsApp +971 50 808 8925",
+    "quote": "« Le vrai luxe, c'est de ne jamais avoir à demander deux fois. »",
+    "copyright": "© 2026 DXBTKTS. Tous droits réservés. Images et film © DXBTKTS.",
     "contact": "hello@dxbtkts.com"
+  },
+  "howItWorks": {
+    "eyebrow": "Comment Ça Marche",
+    "title": "Trois Étapes, <accent>Aucune Surprise</accent>",
+    "steps": [
+      {
+        "title": "Choisissez",
+        "copy": "Choisissez une expérience, ou dites-nous ce que vous imaginez, vos dates et votre groupe."
+      },
+      {
+        "title": "Nous confirmons",
+        "copy": "Nous vérifions la disponibilité auprès de nos partenaires et vous confirmons les détails et le prix avant tout paiement."
+      },
+      {
+        "title": "Profitez",
+        "copy": "Nous restons joignables sur WhatsApp avant, pendant et après votre expérience."
+      }
+    ]
+  },
+  "meta": {
+    "home": {
+      "title": "DXB TKTS | Expériences Privées & Conciergerie à Dubaï",
+      "description": "Yachts privés, désert, hélicoptère, chauffeurs et célébrations à Dubaï — organisés par une équipe basée à Dubaï, sur WhatsApp."
+    },
+    "services": {
+      "title": "Services de Conciergerie à Dubaï | DXB TKTS",
+      "description": "Conciergerie privée, itinéraires sur mesure, arrivées VIP, chauffeurs, réservations, célébrations, shopping et accès privilégiés à Dubaï."
+    },
+    "corporate": {
+      "title": "Entreprises & Groupes | DXB TKTS Dubaï",
+      "description": "Réceptions clients, sorties d'équipe, expériences de groupe et logistique des invités à Dubaï, avec un seul interlocuteur."
+    },
+    "about": {
+      "title": "À propos de DXB TKTS | Expériences privées & conciergerie à Dubaï",
+      "description": "Une maison dubaïote d’expériences privées et de conciergerie, nourrie par l’expérience de grandes maisons internationales, portée par une jeune équipe ambitieuse."
+    },
+    "request": {
+      "title": "Organiser Votre Expérience | DXB TKTS Dubaï",
+      "description": "Indiquez vos dates et vos envies — yacht, désert, hélicoptère, restaurant ou célébration. Nous répondons personnellement."
+    },
+    "contact": {
+      "title": "Contact | DXB TKTS Dubaï",
+      "description": "Contactez DXB TKTS sur WhatsApp ou par email pour organiser vos expériences privées à Dubaï."
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité | DXB TKTS",
+      "description": "Comment DXB TKTS collecte, utilise et protège vos données personnelles."
+    },
+    "terms": {
+      "title": "Conditions d'Utilisation | DXB TKTS",
+      "description": "Conditions d'utilisation du site et des services DXB TKTS."
+    },
+    "cookies": {
+      "title": "Politique de Cookies | DXB TKTS",
+      "description": "Comment DXB TKTS utilise les cookies sur son site."
+    },
+    "experiences": {
+      "title": "Expériences Privées à Dubaï | DXB TKTS",
+      "description": "Yachts privés, safaris, buggys, hélicoptère, transferts aéroport et excursions à Abu Dhabi — avec prix, confirmés avant paiement."
+    },
+    "membership": {
+      "title": "Membership | DXB TKTS Dubaï",
+      "description": "Une relation privilégiée avec Dubaï : un lifestyle manager attitré, des demandes prioritaires pour les tables, les événements et les éditions limitées."
+    },
+    "whatsOn": {
+      "title": "Billets & événements à Dubaï et aux Émirats — Concerts, sport, festivals | DXB TKTS",
+      "description": "Concerts, spectacles, Formule 1, Dubai World Cup, festivals à Dubaï et aux Émirats. Demandez vos billets à DXB TKTS et laissez-nous organiser la soirée."
+    },
+    "journal": {
+      "title": "Blog — Guides de Dubaï, usages et conseils d’initiés | DXB TKTS",
+      "description": "Des guides pratiques sur Dubaï et les Émirats par l’équipe DXB TKTS : usages et règles, où séjourner, le désert, les familles, la gastronomie et la meilleure saison."
+    },
+    "packages": {
+      "title": "Formules Dubaï — Journées toutes prêtes avec voiture privée | DXB TKTS",
+      "description": "Formules thématiques à Dubaï : Burj Khalifa au coucher du soleil, journée sur la Palm, soirées privées dans le désert, Abu Dhabi culturel et Dubaï en 3 jours — avec la voiture entre chaque expérience."
+    }
+  },
+  "corporatePage": {
+    "eyebrow": "Entreprises & Groupes",
+    "title": "Réceptions Clients, Sorties d'Équipe et Expériences de Groupe à Dubaï",
+    "sub": "Un seul interlocuteur pour les expériences, les transports et les détails autour de vos invités et de vos équipes — préparés avec vous, confirmés par écrit.",
+    "usesHeading": "Ce Que les Entreprises <accent>Nous Demandent</accent>",
+    "uses": [
+      {
+        "title": "Réceptions Clients",
+        "copy": "Un yacht au coucher du soleil, un dîner privé dans le désert ou une table pour une soirée importante — organisés autour de vos invités."
+      },
+      {
+        "title": "Sorties d'Équipe",
+        "copy": "Des activités de groupe sur l'eau, dans le désert ou en ville, adaptées à la taille et aux horaires de votre équipe."
+      },
+      {
+        "title": "Célébrations & Événements",
+        "copy": "Anniversaires d'entreprise, lancements et réceptions privées, avec le bon lieu, les bons partenaires et la logistique."
+      },
+      {
+        "title": "Arrivées & Transports",
+        "copy": "Accueil à l'aéroport, transferts et chauffeurs pour les dirigeants et délégations en visite."
+      }
+    ],
+    "processHeading": "Comment Nous Travaillons avec les Entreprises",
+    "process": [
+      "Vous nous indiquez l'occasion, les dates, le nombre d'invités et la fourchette de budget.",
+      "Nous proposons des options avec des prix clairs et le détail de ce qui est inclus.",
+      "Après votre accord, nous confirmons avec nos partenaires et vous envoyons les détails par écrit.",
+      "Le jour J, notre équipe reste joignable jusqu'au retour du dernier invité."
+    ],
+    "ctaHeading": "Organisez Votre <accent>Groupe</accent>",
+    "ctaSub": "Parlez-nous de l'occasion et de votre groupe. Nous répondons personnellement avec des options.",
+    "ctaPrimary": "Demander une Proposition"
+  },
+  "catalogue": {
+    "hubEyebrow": "Expériences",
+    "hubTitle": "Expériences Privées à <accent>Dubaï</accent>",
+    "hubSub": "Choisissez une expérience, une date et ajoutez-la à votre programme. Nous confirmons la disponibilité et le prix final avec vous avant tout paiement.",
+    "all": "Tout",
+    "count": "{count, plural, one {# expérience} other {# expériences}}",
+    "from": "À partir de",
+    "explore": "Découvrir",
+    "priceType": {
+      "per_person": "par personne",
+      "per_group": "le forfait",
+      "per_vehicle": "par véhicule",
+      "per_unit": "l’unité",
+      "per_hour": "de l’heure"
+    },
+    "confirmation": {
+      "on_request": "Confirmé par notre équipe",
+      "instant": "Confirmation immédiate"
+    },
+    "indicative": "Prix indicatif",
+    "indicativeNote": "Pré-lancement : les prix affichés sont indicatifs.",
+    "breadcrumbHome": "Accueil",
+    "duration": "Durée",
+    "group": "Groupe",
+    "highlights": "Points forts",
+    "included": "Inclus",
+    "notIncluded": "Non inclus",
+    "goodToKnow": "Bon à savoir",
+    "faq": "Questions",
+    "related": "À combiner avec",
+    "options": "Choisissez votre option",
+    "ourPick": "Notre choix",
+    "eachFor": "{each} AED chacun pour {people}",
+    "date": "Date",
+    "time": "Moment de la journée",
+    "timeOptions": {
+      "any": "Indifférent",
+      "morning": "Matin",
+      "afternoon": "Après-midi",
+      "evening": "Soir"
+    },
+    "qty": {
+      "per_person": "Adultes",
+      "per_hour": "Heures",
+      "per_vehicle": "Véhicules",
+      "per_unit": "Quantité",
+      "per_group": "Forfaits"
+    },
+    "children": "Enfants",
+    "minHours": "Minimum {min} heures",
+    "extras": "Options",
+    "free": "Gratuit",
+    "total": "Total estimé",
+    "addToPlan": "Ajouter à mon programme",
+    "added": "Ajouté à votre programme",
+    "viewPlan": "Voir le programme",
+    "askWhatsApp": "Demander sur WhatsApp",
+    "whatHappens": "Payez maintenant par carte, ou ajoutez-la à votre programme et envoyez-la comme demande. Dans les deux cas, notre équipe confirme les détails avec vous sur WhatsApp.",
+    "approx": "Env.",
+    "chargedInAED": "Le paiement est effectué en AED.",
+    "conciergeTitle": "Envie d’autre chose ?",
+    "conciergeCopy": "Notre équipe peut adapter chaque expérience — horaire, taille du groupe, occasion — ou créer quelque chose de nouveau.",
+    "conciergeCta": "Faire une demande",
+    "plan": {
+      "title": "Mon programme",
+      "empty": "Votre programme est vide. Ajoutez des expériences et envoyez-les en une seule demande.",
+      "browse": "Voir les expériences",
+      "remove": "Retirer",
+      "edit": "Modifier",
+      "yourDetails": "Vos coordonnées",
+      "name": "Nom complet",
+      "email": "Email",
+      "whatsapp": "Numéro WhatsApp",
+      "hotel": "Hôtel ou quartier (facultatif)",
+      "notes": "Quelque chose à nous dire ? (facultatif)",
+      "consent": "J’accepte d’être contacté(e) au sujet de cette demande.",
+      "submit": "Envoyer mon programme",
+      "sending": "Envoi…",
+      "whatsappInstead": "Ou l’envoyer sur WhatsApp",
+      "successTitle": "Programme reçu",
+      "successCopy": "Merci. Nous vérifions la disponibilité auprès de nos partenaires et revenons vers vous avec le prix final.",
+      "reference": "Référence",
+      "error": "Une erreur est survenue. Réessayez ou envoyez votre programme sur WhatsApp.",
+      "dateTbc": "Date à confirmer",
+      "items": "{count, plural, one {# élément} other {# éléments}}",
+      "close": "Fermer",
+      "payNow": "Payer maintenant",
+      "payTest": "Mode test",
+      "payNote": "Paiement sécurisé par carte via Stripe. Vous pouvez aussi envoyer le programme comme demande et payer une fois la disponibilité confirmée.",
+      "payError": "Le paiement n’a pas pu démarrer. Réessayez ou envoyez votre programme comme demande.",
+      "or": "ou"
+    },
+    "onRequest": "Sur demande",
+    "idealFor": "Idéal pour",
+    "suits": {
+      "couples": "Couples",
+      "families": "Familles",
+      "friends": "Amis",
+      "vip": "VIP",
+      "groups": "Groupes"
+    },
+    "payNow": "Payer maintenant"
+  },
+  "notFound": {
+    "title": "Cette page n’existe pas",
+    "copy": "La page a peut-être été déplacée. Découvrez nos expériences ou revenez à l’accueil.",
+    "experiences": "Voir les expériences",
+    "home": "Accueil"
+  },
+  "whatsapp": {
+    "button": "Écrire à DXB TKTS sur WhatsApp",
+    "title": "Écrivez-nous sur WhatsApp",
+    "subtitle": "Choisissez un sujet — le message est prêt. Modifiez-le avant l’envoi.",
+    "close": "Fermer",
+    "viewing": "page",
+    "note": "Notre équipe à Dubaï répond sur WhatsApp sept jours sur sept.",
+    "labels": {
+      "general": "Question générale",
+      "booking": "Réserver cette expérience",
+      "tailored": "Demande sur mesure",
+      "membership": "Adhésion",
+      "other": "Autre chose"
+    },
+    "messages": {
+      "general": "Bonjour DXB TKTS, j’ai une question sur vos services.",
+      "booking": "Bonjour DXB TKTS, je souhaite réserver cette expérience",
+      "tailored": "Bonjour DXB TKTS, j’aimerais de l’aide pour organiser une expérience sur mesure à Dubaï.",
+      "membership": "Bonjour DXB TKTS, j’aimerais en savoir plus sur l’adhésion.",
+      "other": "Bonjour DXB TKTS,"
+    }
+  },
+  "comingSoon": {
+    "label": "Ouverture prochaine",
+    "title": "Quelque chose d’exceptionnel se prépare.",
+    "copy": "DXB TKTS se prépare à vous accueillir.",
+    "cta": "Découvrez Dubaï autrement",
+    "close": "Fermer l’annonce"
+  },
+  "footerExtra": {
+    "follow": "Suivre DXB TKTS",
+    "socialSoon": "Bientôt",
+    "journal": "Blog",
+    "whatsOn": "Billets & événements",
+    "discover": "Découvrir",
+    "packages": "Formules"
   }
 }

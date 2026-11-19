@@ -1,19 +1,20 @@
 # PROJECT IDENTIFICATION
 
 - **Project Name:** DXBTKTS
-- **Project Type:** DXB TKTS — Luxury Concierge & Lifestyle Management (Dubai)
-- **Default Port:** 3006
-- **Framework:** Next.js (React), multilingual (EN / AR-RTL / FR)
-- **Database:** Self-contained (project-owned); none shared with other projects
-- **Status:** Active — production site (18 routes)
+- **Project Type:** DXB TKTS — private experiences & concierge booking platform for Dubai and the UAE
+- **Default Port:** 3006 (dev server run by pm2 as `dxb-tkts`)
+- **Framework:** Next.js 14 (App Router), multilingual (EN / AR-RTL / FR)
+- **Database:** none yet (Roadmap Stage 3)
+- **Status:** Pre-launch. Company formation in progress; no live domain yet.
 
-## Embedded sub-site
-- **Lavish Morocco** — luxury concierge site served at the `/lavish-morocco` route **inside this app** (not a separate project). Port **3008** is reserved if it is ever extracted into a standalone app.
+## Scope
+DXB TKTS is a Dubai project only. It shares no code, data, CRM or branding with
+Lavish Morocco (a separate Morocco project in its own folder).
 
-## History note
-This folder was previously named `Portfolio/` (package `ahmed-allazim-portfolio`). It is the
-full, mature DXB TKTS site. An earlier thin 6-route DXBTKTS scaffold was archived to
-`Archive/DXBTKTS-scaffold-old-2026-06-21/` on 2026-06-26.
+## Plan
+See the seven `DXB_TKTS_*.md` reports, especially
+`DXB_TKTS_IMPLEMENTATION_ROADMAP.md`. Stage 1 (clean-up, trust, SEO) was
+carried out on 2026-11-18; a full pre-clean-up backup is in
+`Backups/DXBTKTS-before-stage1-2026-11-18.tar.gz`.
 
-> This file lets Claude Code immediately identify which project it is working on.
 > Default port is fixed. Do not change it automatically.

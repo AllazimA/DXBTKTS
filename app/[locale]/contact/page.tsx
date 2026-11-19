@@ -1,26 +1,32 @@
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { EnquiryForm } from '@/components/forms/enquiry-form'
-import { Eyebrow } from '@/components/ui/eyebrow'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
+import { site, whatsappLink } from '@/lib/site'
+import { SocialLinks } from '@/components/layout/social-links'
 
-export const metadata: Metadata = {
-  title: 'Contact Us | DXB TKTS',
-  description: 'Get in touch with DXB TKTS. Request an invitation or learn more about our services.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'contact', '/contact')
 }
 
-export default function Contact() {
+export default async function Contact() {
+  const t = await getTranslations('contact')
+  const tx = await getTranslations('footerExtra')
+
   return (
     <>
       {/* Hero */}
       <section className="py-20 bg-gradient-to-b from-dxb-ivory to-dxb-band">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <Eyebrow className="mb-4 flex justify-center">Get in Touch</Eyebrow>
+          <span className="block text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase mb-4">
+            {t('eyebrow')}
+          </span>
           <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mb-6">
-            Begin Your Journey
+            {t('title')}
           </h1>
-          <p className="text-lg text-dxb-slate max-w-2xl mx-auto">
-            Contact us to learn more about membership or to discuss how we can serve your lifestyle needs.
-          </p>
+          <p className="text-lg text-dxb-slate max-w-2xl mx-auto">{t('sub')}</p>
         </div>
       </section>
 
@@ -30,16 +36,23 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
             <div>
-              <h3 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-8">Reach Out</h3>
+              <h3 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-8">
+                {t('reachOut')}
+              </h3>
 
               <div className="space-y-8">
                 {/* Email */}
                 <div className="flex gap-4">
                   <Mail className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">Email</p>
-                    <a href="mailto:hello@dxbtkts.com" className="text-dxb-slate hover:text-dxb-gold transition">
-                      hello@dxbtkts.com
+                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                      {t('email')}
+                    </p>
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="text-dxb-slate hover:text-dxb-gold transition"
+                    >
+                      {site.email}
                     </a>
                   </div>
                 </div>
@@ -48,9 +61,15 @@ export default function Contact() {
                 <div className="flex gap-4">
                   <Phone className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">Phone</p>
-                    <a href="tel:+9714XXXXXXXX" className="text-dxb-slate hover:text-dxb-gold transition">
-                      +971 4 XXX XXXX
+                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                      {t('phone')}
+                    </p>
+                    <a
+                      href={`tel:${site.whatsapp.e164}`}
+                      className="text-dxb-slate hover:text-dxb-gold transition"
+                      dir="ltr"
+                    >
+                      {site.whatsapp.display}
                     </a>
                   </div>
                 </div>
@@ -59,12 +78,14 @@ export default function Contact() {
                 <div className="flex gap-4">
                   <Phone className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">WhatsApp</p>
+                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                      {t('whatsapp')}
+                    </p>
                     <a
-                      href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '971'}?text=Hi%20DXB%20TKTS`}
+                      href={whatsappLink()}
                       className="text-dxb-slate hover:text-dxb-gold transition"
                     >
-                      Chat with us
+                      {t('whatsappCta')}
                     </a>
                   </div>
                 </div>
@@ -73,20 +94,26 @@ export default function Contact() {
                 <div className="flex gap-4">
                   <MapPin className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">Location</p>
-                    <p className="text-dxb-slate">
-                      Dubai, UAE
+                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                      {t('location')}
                     </p>
+                    <p className="text-dxb-slate">{t('locationValue')}</p>
                   </div>
                 </div>
               </div>
 
+              {/* Social */}
+              <div className="mt-10">
+                <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-3">{tx('follow')}</p>
+                <SocialLinks tone="dark" comingSoonLabel={tx('socialSoon')} />
+              </div>
+
               {/* Response Time */}
               <div className="mt-12 p-6 bg-dxb-band rounded">
-                <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-2">Response Time</p>
-                <p className="text-sm text-dxb-slate">
-                  We aim to respond to all enquiries within 24 hours. For urgent matters, please contact us via WhatsApp.
+                <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-2">
+                  {t('responseTime')}
                 </p>
+                <p className="text-sm text-dxb-slate">{t('responseCopy')}</p>
               </div>
             </div>
 

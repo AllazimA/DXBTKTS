@@ -1,170 +1,80 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { Users, Handshake, Plane, PartyPopper } from 'lucide-react'
 import { Eyebrow } from '@/components/ui/eyebrow'
 import { CTABand } from '@/components/ui/cta-band'
-import { Users, TrendingUp, Heart, Briefcase } from 'lucide-react'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'Corporate Concierge | DXB TKTS',
-  description: 'Executive lifestyle management programs for organizations and their leadership teams.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'corporate', '/corporate')
 }
 
-const benefits = [
-  {
-    icon: Users,
-    title: 'Executive Wellness',
-    description: 'Comprehensive lifestyle support programs designed to boost executive productivity and well-being.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Talent Retention',
-    description: 'Demonstrate care for your team. Premium concierge services are a powerful retention tool for top talent.',
-  },
-  {
-    icon: Heart,
-    title: 'Work-Life Balance',
-    description: 'Help your team achieve equilibrium. When logistics are handled, focus returns to what matters.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Duty of Care',
-    description: 'Provide genuine support to your executives. Shows organizational values and strengthens loyalty.',
-  },
-]
+const icons = [Handshake, Users, PartyPopper, Plane]
 
-export default function Corporate() {
+export default async function Corporate() {
+  const t = await getTranslations('corporatePage')
+  const uses = t.raw('uses') as { title: string; copy: string }[]
+  const process = t.raw('process') as string[]
+  const accent = (chunks: React.ReactNode) => <span className="italic text-dxb-gold">{chunks}</span>
+
   return (
     <>
-      {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-dxb-ivory to-dxb-band">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-dxb-ivory to-dxb-band">
         <div className="max-w-7xl mx-auto px-6">
-          <Eyebrow className="mb-4">Corporate Programs</Eyebrow>
+          <Eyebrow className="mb-4">{t('eyebrow')}</Eyebrow>
           <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mb-6 max-w-3xl">
-            Executive Care, Scaled
+            {t('title')}
           </h1>
-          <p className="text-lg text-dxb-slate max-w-2xl">
-            A comprehensive concierge program that empowers your executives and demonstrates organizational commitment to their success.
-          </p>
+          <p className="text-lg text-dxb-slate max-w-2xl leading-relaxed">{t('sub')}</p>
         </div>
       </section>
 
-      {/* Value Prop */}
       <section className="py-20 bg-dxb-ivory">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-6">
-                Why Leading Organizations Choose DXB TKTS
-              </h2>
-              <div className="space-y-4">
-                <p className="text-dxb-slate leading-relaxed">
-                  In competitive markets, top talent demands more than a salary. They expect a lifestyle that matches their position and effort. A corporate concierge program is a powerful statement.
-                </p>
-                <p className="text-dxb-slate leading-relaxed">
-                  We handle the complex logistical demands so your executives can focus on strategy, innovation, and leadership. Result: productivity gains, retention improvements, and genuine organizational care.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { stat: '95%', label: 'Executive Satisfaction' },
-                { stat: '30%', label: 'Retention Lift (avg)' },
-                { stat: '20+', label: 'Years of Experience' },
-                { stat: '500+', label: 'Vetted Partners' },
-              ].map(item => (
-                <div key={item.stat} className="text-center p-6 bg-dxb-band rounded">
-                  <div className="font-cormorant text-3xl font-semibold text-dxb-gold mb-1">
-                    {item.stat}
-                  </div>
-                  <p className="text-sm text-dxb-slate">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-20 bg-dxb-band">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-12 text-center">
-            Key Benefits for Organizations
+          <h2 className="font-cormorant text-4xl font-light text-dxb-ink mb-12 text-center">
+            {t.rich('usesHeading', { accent })}
           </h2>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {benefits.map(benefit => {
-              const Icon = benefit.icon
+            {uses.map((use, i) => {
+              const Icon = icons[i % icons.length]
               return (
-                <Card key={benefit.title}>
-                  <CardHeader>
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-dxb-gold/10 mb-4">
-                      <Icon className="w-6 h-6 text-dxb-gold" />
-                    </div>
-                    <CardTitle>{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-dxb-slate">{benefit.description}</p>
-                  </CardContent>
-                </Card>
+                <div key={use.title} className="bg-white border border-dxb-band p-10">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-dxb-gold/10 mb-5">
+                    <Icon className="w-6 h-6 text-dxb-gold" />
+                  </div>
+                  <h3 className="font-cormorant text-3xl font-medium text-dxb-ink mb-3">{use.title}</h3>
+                  <p className="text-dxb-slate leading-relaxed">{use.copy}</p>
+                </div>
               )
             })}
           </div>
         </div>
       </section>
 
-      {/* Services Included */}
-      <section className="py-20 bg-dxb-ivory">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-12 text-center">
-            Typical Corporate Program Includes
-          </h2>
-
-          <div className="space-y-6">
-            {[
-              'Executive travel coordination and planning',
-              'Ground transportation and logistics management',
-              'Dining reservations and event hosting',
-              'Family support services (school coordination, relocations)',
-              'Personal assistant services for executives',
-              'Wellness and lifestyle management',
-              'Real estate and property support',
-              'Customized annual concierge budget (per executive or company)',
-              'Dedicated account manager for C-suite',
-              '24/7 emergency support and escalation line',
-            ].map((service, i) => (
-              <div key={i} className="flex gap-4 pb-4 border-b border-dxb-band last:border-b-0">
-                <div className="text-dxb-gold font-semibold flex-shrink-0">✓</div>
-                <p className="text-dxb-slate">{service}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Model */}
       <section className="py-20 bg-dxb-band">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="font-cormorant text-4xl font-semibold text-dxb-ink mb-6">
-            Flexible Pricing Models
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="font-cormorant text-4xl font-light text-dxb-ink mb-10 text-center">
+            {t('processHeading')}
           </h2>
-          <p className="text-dxb-slate mb-8 leading-relaxed">
-            We tailor programs to your organization's needs. Options include per-executive retainers, annual enterprise programs, or customized hybrid models. Typically, programs range from AED 50,000 to AED 500,000+ annually, depending on scope and team size.
-          </p>
-          <p className="text-sm text-dxb-slate italic">
-            Let's discuss what works for your organization.
-          </p>
+          <ol className="space-y-5">
+            {process.map((step, i) => (
+              <li key={step} className="flex gap-5 pb-5 border-b border-dxb-ivory last:border-b-0">
+                <span className="font-cormorant text-3xl text-dxb-gold leading-none w-10 shrink-0" dir="ltr">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-dxb-slate leading-relaxed">{step}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* CTA */}
       <CTABand
-        heading="Let's Talk About Your Team"
-        subheading="Schedule a confidential consultation to discuss how we can elevate your executive support program."
-        ctaLabel="Contact our Corporate Team"
-        ctaHref="/contact"
+        heading={t.rich('ctaHeading', { accent })}
+        subheading={t('ctaSub')}
+        ctaLabel={t('ctaPrimary')}
+        ctaHref="/request"
       />
     </>
   )
