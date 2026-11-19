@@ -21,6 +21,10 @@ export const site = {
     mobile: '/videos/hero-loop-mobile.mp4', // 960×540
     poster: '/images/ai/hero-poster.webp',
   } as null | { mp4: string; webm?: string; mobile: string; poster: string },
+  /** Page-hero films (AI-generated for DXBTKTS). */
+  films: {
+    diningTerrace: { mp4: '/videos/dining-terrace.mp4', mobile: '/videos/dining-terrace-mobile.mp4', poster: '/images/film-dining-terrace-poster.webp' },
+  },
   /** Pre-launch announcement bar. Set enabled: false on launch day. */
   comingSoon: { enabled: true },
   /**

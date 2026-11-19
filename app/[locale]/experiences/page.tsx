@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
-import { categories, productsIn, categoryFromPrice } from '@/data/catalogue'
+import { categories, categoryFromPrice } from '@/data/catalogue'
 import { formatAED } from '@/lib/catalogue/money'
 import { categoryImage } from '@/lib/images'
 import { pageMetadata } from '@/lib/metadata'
 import { SceneImage } from '@/components/ui/scene-image'
-import { ProductCard } from '@/components/catalogue/product-card'
+import { CatalogueBrowser } from '@/components/catalogue/catalogue-browser'
 import { CategoryChips, IndicativeNotice } from '@/components/catalogue/catalogue-header'
 import { HowItWorks } from '@/components/sections/how-it-works'
 import { CTABand } from '@/components/ui/cta-band'
@@ -83,31 +83,10 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
         </div>
       </section>
 
-      {/* Products by category */}
+      {/* Products by category, with audience filters */}
       <section className="py-16 bg-dxb-ivory">
-        <div className="max-w-7xl mx-auto px-6 space-y-16">
-          {categories.map(c => {
-            const list = productsIn(c.slug)
-            if (!list.length) return null
-            return (
-              <div key={c.slug}>
-                <div className="flex items-end justify-between gap-4 mb-6">
-                  <div>
-                    <h2 className="font-cormorant text-3xl md:text-4xl text-dxb-ink">{c.name[locale]}</h2>
-                    <p className="text-dxb-slate mt-1 max-w-xl">{c.intro[locale]}</p>
-                  </div>
-                  <Link href={`/experiences/${c.slug}`} className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-dxb-gold shrink-0">
-                    {t('explore')} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
-                  </Link>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {list.map(p => (
-                    <ProductCard key={p.slug} product={p} />
-                  ))}
-                </div>
-              </div>
-            )
-          })}
+        <div className="max-w-7xl mx-auto px-6">
+          <CatalogueBrowser locale={locale} />
         </div>
       </section>
 

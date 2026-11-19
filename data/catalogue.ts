@@ -25,7 +25,7 @@ const allCategories: Category[] = [
   {
     slug: 'signature',
     image: 'dubaiSkyline',
-    name: { en: 'Signature Collection', fr: 'Collection Signature', ar: 'المجموعة المميزة' },
+    name: { en: 'Signature & VIP', fr: 'Signature & VIP', ar: 'التجارب المميزة وكبار الشخصيات' },
     intro: {
       en: 'Our most exclusive experiences — private, hosted and tailored to you. Every detail can be adapted.',
       fr: 'Nos expériences les plus exclusives — privées, accompagnées et adaptées à vous. Chaque détail peut être personnalisé.',
@@ -35,7 +35,7 @@ const allCategories: Category[] = [
   {
     slug: 'on-the-water',
     image: 'yacht',
-    name: { en: 'On the Water', fr: 'Sur l’Eau', ar: 'على الماء' },
+    name: { en: 'Water & Yachts', fr: 'Mer & Yachts', ar: 'البحر واليخوت' },
     intro: {
       en: 'Private yachts, celebrations at sea and jet skis past Dubai’s most famous skyline.',
       fr: 'Yachts privés, célébrations en mer et jet-ski face à la skyline la plus célèbre de Dubaï.',
@@ -55,7 +55,7 @@ const allCategories: Category[] = [
   {
     slug: 'sky',
     image: 'burjAlArabAerial',
-    name: { en: 'Sky', fr: 'Ciel', ar: 'السماء' },
+    name: { en: 'Sky & Adventure', fr: 'Ciel & Aventure', ar: 'السماء والمغامرة' },
     intro: {
       en: 'Scenic helicopter flights over Palm Jumeirah, Burj Al Arab and Downtown.',
       fr: 'Vols panoramiques en hélicoptère au-dessus de Palm Jumeirah, du Burj Al Arab et de Downtown.',
@@ -75,7 +75,7 @@ const allCategories: Category[] = [
   {
     slug: 'transfers',
     image: 'arrival',
-    name: { en: 'Chauffeur & Transfers', fr: 'Chauffeur & Transferts', ar: 'السائق والتنقلات' },
+    name: { en: 'Chauffeurs & Transfers', fr: 'Chauffeurs & Transferts', ar: 'السائقون والتنقلات' },
     intro: {
       en: 'Airport meet-and-greet, private transfers and a chauffeur by the hour.',
       fr: 'Accueil à l’aéroport, transferts privés et chauffeur à l’heure.',
@@ -85,7 +85,7 @@ const allCategories: Category[] = [
   {
     slug: 'day-trips',
     image: 'grandMosque',
-    name: { en: 'Tours & Day Trips', fr: 'Visites & Excursions', ar: 'جولات ورحلات يومية' },
+    name: { en: 'Day Trips & Culture', fr: 'Excursions & Culture', ar: 'رحلات يومية وثقافة' },
     intro: {
       en: 'Private guided tours of Dubai and days out to Abu Dhabi, with your own driver.',
       fr: 'Visites privées de Dubaï avec guide et journées à Abu Dhabi, avec votre propre chauffeur.',
@@ -95,7 +95,7 @@ const allCategories: Category[] = [
   {
     slug: 'attractions',
     image: 'burjKhalifa',
-    name: { en: 'Attractions', fr: 'Attractions', ar: 'المعالم' },
+    name: { en: 'Attractions & Tickets', fr: 'Attractions & Billets', ar: 'المعالم والتذاكر' },
     intro: {
       en: 'Tickets to Dubai’s landmarks, added to your plan in one step.',
       fr: 'Billets pour les sites emblématiques de Dubaï, ajoutés à votre programme en un clic.',
@@ -883,11 +883,29 @@ const coreProducts: Product[] = [
   },
 ]
 
-const CATEGORY_ORDER = ['signature', 'shopping', 'desert', 'on-the-water', 'sky', 'day-trips', 'lifestyle', 'transfers', 'attractions']
+const CATEGORY_ORDER = ['signature', 'attractions', 'shopping', 'desert', 'on-the-water', 'sky', 'day-trips', 'lifestyle', 'transfers']
 export const categories: Category[] = CATEGORY_ORDER.map(slug => allCategories.find(c => c.slug === slug)!).filter(Boolean)
 
 /** Display order: Signature first, then core and additional experiences. */
-export const products: Product[] = [...signatureProducts, ...coreProducts, ...moreProducts, ...shoppingProducts]
+/** Audience tags for core products defined before tags existed (used by the catalogue filters). */
+const CORE_SUITS: Record<string, Product['suits']> = {
+  'private-yacht-charter': ['families', 'friends', 'groups', 'couples'],
+  'sunset-celebration-yacht': ['couples', 'friends', 'groups'],
+  'jet-ski-burj-al-arab': ['friends', 'couples'],
+  'private-desert-safari': ['families', 'couples', 'friends'],
+  'premium-desert-safari': ['families', 'friends', 'groups'],
+  'dune-buggy': ['friends', 'couples'],
+  'hot-air-balloon': ['couples', 'families'],
+  'helicopter-tour': ['couples', 'families', 'friends'],
+  'airport-transfer': ['families', 'couples', 'friends', 'groups', 'vip'],
+  'private-chauffeur': ['families', 'couples', 'friends', 'vip'],
+  'abu-dhabi-day-trip': ['families', 'couples'],
+  'burj-khalifa-at-the-top': ['families', 'couples', 'friends'],
+}
+
+export const products: Product[] = [...signatureProducts, ...coreProducts, ...moreProducts, ...shoppingProducts].map(p =>
+  p.suits?.length || !CORE_SUITS[p.slug] ? p : { ...p, suits: CORE_SUITS[p.slug] },
+)
 
 export function getCategory(slug: string) {
   return categories.find(c => c.slug === slug)

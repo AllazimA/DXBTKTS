@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n.config'
 import { categories, getCategory, productsIn } from '@/data/catalogue'
 import { alternatesFor, site } from '@/lib/site'
-import { ProductCard } from '@/components/catalogue/product-card'
+import { CatalogueBrowser } from '@/components/catalogue/catalogue-browser'
 import { CategoryChips, IndicativeNotice } from '@/components/catalogue/catalogue-header'
 import { CTABand } from '@/components/ui/cta-band'
 
@@ -65,10 +65,8 @@ export default async function CategoryPage({ params: { locale, category: slug } 
       </section>
 
       <section className="py-14 bg-dxb-ivory">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {list.map(p => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
+        <div className="max-w-7xl mx-auto px-6">
+          <CatalogueBrowser locale={locale} category={category.slug} />
         </div>
       </section>
 

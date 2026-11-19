@@ -27,6 +27,11 @@ export const whatsOn = {
   when: t('When', 'Quand', 'الموعد'),
   official: t('Official website', 'Site officiel', 'الموقع الرسمي'),
   requestTickets: t('Request tickets', 'Demander des billets', 'اطلب التذاكر'),
+  eveningTitle: t('Make an evening of it', 'Faites-en une soirée', 'اجعلها أمسية كاملة'),
+  eveningCopy: t('Tickets, a table nearby before or after, and a private car that waits — one request.', 'Les billets, une table à proximité avant ou après, et une voiture privée qui attend — une seule demande.', 'التذاكر وطاولة قريبة قبل الفعالية أو بعدها وسيارة خاصة تنتظرك — في طلب واحد.'),
+  eveningCta: t('Request the full evening', 'Demander la soirée complète', 'اطلب الأمسية الكاملة'),
+  addCar: t('Add the car for that day', 'Ajouter la voiture pour ce jour', 'أضف السيارة لذلك اليوم'),
+  carAdded: t('Car added to your plan', 'Voiture ajoutée à votre programme', 'أُضيفت السيارة إلى خطتك'),
   ticketsOnRequest: t('Tickets on request', 'Billets sur demande', 'التذاكر عند الطلب'),
   ticketsWhatsApp: t('Ask on WhatsApp', 'Demander sur WhatsApp', 'اسأل عبر واتساب'),
   ticketsNote: t(

@@ -7,6 +7,9 @@ import type { Locale } from '@/i18n.config'
 import { events, lastDay, sortKey, type CalendarEvent, type EventCategory, type Emirate } from '@/data/events'
 import { whatsOn as c } from '@/content/whats-on'
 import { whatsappLink } from '@/lib/site'
+import { usePlan } from '@/components/catalogue/plan-provider'
+import { getProduct } from '@/data/catalogue'
+import { formatAED } from '@/lib/catalogue/money'
 
 const intlLocale: Record<Locale, string> = { en: 'en-GB', fr: 'fr-FR', ar: 'ar-AE-u-nu-latn' }
 const CATEGORIES: EventCategory[] = ['entertainment', 'sport', 'culture', 'lifestyle', 'business']
@@ -163,6 +166,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
                     {c.ticketsWhatsApp[locale]}
                   </a>
                 </div>
+                <EventEvening e={e} locale={locale} />
               </div>
             )}
             {e.website && (
@@ -183,6 +187,43 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
         </div>
       )}
     </li>
+  )
+}
+
+/** Event bundle: tickets + a table nearby + a private car (strategy report, opportunity 8). */
+function EventEvening({ e, locale }: { e: CalendarEvent; locale: Locale }) {
+  const plan = usePlan()
+  const [added, setAdded] = useState(false)
+  const car = getProduct('private-chauffeur')
+  const variant = car?.variants.find(v => v.id === 'sedan-5')
+  const date = e.start && e.start >= new Date().toISOString().slice(0, 10) ? e.start : ''
+  return (
+    <div className="mt-5 border-t border-dxb-gold/30 pt-4">
+      <p className="font-cormorant text-xl text-dxb-ink">{c.eveningTitle[locale]}</p>
+      <p className="mt-1 text-sm text-dxb-slate">{c.eveningCopy[locale]}</p>
+      <div className="mt-3 flex flex-wrap items-center gap-4">
+        <Link
+          href={`/request?service=tickets&bundle=evening&event=${encodeURIComponent(e.name.en)}${e.start ? `&date=${e.start}` : ''}`}
+          className="inline-flex items-center gap-2 border border-dxb-ink px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-dxb-ink hover:border-dxb-gold hover:text-dxb-gold"
+        >
+          {c.eveningCta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+        </Link>
+        {car && variant && (
+          <button
+            type="button"
+            disabled={added}
+            onClick={() => {
+              plan.add({ slug: car.slug, variantId: variant.id, date, time: 'evening', qty: 1, children: 0, extras: {} })
+              setAdded(true)
+              plan.setOpen(true)
+            }}
+            className="text-sm font-semibold text-dxb-ink underline underline-offset-4 hover:text-dxb-gold disabled:no-underline disabled:text-dxb-slate"
+          >
+            {added ? c.carAdded[locale] : `${c.addCar[locale]} · ${formatAED(variant.price, locale)}`}
+          </button>
+        )}
+      </div>
+    </div>
   )
 }
 

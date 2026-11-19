@@ -28,7 +28,7 @@ export function RequestForm() {
     if ((kind === 'tickets' || kind === 'shopping') && serviceRef.current) {
       serviceRef.current.value = t(kind === 'tickets' ? 'ticketsOption' : 'shoppingOption')
       const event = q.get('event')
-      if (event && messageRef.current && !messageRef.current.value) messageRef.current.value = t(kind === 'tickets' ? 'ticketsMessage' : 'shoppingMessage', { event })
+      if (event && messageRef.current && !messageRef.current.value) messageRef.current.value = t(kind === 'tickets' ? 'ticketsMessage' : 'shoppingMessage', { event }) + (kind === 'tickets' && q.get('bundle') === 'evening' ? t('eveningExtra') : '')
     }
     const date = q.get('date')
     if (date && /^\d{4}-\d{2}-\d{2}$/.test(date) && dateRef.current) dateRef.current.value = date

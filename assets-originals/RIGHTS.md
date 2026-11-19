@@ -85,3 +85,4 @@
 - 2026-11-19: shopping set (owner's AI images, © DXBTKTS) wired to category-shopping, page-shopping and the six shopping products. Client_shopping_in_Dubai cropped to remove a third-party store sign. NOT USED: Shoppers_walking_in_luxury_mall_2K.jpg — shopping bags show real brand logos (Louis Vuitton, Fendi, Gucci); regenerate with plain bags if wanted.
 - 2026-11-19: owner decision — Shoppers_walking_in_luxury_mall_2K.jpg (brand bags intended) now used for product-dubai-mall-luxury-shopping.
 - 2026-11-19: jet ski, theme park (Ferrari World — owner's choice), supercar track (no venue signage), luxury car rental (key handover) — owner's AI images, © DXBTKTS
+- 2026-11-19: Aquaventure image (product-aquaventure-waterpark); dining-terrace film on the Services hero. Dreamina clips 3269 and 5134 not used yet: 720p with an 'AI' watermark — owner to re-export clean at 1080p.

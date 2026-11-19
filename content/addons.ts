@@ -15,3 +15,16 @@ export const addonsCopy = {
   stepUpCopy: t('The more private version of this experience.', 'La version plus privée de cette expérience.', 'النسخة الأكثر خصوصية من هذه التجربة.'),
   from: t('From', 'À partir de', 'ابتداءً من'),
 }
+
+export const filterCopy = {
+  label: t('Show experiences for', 'Afficher les expériences pour', 'اعرض التجارب لـ'),
+  all: t('Everyone', 'Tous', 'الجميع'),
+  families: t('Families', 'Familles', 'العائلات'),
+  couples: t('Couples', 'Couples', 'الأزواج'),
+  friends: t('Friends & groups', 'Amis & groupes', 'الأصدقاء والمجموعات'),
+  vip: t('VIP', 'VIP', 'كبار الشخصيات'),
+  instant: t('Instant confirmation', 'Confirmation immédiate', 'تأكيد فوري'),
+  results: t('{n} experiences', '{n} expériences', '{n} تجربة'),
+  none: t('Nothing here yet for this filter — ask us and we will arrange it.', 'Rien pour ce filtre pour l’instant — demandez-nous, nous l’organiserons.', 'لا شيء لهذا الاختيار بعد — اسألنا وسنرتّبه.'),
+  explore: t('Explore', 'Explorer', 'استكشف'),
+}

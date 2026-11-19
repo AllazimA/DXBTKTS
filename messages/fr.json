@@ -320,7 +320,8 @@
       "ticketsOption": "Billets d’événements et spectacles",
       "ticketsMessage": "Billets pour : {event}\nNombre de personnes : \nPréférence de placement : ",
       "shoppingOption": "Shopping de luxe",
-      "shoppingMessage": "Personal shopping : {event}\nMarques ou pièces : \nTailles et budget (facultatif) : "
+      "shoppingMessage": "Personal shopping : {event}\nMarques ou pièces : \nTailles et budget (facultatif) : ",
+      "eveningExtra": "\nÀ organiser aussi : une table à proximité avant ou après, et une voiture privée pour la soirée."
     }
   },
   "blog": {

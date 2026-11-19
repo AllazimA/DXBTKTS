@@ -320,7 +320,8 @@
       "ticketsOption": "Event & Show Tickets",
       "ticketsMessage": "Tickets for: {event}\nNumber of guests: \nSeating preference: ",
       "shoppingOption": "Luxury Shopping",
-      "shoppingMessage": "Personal shopping: {event}\nBrands or pieces: \nSizes and budget (optional): "
+      "shoppingMessage": "Personal shopping: {event}\nBrands or pieces: \nSizes and budget (optional): ",
+      "eveningExtra": "\nAlso arrange: a table nearby before or after, and a private car for the evening."
     }
   },
   "blog": {

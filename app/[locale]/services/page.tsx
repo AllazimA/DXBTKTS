@@ -8,7 +8,8 @@ import { aiImage, type SceneImage } from '@/lib/images'
 import { servicesPage as c, servicesDubai, servicesExtra as x } from '@/content/services'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { SceneImage as Picture } from '@/components/ui/scene-image'
-import { whatsappLink } from '@/lib/site'
+import { site, whatsappLink } from '@/lib/site'
+import { BackgroundFilm } from '@/components/ui/background-film'
 
 const HERO = aiImage('page-services', 'fineDining', 'A DXB TKTS concierge meeting a client in Dubai')
 
@@ -35,6 +36,7 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
       {/* Opening — copy over a full-bleed photograph */}
       <section className="relative min-h-[78vh] flex items-end bg-dxb-ink text-white overflow-hidden">
         <Image src={HERO.src ?? ''} alt={HERO.alt} fill priority sizes="100vw" className="object-cover" />
+        <BackgroundFilm {...site.films.diningTerrace} />
         <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink via-dxb-ink/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-dxb-ink via-dxb-ink/75 to-transparent rtl:bg-gradient-to-l" />
         <div className="relative w-full max-w-6xl mx-auto px-6 pt-32 pb-16 md:pb-24">
