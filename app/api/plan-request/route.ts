@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
-import { appendJsonl, parsePlan, planRecord, PLAN_FILE, reference } from '@/lib/plan-request'
+import { appendJsonl, parsePlan, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
 
 /**
  * Booking request from the visitor's plan ("request to book").
@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
 
   const record = planRecord(reference(), 'requested', plan)
   await appendJsonl(PLAN_FILE, record)
+  await queuePlanForCrm(record.reference, 'request', plan)
   console.log('Plan request received:', record.reference, `AED ${plan.total}`)
   return NextResponse.json({ success: true, reference: record.reference, estimatedTotal: plan.total })
 }

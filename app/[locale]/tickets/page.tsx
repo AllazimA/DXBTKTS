@@ -8,6 +8,11 @@ import { whatsOn as c } from '@/content/whats-on'
 import { LAST_REVIEWED } from '@/data/events'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { EventCalendar } from '@/components/whats-on/event-calendar'
+import { ShowsSection } from '@/components/curated/shows-section'
+import { getEvents } from '@/lib/curated'
+
+// Dubai Opera events are published from the DXB CRM at any time: read them on every request.
+export const dynamic = 'force-dynamic'
 
 const HERO = aiImage('gallery-night', 'dubaiSkyline', 'Dubai skyline lit up at night')
 
@@ -15,7 +20,8 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
   return pageMetadata(params.locale, 'whatsOn', '/tickets')
 }
 
-export default function WhatsOnPage({ params: { locale } }: { params: { locale: Locale } }) {
+export default async function WhatsOnPage({ params: { locale } }: { params: { locale: Locale } }) {
+  const events = await getEvents(locale)
   const reviewed = new Intl.DateTimeFormat(locale === 'ar' ? 'ar-AE-u-nu-latn' : locale === 'fr' ? 'fr-FR' : 'en-GB', {
     day: 'numeric',
     month: 'long',
@@ -37,6 +43,8 @@ export default function WhatsOnPage({ params: { locale } }: { params: { locale: 
       </section>
 
       <EventCalendar locale={locale} initialToday={new Date().toISOString().slice(0, 10)} />
+
+      <ShowsSection locale={locale} events={events} />
 
       <section className="bg-dxb-band">
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">

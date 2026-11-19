@@ -22,3 +22,7 @@ data/*.jsonl
 # Master image/film files (large; DXBTKTS brand assets — back up separately)
 assets-originals/ai/
 assets-originals/video/
+
+# CRM outbox queue (customer data)
+data/crm-outbox/
+data/published/

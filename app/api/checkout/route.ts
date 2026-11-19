@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
-import { appendJsonl, parsePlan, planRecord, PLAN_FILE, reference } from '@/lib/plan-request'
+import { appendJsonl, parsePlan, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
 import { stripeClient, stripeMode } from '@/lib/stripe'
 import { site } from '@/lib/site'
 
@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
     })
 
     await appendJsonl(PLAN_FILE, planRecord(ref, 'awaiting_payment', plan, { payment: { provider: 'stripe', mode, session_id: session.id } }))
+    await queuePlanForCrm(ref, 'pay_now', plan)
     console.log('Checkout started:', ref, `AED ${plan.total}`, mode)
     return NextResponse.json({ url: session.url, reference: ref })
   } catch (error) {

@@ -542,6 +542,18 @@
     "packages": {
       "title": "Formules Dubaï — Journées toutes prêtes avec voiture privée | DXB TKTS",
       "description": "Formules thématiques à Dubaï : Burj Khalifa au coucher du soleil, journée sur la Palm, soirées privées dans le désert, Abu Dhabi culturel et Dubaï en 3 jours — avec la voiture entre chaque expérience."
+    },
+    "dining": {
+      "title": "Meilleurs restaurants de Dubaï — nos tables | DXB TKTS",
+      "description": "Notre courte liste de restaurants à Dubaï, la plupart distingués aux Time Out Dubai Restaurant Awards 2026. Dites-nous le soir, nous demandons la table pour vous."
+    },
+    "nightlife": {
+      "title": "Vie nocturne à Dubaï — clubs, rooftops et speakeasies | DXB TKTS",
+      "description": "Dix façons de sortir à Dubaï, choisies parmi les What’s On Nightlife Awards 2025. Nous demandons la table, l’entrée et la voiture du retour."
+    },
+    "sourcing": {
+      "title": "Recherche d’éditions limitées à Dubaï | DXB TKTS",
+      "description": "Montres, sneakers, sacs et premières sorties introuvables : nous cherchons les revendeurs, suivons la sortie et, si c’est autorisé, achetons pour vous."
     }
   },
   "corporatePage": {
@@ -722,6 +734,9 @@
     "journal": "Blog",
     "whatsOn": "Billets & événements",
     "discover": "Découvrir",
-    "packages": "Formules"
+    "packages": "Formules",
+    "dining": "Restaurants",
+    "nightlife": "Vie nocturne",
+    "sourcing": "Éditions limitées"
   }
 }

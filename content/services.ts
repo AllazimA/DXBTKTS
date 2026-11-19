@@ -94,6 +94,7 @@ export const servicesPage = {
     },
     {
       id: 'dining',
+      link: { href: '/dining', label: { en: 'The tables we recommend', fr: 'Nos tables', ar: 'الطاولات التي نوصي بها' } },
       title: { en: 'Dining & reservations', fr: 'Restaurants & réservations', ar: 'المطاعم والحجوزات' },
       line: {
         en: 'The right table at the right moment — from the counter everyone talks about to a private room for twelve.',
@@ -128,6 +129,7 @@ export const servicesPage = {
     },
     {
       id: 'shopping',
+      link: { href: '/sourcing', label: { en: 'Limited-edition sourcing', fr: 'Éditions limitées', ar: 'الإصدارات المحدودة' } },
       title: { en: 'Shopping & sourcing', fr: 'Shopping & recherche d’exception', ar: 'التسوق والبحث عن القطع النادرة' },
       line: {
         en: 'Private appointments at the boutiques of Dubai Mall and Mall of the Emirates, and help finding the piece that is not on display.',

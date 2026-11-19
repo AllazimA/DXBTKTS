@@ -14,6 +14,8 @@ import { ProductCard } from '@/components/catalogue/product-card'
 import { DoorToDoor } from '@/components/catalogue/door-to-door'
 import { upgrades, TRANSPORT_INCLUDED } from '@/data/upgrades'
 import { addonsCopy as ac } from '@/content/addons'
+import { shoppingPanel as sp } from '@/content/curated-pages'
+import { ServiceRequestForm } from '@/components/forms/service-request-form'
 
 type Props = { params: { locale: Locale; category: string; slug: string } }
 
@@ -202,7 +204,15 @@ export default async function ProductPage({ params: { locale, category: category
 
             {/* Right: booking panel */}
             <aside className="lg:sticky lg:top-28" id="book">
-              {product.quoteOnly ? (
+              {product.quoteOnly && product.category === 'shopping' ? (
+                <div className="bg-dxb-ink text-white p-7 md:p-8">
+                  <p className="text-xs font-semibold tracking-[0.25em] uppercase text-dxb-gold">{sp.bespoke[locale]}</p>
+                  <h2 className="mt-3 font-cormorant text-3xl">{sp.title[locale]}</h2>
+                  <p className="mt-3 mb-7 text-white/70 text-sm leading-relaxed">{sp.copy[locale]}</p>
+                  <ServiceRequestForm id="shopping-request" kind="shopping" compact hidden={{ product: product.name.en }} />
+                  <Link href="/sourcing" className="mt-6 block text-sm text-dxb-gold underline underline-offset-4">{sp.sourcingLink[locale]}</Link>
+                </div>
+              ) : product.quoteOnly ? (
                 <div className="bg-dxb-ink text-white p-8">
                   <p className="font-cormorant text-3xl">{t('onRequest')}</p>
                   <p className="mt-3 text-white/70">{t('conciergeCopy')}</p>

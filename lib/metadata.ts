@@ -20,6 +20,9 @@ export type PageKey =
   | 'whatsOn'
   | 'journal'
   | 'packages'
+  | 'dining'
+  | 'nightlife'
+  | 'sourcing'
 
 /** Localised title, description, canonical and hreflang for a page. */
 export async function pageMetadata(locale: Locale, key: PageKey, path: string): Promise<Metadata> {

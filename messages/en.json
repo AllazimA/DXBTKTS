@@ -542,6 +542,18 @@
     "packages": {
       "title": "Dubai Packages — Ready-Made Days with a Private Car | DXB TKTS",
       "description": "Themed Dubai packages: Burj Khalifa at sunset, Palm day to sunset, private desert evenings, Abu Dhabi culture day and Dubai in 3 days — each with the car between experiences."
+    },
+    "dining": {
+      "title": "Best Restaurants in Dubai — Tables We Recommend | DXB TKTS",
+      "description": "Our short list of Dubai restaurants, most recognised in the Time Out Dubai Restaurant Awards 2026. Tell us the night and we request the table for you."
+    },
+    "nightlife": {
+      "title": "Dubai Nightlife — Clubs, Rooftops & Speakeasies | DXB TKTS",
+      "description": "Ten kinds of night out in Dubai, chosen from the What’s On Nightlife Awards 2025. We request your table, entry and the car home."
+    },
+    "sourcing": {
+      "title": "Limited-Edition & First-Release Sourcing in Dubai | DXB TKTS",
+      "description": "Hard-to-find watches, sneakers, bags and first releases: we research retailers, watch the release and, where allowed, queue and buy on your behalf."
     }
   },
   "corporatePage": {
@@ -722,6 +734,9 @@
     "journal": "Blog",
     "whatsOn": "Tickets & events",
     "discover": "Discover",
-    "packages": "Packages"
+    "packages": "Packages",
+    "dining": "Dining",
+    "nightlife": "Nightlife",
+    "sourcing": "Limited-edition sourcing"
   }
 }

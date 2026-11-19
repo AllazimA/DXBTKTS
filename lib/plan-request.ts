@@ -2,6 +2,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { priceItems } from '@/lib/catalogue/pricing'
 import type { PlanItem } from '@/lib/catalogue/types'
+import { queueForCrm } from '@/lib/crm-outbox'
 
 /** Shared parsing and storage for plan requests (request-to-book and pay-now). */
 
@@ -103,4 +104,23 @@ export async function appendJsonl(file: string, record: unknown) {
   } catch (error) {
     console.error('Could not persist record:', error)
   }
+}
+
+/** Queue a plan (request-to-book or pay-now) for the CRM as one experience request. */
+export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', plan: Extract<ParsedPlan, { ok: true }>) {
+  const lines = plan.priced.map(p => `• ${p.product.name.en} — ${p.variant.name.en}${p.item.date ? `, ${p.item.date} (${p.item.time})` : ', date to confirm'} · qty ${p.item.qty}${p.item.children ? ` + ${p.item.children} children` : ''} · AED ${p.total}`)
+  const dates = plan.priced.map(p => p.item.date).filter(Boolean).sort()
+  await queueForCrm({
+    name: plan.customer.name,
+    email: plan.customer.email,
+    phone: plan.customer.whatsapp,
+    interest: 'experience',
+    interestLabel: mode === 'pay_now' ? `Plan ${ref} — paying online` : `Plan ${ref} — request to book`,
+    message: [`Plan ${ref} (${mode === 'pay_now' ? 'Pay now started on the website' : 'sent as a request'}):`, ...lines, `Estimated total: AED ${plan.total}`, plan.customer.hotel ? `Hotel / area: ${plan.customer.hotel}` : '', plan.customer.notes ? `Notes: ${plan.customer.notes}` : ''].filter(Boolean).join('\n'),
+    arrival: dates[0],
+    departure: dates.length > 1 ? dates[dates.length - 1] : undefined,
+    locale: plan.locale ?? undefined,
+    details: { planReference: ref, planMode: mode, estimatedTotalAed: String(plan.total), hotel: plan.customer.hotel ?? '', items: lines.join('\n') },
+    source: 'plan_basket',
+  })
 }

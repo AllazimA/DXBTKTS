@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
+import { queueForCrm, type RequestType } from '@/lib/crm-outbox'
 
 /**
  * Enquiry intake (request + contact forms).
@@ -29,6 +30,20 @@ function clean(value: unknown, max: number) {
   if (typeof value !== 'string') return null
   const v = value.trim().slice(0, max)
   return v.length ? v : null
+}
+
+/** The service the customer picked (any language) → CRM request type. */
+function requestTypeFor(interest: string): RequestType {
+  const i = interest.toLowerCase()
+  if (/ticket|billet|تذاكر/.test(i)) return 'tickets'
+  if (/shopping|التسوق/.test(i)) return 'shopping'
+  if (/sourcing|limited|édition|إصدار/.test(i)) return 'sourcing'
+  if (/membership|adhésion|عضوية|العضوية/.test(i)) return 'membership'
+  if (/chauffeur|airport|aéroport|transfer|السائق|المطار/.test(i)) return 'transfer'
+  if (/celebration|célébration|événement|احتفال|مناسبة/.test(i)) return 'celebration'
+  if (/corporate|group|entreprise|groupe|الشركات|مجموعة/.test(i)) return 'corporate'
+  if (/dining|restaurant|dîner|مطاعم|عشاء/.test(i)) return 'dining'
+  return 'experience'
 }
 
 export async function POST(request: NextRequest) {
@@ -74,6 +89,20 @@ export async function POST(request: NextRequest) {
     console.error('Could not persist enquiry to file:', writeError)
   }
   console.log('Enquiry received:', enquiry.id)
+
+  await queueForCrm({
+    name,
+    email,
+    phone: phone ?? undefined,
+    interest: requestTypeFor(interest),
+    interestLabel: interest,
+    message: fields.message ?? `${interest} — request from the website.`,
+    arrival: fields.date && /^\d{4}-\d{2}-\d{2}$/.test(fields.date) ? fields.date : undefined,
+    timing: fields.date ?? undefined,
+    locale: enquiry.locale ?? undefined,
+    details: { contactMethod: contact_method ?? '', page: enquiry.page ?? '', referralSource: fields.referral_source ?? '' },
+    source: fields.referral_source ?? 'website',
+  })
 
   return NextResponse.json({ success: true, id: enquiry.id }, { status: 200 })
 }

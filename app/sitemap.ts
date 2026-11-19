@@ -5,7 +5,7 @@ import { categories, products } from '@/data/catalogue'
 import { articles } from '@/content/journal'
 import { packages } from '@/data/packages'
 
-const staticRoutes = ['/', '/about', '/experiences', '/services', '/membership', '/corporate', '/request', '/contact', '/tickets', '/blog', '/packages', '/legal/privacy', '/legal/terms', '/legal/cookies']
+const staticRoutes = ['/', '/about', '/experiences', '/services', '/membership', '/corporate', '/request', '/contact', '/tickets', '/blog', '/packages', '/dining', '/nightlife', '/sourcing', '/legal/privacy', '/legal/terms', '/legal/cookies']
 
 const routes = [
   ...staticRoutes,

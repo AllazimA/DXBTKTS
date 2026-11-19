@@ -19,6 +19,8 @@ export function Footer() {
         { href: '/experiences', label: t('columns.signatureServices') },
         { href: '/packages', label: tx('packages') },
         { href: '/tickets', label: tx('whatsOn') },
+        { href: '/dining', label: tx('dining') },
+        { href: '/nightlife', label: tx('nightlife') },
         { href: '/blog', label: tx('journal') },
         { href: '/contact', label: t('columns.contact') },
       ],
@@ -28,6 +30,7 @@ export function Footer() {
       links: [
         { href: '/services', label: t('columns.requestService') },
         { href: '/membership', label: t('columns.privateMembers') },
+        { href: '/sourcing', label: tx('sourcing') },
         { href: '/request', label: th('enquire') },
       ],
     },
