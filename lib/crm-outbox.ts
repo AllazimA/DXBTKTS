@@ -38,6 +38,21 @@ export type OutboxEnquiry = {
   /** Typed form fields, keyed as the CRM request type's fields (strings only). */
   details?: Record<string, string>
   source?: string
+  /** Structured basket (plan request / pay now): one line per product, prices recomputed on the server. */
+  order?: OutboxOrder
+}
+
+export type OutboxOrderLine = {
+  slug: string; product: string; variant: string; category: string | null; priceType: string
+  date: string | null; time: string | null; qty: number; children: number; extras: Record<string, number>
+  unitPrice: number | null; total: number; priceVerified: boolean
+}
+export type OutboxOrder = { reference: string; mode: 'request' | 'pay_now'; currency: string; total: number; lines: OutboxOrderLine[]; hotel?: string | null; notes?: string | null }
+
+/** A verified online payment (Stripe webhook / success page). Separate outbox record, linked by order reference. */
+export type OutboxPayment = {
+  id: string; kind: 'payment'; receivedAt: string
+  payment: { reference: string | null; provider: 'stripe'; sessionId: string; paymentIntent: string | null; amount: number; currency: string; email: string | null; livemode: boolean; paidAt: string; status: 'paid' }
 }
 
 const DIR = path.join(process.cwd(), 'data', 'crm-outbox')
@@ -79,6 +94,7 @@ export async function queueForCrm(input: Omit<OutboxEnquiry, 'id' | 'receivedAt'
     locale: s(input.locale, 5),
     details,
     source: s(input.source, 80),
+    ...(input.order ? { order: input.order } : {}),
   }
   try {
     await fs.mkdir(DIR, { recursive: true })
@@ -89,7 +105,20 @@ export async function queueForCrm(input: Omit<OutboxEnquiry, 'id' | 'receivedAt'
   return e.id
 }
 
-export async function listPending(limit = 50): Promise<OutboxEnquiry[]> {
+/** Queue a verified payment for the CRM. The id is derived from the Stripe session, so a repeat never creates a second record. */
+export async function queuePaymentForCrm(p: OutboxPayment['payment']) {
+  const id = `pay-${p.sessionId.replace(/[^a-zA-Z0-9]/g, '').toLowerCase().slice(-40)}`
+  const rec: OutboxPayment = { id, kind: 'payment', receivedAt: new Date().toISOString(), payment: p }
+  try {
+    await fs.mkdir(DIR, { recursive: true })
+    await fs.writeFile(path.join(DIR, `${id}.json`), JSON.stringify(rec), { encoding: 'utf8', flag: 'wx' }).catch(e => { if ((e as NodeJS.ErrnoException).code !== 'EEXIST') throw e })
+  } catch (err) {
+    console.error('[crm outbox] could not queue payment', id, err)
+  }
+  return id
+}
+
+export async function listPending(limit = 50): Promise<(OutboxEnquiry | OutboxPayment)[]> {
   let files: string[] = []
   try {
     files = (await fs.readdir(DIR)).filter(f => f.endsWith('.json'))
@@ -99,13 +128,13 @@ export async function listPending(limit = 50): Promise<OutboxEnquiry[]> {
   const items = await Promise.all(
     files.map(async f => {
       try {
-        return JSON.parse(await fs.readFile(path.join(DIR, f), 'utf8')) as OutboxEnquiry
+        return JSON.parse(await fs.readFile(path.join(DIR, f), 'utf8')) as OutboxEnquiry | OutboxPayment
       } catch {
         return null
       }
     }),
   )
-  return items.filter((x): x is OutboxEnquiry => !!x).sort((a, b) => a.receivedAt.localeCompare(b.receivedAt)).slice(0, limit)
+  return items.filter((x): x is OutboxEnquiry | OutboxPayment => !!x).sort((a, b) => a.receivedAt.localeCompare(b.receivedAt)).slice(0, limit)
 }
 
 export async function removeImported(ids: string[]) {

@@ -121,6 +121,14 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
     departure: dates.length > 1 ? dates[dates.length - 1] : undefined,
     locale: plan.locale ?? undefined,
     details: { planReference: ref, planMode: mode, estimatedTotalAed: String(plan.total), hotel: plan.customer.hotel ?? '', items: lines.join('\n') },
-    source: 'plan_basket',
+    source: mode === 'pay_now' ? 'website_pay_now' : 'website_plan_request',
+    order: {
+      reference: ref, mode, currency: 'AED', total: plan.total, hotel: plan.customer.hotel, notes: plan.customer.notes,
+      lines: plan.priced.map(p => ({
+        slug: p.product.slug, product: p.product.name.en, variant: p.variant.name.en, category: p.product.category ?? null, priceType: p.product.priceType,
+        date: p.item.date || null, time: p.item.time ?? null, qty: p.item.qty, children: p.item.children, extras: p.item.extras,
+        unitPrice: p.lines.find(l => l.label === 'base')?.unit ?? null, total: p.total, priceVerified: !!p.product.priceVerified,
+      })),
+    },
   })
 }
