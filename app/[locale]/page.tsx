@@ -1,23 +1,45 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { Hero } from '@/components/sections/hero'
-import { WhatWeDo } from '@/components/sections/what-we-do'
+import { PopularExperiences } from '@/components/sections/popular-experiences'
+import { Philosophy } from '@/components/sections/philosophy'
+import { ServicesShowcase } from '@/components/sections/services-showcase'
+import { Experiences } from '@/components/sections/experiences'
+import { Clientele } from '@/components/sections/clientele'
+import { HowItWorks } from '@/components/sections/how-it-works'
+import { Gallery } from '@/components/sections/gallery'
 import { CTABand } from '@/components/ui/cta-band'
+import { whatsappLink } from '@/lib/site'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'DXB TKTS | Home',
-  description: 'Premium luxury concierge and lifestyle management for HNWIs in Dubai.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'home', '/')
 }
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations('home')
+  const accent = (chunks: React.ReactNode) => (
+    <span className="italic text-dxb-gold">{chunks}</span>
+  )
+
   return (
     <>
       <Hero />
-      <WhatWeDo />
+      <PopularExperiences />
+      <ServicesShowcase />
+      <HowItWorks />
+      <Philosophy />
+      <Experiences />
+      <Clientele />
+      <Gallery />
       <CTABand
-        heading="Experience DXB TKTS"
-        subheading="Join the most discerning members in Dubai and beyond."
-        ctaLabel="Request an Invitation"
-        ctaHref="/contact"
+        heading={t.rich('ctaHeading', { accent })}
+        subheading={t('ctaSub')}
+        ctaLabel={t('ctaPrimary')}
+        ctaHref="/request"
+        secondaryCtaLabel={t('ctaSecondary')}
+        secondaryCtaHref={whatsappLink()}
       />
     </>
   )

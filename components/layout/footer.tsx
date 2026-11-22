@@ -2,63 +2,122 @@
 
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { site, whatsappLink } from '@/lib/site'
+import { SocialLinks } from '@/components/layout/social-links'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 export function Footer() {
   const t = useTranslations('footer')
+  const th = useTranslations('header')
+  const tx = useTranslations('footerExtra')
+
+  const columns = [
+    {
+      heading: t('columns.house'),
+      links: [
+        { href: '/about', label: t('columns.ourStory') },
+        { href: '/experiences', label: t('columns.signatureServices') },
+        { href: '/packages', label: tx('packages') },
+        { href: '/tickets', label: tx('whatsOn') },
+        { href: '/dining', label: tx('dining') },
+        { href: '/nightlife', label: tx('nightlife') },
+        { href: '/blog', label: tx('journal') },
+        { href: '/contact', label: t('columns.contact') },
+      ],
+    },
+    {
+      heading: t('columns.membership'),
+      links: [
+        { href: '/services', label: t('columns.requestService') },
+        { href: '/membership', label: t('columns.privateMembers') },
+        { href: '/sourcing', label: tx('sourcing') },
+        { href: '/request', label: th('enquire') },
+      ],
+    },
+    {
+      heading: t('columns.legal'),
+      links: [
+        { href: '/legal/privacy', label: t('columns.privacy') },
+        { href: '/legal/terms', label: t('columns.terms') },
+        { href: '/legal/cookies', label: t('columns.cookies') },
+      ],
+    },
+  ]
 
   return (
-    <footer className="bg-dxb-navy text-white mt-16">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Company */}
-          <div>
-            <h4 className="font-cormorant text-lg font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
-              <li><Link href="/about" className="text-gray-300 hover:text-dxb-gold transition">About</Link></li>
-              <li><Link href="#careers" className="text-gray-300 hover:text-dxb-gold transition">Careers</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-dxb-gold transition">Contact</Link></li>
-            </ul>
+    <footer className="bg-dxb-ink text-white">
+      {/* Gold hairline */}
+      <div className="h-px bg-gradient-to-r from-transparent via-dxb-gold/60 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+          {/* Brand story */}
+          <div className="lg:col-span-5">
+            <Link href="/" className="inline-flex flex-col leading-none">
+              <span className="font-cormorant text-3xl font-semibold tracking-wide">
+                DXB <span className="text-dxb-gold">TKTS</span>
+              </span>
+              <span className="text-[10px] font-semibold tracking-[0.4em] uppercase text-white/50 mt-1.5">
+                {t('tagline')}
+              </span>
+            </Link>
+            <p className="mt-7 text-white/60 font-light leading-relaxed max-w-md">{t('story')}</p>
+            <p className="mt-6 text-xs font-semibold tracking-[0.3em] uppercase text-dxb-gold">
+              {t('appointment')}
+            </p>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-cormorant text-lg font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              <li><Link href="/services" className="text-gray-300 hover:text-dxb-gold transition">All Services</Link></li>
-              <li><Link href="/services/dining" className="text-gray-300 hover:text-dxb-gold transition">Dining</Link></li>
-              <li><Link href="/services/travel" className="text-gray-300 hover:text-dxb-gold transition">Travel</Link></li>
-            </ul>
+          {/* Link columns */}
+          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {columns.map(col => (
+              <div key={col.heading}>
+                <h4 className="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">
+                  {col.heading}
+                </h4>
+                <ul className="space-y-3">
+                  {col.links.map(link => (
+                    <li key={`${col.heading}-${link.label}`}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/65 hover:text-dxb-gold transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
-          {/* Membership */}
-          <div>
-            <h4 className="font-cormorant text-lg font-semibold mb-4">Membership</h4>
-            <ul className="space-y-2">
-              <li><Link href="/membership" className="text-gray-300 hover:text-dxb-gold transition">Tiers</Link></li>
-              <li><Link href="/corporate" className="text-gray-300 hover:text-dxb-gold transition">Corporate</Link></li>
-              <li><Link href="#faq" className="text-gray-300 hover:text-dxb-gold transition">FAQ</Link></li>
-            </ul>
-          </div>
-
-          {/* Connect */}
-          <div>
-            <h4 className="font-cormorant text-lg font-semibold mb-4">Connect</h4>
-            <p className="text-gray-300 text-sm mb-4">{t('contact')}</p>
-            <div className="flex gap-4">
-              <a href="#" className="text-dxb-gold hover:text-white transition">
-                LinkedIn
-              </a>
-              <a href="#" className="text-dxb-gold hover:text-white transition">
-                Instagram
-              </a>
-            </div>
+          {/* Contact */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">
+              {t('reachUs')}
+            </h4>
+            <a
+              href={`mailto:${site.email}`}
+              className="block text-sm text-white/65 hover:text-dxb-gold transition-colors"
+            >
+              {t('contact')}
+            </a>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-sm text-white/65 hover:text-dxb-gold transition-colors"
+            >
+              <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+              {t('whatsapp')}
+            </a>
+            <h4 className="mt-10 text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-4">{tx('follow')}</h4>
+            <SocialLinks tone="light" comingSoonLabel={tx('socialSoon')} />
           </div>
         </div>
 
-        <div className="border-t border-dxb-navy-light pt-8">
-          <p className="text-center text-gray-300 text-sm">
-            {t('copyright')}
-          </p>
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/40 tracking-wide">{t('copyright')}</p>
+          <p className="font-cormorant italic text-sm text-white/50">{t('quote')}</p>
         </div>
       </div>
     </footer>

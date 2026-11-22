@@ -20,7 +20,7 @@ cp .env.example .env.local
 # Run development server
 npm run dev
 
-# Open http://localhost:3000 in your browser
+# Open http://localhost:3006 in your browser
 ```
 
 Build for production:
@@ -223,7 +223,7 @@ Currently **stubbed**—forms mock success and don't persist data.
 - Use `next/image` for all images (never `<img>`)
 - Code-split heavy components with `dynamic()` if > 50KB
 - Lazy-load below-the-fold sections
-- Monitor Lighthouse scores: `npm run build && npx lighthouse http://localhost:3000`
+- Monitor Lighthouse scores: `npm run build && npx lighthouse http://localhost:3006`
 
 ---
 
@@ -256,7 +256,7 @@ npm start
 ## Troubleshooting
 
 ### "next-intl error: Missing locale"
-- Ensure URL includes locale prefix: `http://localhost:3000/en` not `http://localhost:3000`
+- Ensure URL includes locale prefix: `http://localhost:3006/en` not `http://localhost:3006`
 - Check `middleware.ts` is present and correct
 
 ### Images not loading

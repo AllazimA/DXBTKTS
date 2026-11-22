@@ -1,12 +1,18 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function EnquiryForm() {
+  const t = useTranslations('contact.form')
+  const contactOptions = t.raw('contactOptions') as Record<string, string>
+  const interestOptions = t.raw('interestOptions') as Record<string, string>
+  const referralOptions = t.raw('referralOptions') as Record<string, string>
+
   const [isLoading, setIsLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
@@ -26,6 +32,9 @@ export function EnquiryForm() {
           interest: formData.get('interest'),
           message: formData.get('message'),
           referral_source: formData.get('referral_source'),
+          company_website: formData.get('company_website'),
+          page: window.location.pathname,
+          locale: document.documentElement.lang,
         }),
         headers: { 'Content-Type': 'application/json' },
       })
@@ -44,84 +53,85 @@ export function EnquiryForm() {
     return (
       <Card className="border-dxb-gold border-2">
         <CardHeader>
-          <CardTitle className="text-dxb-gold">Thank you</CardTitle>
+          <CardTitle className="text-dxb-gold">{t('successTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-dxb-slate">
-            Your enquiry has been received. Our team will be in touch within 24 hours to discuss how we can serve you.
-          </p>
+          <p className="text-dxb-slate">{t('successCopy')}</p>
         </CardContent>
       </Card>
     )
   }
 
+  const selectStyles =
+    'mt-2 flex h-10 w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold'
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Begin Your Journey</CardTitle>
-        <CardDescription>Tell us about yourself and your needs. We'll be in touch within 24 hours.</CardDescription>
+        <CardTitle>{t('title')}</CardTitle>
+        <CardDescription>{t('subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="relative space-y-6">
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
           {/* Name */}
           <div>
-            <Label htmlFor="name">Full Name *</Label>
-            <Input id="name" name="name" type="text" required placeholder="Your name" className="mt-2" />
+            <Label htmlFor="name">{t('name')}</Label>
+            <Input id="name" name="name" type="text" required placeholder={t('namePlaceholder')} className="mt-2" />
           </div>
 
           {/* Email */}
           <div>
-            <Label htmlFor="email">Email Address *</Label>
-            <Input id="email" name="email" type="email" required placeholder="hello@example.com" className="mt-2" />
+            <Label htmlFor="email">{t('email')}</Label>
+            <Input id="email" name="email" type="email" required placeholder={t('emailPlaceholder')} className="mt-2" dir="ltr" />
           </div>
 
           {/* Phone */}
           <div>
-            <Label htmlFor="phone">Phone Number *</Label>
-            <Input id="phone" name="phone" type="tel" required placeholder="+971 XX XXX XXXX" className="mt-2" />
+            <Label htmlFor="phone">{t('phone')}</Label>
+            <Input id="phone" name="phone" type="tel" required placeholder={t('phonePlaceholder')} className="mt-2" dir="ltr" />
           </div>
 
           {/* Preferred Contact Method */}
           <div>
-            <Label htmlFor="contact_method">Preferred Contact Method *</Label>
-            <select
-              id="contact_method"
-              name="contact_method"
-              required
-              className="mt-2 flex h-10 w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
-            >
-              <option value="">Select a method</option>
-              <option value="phone">Phone</option>
-              <option value="email">Email</option>
-              <option value="whatsapp">WhatsApp</option>
+            <Label htmlFor="contact_method">{t('contactMethod')}</Label>
+            <select id="contact_method" name="contact_method" required className={selectStyles}>
+              <option value="">{t('contactMethodPlaceholder')}</option>
+              {Object.entries(contactOptions).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 
           {/* Interest */}
           <div>
-            <Label htmlFor="interest">What are you interested in? *</Label>
-            <select
-              id="interest"
-              name="interest"
-              required
-              className="mt-2 flex h-10 w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
-            >
-              <option value="">Select an option</option>
-              <option value="signature">Signature Membership</option>
-              <option value="prive">Privé Membership</option>
-              <option value="noir">Noir Membership</option>
-              <option value="corporate">Corporate Concierge</option>
-              <option value="other">Other / Enquiry</option>
+            <Label htmlFor="interest">{t('interest')}</Label>
+            <select id="interest" name="interest" required className={selectStyles}>
+              <option value="">{t('interestPlaceholder')}</option>
+              {Object.entries(interestOptions).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 
           {/* Message */}
           <div>
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">{t('message')}</Label>
             <textarea
               id="message"
               name="message"
-              placeholder="Tell us more about yourself and your lifestyle..."
+              placeholder={t('messagePlaceholder')}
               rows={4}
               className="mt-2 flex w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
             />
@@ -129,18 +139,14 @@ export function EnquiryForm() {
 
           {/* Referral Source */}
           <div>
-            <Label htmlFor="referral_source">How did you hear about us?</Label>
-            <select
-              id="referral_source"
-              name="referral_source"
-              className="mt-2 flex h-10 w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
-            >
-              <option value="">Select an option</option>
-              <option value="referral">Referral</option>
-              <option value="social_media">Social Media</option>
-              <option value="google">Google Search</option>
-              <option value="press">Press / Media</option>
-              <option value="other">Other</option>
+            <Label htmlFor="referral_source">{t('referral')}</Label>
+            <select id="referral_source" name="referral_source" className={selectStyles}>
+              <option value="">{t('referralPlaceholder')}</option>
+              {Object.entries(referralOptions).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -154,13 +160,13 @@ export function EnquiryForm() {
               className="mt-1 w-4 h-4 rounded border border-dxb-band bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
             />
             <Label htmlFor="privacy" className="mt-0">
-              I agree to the privacy policy and consent to being contacted about membership and services. *
+              {t('privacy')}
             </Label>
           </div>
 
           {/* Submit */}
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? 'Sending...' : 'Request Consultation'}
+            {isLoading ? t('sending') : t('submit')}
           </Button>
         </form>
       </CardContent>

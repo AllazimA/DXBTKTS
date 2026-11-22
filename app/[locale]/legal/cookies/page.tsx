@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
 import { Eyebrow } from '@/components/ui/eyebrow'
+import type { Locale } from '@/i18n.config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy | DXB TKTS',
-  description: 'DXB TKTS Cookie Policy.',
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  return pageMetadata(params.locale, 'cookies', '/legal/cookies')
 }
 
 export default function Cookies() {

@@ -1,0 +1,785 @@
+import type { L } from '@/lib/catalogue/types'
+
+/**
+ * DXB TKTS — Dubai & UAE calendar ("What's On").
+ *
+ * HOW TO UPDATE (once or twice a year)
+ *  1. When an organiser announces new dates, set `start` / `end` (YYYY-MM-DD)
+ *     and change `status` to 'confirmed'.
+ *  2. Dates that depend on the moon or that the organiser has only
+ *     indicated stay 'expected'. Unannounced editions are 'tba' with `month`
+ *     (YYYY-MM) = the month the event usually falls in.
+ *  3. Remove an event once it has finished; past events drop off the page automatically.
+ *  4. Update LAST_REVIEWED.
+ *
+ * Concerts and shows: dates and venues as published on the ticketing
+ * listing (checked 18 Nov 2026). Which provider we source each event from is
+ * internal and lives in data/event-sourcing.ts — never shown on the site.
+ *
+ * Rules: only official sources (organiser or government media office), never
+ * a date we have not seen published. DXB TKTS does not sell tickets for these
+ * events and has no partnership with the organisers. The page says so.
+ */
+
+export const LAST_REVIEWED = '2026-11-18'
+
+export type EventCategory = 'business' | 'sport' | 'culture' | 'lifestyle' | 'entertainment'
+export type Emirate = 'dubai' | 'abu-dhabi' | 'sharjah' | 'uae'
+export type EventStatus = 'confirmed' | 'expected' | 'tba'
+
+export type CalendarEvent = {
+  id: string
+  name: L
+  category: EventCategory
+  emirate: Emirate
+  status: EventStatus
+  /** YYYY-MM-DD. Required for confirmed and expected events. */
+  start?: string
+  end?: string
+  /** Show only the month of `end` (closing date not yet announced). */
+  endMonthOnly?: boolean
+  /** YYYY-MM. Usual month, for TBA events. */
+  month?: string
+  venue: L
+  summary: L
+  /** Short note shown with the date, e.g. "Subject to moon sighting". */
+  dateNote?: L
+  /** Organiser's official website (omitted when there is none to point to). */
+  website?: string
+  /** Guests can request tickets from DXB TKTS; we source them through our providers (data/event-sourcing.ts). */
+  ticketable?: boolean
+  /** Which DXB TKTS service a visitor to this event most often needs. */
+  helps: 'transport' | 'dining' | 'stay' | 'experiences' | 'arrivals'
+}
+
+const t = (en: string, fr: string, ar: string): L => ({ en, fr, ar })
+
+export const events: CalendarEvent[] = [
+  {
+    id: 'dubai-fitness-challenge-2026',
+    name: t('Dubai Fitness Challenge', 'Dubai Fitness Challenge', 'تحدي دبي للياقة'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-10-31',
+    end: '2026-11-29',
+    venue: t('Across Dubai', 'Dans tout Dubaï', 'في أنحاء دبي'),
+    summary: t(
+      'Thirty days, thirty minutes of activity a day: free fitness villages across the city, including the Dubai Ride and Dubai Run.',
+      'Trente jours, trente minutes d’activité par jour : des villages sportifs gratuits dans toute la ville, dont la Dubai Ride et la Dubai Run.',
+      'ثلاثون يوماً وثلاثون دقيقة من النشاط يومياً: قرى رياضية مجانية في أنحاء المدينة، ومنها دبي رايد ودبي رن.',
+    ),
+    website: 'https://www.dubaifitnesschallenge.com',
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-international-boat-show-2026',
+    name: t('Dubai International Boat Show', 'Dubai International Boat Show', 'معرض دبي العالمي للقوارب'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-11-25',
+    end: '2026-11-29',
+    venue: t('Dubai Harbour', 'Dubai Harbour', 'دبي هاربر'),
+    summary: t(
+      'The region’s leading yachting show: superyachts on the water, new launches, marine design and the people who build them.',
+      'Le grand salon nautique de la région : superyachts à flot, nouveautés, design marin et ceux qui les construisent.',
+      'أبرز معارض اليخوت في المنطقة: يخوت فاخرة على الماء وإطلاقات جديدة وتصميم بحري وصنّاعه.',
+    ),
+    website: 'https://www.boatshowdubai.com',
+    ticketable: true,
+    helps: 'experiences',
+  },
+  {
+    id: 'emirates-dubai-7s-2026',
+    name: t('Emirates Dubai 7s', 'Emirates Dubai 7s', 'بطولة طيران الإمارات دبي للرجبي السباعي'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-11-27',
+    end: '2026-11-29',
+    venue: t('The Sevens Stadium', 'The Sevens Stadium', 'ملعب السبعات'),
+    summary: t(
+      'Three days of international sevens rugby, community tournaments and live music — one of Dubai’s great social weekends.',
+      'Trois jours de rugby à VII international, de tournois amateurs et de concerts — l’un des grands week-ends de Dubaï.',
+      'ثلاثة أيام من الرجبي السباعي الدولي وبطولات المجتمع والموسيقى الحية — من أبرز عطلات دبي الاجتماعية.',
+    ),
+    website: 'https://www.dubairugby7s.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'uae-national-day-2026',
+    name: t('UAE National Day', 'Fête nationale des Émirats', 'اليوم الوطني لدولة الإمارات'),
+    category: 'culture',
+    emirate: 'uae',
+    status: 'confirmed',
+    start: '2026-12-02',
+    venue: t('Nationwide', 'Dans tout le pays', 'في جميع أنحاء الدولة'),
+    summary: t(
+      'The founding of the Union in 1971, celebrated with fireworks, heritage shows and a long public holiday weekend.',
+      'La fondation de l’Union en 1971, célébrée par des feux d’artifice, des spectacles patrimoniaux et un long week-end férié.',
+      'ذكرى قيام الاتحاد عام 1971، تحتفل بها الدولة بالألعاب النارية وعروض التراث وعطلة رسمية طويلة.',
+    ),
+    website: 'https://u.ae',
+    helps: 'experiences',
+  },
+  {
+    id: 'abu-dhabi-grand-prix-2026',
+    name: t('Formula 1 Abu Dhabi Grand Prix', 'Grand Prix de F1 d’Abu Dhabi', 'جائزة أبوظبي الكبرى للفورمولا 1'),
+    category: 'sport',
+    emirate: 'abu-dhabi',
+    status: 'confirmed',
+    start: '2026-12-03',
+    end: '2026-12-06',
+    venue: t('Yas Marina Circuit, Abu Dhabi', 'Circuit de Yas Marina, Abu Dhabi', 'حلبة مرسى ياس، أبوظبي'),
+    summary: t(
+      'The season finale under floodlights at Yas Marina, with after-race concerts across the island. About 90 minutes from Dubai by road.',
+      'La finale de la saison sous les projecteurs de Yas Marina, avec des concerts après les courses. Environ 1 h 30 de Dubaï par la route.',
+      'ختام الموسم تحت الأضواء في مرسى ياس، مع حفلات موسيقية بعد السباقات. على بعد نحو 90 دقيقة من دبي بالسيارة.',
+    ),
+    website: 'https://www.yasmarinacircuit.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-shopping-festival-2026',
+    name: t('Dubai Shopping Festival', 'Dubai Shopping Festival', 'مهرجان دبي للتسوق'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-04',
+    end: '2027-01-17',
+    venue: t('Malls, souks and venues across Dubai', 'Centres commerciaux, souks et lieux dans tout Dubaï', 'المراكز التجارية والأسواق في أنحاء دبي'),
+    summary: t(
+      'The 32nd edition: six weeks of retail offers, nightly drone shows and fireworks, concerts and markets across the city.',
+      'La 32e édition : six semaines d’offres, de spectacles de drones et feux d’artifice, de concerts et de marchés dans toute la ville.',
+      'الدورة الثانية والثلاثون: ستة أسابيع من العروض وعروض الطائرات المسيّرة والألعاب النارية والحفلات والأسواق في أنحاء المدينة.',
+    ),
+    website: 'https://www.visitdubai.com/en/festivals-and-events/dsf',
+    helps: 'dining',
+  },
+  {
+    id: 'gitex-global-2026',
+    name: t('GITEX Global', 'GITEX Global', 'جيتكس جلوبال'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-07',
+    end: '2026-12-11',
+    venue: t('Expo City Dubai', 'Expo City Dubai', 'مدينة إكسبو دبي'),
+    summary: t(
+      'One of the world’s largest technology shows: AI, start-ups, government tech and investors, now at Expo City Dubai.',
+      'L’un des plus grands salons technologiques au monde : IA, start-up, technologies publiques et investisseurs, désormais à Expo City Dubai.',
+      'من أكبر معارض التقنية في العالم: الذكاء الاصطناعي والشركات الناشئة والتقنيات الحكومية والمستثمرون، في مدينة إكسبو دبي.',
+    ),
+    website: 'https://www.gitex.com',
+    helps: 'arrivals',
+  },
+  {
+    id: 'new-years-eve-2026',
+    name: t('New Year’s Eve in Dubai', 'Réveillon du Nouvel An à Dubaï', 'ليلة رأس السنة في دبي'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-31',
+    venue: t('Burj Khalifa, Downtown and the coast', 'Burj Khalifa, Downtown et le littoral', 'برج خليفة ووسط المدينة والساحل'),
+    summary: t(
+      'Fireworks traditionally light up Burj Khalifa, the coast and The Palm. The year’s most requested night — tables and yachts go early.',
+      'Les feux d’artifice illuminent traditionnellement Burj Khalifa, le littoral et The Palm. La soirée la plus demandée de l’année — tables et yachts partent tôt.',
+      'تضيء الألعاب النارية تقليدياً برج خليفة والساحل ونخلة جميرا. أكثر ليالي العام طلباً — تُحجز الطاولات واليخوت مبكراً.',
+    ),
+    website: 'https://www.visitdubai.com',
+    helps: 'dining',
+  },
+  {
+    id: 'global-village-season-31',
+    name: t('Global Village — Season 31', 'Global Village — saison 31', 'القرية العالمية — الموسم 31'),
+    category: 'culture',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-10-14',
+    end: '2027-05-31',
+    endMonthOnly: true,
+    venue: t('Global Village, Sheikh Mohammed Bin Zayed Road', 'Global Village, Sheikh Mohammed Bin Zayed Road', 'القرية العالمية، شارع الشيخ محمد بن زايد'),
+    dateNote: t('Opened 14 Oct 2026; closing date in May 2027 to be announced', 'Ouvert le 14 oct. 2026 ; date de fermeture en mai 2027 à confirmer', 'افتُتح في 14 أكتوبر 2026، ويُعلن موعد الإغلاق في مايو 2027'),
+    summary: t(
+      'Pavilions from around the world, street food, rides and evening shows — an easy evening out with children.',
+      'Des pavillons du monde entier, de la cuisine de rue, des manèges et des spectacles le soir — une sortie facile avec des enfants.',
+      'أجنحة من حول العالم وأطعمة الشارع والألعاب والعروض المسائية — نزهة مسائية سهلة مع الأطفال.',
+    ),
+    website: 'https://www.globalvillage.ae',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-marathon-2027',
+    name: t('Dubai Marathon', 'Marathon de Dubaï', 'ماراثون دبي'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-01-17',
+    venue: t('Dubai', 'Dubaï', 'دبي'),
+    summary: t(
+      'One of the region’s fastest courses, usually with shorter races alongside the full marathon.',
+      'L’un des parcours les plus rapides de la région, généralement accompagné de courses plus courtes.',
+      'من أسرع مسارات الماراثون في المنطقة، وعادةً ما ترافقه سباقات أقصر.',
+    ),
+    website: 'https://www.dubaimarathon.org',
+    helps: 'stay',
+  },
+  {
+    id: 'hero-dubai-desert-classic-2027',
+    name: t('Hero Dubai Desert Classic', 'Hero Dubai Desert Classic', 'بطولة هيرو دبي ديزرت كلاسيك للغولف'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'tba',
+    month: '2027-01',
+    venue: t('Emirates Golf Club', 'Emirates Golf Club', 'نادي الإمارات للغولف'),
+    dateNote: t('Usually held in January; 2027 dates not yet announced', 'Habituellement en janvier ; dates 2027 non annoncées', 'تُقام عادةً في يناير، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'The historic DP World Tour event on the Majlis course, one of the oldest professional golf tournaments in the Gulf.',
+      'L’épreuve historique du DP World Tour sur le parcours Majlis, l’un des plus anciens tournois professionnels du Golfe.',
+      'البطولة التاريخية ضمن جولة دي بي ورلد على ملعب المجلس، من أقدم بطولات الغولف الاحترافية في الخليج.',
+    ),
+    website: 'https://www.dubaidesertclassic.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'whx-dubai-2027',
+    name: t('WHX Dubai (World Health Expo)', 'WHX Dubai (World Health Expo)', 'معرض الصحة العالمي دبي'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-01-25',
+    end: '2027-01-28',
+    venue: t('Dubai Exhibition Centre & Dubai World Trade Centre', 'Dubai Exhibition Centre et Dubai World Trade Centre', 'مركز دبي للمعارض ومركز دبي التجاري العالمي'),
+    summary: t(
+      'The region’s largest healthcare exhibition and congress, formerly Arab Health.',
+      'Le plus grand salon et congrès de santé de la région, anciennement Arab Health.',
+      'أكبر معرض ومؤتمر للرعاية الصحية في المنطقة، المعروف سابقاً بمعرض الصحة العربي.',
+    ),
+    website: 'https://www.worldhealthexpo.com',
+    helps: 'arrivals',
+  },
+  {
+    id: 'world-governments-summit-2027',
+    name: t('World Governments Summit', 'World Governments Summit', 'القمة العالمية للحكومات'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-02-01',
+    end: '2027-02-03',
+    venue: t('Dubai', 'Dubaï', 'دبي'),
+    summary: t(
+      'Heads of state, ministers and global leaders on the future of government. Participation is by invitation.',
+      'Chefs d’État, ministres et dirigeants mondiaux sur l’avenir de l’action publique. Participation sur invitation.',
+      'رؤساء دول ووزراء وقادة عالميون يناقشون مستقبل الحكومات. المشاركة بدعوة.',
+    ),
+    website: 'https://www.worldgovernmentssummit.org',
+    helps: 'arrivals',
+  },
+  {
+    id: 'uae-tour-women-2027',
+    name: t('UAE Tour Women', 'UAE Tour Women', 'طواف الإمارات للسيدات'),
+    category: 'sport',
+    emirate: 'uae',
+    status: 'confirmed',
+    start: '2027-02-03',
+    end: '2027-02-06',
+    venue: t('Stages across the Emirates', 'Étapes dans tous les Émirats', 'مراحل في مختلف الإمارات'),
+    summary: t(
+      'The UCI Women’s WorldTour stage race through desert, city and mountain roads.',
+      'La course à étapes du UCI Women’s WorldTour entre désert, ville et routes de montagne.',
+      'سباق المراحل ضمن جولة الاتحاد الدولي للدراجات للسيدات عبر الصحراء والمدن والطرق الجبلية.',
+    ),
+    website: 'https://www.theuaetour.com',
+    helps: 'transport',
+  },
+  {
+    id: 'ramadan-2027',
+    name: t('Ramadan', 'Ramadan', 'شهر رمضان'),
+    category: 'culture',
+    emirate: 'uae',
+    status: 'expected',
+    start: '2027-02-08',
+    end: '2027-03-09',
+    venue: t('Nationwide', 'Dans tout le pays', 'في جميع أنحاء الدولة'),
+    dateNote: t('Expected dates — confirmed by moon sighting', 'Dates prévues — confirmées par l’observation de la lune', 'مواعيد متوقعة — تُؤكَّد برؤية الهلال'),
+    summary: t(
+      'The holy month: quieter days, iftar at sunset and long, generous evenings. Some opening hours change; we plan around them.',
+      'Le mois sacré : des journées plus calmes, l’iftar au coucher du soleil et de longues soirées. Certains horaires changent ; nous en tenons compte.',
+      'الشهر الفضيل: نهار أهدأ وإفطار عند الغروب وأمسيات طويلة وكريمة. تتغير بعض مواعيد العمل ونخطط على أساسها.',
+    ),
+    website: 'https://u.ae',
+    helps: 'dining',
+  },
+  {
+    id: 'uae-tour-men-2027',
+    name: t('UAE Tour', 'UAE Tour', 'طواف الإمارات'),
+    category: 'sport',
+    emirate: 'uae',
+    status: 'confirmed',
+    start: '2027-02-15',
+    end: '2027-02-21',
+    venue: t('Stages across the Emirates', 'Étapes dans tous les Émirats', 'مراحل في مختلف الإمارات'),
+    summary: t(
+      'The Middle East’s only UCI WorldTour men’s race, traditionally decided on summit finishes such as Jebel Hafeet.',
+      'La seule course masculine UCI WorldTour du Moyen-Orient, traditionnellement décidée sur des arrivées au sommet comme Jebel Hafeet.',
+      'السباق الوحيد للرجال ضمن جولة الاتحاد الدولي للدراجات في الشرق الأوسط، ويُحسم تقليدياً على قمم مثل جبل حفيت.',
+    ),
+    website: 'https://www.theuaetour.com',
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-duty-free-tennis-2027',
+    name: t('Dubai Duty Free Tennis Championships', 'Dubai Duty Free Tennis Championships', 'بطولة دبي للتنس'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'expected',
+    start: '2027-02-14',
+    end: '2027-02-27',
+    venue: t('Dubai Duty Free Tennis Stadium, Garhoud', 'Dubai Duty Free Tennis Stadium, Garhoud', 'استاد دبي للتنس، القرهود'),
+    dateNote: t('Expected: WTA week from about 14 Feb, ATP the following week — to be confirmed by the organiser', 'Prévu : semaine WTA vers le 14 février, ATP la semaine suivante — à confirmer', 'متوقع: أسبوع السيدات من نحو 14 فبراير، والرجال في الأسبوع التالي — بانتظار تأكيد المنظمين'),
+    summary: t(
+      'Two weeks of WTA and ATP tennis in an intimate stadium — one of the most enjoyable tournaments on the tour.',
+      'Deux semaines de tennis WTA et ATP dans un stade à taille humaine — l’un des tournois les plus agréables du circuit.',
+      'أسبوعان من تنس السيدات والرجال في ملعب حميم — من أمتع بطولات الجولة.',
+    ),
+    website: 'https://www.dubaidutyfreetennischampionships.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'eid-al-fitr-2027',
+    name: t('Eid al-Fitr', 'Aïd al-Fitr', 'عيد الفطر'),
+    category: 'culture',
+    emirate: 'uae',
+    status: 'expected',
+    start: '2027-03-10',
+    venue: t('Nationwide', 'Dans tout le pays', 'في جميع أنحاء الدولة'),
+    dateNote: t('Expected 9 or 10 March — confirmed by moon sighting', 'Prévu le 9 ou le 10 mars — confirmé par l’observation de la lune', 'متوقع في 9 أو 10 مارس — يُؤكَّد برؤية الهلال'),
+    summary: t(
+      'The end of Ramadan: family gatherings, public holidays and fireworks. Hotels and restaurants fill quickly.',
+      'La fin du Ramadan : réunions de famille, jours fériés et feux d’artifice. Hôtels et restaurants se remplissent vite.',
+      'نهاية رمضان: تجمعات عائلية وعطلات رسمية وألعاب نارية. تمتلئ الفنادق والمطاعم بسرعة.',
+    ),
+    website: 'https://u.ae',
+    helps: 'stay',
+  },
+  {
+    id: 'gulfood-2027',
+    name: t('Gulfood', 'Gulfood', 'جلفود'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-03-15',
+    end: '2027-03-19',
+    venue: t('Dubai World Trade Centre & Expo City Dubai', 'Dubai World Trade Centre et Expo City Dubai', 'مركز دبي التجاري العالمي ومدينة إكسبو دبي'),
+    summary: t(
+      'The world’s largest annual food and beverage trade show, across two venues.',
+      'Le plus grand salon professionnel annuel de l’alimentation et des boissons au monde, sur deux sites.',
+      'أكبر معرض تجاري سنوي للأغذية والمشروبات في العالم، في موقعين.',
+    ),
+    website: 'https://www.gulfood.com',
+    helps: 'arrivals',
+  },
+  {
+    id: 'dubai-world-cup-2027',
+    name: t('Dubai World Cup', 'Dubai World Cup', 'كأس دبي العالمي'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-03-27',
+    venue: t('Meydan Racecourse', 'Hippodrome de Meydan', 'مضمار ميدان'),
+    summary: t(
+      'One of the richest race days in the world, with fashion, hospitality and a closing concert. Dress codes apply in many enclosures.',
+      'L’une des journées de courses les mieux dotées au monde, avec mode, hospitalité et concert de clôture. Code vestimentaire dans de nombreuses enceintes.',
+      'من أغنى أيام سباقات الخيل في العالم، مع الأزياء والضيافة وحفل ختامي. تُطبَّق قواعد للّباس في كثير من المناطق.',
+    ),
+    website: 'https://www.dubaiworldcup.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-food-festival-2027',
+    name: t('Dubai Food Festival', 'Dubai Food Festival', 'مهرجان دبي للمأكولات'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'tba',
+    month: '2027-04',
+    venue: t('Restaurants across Dubai', 'Restaurants dans tout Dubaï', 'مطاعم في أنحاء دبي'),
+    dateNote: t('Usually held in spring; 2027 dates not yet announced', 'Habituellement au printemps ; dates 2027 non annoncées', 'يُقام عادةً في الربيع، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'Set menus at the city’s restaurants, food trails and pop-ups — a good moment to book tables that are usually hard to get.',
+      'Menus spéciaux dans les restaurants de la ville, parcours gourmands et pop-ups — le bon moment pour des tables d’ordinaire difficiles.',
+      'قوائم خاصة في مطاعم المدينة وجولات طعام ومطاعم مؤقتة — وقت مناسب لحجز طاولات يصعب الحصول عليها عادةً.',
+    ),
+    website: 'https://www.visitdubai.com/en/dff',
+    helps: 'dining',
+  },
+  {
+    id: 'art-dubai-2027',
+    name: t('Art Dubai', 'Art Dubai', 'آرت دبي'),
+    category: 'culture',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-04-07',
+    end: '2027-04-11',
+    venue: t('Madinat Jumeirah', 'Madinat Jumeirah', 'مدينة جميرا'),
+    summary: t(
+      'The region’s leading international art fair: galleries from the Global South and beyond, talks and the Dubai Art Week programme.',
+      'La grande foire d’art internationale de la région : galeries du Sud global et d’ailleurs, conférences et programme de l’Art Week.',
+      'أبرز معارض الفن الدولية في المنطقة: صالات عرض من الجنوب العالمي وخارجه وحوارات وبرنامج أسبوع دبي للفن.',
+    ),
+    website: 'https://www.artdubai.ae',
+    ticketable: true,
+    helps: 'experiences',
+  },
+  {
+    id: 'arabian-travel-market-2027',
+    name: t('Arabian Travel Market', 'Arabian Travel Market', 'سوق السفر العربي'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-05-03',
+    end: '2027-05-06',
+    venue: t('Dubai World Trade Centre', 'Dubai World Trade Centre', 'مركز دبي التجاري العالمي'),
+    summary: t(
+      'The Middle East’s main travel and tourism trade show: hotels, airlines, destinations and travel technology.',
+      'Le principal salon professionnel du voyage au Moyen-Orient : hôtels, compagnies aériennes, destinations et technologies.',
+      'المعرض التجاري الرئيسي للسفر والسياحة في الشرق الأوسط: فنادق وشركات طيران ووجهات وتقنيات سفر.',
+    ),
+    website: 'https://www.wtm.com/atm/en-gb.html',
+    helps: 'arrivals',
+  },
+  {
+    id: 'dubai-design-week-2027',
+    name: t('Dubai Design Week', 'Dubai Design Week', 'أسبوع دبي للتصميم'),
+    category: 'culture',
+    emirate: 'dubai',
+    status: 'tba',
+    month: '2027-11',
+    venue: t('Dubai Design District (d3)', 'Dubai Design District (d3)', 'حي دبي للتصميم'),
+    dateNote: t('Usually early November (2026 edition: 3–8 Nov); 2027 dates not yet announced', 'Habituellement début novembre (édition 2026 : 3–8 nov.) ; dates 2027 non annoncées', 'عادةً في أوائل نوفمبر (دورة 2026: 3–8 نوفمبر)، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'The region’s largest design festival: installations, the Downtown Design fair and talks across d3.',
+      'Le plus grand festival de design de la région : installations, le salon Downtown Design et des conférences à d3.',
+      'أكبر مهرجان للتصميم في المنطقة: أعمال تركيبية ومعرض داون تاون ديزاين وحوارات في حي دبي للتصميم.',
+    ),
+    website: 'https://www.dubaidesignweek.ae',
+    helps: 'experiences',
+  },
+  {
+    id: 'sharjah-international-book-fair-2027',
+    name: t('Sharjah International Book Fair', 'Foire internationale du livre de Charjah', 'معرض الشارقة الدولي للكتاب'),
+    category: 'culture',
+    emirate: 'sharjah',
+    status: 'tba',
+    month: '2027-11',
+    venue: t('Expo Centre Sharjah', 'Expo Centre Sharjah', 'مركز إكسبو الشارقة'),
+    dateNote: t('Usually early to mid November (2026 edition: 4–15 Nov); 2027 dates not yet announced', 'Habituellement début à mi-novembre (édition 2026 : 4–15 nov.) ; dates 2027 non annoncées', 'عادةً من أوائل إلى منتصف نوفمبر (دورة 2026: 4–15 نوفمبر)، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'One of the largest book fairs in the world, with authors, publishers and a strong children’s programme.',
+      'L’une des plus grandes foires du livre au monde, avec auteurs, éditeurs et un riche programme jeunesse.',
+      'من أكبر معارض الكتب في العالم، يضم مؤلفين وناشرين وبرنامجاً غنياً للأطفال.',
+    ),
+    website: 'https://www.sibf.com',
+    helps: 'transport',
+  },
+  {
+    id: 'adipec-2027',
+    name: t('ADIPEC', 'ADIPEC', 'أديبك'),
+    category: 'business',
+    emirate: 'abu-dhabi',
+    status: 'tba',
+    month: '2027-11',
+    venue: t('ADNEC Centre Abu Dhabi', 'ADNEC Centre Abu Dhabi', 'مركز أدنيك أبوظبي'),
+    dateNote: t('Usually held in November; 2027 dates not yet announced', 'Habituellement en novembre ; dates 2027 non annoncées', 'يُقام عادةً في نوفمبر، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'One of the world’s largest energy exhibitions and conferences.',
+      'L’un des plus grands salons et conférences de l’énergie au monde.',
+      'من أكبر معارض ومؤتمرات الطاقة في العالم.',
+    ),
+    website: 'https://www.adipec.com',
+    helps: 'arrivals',
+  },
+  {
+    id: 'dp-world-tour-championship-2027',
+    name: t('DP World Tour Championship', 'DP World Tour Championship', 'بطولة دي بي ورلد تور'),
+    category: 'sport',
+    emirate: 'dubai',
+    status: 'tba',
+    month: '2027-11',
+    venue: t('Jumeirah Golf Estates (Earth course)', 'Jumeirah Golf Estates (parcours Earth)', 'جميرا جولف إستيتس (ملعب الأرض)'),
+    dateNote: t('Usually mid-November (2026 edition: 12–15 Nov); 2027 dates not yet announced', 'Habituellement mi-novembre (édition 2026 : 12–15 nov.) ; dates 2027 non annoncées', 'عادةً في منتصف نوفمبر (دورة 2026: 12–15 نوفمبر)، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'The season finale of the DP World Tour, where the Race to Dubai is decided.',
+      'La finale de la saison du DP World Tour, où se décide la Race to Dubai.',
+      'ختام موسم جولة دي بي ورلد، حيث يُحسم السباق إلى دبي.',
+    ),
+    website: 'https://www.dpworldtour.com',
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'dubai-watch-week-2027',
+    name: t('Dubai Watch Week', 'Dubai Watch Week', 'أسبوع دبي للساعات'),
+    category: 'lifestyle',
+    emirate: 'dubai',
+    status: 'tba',
+    month: '2027-11',
+    venue: t('Dubai', 'Dubaï', 'دبي'),
+    dateNote: t('Usually held in November; 2027 dates not yet announced', 'Habituellement en novembre ; dates 2027 non annoncées', 'يُقام عادةً في نوفمبر، ولم تُعلن مواعيد 2027 بعد'),
+    summary: t(
+      'Talks, exhibitions and masterclasses for collectors and anyone curious about fine watchmaking.',
+      'Conférences, expositions et masterclasses pour les collectionneurs et les curieux de haute horlogerie.',
+      'حوارات ومعارض ودروس متخصصة لهواة الجمع وكل المهتمين بصناعة الساعات الراقية.',
+    ),
+    website: 'https://www.dubaiwatchweek.com',
+    helps: 'experiences',
+  },
+  {
+    id: 'dubai-airshow-2027',
+    name: t('Dubai Airshow', 'Dubai Airshow', 'معرض دبي للطيران'),
+    category: 'business',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-11-15',
+    end: '2027-11-19',
+    venue: t('Dubai World Central (Al Maktoum International)', 'Dubai World Central (Al Maktoum International)', 'دبي وورلد سنترال (مطار آل مكتوم الدولي)'),
+    summary: t(
+      'The aerospace show, held every two years,, with flying displays, aircraft orders and defence and space pavilions.',
+      'Le salon aéronautique biennal, avec démonstrations en vol, commandes d’avions et pavillons défense et espace.',
+      'معرض الطيران الذي يُقام كل عامين، مع عروض جوية وصفقات طائرات وأجنحة للدفاع والفضاء.',
+    ),
+    website: 'https://www.dubaiairshow.aero',
+    helps: 'arrivals',
+  },
+  {
+    id: 'atif-aslam-2026',
+    name: t('Atif Aslam live', 'Atif Aslam en concert', 'عاطف أسلم مباشرة'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-11-27',
+    venue: t('Coca-Cola Arena', 'Coca-Cola Arena', 'كوكاكولا أرينا'),
+    summary: t(
+      'One of South Asia’s best-loved voices, live in Dubai’s largest indoor arena.',
+      'L’une des voix les plus aimées d’Asie du Sud, en concert dans la plus grande salle couverte de Dubaï.',
+      'أحد أحب الأصوات في جنوب آسيا، مباشرة في أكبر صالة مغلقة في دبي.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'artbat-upperground-2026',
+    name: t('ARTBAT presents Upperground', 'ARTBAT présente Upperground', 'آرتبات يقدّم أبرغراوند'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-11-28',
+    venue: t('Ushuaïa Dubai Harbour', 'Ushuaïa Dubai Harbour', 'أوشوايا دبي هاربر'),
+    summary: t(
+      'The Ukrainian melodic-techno duo bring their Upperground show to the open-air stage at Dubai Harbour.',
+      'Le duo ukrainien de techno mélodique présente Upperground sur la scène en plein air de Dubai Harbour.',
+      'الثنائي الأوكراني للتكنو اللحني يقدّم عرض أبرغراوند على المسرح المفتوح في دبي هاربر.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'rashed-al-majed-2026',
+    name: t('Rashed Al Majed live', 'Rashed Al Majed en concert', 'راشد الماجد مباشرة'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-04',
+    venue: t('Coca-Cola Arena', 'Coca-Cola Arena', 'كوكاكولا أرينا'),
+    summary: t(
+      'A night with one of the Gulf’s most celebrated singers — a highlight of the Arabic music season.',
+      'Une soirée avec l’un des chanteurs les plus célébrés du Golfe — un temps fort de la saison musicale arabe.',
+      'ليلة مع أحد أشهر مطربي الخليج — من أبرز محطات موسم الموسيقى العربية.',
+    ),
+    ticketable: true,
+    helps: 'dining',
+  },
+  {
+    id: 'cirque-de-cuisine-2026',
+    name: t('Cirque de Cuisine night brunch — The Candyland Edition', 'Cirque de Cuisine, brunch du soir — Candyland', 'سيرك دو كويزين — برانش مسائي بنسخة كاندي لاند'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-11',
+    venue: t('Atlantis, The Palm', 'Atlantis, The Palm', 'أتلانتس النخلة'),
+    summary: t(
+      'A festive evening brunch with circus performers and live entertainment at Atlantis.',
+      'Un brunch du soir festif avec artistes de cirque et animations à l’Atlantis.',
+      'برانش مسائي احتفالي مع فناني سيرك وعروض حية في أتلانتس.',
+    ),
+    ticketable: true,
+    helps: 'dining',
+  },
+  {
+    id: 'winter-city-2026',
+    name: t('Winter City — Once upon a holiday', 'Winter City — Once upon a holiday', 'مدينة الشتاء — ذات عطلة'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-11',
+    end: '2026-12-31',
+    venue: t('Al Wasl Plaza, Expo City Dubai', 'Al Wasl Plaza, Expo City Dubai', 'ساحة الوصل، مدينة إكسبو دبي'),
+    summary: t(
+      'Winter City returns under the Al Wasl dome, this year with Disney+ — a festive family evening out through December.',
+      'Winter City revient sous le dôme d’Al Wasl, cette année avec Disney+ — une sortie familiale festive tout au long de décembre.',
+      'تعود مدينة الشتاء تحت قبة الوصل، هذا العام مع ديزني+ — نزهة عائلية احتفالية طوال ديسمبر.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'sole-dxb-2026',
+    name: t('Sole DXB', 'Sole DXB', 'سول دي إكس بي'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-11',
+    end: '2026-12-13',
+    venue: t('The Square, Nad Al Sheba', 'The Square, Nad Al Sheba', 'ذا سكوير، ند الشبا'),
+    summary: t(
+      'Three days of music, fashion, art, sport and food — the region’s big streetwear and culture festival, in a new home.',
+      'Trois jours de musique, mode, art, sport et cuisine — le grand festival streetwear et culture de la région, dans un nouveau lieu.',
+      'ثلاثة أيام من الموسيقى والأزياء والفن والرياضة والطعام — مهرجان الثقافة وأزياء الشارع الأكبر في المنطقة، في موقع جديد.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'elissa-abu-dhabi-2026',
+    name: t('Elissa live in Abu Dhabi', 'Elissa en concert à Abu Dhabi', 'إليسا مباشرة في أبوظبي'),
+    category: 'entertainment',
+    emirate: 'abu-dhabi',
+    status: 'confirmed',
+    start: '2026-12-19',
+    venue: t('Etihad Arena, Yas Island', 'Etihad Arena, Yas Island', 'الاتحاد أرينا، جزيرة ياس'),
+    summary: t(
+      'The Lebanese star in concert on Yas Island — about 90 minutes from Dubai by road.',
+      'La star libanaise en concert sur Yas Island — à environ 1 h 30 de Dubaï.',
+      'النجمة اللبنانية في حفل على جزيرة ياس — على بعد نحو 90 دقيقة من دبي.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'max-amini-2026',
+    name: t('Max Amini at Dubai Opera', 'Max Amini au Dubai Opera', 'ماكس أميني في دبي أوبرا'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-22',
+    end: '2026-12-25',
+    venue: t('Dubai Opera, Downtown Dubai', 'Dubai Opera, Downtown Dubai', 'دبي أوبرا، وسط مدينة دبي'),
+    summary: t(
+      'Stand-up from the Iranian-American comedian, across four nights at Dubai Opera.',
+      'Le stand-up de l’humoriste irano-américain, quatre soirs au Dubai Opera.',
+      'عروض كوميدية للفنان الأمريكي الإيراني على مدى أربع ليالٍ في دبي أوبرا.',
+    ),
+    ticketable: true,
+    helps: 'dining',
+  },
+  {
+    id: 'black-coffee-2026',
+    name: t('Black Coffee', 'Black Coffee', 'بلاك كوفي'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-26',
+    venue: t('Ushuaïa Dubai Harbour', 'Ushuaïa Dubai Harbour', 'أوشوايا دبي هاربر'),
+    summary: t(
+      'The South African house legend plays the open-air stage at Dubai Harbour.',
+      'La légende sud-africaine de la house sur la scène en plein air de Dubai Harbour.',
+      'أسطورة موسيقى الهاوس الجنوب أفريقي على المسرح المفتوح في دبي هاربر.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'katy-perry-nye-2026',
+    name: t('New Year’s Eve gala dinner with Katy Perry', 'Dîner de gala du Nouvel An avec Katy Perry', 'عشاء احتفالي لليلة رأس السنة مع كاتي بيري'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-31',
+    venue: t('Atlantis, The Palm', 'Atlantis, The Palm', 'أتلانتس النخلة'),
+    summary: t(
+      'Atlantis’s New Year’s Eve “Under the Stars” gala dinner, with Katy Perry performing.',
+      'Le dîner de gala « Under the Stars » de l’Atlantis pour le Nouvel An, avec Katy Perry sur scène.',
+      'عشاء أتلانتس الاحتفالي «تحت النجوم» ليلة رأس السنة، مع أداء كاتي بيري.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'argy-nye-2026',
+    name: t('Argy presents Neworld — New Year’s Eve', 'Argy présente Neworld — Nouvel An', 'آرجي يقدّم نيوورلد — ليلة رأس السنة'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2026-12-31',
+    venue: t('Ushuaïa Dubai Harbour', 'Ushuaïa Dubai Harbour', 'أوشوايا دبي هاربر'),
+    summary: t(
+      'See in 2027 at Dubai Harbour with Argy’s Neworld show.',
+      'Passez à 2027 à Dubai Harbour avec le show Neworld d’Argy.',
+      'استقبل 2027 في دبي هاربر مع عرض نيوورلد لآرجي.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'diljit-dosanjh-2026',
+    name: t('Diljit Dosanjh — New Year’s Eve', 'Diljit Dosanjh — Nouvel An', 'ديلجيت دوسانجه — ليلة رأس السنة'),
+    category: 'entertainment',
+    emirate: 'abu-dhabi',
+    status: 'confirmed',
+    start: '2026-12-31',
+    venue: t('Yas Island, Abu Dhabi', 'Yas Island, Abu Dhabi', 'جزيرة ياس، أبوظبي'),
+    summary: t(
+      'The Punjabi superstar’s New Year’s Eve concert on Yas Island.',
+      'Le concert du Nouvel An de la star pendjabie sur Yas Island.',
+      'حفل ليلة رأس السنة لنجم البنجاب على جزيرة ياس.',
+    ),
+    ticketable: true,
+    helps: 'transport',
+  },
+  {
+    id: 'richard-marx-2027',
+    name: t('Richard Marx live', 'Richard Marx en concert', 'ريتشارد ماركس مباشرة'),
+    category: 'entertainment',
+    emirate: 'dubai',
+    status: 'confirmed',
+    start: '2027-06-06',
+    venue: t('Coca-Cola Arena', 'Coca-Cola Arena', 'كوكاكولا أرينا'),
+    summary: t(
+      'The American singer-songwriter of “Right Here Waiting”, live in Dubai.',
+      'L’auteur-compositeur américain de « Right Here Waiting », en concert à Dubaï.',
+      'المغني والملحن الأمريكي صاحب أغنية «رايت هير ويتنغ» مباشرة في دبي.',
+    ),
+    ticketable: true,
+    helps: 'dining',
+  },
+]
+
+/** Sort key: start date, or the 1st of the usual month for TBA events. */
+export function sortKey(e: CalendarEvent) {
+  return e.start ?? `${e.month}-01`
+}
+
+/** Last day the event is on (YYYY-MM-DD), used to hide finished events. */
+export function lastDay(e: CalendarEvent) {
+  if (e.end) return e.end
+  if (e.start) return e.start
+  const [y, m] = (e.month ?? '2099-12').split('-').map(Number)
+  const last = new Date(Date.UTC(y, m, 0)).getUTCDate()
+  return `${e.month}-${String(last).padStart(2, '0')}`
+}

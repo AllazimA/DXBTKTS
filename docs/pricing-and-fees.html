@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DXB TKTS — How Our Prices, Fees and Commissions Work</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm; }
+  :root { --ink:#0E1B2C; --slate:#5A6B7B; --gold:#B08D3F; --clay:#B4532F; --band:#F3F1EC; --line:#E3DED3; }
+  * { box-sizing: border-box; }
+  body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); font-size: 10pt; line-height: 1.55; margin: 0; }
+  h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif; font-weight: 400; color: var(--ink); }
+  h1 { font-size: 34pt; line-height: 1.05; margin: 0 0 10mm; }
+  h2 { font-size: 19pt; margin: 9mm 0 3mm; padding-top: 2mm; border-top: 0.6pt solid var(--line); }
+  h3 { font-size: 13pt; margin: 6mm 0 2mm; }
+  p { margin: 0 0 3mm; }
+  .eyebrow { font-size: 7.5pt; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .cover { height: 250mm; display: flex; flex-direction: column; justify-content: space-between; page-break-after: always; }
+  .cover .brand { font-family: Georgia, serif; font-size: 20pt; letter-spacing: 0.04em; }
+  .cover .brand span { color: var(--gold); }
+  .cover .lede { font-size: 12pt; color: var(--slate); max-width: 140mm; }
+  .cover .meta { font-size: 8.5pt; color: var(--slate); border-top: 0.6pt solid var(--line); padding-top: 4mm; }
+  .note { background: var(--band); border-left: 2pt solid var(--gold); padding: 3mm 4mm; margin: 4mm 0; font-size: 9pt; }
+  .warn { border-left-color: var(--clay); }
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; font-size: 9pt; page-break-inside: avoid; }
+  th { text-align: left; font-weight: 600; font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); border-bottom: 0.8pt solid var(--ink); padding: 2mm 2mm; }
+  td { border-bottom: 0.4pt solid var(--line); padding: 2mm 2mm; vertical-align: top; }
+  td.num, th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  tr.total td { font-weight: 700; border-top: 0.8pt solid var(--ink); border-bottom: none; }
+  tr.sub td { color: var(--slate); }
+  .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+  .box { border: 0.6pt solid var(--line); padding: 4mm; }
+  .box .n { font-family: Georgia, serif; font-size: 18pt; color: var(--gold); }
+  .box h3 { margin-top: 1mm; }
+  .formula { font-family: "SF Mono", Menlo, monospace; font-size: 8.8pt; background: #fbfaf7; border: 0.6pt solid var(--line); padding: 3mm 4mm; margin: 3mm 0; white-space: pre-wrap; }
+  .page-break { page-break-before: always; }
+  h2, h3, .eyebrow { break-after: avoid; page-break-after: avoid; }
+  .keep { break-inside: avoid; page-break-inside: avoid; }
+  .three, .note, .formula, ul { break-inside: avoid; }
+  .small { font-size: 8.3pt; color: var(--slate); }
+  ul { margin: 0 0 3mm 5mm; padding: 0; }
+  li { margin-bottom: 1.2mm; }
+  .tag { display: inline-block; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5mm 2mm; border: 0.5pt solid var(--gold); color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="brand">DXB <span>TKTS</span></div>
+  <div>
+    <p class="eyebrow">Internal guide · Commercial model</p>
+    <h1>How our prices, fees<br>and commissions work</h1>
+    <p class="lede">A plain explanation of what is inside a published experience price, when we charge a concierge fee for arranged requests, how supplier commissions fit in — and how we stay competitive, profitable and transparent with clients.</p>
+  </div>
+  <div class="meta">
+    Prepared for Ahmed Allazim, Founder · DXBTKTS, Dubai · November 2026<br>
+    All supplier costs, commissions and margins in this document are <strong>illustrative assumptions</strong> until supplier rate sheets are signed. Catalogue prices are the website’s current indicative prices. Tax points must be confirmed with a UAE tax adviser.
+  </div>
+</section>
+
+<!-- 1 -->
+<p class="eyebrow">01 · The short answer</p>
+<h2>Three ways DXB TKTS earns, one rule for clients</h2>
+<div class="three">
+  <div class="box"><div class="n">1</div><h3>Margin inside published prices</h3><p>Every price on an experience page already includes our earnings. The client pays one all-inclusive price — no booking fee added at checkout.</p></div>
+  <div class="box"><div class="n">2</div><h3>Concierge fee on arranged requests</h3><p>When we arrange something that is not a catalogue product — a restaurant, an event, an itinerary, a sourcing request — we charge a coordination fee, shown in the proposal before the client confirms.</p></div>
+  <div class="box"><div class="n">3</div><h3>Commissions from suppliers</h3><p>Many suppliers pay agents a commission. It is our income from the supplier side; it is never added to the client’s price and never changes what we recommend.</p></div>
+</div>
+<div class="note"><strong>The client rule:</strong> the client always sees the full price before paying. Published prices are final (VAT included once we are registered). Arranged requests show every line and our fee in writing. Membership fees (Oasis, Pearl, Najm) are a fourth, separate income line and are not covered here.</div>
+
+<!-- 2 -->
+<p class="eyebrow">02 · Published experience prices</p>
+<h2>What is inside a price on the website</h2>
+<p>We buy each experience from a licensed operator in one of two ways. The model is agreed per supplier and decides how the published price is built.</p>
+
+<h3>Model A — Net rate (we set the selling price)</h3>
+<p>The supplier gives us a confidential <em>net rate</em>. We add our margin and publish the result. Best for private and premium products (yachts, private safaris, chauffeurs, Signature experiences), where we add value and control the price.</p>
+<div class="formula">Published price = Supplier net rate + DXB TKTS margin (+ 5% VAT once VAT-registered)
+DXB TKTS gross margin = Published price (excl. VAT) − Supplier net rate
+DXB TKTS contribution = Gross margin − card-payment fees − other direct costs</div>
+
+<h3>Model B — Commission (the supplier sets the price)</h3>
+<p>The supplier keeps its public price and pays us a percentage of each sale. Best for standard products with a public price (attraction tickets, some tours).</p>
+<div class="formula">Published price = Supplier’s public price (rate parity — we do not undercut it)
+DXB TKTS commission = Published price × commission %
+DXB TKTS contribution = Commission − card-payment fees (when we collect the payment)</div>
+
+<div class="note"><strong>Benchmark (verified):</strong> GetYourGuide publishes a 20–30% commission range for its suppliers in Dubai. Suppliers already accept giving up this share to marketplaces — so asking for a net rate 15–25% below their public price is a normal, realistic negotiation for DXB TKTS.</div>
+
+<h3>Card-payment cost (verified)</h3>
+<p>Stripe’s published UAE pricing (November 2026): 2.9% + AED 1 per successful card payment, +1% for international cards, +1% if currency conversion applies. Most DXB TKTS visitors will pay with international cards, so this guide uses <strong>3.9% + AED 1</strong>. The final provider (Stripe, Network International, Ziina, PayPal) is not chosen yet.</p>
+
+<!-- 3 -->
+<p class="eyebrow">03 · Worked examples using our catalogue</p>
+<h2>Where the money goes on real products</h2>
+<p class="small">Published prices are the website’s current indicative prices. Supplier costs and commission rates are assumptions for illustration only.</p>
+
+<div class="keep"><h3>Example 1 · Private Yacht Charter, 60 ft, 3 hours <span class="tag">Model A · net rate</span></h3>
+<table>
+  <tr><th>Line</th><th class="num">Not VAT-registered</th><th class="num">VAT-registered</th></tr>
+  <tr><td>Published price (AED 1,100 × 3 hours) — what the client pays</td><td class="num">3,300.00</td><td class="num">3,300.00</td></tr>
+  <tr class="sub"><td>VAT included in the price (5/105)</td><td class="num">—</td><td class="num">157.14</td></tr>
+  <tr><td>Price excluding VAT</td><td class="num">3,300.00</td><td class="num">3,142.86</td></tr>
+  <tr class="sub"><td>Supplier net rate (assumed AED 880/hour — 20% below published)</td><td class="num">− 2,640.00</td><td class="num">− 2,640.00</td></tr>
+  <tr><td>DXB TKTS gross margin</td><td class="num">660.00</td><td class="num">502.86</td></tr>
+  <tr class="sub"><td>Card fee (3.9% × 3,300 + AED 1)</td><td class="num">− 129.70</td><td class="num">− 129.70</td></tr>
+  <tr class="total"><td>DXB TKTS contribution</td><td class="num">530.30 (16%)</td><td class="num">373.16 (11%)</td></tr>
+</table></div>
+<p>Add the <em>Decoration &amp; celebration cake</em> extra (AED 750, assumed cost AED 500) and contribution rises by about AED 220 after fees. <strong>Extras are where private products become clearly profitable.</strong></p>
+
+<div class="keep"><h3>Example 2 · Dune Buggy, 2-seat, 1 hour <span class="tag">Model B · commission</span></h3>
+<table>
+  <tr><th>Line</th><th class="num">AED</th></tr>
+  <tr><td>Published price = supplier’s public price — what the client pays</td><td class="num">950.00</td></tr>
+  <tr class="sub"><td>Paid on to the supplier (assumed 80%)</td><td class="num">− 760.00</td></tr>
+  <tr><td>DXB TKTS commission (assumed 20%)</td><td class="num">190.00</td></tr>
+  <tr class="sub"><td>Card fee (3.9% × 950 + AED 1)</td><td class="num">− 38.05</td></tr>
+  <tr class="total"><td>DXB TKTS contribution (before VAT on our commission)</td><td class="num">151.95 (16%)</td></tr>
+</table></div>
+
+<div class="keep"><h3>Example 3 · Heritage Safari in Vintage Land Rovers, morning <span class="tag">Model A · Signature</span></h3>
+<table>
+  <tr><th>Line</th><th class="num">AED</th></tr>
+  <tr><td>Published price per vehicle (up to 4 guests)</td><td class="num">3,400.00</td></tr>
+  <tr class="sub"><td>Supplier net rate (assumed 25% below published)</td><td class="num">− 2,550.00</td></tr>
+  <tr><td>Gross margin (not VAT-registered)</td><td class="num">850.00</td></tr>
+  <tr class="sub"><td>Card fee</td><td class="num">− 133.60</td></tr>
+  <tr class="total"><td>DXB TKTS contribution</td><td class="num">716.40 (21%)</td></tr>
+</table></div>
+
+<div class="keep"><h3>Example 4 · Burj Khalifa: At the Top, 2 adults + 1 child <span class="tag">Model B · tickets</span></h3>
+<table>
+  <tr><th>Line</th><th class="num">AED</th></tr>
+  <tr><td>Published price (199 × 2 + 159)</td><td class="num">557.00</td></tr>
+  <tr><td>Commission (assumed 8%)</td><td class="num">44.56</td></tr>
+  <tr class="sub"><td>Card fee</td><td class="num">− 22.72</td></tr>
+  <tr class="total"><td>DXB TKTS contribution</td><td class="num">21.84 (4%)</td></tr>
+</table></div>
+<p><strong>Lesson:</strong> tickets earn little. Offer them for convenience and to grow the basket next to private products — never as the main business.</p>
+
+<!-- 4 -->
+<p class="eyebrow">04 · Arranged requests (concierge)</p>
+<h2>Why we charge a fee — and how</h2>
+<p>An arranged request uses our time and relationships: calls, negotiation, confirmations, changes and being on call on the day. Many suppliers involved — restaurants, boutiques, venues — pay no commission at all. Without a fee, the most demanding requests would earn nothing. The fee is always shown in the proposal before the client confirms.</p>
+
+<div class="keep"><h3>Recommended coordination-fee schedule <span class="tag">For your approval</span></h3>
+<table>
+  <tr><th>Request type</th><th>Examples</th><th class="num">Fee (non-members)</th></tr>
+  <tr><td>Simple</td><td>One restaurant reservation, one transfer, one spa booking</td><td class="num">AED 150</td></tr>
+  <tr><td>Standard</td><td>A full day plan, a celebration set-up, several bookings for one evening</td><td class="num">AED 350–500</td></tr>
+  <tr><td>Complex</td><td>Multi-day itineraries, private events, VIP event hospitality, group programmes</td><td class="num">10–15% of arranged total (min. AED 1,000)</td></tr>
+  <tr><td>Sourcing</td><td>Watches, jewellery, limited editions, special gifts</td><td class="num">5–10% of item value, agreed upfront</td></tr>
+  <tr><td>Urgent (optional)</td><td>Same-day requests after 20:00</td><td class="num">+ AED 250</td></tr>
+</table></div>
+<div class="note"><strong>Members:</strong> as stated on the website, coordination fees are waived for Pearl and Najm. Recommendation: Oasis members pay 50% of the standard fee (the website does not yet mention Oasis — update the copy if you approve). The fee is non-refundable once the work is done; supplier cancellation terms pass through to the client.</div>
+
+<div class="keep"><h3>Example 5 · Anniversary evening for two (arranged request)</h3>
+<table>
+  <tr><th>Line</th><th class="num">Client pays</th><th class="num">DXB TKTS earns</th></tr>
+  <tr><td>Rolls-Royce with chauffeur, 5 hours (catalogue, Model A, assumed 20% margin)</td><td class="num">3,900.00</td><td class="num">780.00</td></tr>
+  <tr><td>Roses and table styling (sourced at AED 300, sold at AED 450)</td><td class="num">450.00</td><td class="num">150.00</td></tr>
+  <tr><td>Dinner at a restaurant — paid by the client at the venue (commission assumed 0%)</td><td class="num">(at venue)</td><td class="num">0.00</td></tr>
+  <tr><td>Coordination fee — Standard</td><td class="num">350.00</td><td class="num">350.00</td></tr>
+  <tr class="sub"><td>Card fee on AED 4,700</td><td class="num"></td><td class="num">− 184.30</td></tr>
+  <tr class="total"><td>Total</td><td class="num">4,700.00</td><td class="num">1,095.70 (23%)</td></tr>
+</table></div>
+
+<div class="keep"><h3>Example 6 · Grand Prix hospitality for two (complex request)</h3>
+<table>
+  <tr><th>Line</th><th class="num">Client pays</th><th class="num">DXB TKTS earns</th></tr>
+  <tr><td>Official hospitality package, AED 12,000 × 2 (seller’s price; assumed 8% agent commission)</td><td class="num">24,000.00</td><td class="num">1,920.00</td></tr>
+  <tr><td>Coordination fee — Complex, 10%</td><td class="num">2,400.00</td><td class="num">2,400.00</td></tr>
+  <tr><td>Chauffeur Dubai ↔ Abu Dhabi (quoted, assumed 15% margin on AED 2,200)</td><td class="num">2,200.00</td><td class="num">330.00</td></tr>
+  <tr class="sub"><td>Card fee on AED 28,600 (bank transfer recommended for large amounts)</td><td class="num"></td><td class="num">− 1,116.40</td></tr>
+  <tr class="total"><td>Total</td><td class="num">28,600.00</td><td class="num">3,533.60 (12%)</td></tr>
+</table></div>
+<p class="small">Large invoices should be settled by bank transfer to avoid card fees of over AED 1,000.</p>
+
+<!-- 5 -->
+<p class="eyebrow">05 · Supplier commissions</p>
+<h2>Where commissions come from</h2>
+<p>Ranges below are typical starting points for negotiation in Dubai, <strong>not confirmed terms</strong>. Each one must be agreed in writing with each supplier.</p>
+<table>
+  <tr><th>Category</th><th>Usual model</th><th class="num">Target range (to negotiate)</th></tr>
+  <tr><td>Desert safaris, buggies, tours</td><td>Net rate or commission</td><td class="num">15–25%</td></tr>
+  <tr><td>Yachts and superyachts</td><td>Net rate</td><td class="num">10–20%</td></tr>
+  <tr><td>Helicopter and seaplane</td><td>Commission</td><td class="num">10–15%</td></tr>
+  <tr><td>Chauffeurs, transfers, luxury cars</td><td>Net rate</td><td class="num">10–20%</td></tr>
+  <tr><td>Spas and wellness</td><td>Commission</td><td class="num">10–20%</td></tr>
+  <tr><td>Golf</td><td>Commission</td><td class="num">5–10%</td></tr>
+  <tr><td>Hotels and resorts</td><td>Agent commission</td><td class="num">8–15%</td></tr>
+  <tr><td>Attraction tickets</td><td>Commission</td><td class="num">5–10%</td></tr>
+  <tr><td>Official event hospitality</td><td>Agent commission</td><td class="num">5–12%</td></tr>
+  <tr><td>Restaurants and beach clubs</td><td>Often none; some concierge programmes</td><td class="num">0–10%</td></tr>
+  <tr><td>Luxury retail and sourcing</td><td>Usually none → sourcing fee instead</td><td class="num">0%</td></tr>
+</table>
+
+<h3>Our commission rules</h3>
+<ul>
+  <li><strong>Never added to the client’s price.</strong> A commission comes out of the supplier’s side.</li>
+  <li><strong>Never changes the recommendation.</strong> We recommend the right option, even when it pays us nothing.</li>
+  <li><strong>Disclosed in principle.</strong> The Services page tells clients that some partners pay us a commission. Amounts are commercially confidential.</li>
+  <li><strong>Rate parity.</strong> For commission products we do not sell below the supplier’s public price; we compete on service, bundling and access.</li>
+  <li><strong>In writing.</strong> Every commission and net rate sits in a signed rate sheet with validity dates.</li>
+</ul>
+
+<!-- 6 -->
+<p class="eyebrow">06 · Protecting the margin</p>
+<h2>Rules that keep DXB TKTS profitable</h2>
+<ul>
+  <li><strong>Margin floor:</strong> do not publish a product whose contribution after card fees is below <strong>AED 150 or 12%</strong>, whichever is higher (tickets excepted as add-ons).</li>
+  <li><strong>Sell private and Signature first:</strong> they carry 15–25% margin; shared products and tickets carry 4–16%.</li>
+  <li><strong>Price extras generously:</strong> decoration, photographers, transfers and catering lift contribution by 30–50% on a booking.</li>
+  <li><strong>Steer large payments to bank transfer:</strong> above roughly AED 10,000, card fees become significant.</li>
+  <li><strong>Review prices each season:</strong> November–April is peak; update net rates and published prices together.</li>
+</ul>
+
+<!-- 7 -->
+<p class="eyebrow">07 · VAT and compliance</p>
+<h2>What to confirm with advisers</h2>
+<ul>
+  <li><strong>VAT is 5% in the UAE.</strong> Registration becomes mandatory above AED 375,000 of taxable supplies in 12 months (voluntary from AED 187,500).</li>
+  <li><strong>Principal or agent?</strong> When we resell on a net rate (Model A) we likely act as <em>principal</em>, so VAT applies to the full price. When we earn a commission (Model B) we may act as <em>agent</em>, so VAT applies to our commission. This changes margins (see Example 1) — <strong>confirm with a UAE tax adviser before launch.</strong></li>
+  <li><strong>Published prices must include VAT</strong> once registered, so the client’s price never changes at checkout.</li>
+  <li><strong>Tourism licensing:</strong> confirm with Dubai’s Department of Economy and Tourism which licence DXB TKTS needs to sell experiences online.</li>
+</ul>
+
+<!-- 8 -->
+<p class="eyebrow">08 · Next steps</p>
+<h2>To turn this into real numbers</h2>
+<table>
+  <tr><th>#</th><th>Action</th><th>Owner</th></tr>
+  <tr><td>1</td><td>Approve the coordination-fee schedule (section 04), including the Oasis rule</td><td>Ahmed</td></tr>
+  <tr><td>2</td><td>Collect net rates or commission terms from 2 suppliers per launch category</td><td>Ahmed</td></tr>
+  <tr><td>3</td><td>Replace placeholder prices in <code>data/catalogue.ts</code>; set <code>priceVerified: true</code> per signed supplier</td><td>Claude</td></tr>
+  <tr><td>4</td><td>Confirm VAT position and tourism licence</td><td>Ahmed + advisers</td></tr>
+  <tr><td>5</td><td>Choose the payment provider; replace the 3.9% assumption with the real rate</td><td>Ahmed</td></tr>
+  <tr><td>6</td><td>Build fee lines into proposals and the admin margin report (Stage 4)</td><td>Claude</td></tr>
+</table>
+<p class="small">Sources: Stripe UAE pricing (stripe.com/ae/pricing, checked November 2026); GetYourGuide supplier commission range (getyourguide.supply). All other figures are assumptions for planning and must be replaced with signed supplier terms.</p>
+
+</body>
+</html>

@@ -1,65 +1,33 @@
 const createNextIntlPlugin = require('next-intl/plugin')
 const withNextIntl = createNextIntlPlugin('./i18n.ts')
 
+// Pages removed in Stage 1 (see DXB_TKTS_IMPLEMENTATION_ROADMAP.md)
+const retired = [
+  ['/portal', '/'],
+  ['/supplier', '/'],
+  ['/styleguide', '/'],
+]
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'localhost' },
-    ],
-    unoptimized: false,
+    remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }],
   },
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'disabled'],
-  webpack: (config, { isServer }) => {
-    config.watchOptions = {
-      ignored: ['**/.disabled', '**/node_modules/**'],
-    }
-    return config
-  },
-  webpack: (config, { isServer }) => {
-    // Handle libsql bindings and excluded file types
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      'libsql': false,
-      '@libsql/client': false,
-      '@libsql/darwin-arm64': false,
-      '@libsql/darwin-x64': false,
-      '@libsql/linux-x64': false,
-      '@libsql/linux-arm64': false,
-      '@libsql/win32-x64': false,
-    }
-
-    // Add rule to exclude non-JS/TS files from node_modules
-    config.module.rules.push({
-      test: /\.(md|MD|LICENSE|node|node-gyp-build)$/,
-      include: /node_modules/,
-      type: 'asset/resource',
-      parser: {
-        dataUrlCondition: {
-          maxSize: 0,
-        },
-      },
-    })
-
-    // Also exclude from all rules that might try to parse them
-    const newRules = config.module.rules.map((rule) => {
-      if (!rule.test) return rule;
-      return {
-        ...rule,
-        exclude: [
-          ...(rule.exclude instanceof RegExp ? [rule.exclude] : rule.exclude ? Array.isArray(rule.exclude) ? rule.exclude : [rule.exclude] : []),
-          /node_modules\/@libsql/,
-          /node_modules\/libsql/,
-          /\.md$/,
-          /\.node$/,
-          /LICENSE/,
-        ]
-      };
-    });
-    config.module.rules = newRules;
-
-    return config
+  async redirects() {
+    // Renamed pages keep their sub-paths (e.g. /journal/<slug> → /blog/<slug>).
+    const renamed = [
+      ['/journal', '/blog'],
+      ['/whats-on', '/tickets'],
+      ['/experiences/signature/heritage-conservation-safari', '/experiences/signature/desert-safari-in-style'],
+      ['/packages/heritage-falconry-dawn', '/packages/desert-reserve-falconry-dawn'],
+    ].flatMap(([from, to]) => [
+      { source: `${from}/:path*`, destination: `${to}/:path*`, permanent: true },
+      { source: `/:locale(en|ar|fr)${from}/:path*`, destination: `/:locale${to}/:path*`, permanent: true },
+    ])
+    return renamed.concat(retired.flatMap(([from, to]) => [
+      { source: `${from}/:path*`, destination: to, permanent: false },
+      { source: `/:locale(en|ar|fr)${from}/:path*`, destination: `/:locale${to === '/' ? '' : to}`, permanent: false },
+    ]))
   },
 }
 
