@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
     if (plan.honeypot) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
     return NextResponse.json({ error: plan.error }, { status: plan.status })
   }
+  // Paying online books real dates: every experience needs one (flexible dates go through a request instead).
+  if (plan.priced.some(p => !p.item.date)) return NextResponse.json({ error: 'Choose a date for each experience to pay online.' }, { status: 400 })
 
   const locale = ['en', 'fr', 'ar'].includes(plan.locale ?? '') ? plan.locale! : 'en'
   const origin = request.headers.get('origin') ?? site.url

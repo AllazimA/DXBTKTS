@@ -24,6 +24,8 @@ export type ParsedPlan =
   | {
       ok: true
       customer: { name: string; email: string; whatsapp: string; guests: number | null; hotel: string | null; notes: string | null }
+      /** The guest ticked "My dates are flexible" for experiences without a date. */
+      datesFlexible: boolean
       locale: string | null
       priced: ReturnType<typeof priceItems>['priced']
       total: number
@@ -69,6 +71,7 @@ export function parsePlan(body: Record<string, unknown>): ParsedPlan {
     ok: true,
     customer: { name, email, whatsapp, guests, hotel: str(body.hotel, 160), notes: str(body.notes, 2000) },
     locale: str(body.locale, 5),
+    datesFlexible: body.datesFlexible === true && priced.some(p => !p.item.date),
     priced,
     total,
   }
@@ -81,6 +84,7 @@ export function planRecord(ref: string, status: string, plan: Extract<ParsedPlan
     received_at: new Date().toISOString(),
     locale: plan.locale,
     customer: plan.customer,
+    dates_flexible: plan.datesFlexible,
     items: plan.priced.map(p => ({
       slug: p.product.slug,
       product: p.product.name.en,
@@ -118,7 +122,7 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
     phone: plan.customer.whatsapp,
     interest: 'experience',
     interestLabel: mode === 'pay_now' ? `Plan ${ref} — paying online` : `Plan ${ref} — request to book`,
-    message: [`Plan ${ref} (${mode === 'pay_now' ? 'Pay now started on the website' : 'sent as a request'}):`, ...lines, `Estimated total: AED ${plan.total}`, plan.customer.guests ? `Guests: ${plan.customer.guests}` : '', plan.customer.hotel ? `Hotel / area: ${plan.customer.hotel}` : '', plan.customer.notes ? `Notes: ${plan.customer.notes}` : ''].filter(Boolean).join('\n'),
+    message: [`Plan ${ref} (${mode === 'pay_now' ? 'Pay now started on the website' : 'sent as a request'}):`, ...lines, `Estimated total: AED ${plan.total}`, plan.datesFlexible ? 'Dates: flexible — the guest asks us to suggest dates' : '', plan.customer.guests ? `Guests: ${plan.customer.guests}` : '', plan.customer.hotel ? `Hotel / area: ${plan.customer.hotel}` : '', plan.customer.notes ? `Notes: ${plan.customer.notes}` : ''].filter(Boolean).join('\n'),
     arrival: dates[0],
     guests: plan.customer.guests ? String(plan.customer.guests) : undefined,
     departure: dates.length > 1 ? dates[dates.length - 1] : undefined,
@@ -126,7 +130,7 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
     details: { planReference: ref, planMode: mode, estimatedTotalAed: String(plan.total), hotel: plan.customer.hotel ?? '', items: lines.join('\n') },
     source: mode === 'pay_now' ? 'website_pay_now' : 'website_plan_request',
     order: {
-      reference: ref, mode, currency: 'AED', total: plan.total, guests: plan.customer.guests, hotel: plan.customer.hotel, notes: plan.customer.notes,
+      reference: ref, mode, currency: 'AED', total: plan.total, guests: plan.customer.guests, datesFlexible: plan.datesFlexible, hotel: plan.customer.hotel, notes: plan.customer.notes,
       lines: plan.priced.map(p => ({
         slug: p.product.slug, product: p.product.name.en, variant: p.variant.name.en, category: p.product.category ?? null, priceType: p.product.priceType,
         date: p.item.date || null, time: p.item.time ?? null, qty: p.item.qty, children: p.item.children, extras: p.item.extras,

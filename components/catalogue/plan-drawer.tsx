@@ -19,8 +19,14 @@ const input = 'mt-1.5 w-full border border-dxb-band bg-white px-3 py-2.5 text-sm
 const PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ''
 const PAYMENTS: 'test' | 'live' | null = PK.startsWith('pk_test_') ? 'test' : PK.startsWith('pk_live_') ? 'live' : null
 
+function tomorrow() {
+  const d = new Date()
+  d.setDate(d.getDate() + 1)
+  return d.toISOString().slice(0, 10)
+}
+
 export function PlanDrawer() {
-  const { items, open, setOpen, remove, clear } = usePlan()
+  const { items, open, setOpen, remove, clear, update } = usePlan()
   const locale = useLocale() as Locale
   const t = useTranslations('catalogue')
   const tp = useTranslations('catalogue.plan')
@@ -28,6 +34,9 @@ export function PlanDrawer() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [reference, setReference] = useState('')
   const [paying, setPaying] = useState(false)
+  const [flexible, setFlexible] = useState(false)
+  const [datesError, setDatesError] = useState<'' | 'request' | 'pay'>('')
+  const undated = priced.filter(p => !p.item.date).length
 
   useEffect(() => {
     if (!open) return
@@ -57,6 +66,9 @@ export function PlanDrawer() {
     e.preventDefault()
     const form = new FormData(e.currentTarget)
     const pay = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null)?.value === 'pay'
+    // Every experience needs a date — or, for a request, the guest says the dates are flexible. Paying always needs dates.
+    if (undated && (pay || !flexible)) { setDatesError(pay ? 'pay' : 'request'); return }
+    setDatesError('')
     setStatus('sending')
     setPaying(pay)
     try {
@@ -70,6 +82,7 @@ export function PlanDrawer() {
           hotel: form.get('hotel'),
           guests: Number(form.get('guests')) || null,
           notes: form.get('notes'),
+          datesFlexible: undated > 0 && flexible,
           consent: form.get('consent') === 'on',
           company_website: form.get('company_website'),
           locale,
@@ -141,10 +154,22 @@ export function PlanDrawer() {
                               {p.product.name[locale]}
                             </Link>
                             <p className="text-sm text-dxb-slate">{p.variant.name[locale]}</p>
-                            <p className="text-xs text-dxb-slate mt-1 inline-flex items-center gap-1.5">
-                              <CalendarDays className="w-3.5 h-3.5" />
-                              {p.item.date || tp('dateTbc')} · {t(`timeOptions.${p.item.time}`)}
-                            </p>
+                            {p.item.date ? (
+                              <p className="text-xs text-dxb-slate mt-1 inline-flex items-center gap-1.5">
+                                <CalendarDays className="w-3.5 h-3.5" />
+                                {p.item.date} · {t(`timeOptions.${p.item.time}`)}
+                              </p>
+                            ) : (
+                              // No date yet: pick it right here, so the request arrives complete.
+                              <label className="mt-1.5 flex items-center gap-2 text-xs text-dxb-ink">
+                                <CalendarDays className="w-3.5 h-3.5 text-dxb-gold" />
+                                <span className="sr-only">{tp('pickDate')}</span>
+                                <input type="date" min={tomorrow()} aria-label={`${tp('pickDate')} — ${p.product.name[locale]}`} value=""
+                                  onChange={e => { update(p.item.key, { date: e.target.value }); setDatesError('') }}
+                                  className="border border-dxb-gold/60 bg-white px-2 py-1 text-xs focus:outline-none focus:border-dxb-gold" />
+                                <span className="text-dxb-slate">· {t(`timeOptions.${p.item.time}`)}</span>
+                              </label>
+                            )}
                             {p.product.priceType !== 'per_group' && (
                               <p className="text-xs text-dxb-slate">
                                 {t(`qty.${p.product.priceType}`)}: {p.item.qty}
@@ -200,6 +225,13 @@ export function PlanDrawer() {
                       {tp('notes')}
                       <textarea name="notes" rows={3} className={input} />
                     </label>
+                    {undated > 0 && (
+                      <label className="flex items-start gap-2 text-xs text-dxb-ink">
+                        <input type="checkbox" checked={flexible} onChange={e => { setFlexible(e.target.checked); setDatesError('') }} className="mt-0.5 accent-[#B08D3F]" />
+                        {tp('datesFlexible')}
+                      </label>
+                    )}
+                    {datesError && <p role="alert" className="text-sm text-red-700">{datesError === 'pay' ? tp('datesNeededPay') : tp('datesNeeded')}</p>}
                     <label className="flex items-start gap-2 text-xs text-dxb-slate">
                       <input name="consent" type="checkbox" required className="mt-0.5 accent-[#B08D3F]" />
                       {tp('consent')}
