@@ -213,7 +213,7 @@ export function PlanDrawer() {
                       <input name="whatsapp" type="tel" required autoComplete="tel" dir="ltr" placeholder="+44 7700 900000" className={input} />
                     </label>
                     <label className="block text-sm text-dxb-ink">
-                      {tp('guests')}
+                      {tp('guests')} *
                       <input key={guestsGuess} name="guests" type="number" inputMode="numeric" min={1} max={100} required defaultValue={guestsGuess || undefined} dir="ltr" className={input} />
                       <span className="mt-1 block text-xs text-dxb-slate">{tp('guestsHint')}</span>
                     </label>
