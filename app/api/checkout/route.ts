@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
-import { appendJsonl, parsePlan, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
+import { appendJsonl, parsePlan, planLines, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
 import { stripeClient, stripeMode } from '@/lib/stripe'
 import { site } from '@/lib/site'
 
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
           },
         },
       })),
-      metadata: { reference: ref, source: 'plan_drawer' },
+      metadata: { reference: ref, source: 'plan_drawer', locale, name: plan.customer.name.slice(0, 100), summary: planLines(plan).join(' | ').slice(0, 480) },
       payment_intent_data: { metadata: { reference: ref }, description: `DXB TKTS ${ref}` },
       success_url: `${origin}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${locale}/checkout/cancelled?ref=${ref}`,

@@ -3,6 +3,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { queueForCrm } from '@/lib/crm-outbox'
+import { sendAck } from '@/lib/ack-email'
 import { FIELD_LABEL, SERVICE_FIELDS, SERVICE_KINDS, SERVICE_LABEL, type ServiceKind } from '@/lib/service-requests'
 
 /**
@@ -51,7 +52,10 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     console.error('Could not log service request:', e)
   }
+  const ack = await sendAck({ to: email, name, locale: record.locale, kind: 'service',
+    lines: [label, ...Object.entries(details).filter(([k]) => !/^(termsAccepted|referenceUrl)$/.test(k) && k !== 'restaurant' && k !== 'productName').slice(0, 6).map(([k, v]) => `${FIELD_LABEL[k] ?? k}: ${v}`)] })
   const id = await queueForCrm({
+    ackEmail: ack,
     name,
     email,
     phone,

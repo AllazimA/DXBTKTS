@@ -40,6 +40,8 @@ export type OutboxEnquiry = {
   source?: string
   /** Structured basket (plan request / pay now): one line per product, prices recomputed on the server. */
   order?: OutboxOrder
+  /** Whether the website emailed the guest an acknowledgement ('sent' | 'off' | 'failed'). */
+  ackEmail?: 'sent' | 'off' | 'failed'
 }
 
 export type OutboxOrderLine = {
@@ -95,6 +97,7 @@ export async function queueForCrm(input: Omit<OutboxEnquiry, 'id' | 'receivedAt'
     details,
     source: s(input.source, 80),
     ...(input.order ? { order: input.order } : {}),
+    ...(input.ackEmail ? { ackEmail: input.ackEmail } : {}),
   }
   try {
     await fs.mkdir(DIR, { recursive: true })

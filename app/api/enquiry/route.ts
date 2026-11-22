@@ -3,6 +3,7 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { queueForCrm, type RequestType } from '@/lib/crm-outbox'
+import { sendAck } from '@/lib/ack-email'
 
 /**
  * Enquiry intake (request + contact forms).
@@ -90,7 +91,11 @@ export async function POST(request: NextRequest) {
   }
   console.log('Enquiry received:', enquiry.id)
 
+  const ack = await sendAck({ to: email, name, locale: enquiry.locale, kind: 'enquiry',
+    lines: [[interest, fields.date && /^\d{4}-\d{2}-\d{2}$/.test(fields.date) ? new Date(fields.date + 'T00:00:00Z').toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric' }) : null].filter(Boolean).join(' · '),
+      ...(fields.message ? [`“${fields.message.length > 240 ? fields.message.slice(0, 240) + '…' : fields.message}”`] : [])] })
   await queueForCrm({
+    ackEmail: ack,
     name,
     email,
     phone: phone ?? undefined,

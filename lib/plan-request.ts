@@ -113,7 +113,7 @@ export async function appendJsonl(file: string, record: unknown) {
 }
 
 /** Queue a plan (request-to-book or pay-now) for the CRM as one experience request. */
-export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', plan: Extract<ParsedPlan, { ok: true }>) {
+export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', plan: Extract<ParsedPlan, { ok: true }>, ackEmail?: 'sent' | 'off' | 'failed') {
   const lines = plan.priced.map(p => `• ${p.product.name.en} — ${p.variant.name.en}${p.item.date ? `, ${p.item.date} (${p.item.time})` : ', date to confirm'} · qty ${p.item.qty}${p.item.children ? ` + ${p.item.children} children` : ''} · AED ${p.total}`)
   const dates = plan.priced.map(p => p.item.date).filter(Boolean).sort()
   await queueForCrm({
@@ -129,6 +129,7 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
     locale: plan.locale ?? undefined,
     details: { planReference: ref, planMode: mode, estimatedTotalAed: String(plan.total), hotel: plan.customer.hotel ?? '', items: lines.join('\n') },
     source: mode === 'pay_now' ? 'website_pay_now' : 'website_plan_request',
+    ...(ackEmail ? { ackEmail } : {}),
     order: {
       reference: ref, mode, currency: 'AED', total: plan.total, guests: plan.customer.guests, datesFlexible: plan.datesFlexible, hotel: plan.customer.hotel, notes: plan.customer.notes,
       lines: plan.priced.map(p => ({
@@ -138,4 +139,13 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
       })),
     },
   })
+}
+
+/** The plan as the guest will read it in their acknowledgement email. */
+export function planLines(plan: Extract<ParsedPlan, { ok: true }>): string[] {
+  const day = (d: string) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { timeZone: 'UTC', weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
+  return plan.priced.map(p => [
+    `${p.product.name.en} — ${p.variant.name.en}`,
+    p.item.date ? `${day(p.item.date)}${p.item.time && p.item.time !== 'any' ? `, ${p.item.time}` : ''}` : 'date to agree',
+  ].join(' · '))
 }
