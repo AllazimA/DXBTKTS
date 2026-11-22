@@ -23,7 +23,7 @@ export type ParsedPlan =
   | { ok: false; status: number; error: string; honeypot?: boolean }
   | {
       ok: true
-      customer: { name: string; email: string; whatsapp: string; hotel: string | null; notes: string | null }
+      customer: { name: string; email: string; whatsapp: string; guests: number | null; hotel: string | null; notes: string | null }
       locale: string | null
       priced: ReturnType<typeof priceItems>['priced']
       total: number
@@ -38,6 +38,8 @@ export function parsePlan(body: Record<string, unknown>): ParsedPlan {
   if (!name || !email || !whatsapp || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false, status: 400, error: 'Missing or invalid contact details' }
   }
+  const g = Number(body.guests)
+  const guests = Number.isInteger(g) && g >= 1 && g <= 100 ? g : null
   if (body.consent !== true) return { ok: false, status: 400, error: 'Consent required' }
 
   const rawItems = Array.isArray(body.items) ? body.items.slice(0, 20) : []
@@ -65,7 +67,7 @@ export function parsePlan(body: Record<string, unknown>): ParsedPlan {
 
   return {
     ok: true,
-    customer: { name, email, whatsapp, hotel: str(body.hotel, 160), notes: str(body.notes, 2000) },
+    customer: { name, email, whatsapp, guests, hotel: str(body.hotel, 160), notes: str(body.notes, 2000) },
     locale: str(body.locale, 5),
     priced,
     total,
@@ -116,14 +118,15 @@ export async function queuePlanForCrm(ref: string, mode: 'request' | 'pay_now', 
     phone: plan.customer.whatsapp,
     interest: 'experience',
     interestLabel: mode === 'pay_now' ? `Plan ${ref} — paying online` : `Plan ${ref} — request to book`,
-    message: [`Plan ${ref} (${mode === 'pay_now' ? 'Pay now started on the website' : 'sent as a request'}):`, ...lines, `Estimated total: AED ${plan.total}`, plan.customer.hotel ? `Hotel / area: ${plan.customer.hotel}` : '', plan.customer.notes ? `Notes: ${plan.customer.notes}` : ''].filter(Boolean).join('\n'),
+    message: [`Plan ${ref} (${mode === 'pay_now' ? 'Pay now started on the website' : 'sent as a request'}):`, ...lines, `Estimated total: AED ${plan.total}`, plan.customer.guests ? `Guests: ${plan.customer.guests}` : '', plan.customer.hotel ? `Hotel / area: ${plan.customer.hotel}` : '', plan.customer.notes ? `Notes: ${plan.customer.notes}` : ''].filter(Boolean).join('\n'),
     arrival: dates[0],
+    guests: plan.customer.guests ? String(plan.customer.guests) : undefined,
     departure: dates.length > 1 ? dates[dates.length - 1] : undefined,
     locale: plan.locale ?? undefined,
     details: { planReference: ref, planMode: mode, estimatedTotalAed: String(plan.total), hotel: plan.customer.hotel ?? '', items: lines.join('\n') },
     source: mode === 'pay_now' ? 'website_pay_now' : 'website_plan_request',
     order: {
-      reference: ref, mode, currency: 'AED', total: plan.total, hotel: plan.customer.hotel, notes: plan.customer.notes,
+      reference: ref, mode, currency: 'AED', total: plan.total, guests: plan.customer.guests, hotel: plan.customer.hotel, notes: plan.customer.notes,
       lines: plan.priced.map(p => ({
         slug: p.product.slug, product: p.product.name.en, variant: p.variant.name.en, category: p.product.category ?? null, priceType: p.product.priceType,
         date: p.item.date || null, time: p.item.time ?? null, qty: p.item.qty, children: p.item.children, extras: p.item.extras,

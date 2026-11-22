@@ -668,6 +668,8 @@
       "email": "Email",
       "whatsapp": "WhatsApp number",
       "hotel": "Hotel or area (optional)",
+      "guests": "Number of guests",
+      "guestsHint": "Everyone taking part, including children.",
       "notes": "Anything we should know? (optional)",
       "consent": "I agree to be contacted about this request.",
       "submit": "Send my plan",

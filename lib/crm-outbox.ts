@@ -47,7 +47,7 @@ export type OutboxOrderLine = {
   date: string | null; time: string | null; qty: number; children: number; extras: Record<string, number>
   unitPrice: number | null; total: number; priceVerified: boolean
 }
-export type OutboxOrder = { reference: string; mode: 'request' | 'pay_now'; currency: string; total: number; lines: OutboxOrderLine[]; hotel?: string | null; notes?: string | null }
+export type OutboxOrder = { reference: string; mode: 'request' | 'pay_now'; currency: string; total: number; lines: OutboxOrderLine[]; guests?: number | null; hotel?: string | null; notes?: string | null }
 
 /** A verified online payment (Stripe webhook / success page). Separate outbox record, linked by order reference. */
 export type OutboxPayment = {

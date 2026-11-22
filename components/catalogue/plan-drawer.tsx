@@ -50,6 +50,9 @@ export function PlanDrawer() {
     `Estimated total: AED ${total}`,
   ].join('\n')
 
+  // Per-person tickets already say how many people: start the guest count there (largest group in the plan).
+  const guestsGuess = Math.max(0, ...priced.filter(p => p.product.priceType === 'per_person').map(p => p.item.qty + (p.item.children || 0)))
+
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = new FormData(e.currentTarget)
@@ -65,6 +68,7 @@ export function PlanDrawer() {
           email: form.get('email'),
           whatsapp: form.get('whatsapp'),
           hotel: form.get('hotel'),
+          guests: Number(form.get('guests')) || null,
           notes: form.get('notes'),
           consent: form.get('consent') === 'on',
           company_website: form.get('company_website'),
@@ -182,6 +186,11 @@ export function PlanDrawer() {
                     <label className="block text-sm text-dxb-ink">
                       {tp('whatsapp')} *
                       <input name="whatsapp" type="tel" required autoComplete="tel" dir="ltr" placeholder="+44 7700 900000" className={input} />
+                    </label>
+                    <label className="block text-sm text-dxb-ink">
+                      {tp('guests')}
+                      <input key={guestsGuess} name="guests" type="number" inputMode="numeric" min={1} max={100} required defaultValue={guestsGuess || undefined} dir="ltr" className={input} />
+                      <span className="mt-1 block text-xs text-dxb-slate">{tp('guestsHint')}</span>
                     </label>
                     <label className="block text-sm text-dxb-ink">
                       {tp('hotel')}

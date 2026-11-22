@@ -668,6 +668,8 @@
       "email": "Email",
       "whatsapp": "Numéro WhatsApp",
       "hotel": "Hôtel ou quartier (facultatif)",
+      "guests": "Nombre de personnes",
+      "guestsHint": "Tous les participants, enfants compris.",
       "notes": "Quelque chose à nous dire ? (facultatif)",
       "consent": "J’accepte d’être contacté(e) au sujet de cette demande.",
       "submit": "Envoyer mon programme",
