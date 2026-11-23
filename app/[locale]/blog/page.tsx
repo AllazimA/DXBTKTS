@@ -6,8 +6,8 @@ import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { aiImage } from '@/lib/images'
 import { articles, formatDate, journalCategories, journalCopy as c, readingMinutes } from '@/content/journal'
-import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { JournalIndex, type CardData } from '@/components/journal/journal-index'
+import { Tear } from '@/components/brand'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'journal', '/blog')
@@ -27,11 +27,11 @@ export default function JournalPage({ params: { locale } }: { params: { locale: 
 
   return (
     <>
-      <section className="bg-dxb-ink text-white">
-        <div className="max-w-6xl mx-auto px-6 pt-28 md:pt-36 pb-14">
-          <ChapterLabel label={c.eyebrow[locale]} tone="light" />
-          <h1 className="mt-8 font-cormorant font-light text-[2.75rem] leading-[1.05] md:text-7xl whitespace-pre-line">{c.title[locale]}</h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/75 font-light">{c.lede[locale]}</p>
+      <section className="bg-dxb-navy text-white">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6 pt-14 md:pt-20 pb-12">
+          <span className="dxb-label text-dxb-orange inline-flex items-center">DXB TKTS<Tear />{c.eyebrow[locale]}</span>
+          <h1 className="mt-6 font-display text-[44px] leading-[0.98] sm:text-6xl lg:text-[72px] tracking-[-0.035em] whitespace-pre-line">{c.title[locale]}</h1>
+          <p className="mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/75">{c.lede[locale]}</p>
         </div>
 
         {/* Featured story */}
@@ -41,15 +41,15 @@ export default function JournalPage({ params: { locale } }: { params: { locale: 
               {fImg.src && <Image src={fImg.src} alt={fImg.alt} fill priority sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />}
             </div>
             <div className="lg:col-span-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-dxb-gold">
+              <p className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">
                 {c.featured[locale]} · {catName}
               </p>
-              <h2 className="mt-4 font-cormorant text-4xl md:text-5xl leading-tight group-hover:text-dxb-gold transition-colors">{featured.title[locale]}</h2>
+              <h2 className="mt-4 font-display text-4xl md:text-5xl leading-tight group-hover:text-dxb-gold transition-colors">{featured.title[locale]}</h2>
               <p className="mt-5 text-white/70 leading-relaxed">{featured.excerpt[locale]}</p>
               <p className="mt-5 text-xs text-white/50">
                 {formatDate(locale, featured.published)} · {c.minRead[locale].replace('{n}', String(readingMinutes(featured)))}
               </p>
-              <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-dxb-gold">
+              <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">
                 {c.read[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
               </span>
             </div>

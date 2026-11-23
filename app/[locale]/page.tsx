@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default async function Home() {
   const t = await getTranslations('home')
   const accent = (chunks: React.ReactNode) => (
-    <span className="italic text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-gold">{chunks}</span>
   )
 
   return (

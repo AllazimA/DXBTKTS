@@ -2,64 +2,48 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
-import { Compass, Briefcase, Sparkles, ArrowRight } from 'lucide-react'
+import { BrandIcon, Perforation } from '@/components/brand'
+import { SectionHeading } from '@/components/brand/section-heading'
+import { Reveal } from '@/components/brand/reveal'
 
 const visuals = [
-  { icon: Compass, href: '/experiences' },
-  { icon: Briefcase, href: '/services' },
-  { icon: Sparkles, href: '/membership' },
-]
+  { icon: 'ticket', href: '/experiences' },
+  { icon: 'concierge', href: '/services' },
+  { icon: 'membership', href: '/membership' },
+] as const
 
+/** Three ways in — three white passes on the gulf-cobalt brand field. */
 export function Clientele() {
   const t = useTranslations('clientele')
   const tiers = t.raw('tiers') as { title: string; desc: string; cta: string }[]
-  const accent = (chunks: React.ReactNode) => <span className="italic">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-orange">{chunks}</span>
 
   return (
-    <section className="py-24 md:py-32 bg-dxb-navy relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:32px_32px]" />
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">
-            {t('eyebrow')}
-          </span>
-          <h2 className="font-cormorant text-4xl md:text-5xl font-light text-white mt-6">
-            {t.rich('title', { accent })}
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-20 md:py-28 bg-dxb-cobalt text-white">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
+        <SectionHeading index="06" label={t('eyebrow')} title={t.rich('title', { accent })} tone="dark" className="mb-12" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {tiers.map((tier, i) => {
             const visual = visuals[i]
-            const Icon = visual.icon
             return (
-              <motion.div
-                key={tier.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: i * 0.12 }}
-                viewport={{ once: true, margin: '-60px' }}
-                className="group relative border border-white/10 bg-white/[0.03] backdrop-blur-sm p-10 transition-all duration-500 hover:border-dxb-gold/50 hover:bg-white/[0.06] hover:-translate-y-2"
-              >
-                <Icon className="w-8 h-8 text-dxb-gold mb-6" />
-                <h3 className="font-cormorant text-3xl font-medium text-white mb-4">{tier.title}</h3>
-                <p className="text-white/60 leading-relaxed font-light mb-8">{tier.desc}</p>
-                <Link
-                  href={visual.href}
-                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] uppercase text-dxb-gold"
-                >
-                  {tier.cta}
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+              <Reveal key={tier.title} delay={i * 0.1} className="dxb-lift">
+                <Link href={visual.href} className="group flex h-full flex-col">
+                  <div className="flex-1 bg-white text-dxb-ink dxb-cut p-7 md:p-8">
+                    <span className="grid place-items-center w-12 h-12 bg-dxb-sand text-dxb-cobalt">
+                      <BrandIcon name={visual.icon} className="w-6 h-6" />
+                    </span>
+                    <h3 className="mt-6 text-2xl md:text-[28px] font-extrabold tracking-[-0.02em] text-dxb-navy">{tier.title}</h3>
+                    <p className="mt-3 text-dxb-muted leading-relaxed">{tier.desc}</p>
+                  </div>
+                  <div className="relative bg-white dxb-notch-top px-7 md:px-8 py-4 flex items-center justify-between">
+                    <Perforation className="absolute top-0 inset-x-3 text-dxb-navy" />
+                    <span className="text-[15px] font-bold text-dxb-cobalt">{tier.cta}</span>
+                    <span className="grid place-items-center w-9 h-9 bg-dxb-orange text-dxb-ink transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                      <BrandIcon name="arrow" className="w-4 h-4 rtl:rotate-180" />
+                    </span>
+                  </div>
                 </Link>
-                <span className="absolute bottom-0 start-0 h-0.5 w-0 bg-dxb-gold transition-all duration-500 group-hover:w-full" />
-              </motion.div>
+              </Reveal>
             )
           })}
         </div>

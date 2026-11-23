@@ -7,7 +7,7 @@ const Eyebrow = React.forwardRef<HTMLDivElement, EyebrowProps>(
   ({ className, children, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('text-xs font-semibold tracking-widest text-dxb-gold uppercase', className)}
+      className={cn('text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase', className)}
       {...props}
     >
       {children}

@@ -71,7 +71,7 @@ const P: Record<CardFinish, Palette> = {
 
 const W = 856
 const H = 540
-const SERIF = "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif"
+const SERIF = "var(--font-display font-bold), 'Cormorant Garamond', Georgia, serif"
 const SANS = "var(--font-inter), Inter, system-ui, sans-serif"
 const ARABIC = "var(--font-arabic-display), Amiri, serif"
 

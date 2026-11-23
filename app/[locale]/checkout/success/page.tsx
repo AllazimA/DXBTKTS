@@ -40,31 +40,31 @@ export default async function CheckoutSuccess({ params: { locale }, searchParams
   const ref = session?.client_reference_id ?? session?.metadata?.reference
 
   return (
-    <section className="bg-dxb-ivory">
+    <section className="bg-dxb-sand">
       <div className="max-w-2xl mx-auto px-6 py-28 md:py-36 text-center">
         {!session ? (
-          <h1 className="font-cormorant text-4xl text-dxb-ink">{c.missing[locale]}</h1>
+          <h1 className="font-display text-4xl text-dxb-navy">{c.missing[locale]}</h1>
         ) : (
           <>
             {paid ? <ClearPlan /> : null}
             {paid ? <CheckCircle2 className="mx-auto w-14 h-14 text-dxb-sea" /> : <Clock className="mx-auto w-14 h-14 text-dxb-gold" />}
-            <h1 className="mt-8 font-cormorant font-light text-4xl md:text-5xl text-dxb-ink">{paid ? c.paidTitle[locale] : c.pendingTitle[locale]}</h1>
+            <h1 className="mt-8 font-display text-4xl md:text-5xl text-dxb-navy">{paid ? c.paidTitle[locale] : c.pendingTitle[locale]}</h1>
             <p className="mt-6 text-lg text-dxb-slate leading-relaxed">{paid ? c.paidCopy[locale] : c.pendingCopy[locale]}</p>
             <dl className="mt-10 inline-grid grid-cols-2 gap-x-10 gap-y-2 text-start border-t border-dxb-ink/15 pt-6">
-              <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-dxb-slate">{c.reference[locale]}</dt>
+              <dt className="text-xs font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.reference[locale]}</dt>
               <dd className="font-semibold text-dxb-ink" dir="ltr">{ref}</dd>
-              <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-dxb-slate">{c.amount[locale]}</dt>
+              <dt className="text-xs font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.amount[locale]}</dt>
               <dd className="font-semibold text-dxb-ink">{formatAED((session.amount_total ?? 0) / 100, locale)}</dd>
             </dl>
             {!session.livemode && <p className="mt-6 text-sm text-dxb-gold">{c.test[locale]}</p>}
           </>
         )}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover">
+          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
             <WhatsAppIcon className="w-4 h-4" />
             {c.whatsapp[locale]}
           </a>
-          <Link href="/" className="px-8 py-4 border border-dxb-ink/20 text-dxb-ink text-sm font-semibold tracking-[0.12em] uppercase hover:border-dxb-gold">
+          <Link href="/" className="px-8 py-4 border border-dxb-ink/20 text-dxb-ink text-sm font-medium tracking-[0.06em] font-mono uppercase hover:border-dxb-gold">
             {c.home[locale]}
           </Link>
         </div>

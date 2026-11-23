@@ -7,14 +7,14 @@ import { motion } from 'framer-motion'
 const inputStyles =
   'mt-2 w-full bg-white/[0.04] border border-white/15 px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold/70 focus:bg-white/[0.06] transition-colors'
 
-const labelStyles = 'block text-xs font-semibold tracking-[0.2em] uppercase text-white/60'
+const labelStyles = 'block text-xs font-medium tracking-[0.06em] font-mono uppercase text-white/60'
 
 export function RequestForm() {
   const t = useTranslations('request.form')
   const serviceOptions = t.raw('serviceOptions') as string[]
   const contactOptions = t.raw('contactOptions') as Record<string, string>
   const accent = (chunks: React.ReactNode) => (
-    <span className="italic text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-gold">{chunks}</span>
   )
 
   const serviceRef = useRef<HTMLSelectElement>(null)
@@ -29,6 +29,12 @@ export function RequestForm() {
       serviceRef.current.value = t(kind === 'tickets' ? 'ticketsOption' : 'shoppingOption')
       const event = q.get('event')
       if (event && messageRef.current && !messageRef.current.value) messageRef.current.value = t(kind === 'tickets' ? 'ticketsMessage' : 'shoppingMessage', { event }) + (kind === 'tickets' && q.get('bundle') === 'evening' ? t('eveningExtra') : '')
+    }
+    // From the homepage planner: /request?interest=Desert&guests=4&date=…
+    const interest = q.get('interest')?.slice(0, 80)
+    const guests = q.get('guests')?.replace(/\D/g, '').slice(0, 3)
+    if ((interest || guests) && messageRef.current && !messageRef.current.value) {
+      messageRef.current.value = t('plannerMessage', { interest: interest || '—', guests: guests || '—' })
     }
     const date = q.get('date')
     if (date && /^\d{4}-\d{2}-\d{2}$/.test(date) && dateRef.current) dateRef.current.value = date
@@ -79,10 +85,10 @@ export function RequestForm() {
         animate={{ opacity: 1, y: 0 }}
         className="border border-dxb-gold/50 bg-white/[0.03] p-12 text-center"
       >
-        <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">
+        <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">
           {t('successEyebrow')}
         </span>
-        <h3 className="font-cormorant text-4xl font-light text-white mt-5 mb-4">
+        <h3 className="font-display text-4xl text-white mt-5 mb-4">
           {t.rich('successTitle', { accent })}
         </h3>
         <p className="text-white/65 font-light leading-relaxed max-w-md mx-auto">
@@ -175,12 +181,12 @@ export function RequestForm() {
         />
       </div>
 
-      {error && <p className="text-sm text-red-400/90">{t('error')}</p>}
+      {error && <p className="text-sm text-dxb-red/90">{t('error')}</p>}
 
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full px-10 py-4 bg-dxb-gold text-white text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-dxb-gold-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
+        className="w-full px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold transition-all duration-300 hover:bg-dxb-orange-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
       >
         {isLoading ? t('sending') : t('submit')}
       </button>

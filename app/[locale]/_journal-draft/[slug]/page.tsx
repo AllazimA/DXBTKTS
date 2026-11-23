@@ -30,7 +30,7 @@ export default async function ArticlePage({ params }: Props) {
 
   const t = await getTranslations('blog')
   const accent = (chunks: React.ReactNode) => (
-    <span className="italic text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-gold">{chunks}</span>
   )
 
   const content = getArticleContent(article, params.locale)
@@ -43,7 +43,7 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <>
       {/* Cinematic article header */}
-      <section className="relative h-[60vh] min-h-[28rem] flex items-end overflow-hidden bg-dxb-ink">
+      <section className="relative h-[60vh] min-h-[28rem] flex items-end overflow-hidden bg-dxb-navy">
         <Image
           src={article.img}
           alt={article.alt}
@@ -54,19 +54,19 @@ export default async function ArticlePage({ params }: Props) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink via-dxb-ink/40 to-dxb-ink/20" />
         <div className="relative z-10 max-w-3xl mx-auto px-6 pb-16 text-center w-full">
-          <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">
+          <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">
             {content.category} · {content.date} · {content.readTime}
           </span>
-          <h1 className="font-cormorant text-4xl md:text-6xl font-light text-white mt-6 leading-[1.1]">
+          <h1 className="font-display text-4xl md:text-6xl text-white mt-6 leading-[1.1]">
             {content.title}
           </h1>
         </div>
       </section>
 
       {/* Body */}
-      <article className="py-20 md:py-28 bg-dxb-ivory">
+      <article className="py-20 md:py-28 bg-dxb-sand">
         <div className="max-w-2xl mx-auto px-6">
-          <p className="font-cormorant text-2xl md:text-3xl font-light text-dxb-ink leading-snug mb-12">
+          <p className="font-display text-2xl md:text-3xl text-dxb-navy leading-snug mb-12">
             {content.excerpt}
           </p>
 
@@ -78,7 +78,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Pull quote */}
           <figure className="my-14 border-s-2 border-dxb-gold ps-8 py-2">
-            <blockquote className="font-cormorant text-3xl md:text-4xl font-light italic text-dxb-ink leading-snug">
+            <blockquote className="font-display text-3xl md:text-4xl text-dxb-navy leading-snug">
               {content.pullQuote}
             </blockquote>
           </figure>
@@ -92,16 +92,16 @@ export default async function ArticlePage({ params }: Props) {
           {/* Byline */}
           <div className="mt-16 pt-8 border-t border-dxb-band flex items-center justify-between gap-4 flex-wrap">
             <div>
-              <p className="text-xs font-semibold tracking-[0.25em] uppercase text-dxb-gold">
+              <p className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold">
                 {t('desk')}
               </p>
               <p className="text-sm text-dxb-slate mt-1">{t('deskLocation')}</p>
             </div>
             <Link
               href="/request"
-              className="group inline-flex items-center gap-3 text-sm font-semibold tracking-[0.2em] uppercase text-dxb-ink hover:text-dxb-gold transition-colors"
+              className="group inline-flex items-center gap-3 text-sm font-medium tracking-[0.06em] font-mono uppercase text-dxb-ink hover:text-dxb-gold transition-colors"
             >
-              <span className="h-px w-10 bg-dxb-gold transition-all duration-300 group-hover:w-16" />
+              <span className="h-px w-10 bg-dxb-orange transition-all duration-300 group-hover:w-16" />
               {t('arrange')}
             </Link>
           </div>
@@ -109,10 +109,10 @@ export default async function ArticlePage({ params }: Props) {
       </article>
 
       {/* More from the Journal */}
-      <section className="pb-24 bg-dxb-ivory">
+      <section className="pb-24 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-6 mb-12">
-            <h2 className="font-cormorant text-3xl md:text-4xl font-light text-dxb-ink shrink-0">
+            <h2 className="font-display text-3xl md:text-4xl text-dxb-navy shrink-0">
               {t.rich('moreFrom', { accent })}
             </h2>
             <span className="h-px flex-1 bg-dxb-band" />
@@ -120,7 +120,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {related.map(story => (
               <Link key={story.slug} href={`/blog/${story.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden bg-dxb-ink mb-5">
+                <div className="relative aspect-[4/3] overflow-hidden bg-dxb-navy mb-5">
                   <Image
                     src={story.img}
                     alt={story.alt}
@@ -128,12 +128,12 @@ export default async function ArticlePage({ params }: Props) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
-                  <span className="absolute top-0 start-0 h-0.5 w-0 bg-dxb-gold transition-all duration-500 group-hover:w-full" />
+                  <span className="absolute top-0 start-0 h-0.5 w-0 bg-dxb-orange transition-all duration-500 group-hover:w-full" />
                 </div>
-                <span className="text-[11px] font-semibold tracking-[0.3em] uppercase text-dxb-gold">
+                <span className="text-[11px] font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold">
                   {story.category} · {story.date}
                 </span>
-                <h3 className="font-cormorant text-2xl font-medium text-dxb-ink mt-2 leading-snug group-hover:text-dxb-gold transition-colors">
+                <h3 className="font-display font-bold text-2xl text-dxb-navy mt-2 leading-snug group-hover:text-dxb-gold transition-colors">
                   {story.title}
                 </h3>
               </Link>

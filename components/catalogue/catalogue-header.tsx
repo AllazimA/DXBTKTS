@@ -9,7 +9,7 @@ export function CategoryChips({ active }: { active?: string }) {
   const t = useTranslations('catalogue')
   const chip = (isActive: boolean) =>
     `shrink-0 px-4 py-2 text-sm border transition-colors ${
-      isActive ? 'bg-dxb-ink text-white border-dxb-ink' : 'bg-white text-dxb-ink border-dxb-band hover:border-dxb-gold'
+      isActive ? 'bg-dxb-navy text-white border-dxb-ink' : 'bg-white text-dxb-ink border-dxb-band hover:border-dxb-gold'
     }`
   return (
     <nav aria-label="Categories" className="-mx-6 px-6 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none]">

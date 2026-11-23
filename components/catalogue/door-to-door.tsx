@@ -18,7 +18,7 @@ export function DoorToDoor({ locale }: { locale: Locale }) {
 
   return (
     <div className="mt-4 border border-dxb-band bg-white p-5">
-      <p className="flex items-center gap-2 font-cormorant text-xl text-dxb-ink">
+      <p className="flex items-center gap-2 font-display font-bold text-xl text-dxb-navy">
         <Car className="w-5 h-5 text-dxb-gold" /> {c.doorTitle[locale]}
       </p>
       <p className="mt-1 text-xs text-dxb-slate leading-relaxed">{c.doorCopy[locale]}</p>

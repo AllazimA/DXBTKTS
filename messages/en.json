@@ -46,6 +46,15 @@
         "title": "City",
         "label": "Chauffeur"
       }
+    },
+    "ticketsFrame": "Tickets & events",
+    "finder": {
+      "label": "Start planning",
+      "what": "What",
+      "when": "When",
+      "guests": "Guests",
+      "anything": "Anything in Dubai",
+      "submit": "Plan it"
     }
   },
   "whatWeDo": {
@@ -325,7 +334,8 @@
       "ticketsMessage": "Tickets for: {event}\nNumber of guests: \nSeating preference: ",
       "shoppingOption": "Luxury Shopping",
       "shoppingMessage": "Personal shopping: {event}\nBrands or pieces: \nSizes and budget (optional): ",
-      "eveningExtra": "\nAlso arrange: a table nearby before or after, and a private car for the evening."
+      "eveningExtra": "\nAlso arrange: a table nearby before or after, and a private car for the evening.",
+      "plannerMessage": "Interested in: {interest}\nNumber of guests: {guests}\n"
     }
   },
   "blog": {
@@ -488,7 +498,8 @@
         "title": "Enjoy",
         "copy": "We stay reachable on WhatsApp before, during and after your experience."
       }
-    ]
+    ],
+    "step": "Step"
   },
   "meta": {
     "home": {

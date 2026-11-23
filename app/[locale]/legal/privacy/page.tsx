@@ -9,16 +9,16 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 
 export default function Privacy() {
   return (
-    <div className="py-16 bg-dxb-ivory">
+    <div className="py-16 bg-dxb-sand">
       <div className="max-w-3xl mx-auto px-6">
         <Eyebrow className="mb-4">Legal</Eyebrow>
-        <h1 className="font-cormorant text-5xl font-light text-dxb-ink mb-12">
+        <h1 className="font-display text-5xl text-dxb-navy mb-12">
           Privacy Policy
         </h1>
 
         <div className="space-y-8 text-dxb-slate">
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Your Privacy Matters
             </h2>
             <p>
@@ -27,7 +27,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Information We Collect
             </h2>
             <p>
@@ -42,7 +42,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               How We Use Your Information
             </h2>
             <p>
@@ -58,7 +58,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Data Protection
             </h2>
             <p>
@@ -67,7 +67,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Contact Us
             </h2>
             <p>

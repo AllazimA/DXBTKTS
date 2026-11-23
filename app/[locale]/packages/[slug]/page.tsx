@@ -52,7 +52,7 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="bg-dxb-ivory pt-8 pb-16">
+      <section className="bg-dxb-sand pt-8 pb-16">
         <div className="max-w-7xl mx-auto px-6">
           <nav className="text-xs text-dxb-slate mb-6" aria-label="Breadcrumb">
             <Link href="/packages" className="hover:text-dxb-gold">{c.eyebrow[locale]}</Link>
@@ -61,11 +61,11 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
           </nav>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_400px] gap-10 lg:gap-14 items-start">
             <div className="min-w-0">
-              <div className="relative aspect-[16/10] overflow-hidden bg-dxb-ink">
+              <div className="relative aspect-[16/10] overflow-hidden bg-dxb-navy">
                 <SceneImage image={img} sizes="(max-width: 1024px) 100vw, 60vw" priority className="object-cover" />
               </div>
-              <span className="mt-8 inline-block text-[11px] font-semibold uppercase tracking-[0.25em] text-dxb-gold">{c.themes[p.theme][locale]}</span>
-              <h1 className="font-cormorant text-4xl md:text-5xl font-light text-dxb-ink mt-2 leading-tight">{p.name[locale]}</h1>
+              <span className="mt-8 inline-block text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.themes[p.theme][locale]}</span>
+              <h1 className="font-display text-4xl md:text-5xl text-dxb-navy mt-2 leading-tight">{p.name[locale]}</h1>
               <p className="text-lg text-dxb-slate mt-3 leading-relaxed">{p.tagline[locale]}</p>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-dxb-ink">
                 <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-dxb-gold" /> {p.duration[locale]}</span>
@@ -74,11 +74,11 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
               </div>
               <p className="mt-8 text-dxb-slate text-lg leading-relaxed">{p.description[locale]}</p>
 
-              <h2 className="mt-12 font-cormorant text-3xl text-dxb-ink">{c.howItRuns[locale]}</h2>
+              <h2 className="mt-12 font-display text-3xl text-dxb-navy">{c.howItRuns[locale]}</h2>
               <ol className="mt-5 space-y-3">
                 {p.flow[locale].map((step, i) => (
                   <li key={step} className="flex gap-4 text-dxb-ink">
-                    <span className="font-cormorant text-2xl leading-none text-dxb-gold w-7 shrink-0" dir="ltr">{i + 1}</span>
+                    <span className="font-display font-bold text-2xl leading-none text-dxb-gold w-7 shrink-0" dir="ltr">{i + 1}</span>
                     <span className="pt-0.5">{step}</span>
                   </li>
                 ))}
@@ -91,7 +91,7 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
             </div>
 
             <aside className="lg:sticky lg:top-28 bg-white border border-dxb-band p-6 md:p-7">
-              <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate">{c.inThePackage[locale]}</h2>
+              <h2 className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{c.inThePackage[locale]}</h2>
               <ul className="mt-4 divide-y divide-dxb-band">
                 {lines.map(l => {
                   const cat = getCategory(l.product.category)
@@ -126,9 +126,9 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
       </section>
 
       {more.length > 0 && (
-        <section className="py-16 bg-dxb-band">
+        <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="font-cormorant text-3xl md:text-4xl text-dxb-ink mb-8">{c.shelfTitle[locale]}</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-dxb-navy mb-8">{c.shelfTitle[locale]}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {more.map(x => (
                 <PackageCard key={x.slug} pkg={x} locale={locale} />

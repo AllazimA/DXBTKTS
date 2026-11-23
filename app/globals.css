@@ -2,8 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-/* DXB TKTS — global styles. Fonts are loaded with next/font in
-   app/[locale]/layout.tsx and exposed as CSS variables. */
+/* DXB TKTS — global styles, brand package v1.0 (approved 22 Nov 2026).
+   Fonts: Archivo (display + text, width axis), IBM Plex Mono (labels and
+   data), IBM Plex Sans Arabic. Loaded with next/font in app/[locale]/layout.tsx. */
+
+:root {
+  /* Contextual accent (Tailwind `dxb-gold`): gulf cobalt on light grounds,
+     light orange on dark grounds. Light orange never sits on sand/white. */
+  --dxb-accent: 47 61 240;
+  --dxb-ink-rgb: 10 14 42;
+}
+
+/* Dark grounds switch the accent to light orange. */
+.bg-dxb-navy,
+.bg-dxb-ink,
+.bg-dxb-red,
+.bg-dxb-cobalt,
+.bg-black,
+.text-white,
+.dark-ground {
+  --dxb-accent: 250 166 28;
+}
+/* Light grounds inside dark ones switch it back. */
+.bg-white,
+.bg-dxb-sand,
+.bg-dxb-ivory,
+.light-ground {
+  --dxb-accent: 47 61 240;
+}
 
 @layer base {
   html {
@@ -12,36 +38,53 @@
   }
 
   body {
-    font-family: var(--font-inter), system-ui, sans-serif;
-    background-color: #fbfaf7;
-    color: #0e1b2c;
+    font-family: var(--font-archivo), 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f2eee6;
+    color: #0a0e2a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01' on;
   }
 
-  /* Arabic: Cormorant and Inter have no Arabic glyphs, so map both
-     families to Arabic faces designed for the job. */
-  html[lang='ar'] body {
-    font-family: var(--font-arabic-sans), var(--font-inter), system-ui, sans-serif;
+  h1, h2, h3, h4 {
+    text-wrap: balance;
   }
+
+  /* Arabic: IBM Plex Sans Arabic for everything, including display and mono roles. */
+  html[lang='ar'] body,
+  html[lang='ar'] .font-display,
+  html[lang='ar'] .font-cormorant,
+  html[lang='ar'] .font-mono,
+  html[lang='ar'] .dxb-label {
+    font-family: var(--font-arabic-sans), var(--font-archivo), Tahoma, sans-serif;
+  }
+  html[lang='ar'] .font-display,
   html[lang='ar'] .font-cormorant {
-    font-family: var(--font-arabic-display), var(--font-cormorant), Georgia, serif;
-    letter-spacing: 0;
+    font-stretch: 100%;
+    line-height: 1.25;
   }
   /* Letter-spacing breaks Arabic joining; neutralise tracking utilities. */
-  html[lang='ar'] [class*='tracking-'] {
+  html[lang='ar'] [class*='tracking-'],
+  html[lang='ar'] .dxb-label,
+  html[lang='ar'] .font-display,
+  html[lang='ar'] .font-cormorant {
     letter-spacing: 0 !important;
   }
 
   ::selection {
-    background: rgba(176, 141, 63, 0.25);
-    color: #0e1b2c;
+    background: rgba(250, 166, 28, 0.45);
+    color: #0a0e2a;
   }
 
   :focus-visible {
-    outline: 2px solid #b08d3f;
+    outline: 2px solid #2f3df0;
     outline-offset: 2px;
+  }
+  .bg-dxb-navy :focus-visible,
+  .bg-dxb-ink :focus-visible,
+  .dark-ground :focus-visible {
+    outline-color: #faa61c;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -58,11 +101,150 @@
   }
 }
 
+@layer components {
+  /* Display type: Archivo 800, expanded, tight. Sentence case. */
+  .font-display,
+  .font-cormorant {
+    font-weight: 800;
+    font-stretch: 108%;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+
+  /* Mono label: IBM Plex Mono caps, +6% tracking. */
+  .dxb-label {
+    font-family: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Data: prices, dates, times, references. */
+  .dxb-data {
+    font-family: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+
+  /* Tear mark ⁞ — three rounded dashes, sized to the text. */
+  .dxb-tear {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.09em;
+    height: 0.8em;
+    vertical-align: -0.05em;
+    margin: 0 0.45em;
+  }
+  .dxb-tear i {
+    display: block;
+    width: 0.13em;
+    min-width: 2px;
+    height: 0.2em;
+    border-radius: 1px;
+    background: currentColor;
+  }
+
+  /* Stub cut: one concave notch at the top-right corner (start-end in RTL). */
+  .dxb-cut {
+    --cut: 18px;
+    -webkit-mask: radial-gradient(circle at 100% 0, #0000 var(--cut), #000 calc(var(--cut) + 0.5px));
+    mask: radial-gradient(circle at 100% 0, #0000 var(--cut), #000 calc(var(--cut) + 0.5px));
+  }
+  [dir='rtl'] .dxb-cut {
+    -webkit-mask: radial-gradient(circle at 0 0, #0000 var(--cut), #000 calc(var(--cut) + 0.5px));
+    mask: radial-gradient(circle at 0 0, #0000 var(--cut), #000 calc(var(--cut) + 0.5px));
+  }
+  .dxb-cut-sm { --cut: 12px; }
+  .dxb-cut-lg { --cut: 28px; }
+
+  /* Ticket stub: a notch pair top and bottom at --stub-x, where a perforation runs. */
+  .dxb-stub {
+    --stub-x: 72%;
+    --stub-r: 11px;
+    -webkit-mask:
+      radial-gradient(circle at var(--stub-x) 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) top / 100% 51% no-repeat,
+      radial-gradient(circle at var(--stub-x) 100%, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) bottom / 100% 51% no-repeat;
+    mask:
+      radial-gradient(circle at var(--stub-x) 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) top / 100% 51% no-repeat,
+      radial-gradient(circle at var(--stub-x) 100%, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) bottom / 100% 51% no-repeat;
+  }
+  /* Horizontal ticket: notches on the left and right edges at --stub-y. */
+  .dxb-stub-h {
+    --stub-y: 62%;
+    --stub-r: 11px;
+    -webkit-mask:
+      radial-gradient(circle at 0 var(--stub-y), #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% var(--stub-y), #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) right / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle at 0 var(--stub-y), #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% var(--stub-y), #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) right / 51% 100% no-repeat;
+  }
+
+  /* Stub base: two half-notches on its top corners, so it reads as torn
+     from the ticket body above it. */
+  .dxb-notch-top {
+    --stub-r: 10px;
+    -webkit-mask:
+      radial-gradient(circle at 0 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) right / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle at 0 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 0, #0000 var(--stub-r), #000 calc(var(--stub-r) + 0.5px)) right / 51% 100% no-repeat;
+  }
+
+  /* Soft lift for masked shapes (box-shadow is clipped by masks). */
+  .dxb-lift {
+    filter: drop-shadow(0 1px 0 rgba(10, 14, 42, 0.05)) drop-shadow(0 14px 22px rgba(10, 14, 42, 0.1));
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  .dxb-lift:hover {
+    filter: drop-shadow(0 1px 0 rgba(10, 14, 42, 0.05)) drop-shadow(0 22px 30px rgba(10, 14, 42, 0.18));
+  }
+
+  /* Perforations */
+  .dxb-perf-h {
+    display: block;
+    height: 0;
+    border-top: 2px dashed currentColor;
+    opacity: 0.3;
+  }
+  .dxb-perf-v {
+    display: block;
+    width: 0;
+    border-left: 2px dashed currentColor;
+    opacity: 0.3;
+  }
+
+  /* Tear pattern grounds (08_Graphics/patterns) */
+  .dxb-pattern-navy {
+    background-color: #00354e;
+    background-image: url('/brand/DXBTKTS_TearPattern_Orange-on-Navy.svg');
+    background-size: 240px auto;
+  }
+  .dxb-pattern-ink {
+    background-color: #0a0e2a;
+    background-image: url('/brand/DXBTKTS_TearPattern_Orange-on-Ink.svg');
+    background-size: 240px auto;
+  }
+  .dxb-pattern-sand {
+    background-color: #f2eee6;
+    background-image: url('/brand/DXBTKTS_TearPattern_Navy-on-Sand.svg');
+    background-size: 240px auto;
+  }
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
   }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
 }

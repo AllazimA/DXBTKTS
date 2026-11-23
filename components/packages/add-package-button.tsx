@@ -17,7 +17,7 @@ export function AddPackageButton({ items, locale, multiDay }: { items: PackageIt
   return (
     <div>
       {!multiDay && (
-        <label className="block text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate">
+        <label className="block text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">
           {c.date[locale]}
           <input type="date" min={today} value={date} onChange={e => setDate(e.target.value)} className="mt-2 w-full border border-dxb-band bg-white px-3 py-2.5 text-sm normal-case tracking-normal text-dxb-ink focus:outline-none focus:border-dxb-gold" />
           <span className="mt-1 block text-[11px] normal-case tracking-normal font-normal text-dxb-slate">{c.dateHint[locale]}</span>
@@ -31,7 +31,7 @@ export function AddPackageButton({ items, locale, multiDay }: { items: PackageIt
           plan.setOpen(true)
         }}
         disabled={added}
-        className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover disabled:opacity-80 transition-colors"
+        className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-80 transition-colors"
       >
         {added ? (
           <>

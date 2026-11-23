@@ -46,6 +46,15 @@
         "title": "Ville",
         "label": "Chauffeur"
       }
+    },
+    "ticketsFrame": "Billets & événements",
+    "finder": {
+      "label": "Commencer à planifier",
+      "what": "Quoi",
+      "when": "Quand",
+      "guests": "Invités",
+      "anything": "Tout Dubaï",
+      "submit": "Planifier"
     }
   },
   "whatWeDo": {
@@ -325,7 +334,8 @@
       "ticketsMessage": "Billets pour : {event}\nNombre de personnes : \nPréférence de placement : ",
       "shoppingOption": "Shopping de luxe",
       "shoppingMessage": "Personal shopping : {event}\nMarques ou pièces : \nTailles et budget (facultatif) : ",
-      "eveningExtra": "\nÀ organiser aussi : une table à proximité avant ou après, et une voiture privée pour la soirée."
+      "eveningExtra": "\nÀ organiser aussi : une table à proximité avant ou après, et une voiture privée pour la soirée.",
+      "plannerMessage": "Intéressé(e) par : {interest}\nNombre de personnes : {guests}\n"
     }
   },
   "blog": {
@@ -488,7 +498,8 @@
         "title": "Profitez",
         "copy": "Nous restons joignables sur WhatsApp avant, pendant et après votre expérience."
       }
-    ]
+    ],
+    "step": "Étape"
   },
   "meta": {
     "home": {

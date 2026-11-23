@@ -18,8 +18,8 @@ const EMIRATES: Emirate[] = ['dubai', 'abu-dhabi', 'sharjah', 'uae']
 
 const CATEGORY_TONE: Record<EventCategory, string> = {
   business: 'bg-dxb-sea',
-  sport: 'bg-dxb-clay',
-  culture: 'bg-dxb-gold',
+  sport: 'bg-dxb-orange',
+  culture: 'bg-dxb-orange',
   lifestyle: 'bg-[#8C4A5E]',
   entertainment: 'bg-[#5B4B8A]',
 }
@@ -68,15 +68,15 @@ function DateBlock({ e, locale }: { e: CalendarEvent; locale: Locale }) {
   if (!e.start) {
     return (
       <div className="w-20 shrink-0 text-center">
-        <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-dxb-slate">{fmt(locale, `${e.month}-01`, { month: 'short' })}</span>
-        <span className="block font-cormorant text-2xl text-dxb-slate/70 mt-1">TBA</span>
+        <span className="block text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{fmt(locale, `${e.month}-01`, { month: 'short' })}</span>
+        <span className="block font-display font-bold text-2xl text-dxb-slate/70 mt-1">TBA</span>
       </div>
     )
   }
   return (
     <div className="w-20 shrink-0 text-center">
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-dxb-gold">{fmt(locale, e.start, { month: 'short' })}</span>
-      <span className="block font-cormorant text-4xl leading-none text-dxb-ink mt-1" dir="ltr">
+      <span className="block text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{fmt(locale, e.start, { month: 'short' })}</span>
+      <span className="block font-display text-4xl leading-none text-dxb-navy mt-1" dir="ltr">
         {fmt('en', e.start, { day: 'numeric' })}
       </span>
       {e.end && e.end !== e.start && (
@@ -96,8 +96,8 @@ function StatusBadge({ e, locale }: { e: CalendarEvent; locale: Locale }) {
         ? 'border-dxb-gold/40 text-[#8A6A2B]'
         : 'border-dxb-ink/15 text-dxb-slate'
   return (
-    <span className={`inline-flex items-center gap-1.5 border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] ${tone}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${e.status === 'confirmed' ? 'bg-dxb-sea' : e.status === 'expected' ? 'bg-dxb-gold' : 'bg-dxb-slate/50'}`} />
+    <span className={`inline-flex items-center gap-1.5 border px-2 py-0.5 text-[10px] font-medium font-mono uppercase tracking-[0.06em] ${tone}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${e.status === 'confirmed' ? 'bg-dxb-sea' : e.status === 'expected' ? 'bg-dxb-orange' : 'bg-dxb-slate/50'}`} />
       {c.status[e.status][locale]}
     </span>
   )
@@ -113,12 +113,12 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className={`h-2 w-2 rounded-full ${CATEGORY_TONE[e.category]}`} aria-hidden="true" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-dxb-slate">{c.categories[e.category][locale]}</span>
+            <span className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.categories[e.category][locale]}</span>
             <StatusBadge e={e} locale={locale} />
-            {live && <span className="bg-dxb-clay px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white">{c.onNow[locale]}</span>}
-            {e.ticketable && <span className="border border-dxb-clay/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-dxb-clay">{c.ticketsOnRequest[locale]}</span>}
+            {live && <span className="bg-dxb-orange px-2 py-0.5 text-[10px] font-bold text-dxb-ink">{c.onNow[locale]}</span>}
+            {e.ticketable && <span className="border border-dxb-clay/40 px-2 py-0.5 text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-clay">{c.ticketsOnRequest[locale]}</span>}
           </div>
-          <h3 className="mt-2 font-cormorant text-2xl md:text-3xl leading-tight text-dxb-ink group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
+          <h3 className="mt-2 font-display text-2xl md:text-3xl leading-tight text-dxb-navy group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
           <p className="mt-1 flex items-center gap-1.5 text-sm text-dxb-slate">
             <MapPin className="w-3.5 h-3.5 text-dxb-gold shrink-0" />
             <span className="truncate">{e.venue[locale]}</span>
@@ -126,7 +126,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
             <span className="shrink-0">{c.emirates[e.emirate][locale]}</span>
           </p>
         </div>
-        <span className="hidden sm:inline-flex items-center gap-1.5 pt-2 text-xs font-semibold uppercase tracking-[0.16em] text-dxb-slate group-hover:text-dxb-gold">
+        <span className="hidden sm:inline-flex items-center gap-1.5 pt-2 text-xs font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate group-hover:text-dxb-gold">
           {open ? c.hide[locale] : c.details[locale]}
           <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
         </span>
@@ -138,12 +138,12 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
           <div className="lg:col-span-7">
             <p className="text-dxb-ink/85 leading-relaxed text-[17px]">{e.summary[locale]}</p>
             <dl className="mt-5 grid grid-cols-[5.5rem_1fr] gap-x-4 gap-y-2 text-sm">
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dxb-slate pt-0.5">{c.when[locale]}</dt>
+              <dt className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate pt-0.5">{c.when[locale]}</dt>
               <dd className="text-dxb-ink">
                 {e.start ? dateRange(locale, e) : monthLabel(locale, e.month!)}
                 {e.dateNote && <span className="block text-dxb-slate mt-0.5">{e.dateNote[locale]}</span>}
               </dd>
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dxb-slate pt-0.5">{c.where[locale]}</dt>
+              <dt className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate pt-0.5">{c.where[locale]}</dt>
               <dd className="text-dxb-ink">
                 {e.venue[locale]} · {c.emirates[e.emirate][locale]}
               </dd>
@@ -154,7 +154,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
                 <div className="mt-4 flex flex-wrap items-center gap-4">
                   <Link
                     href={`/request?service=tickets&event=${encodeURIComponent(e.name.en)}${e.start ? `&date=${e.start}` : ''}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-dxb-clay text-white text-xs font-semibold tracking-[0.14em] uppercase hover:bg-dxb-clay-hover transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-dxb-orange text-dxb-ink text-xs font-bold hover:bg-dxb-orange-hover transition-colors"
                   >
                     {c.requestTickets[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                   </Link>
@@ -201,12 +201,12 @@ function EventEvening({ e, locale }: { e: CalendarEvent; locale: Locale }) {
   const date = e.start && e.start >= new Date().toISOString().slice(0, 10) ? e.start : ''
   return (
     <div className="mt-5 border-t border-dxb-gold/30 pt-4">
-      <p className="font-cormorant text-xl text-dxb-ink">{c.eveningTitle[locale]}</p>
+      <p className="font-display font-bold text-xl text-dxb-navy">{c.eveningTitle[locale]}</p>
       <p className="mt-1 text-sm text-dxb-slate">{c.eveningCopy[locale]}</p>
       <div className="mt-3 flex flex-wrap items-center gap-4">
         <Link
           href={`/request?service=tickets&bundle=evening&event=${encodeURIComponent(e.name.en)}${e.start ? `&date=${e.start}` : ''}`}
-          className="inline-flex items-center gap-2 border border-dxb-ink px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-dxb-ink hover:border-dxb-gold hover:text-dxb-gold"
+          className="inline-flex items-center gap-2 border border-dxb-ink px-5 py-2.5 text-xs font-medium font-mono uppercase tracking-[0.06em] text-dxb-ink hover:border-dxb-gold hover:text-dxb-gold"
         >
           {c.eveningCta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
         </Link>
@@ -270,14 +270,14 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
 
   const anyFilter = month !== 'all' || category !== 'all' || emirate !== 'all'
   const chip = (active: boolean) =>
-    `shrink-0 px-4 py-2 text-sm border transition-colors ${active ? 'bg-dxb-ink text-white border-dxb-ink' : 'bg-white/60 text-dxb-ink border-dxb-ink/15 hover:border-dxb-gold'}`
+    `shrink-0 px-4 py-2 text-sm border transition-colors ${active ? 'bg-dxb-navy text-white border-dxb-ink' : 'bg-white/60 text-dxb-ink border-dxb-ink/15 hover:border-dxb-gold'}`
 
   return (
     <>
       {/* Coming up */}
-      <section className="bg-dxb-ivory">
+      <section className="bg-dxb-sand">
         <div className="max-w-6xl mx-auto px-6 pt-16 md:pt-20">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-dxb-gold">{c.nextUp[locale]}</p>
+          <p className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.nextUp[locale]}</p>
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
             {nextUp.map(e => (
               <button
@@ -290,17 +290,17 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
                   setOpenId(e.id)
                   window.setTimeout(() => document.getElementById(`row-${e.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
                 }}
-                className="group relative text-start bg-dxb-ink text-white p-7 overflow-hidden"
+                className="group relative text-start bg-dxb-navy text-white p-7 overflow-hidden"
               >
                 <span className={`absolute top-0 start-0 h-1 w-full ${CATEGORY_TONE[e.category]}`} aria-hidden="true" />
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dxb-gold">{c.categories[e.category][locale]}</span>
-                  {isLive(e) && <span className="shrink-0 whitespace-nowrap bg-dxb-clay px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em]">{c.onNow[locale]}</span>}
+                  <span className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.categories[e.category][locale]}</span>
+                  {isLive(e) && <span className="shrink-0 whitespace-nowrap bg-dxb-orange px-2 py-0.5 text-[10px] font-bold">{c.onNow[locale]}</span>}
                 </div>
-                <h3 className="mt-5 font-cormorant text-3xl leading-tight group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
+                <h3 className="mt-5 font-display text-3xl leading-tight group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
                 <p className="mt-3 text-sm text-white/70">{dateRange(locale, e)}</p>
                 <p className="mt-1 text-sm text-white/50">{e.venue[locale]}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/70 group-hover:text-white">
+                <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium font-mono uppercase tracking-[0.06em] text-white/70 group-hover:text-white">
                   {c.details[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                 </span>
               </button>
@@ -310,9 +310,9 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
       </section>
 
       {/* Filters + list */}
-      <section className="bg-dxb-ivory">
+      <section className="bg-dxb-sand">
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20">
-          <div className="sticky top-[72px] z-20 -mx-6 px-6 py-4 bg-dxb-ivory/95 backdrop-blur border-b border-dxb-ink/10" role="group" aria-label={c.filters[locale]}>
+          <div className="sticky top-[72px] z-20 -mx-6 px-6 py-4 bg-dxb-sand/95 backdrop-blur border-b border-dxb-ink/10" role="group" aria-label={c.filters[locale]}>
             <div className="flex gap-2 overflow-x-auto scrollbar-none" aria-label={c.month[locale]}>
               <button type="button" onClick={() => setMonth('all')} className={chip(month === 'all')}>
                 {c.allMonths[locale]}
@@ -336,7 +336,7 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
                 ))}
               </div>
               <label className="flex items-center gap-3 text-sm md:ms-auto">
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-dxb-slate">{c.emirate[locale]}</span>
+                <span className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.emirate[locale]}</span>
                 <select value={emirate} onChange={ev => setEmirate(ev.target.value as Emirate | 'all')} className="border border-dxb-ink/15 bg-white/60 px-3 py-2 text-sm text-dxb-ink focus:border-dxb-gold focus:outline-none">
                   <option value="all">{c.all[locale]}</option>
                   {EMIRATES.map(k => (
@@ -371,7 +371,7 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
           ) : (
             groups.map(([ym, list]) => (
               <div key={ym} className="mt-12">
-                <h2 className="font-cormorant text-3xl md:text-4xl font-light text-dxb-ink border-b border-dxb-ink pb-3">{monthLabel(locale, ym)}</h2>
+                <h2 className="font-display text-3xl md:text-4xl text-dxb-navy border-b border-dxb-ink pb-3">{monthLabel(locale, ym)}</h2>
                 <ul>
                   {list.map(e => (
                     <EventRow key={e.id} e={e} locale={locale} live={isLive(e)} open={openId === e.id} onToggle={() => setOpenId(openId === e.id ? null : e.id)} />

@@ -81,7 +81,7 @@ export function BookingPanel({ product }: { product: Product }) {
       <div className="p-6 space-y-6">
         {/* Options */}
         <fieldset>
-          <legend className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate mb-3">{t('options')}</legend>
+          <legend className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate mb-3">{t('options')}</legend>
           <div className="space-y-2">
             {product.variants.map(v => {
               const selected = v.id === item.variantId
@@ -92,7 +92,7 @@ export function BookingPanel({ product }: { product: Product }) {
                   <span className="flex-1">
                     <span className="flex flex-wrap items-center gap-2">
                       <span className="text-sm font-semibold text-dxb-ink">{v.name[locale]}</span>
-                      {v.recommended && <span className="text-[10px] uppercase tracking-wider bg-dxb-ink text-white px-1.5 py-0.5">{t('ourPick')}</span>}
+                      {v.recommended && <span className="text-[10px]r bg-dxb-navy text-white px-1.5 py-0.5">{t('ourPick')}</span>}
                     </span>
                     <span className="block text-xs text-dxb-slate mt-0.5">{v.detail[locale]}</span>
                     {hint && <span className="block text-xs text-dxb-gold mt-0.5">{t('eachFor', { each: hint.each, people: hint.people })}</span>}
@@ -110,11 +110,11 @@ export function BookingPanel({ product }: { product: Product }) {
         {/* Date & time */}
         <div className="grid grid-cols-2 gap-3">
           <label className="block">
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate">{t('date')}</span>
+            <span className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{t('date')}</span>
             <input type="date" min={tomorrow()} value={item.date} onChange={e => set({ date: e.target.value })} className="mt-2 w-full border border-dxb-band px-3 py-2.5 text-sm" />
           </label>
           <label className="block">
-            <span className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate">{t('time')}</span>
+            <span className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{t('time')}</span>
             <select value={item.time} onChange={e => set({ time: e.target.value as PlanItem['time'] })} className="mt-2 w-full border border-dxb-band px-3 py-2.5 text-sm bg-white">
               {(['any', 'morning', 'afternoon', 'evening'] as const).map(o => (
                 <option key={o} value={o}>
@@ -145,7 +145,7 @@ export function BookingPanel({ product }: { product: Product }) {
         {/* Extras */}
         {product.extras && product.extras.length > 0 && (
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate mb-3">{t('extras')}</p>
+            <p className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate mb-3">{t('extras')}</p>
             <div className="space-y-3">
               {product.extras.map(extra => (
                 <Stepper
@@ -164,7 +164,7 @@ export function BookingPanel({ product }: { product: Product }) {
       </div>
 
       {/* Total + actions */}
-      <div className="border-t border-dxb-band p-6 bg-dxb-ivory">
+      <div className="border-t border-dxb-band p-6 bg-dxb-sand">
         <div className="flex items-baseline justify-between gap-3">
           <span className="text-sm text-dxb-slate">{t('total')}</span>
           <span className="text-2xl font-semibold text-dxb-ink">{formatAED(total, locale)}</span>
@@ -180,7 +180,7 @@ export function BookingPanel({ product }: { product: Product }) {
             plan.add(item)
             setAdded(true)
           }}
-          className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover transition-colors"
+          className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors"
         >
           {added ? (
             <>
@@ -203,7 +203,7 @@ export function BookingPanel({ product }: { product: Product }) {
                 ;(document.querySelector('[role="dialog"] input[name="name"]') as HTMLInputElement | null)?.focus({ preventScroll: true })
               }, 450)
             }}
-            className="mt-2 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-ink text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-navy transition-colors"
+            className="mt-2 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-navy text-white text-sm font-bold hover:bg-dxb-navy transition-colors"
           >
             <Lock className="w-4 h-4" /> {t('payNow')} · {formatAED(total, locale)}
           </button>

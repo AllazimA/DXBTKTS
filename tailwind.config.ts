@@ -5,32 +5,44 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx}',
+    './content/**/*.{js,ts,jsx,tsx}',
+    './data/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
         dxb: {
-          ink: '#0E1B2C',
-          navy: '#13294B',
-          'navy-light': '#1a3a62',
-          'gold': '#B08D3F',
-          'gold-hover': '#8C6E2E',
-          'ivory': '#FBFAF7',
-          'band': '#F3F1EC',
-          'slate': '#5A6B7B',
-          'slate-light': '#7a8b9b',
-          // Brand v2 accents (Report 4): desert clay for booking actions,
-          // Gulf sea for confirmation states, warm sand surfaces.
-          clay: '#B4532F',
-          'clay-hover': '#963F20',
-          sea: '#0F5E66',
-          sand: '#EADFCB',
+          // DXB TKTS brand palette v1.0 — eight colours, locked 22 Nov 2026.
+          navy: '#00354E', // brand dark: bars, footers, headlines
+          orange: '#FAA61C', // light orange: T symbol, buttons, highlights (ink text only)
+          cobalt: '#2F3DF0', // gulf cobalt: links, brand panels, water
+          ink: '#0A0E2A', // night ink: body text, premium grounds
+          green: '#5FAD46', // days out, Oasis (ink text only)
+          red: '#CF2227', // live events and nights (white text)
+          sand: '#F2EEE6', // page ground
+          // Interface states derived from the palette (not new brand colours).
+          'orange-hover': '#F29A08',
+          line: '#DCD6CA', // hairlines on sand/white
+          muted: '#4E5268', // secondary text: night ink at ~75%
+          // Legacy names kept so older markup stays on-brand.
+          // `gold` is contextual: cobalt on light grounds, light orange on dark grounds (see globals.css).
+          gold: 'rgb(var(--dxb-accent) / <alpha-value>)',
+          'gold-hover': '#00354E',
+          ivory: '#F2EEE6',
+          band: '#DCD6CA',
+          slate: '#4E5268',
+          clay: '#FAA61C',
+          'clay-hover': '#F29A08',
+          sea: '#2F3DF0',
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        cormorant: ['var(--font-cormorant)', 'Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['var(--font-archivo)', 'Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['var(--font-archivo)', 'Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        mono: ['var(--font-plex-mono)', 'IBM Plex Mono', 'ui-monospace', 'Menlo', 'monospace'],
+        cormorant: ['var(--font-archivo)', 'Archivo', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -59,9 +71,8 @@ const config: Config = {
         },
       },
       boxShadow: {
-        'gold': '0 0 30px rgba(201, 169, 110, 0.3)',
-        'gold-lg': '0 0 60px rgba(201, 169, 110, 0.4)',
-        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+        ticket: '0 1px 0 rgba(10,14,42,0.06), 0 18px 40px -24px rgba(10,14,42,0.35)',
+        'ticket-lg': '0 1px 0 rgba(10,14,42,0.06), 0 30px 60px -28px rgba(10,14,42,0.45)',
       },
     },
   },

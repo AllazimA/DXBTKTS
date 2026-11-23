@@ -34,14 +34,14 @@ export function CatalogueBrowser({ locale, category }: { locale: Locale; categor
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2" role="group" aria-label={c.label[locale]}>
-        <span className="me-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-dxb-slate">{c.label[locale]}</span>
+        <span className="me-2 text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.label[locale]}</span>
         {FILTERS.filter(f => f === 'all' || counts[f] > 0).map(f => (
           <button
             key={f}
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 text-sm border transition-colors ${filter === f ? 'bg-dxb-ink text-white border-dxb-ink' : 'bg-white text-dxb-ink border-dxb-ink/15 hover:border-dxb-gold'}`}
+            className={`px-4 py-2 text-sm border transition-colors ${filter === f ? 'bg-dxb-navy text-white border-dxb-ink' : 'bg-white text-dxb-ink border-dxb-ink/15 hover:border-dxb-gold'}`}
           >
             {c[f][locale]} <span className="opacity-50 ms-1">{counts[f]}</span>
           </button>
@@ -57,7 +57,7 @@ export function CatalogueBrowser({ locale, category }: { locale: Locale; categor
               <div key={cat.slug}>
                 <div className="flex items-end justify-between gap-4 mb-6">
                   <div>
-                    <h2 className="font-cormorant text-3xl md:text-4xl text-dxb-ink">{cat.name[locale]}</h2>
+                    <h2 className="font-display text-3xl md:text-4xl text-dxb-navy">{cat.name[locale]}</h2>
                     <p className="text-dxb-slate mt-1 max-w-xl">{cat.intro[locale]}</p>
                   </div>
                   <Link href={`/experiences/${cat.slug}`} className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-dxb-gold shrink-0">

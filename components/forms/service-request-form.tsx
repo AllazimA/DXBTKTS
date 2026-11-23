@@ -9,7 +9,7 @@ import { FORM_FIELDS, formCopy as c, type FieldSpec, type Option } from '@/conte
 
 const input =
   'mt-2 w-full bg-white/[0.04] border border-white/15 px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold/70 focus:bg-white/[0.06] transition-colors'
-const labelCls = 'block text-xs font-semibold tracking-[0.2em] uppercase text-white/60'
+const labelCls = 'block text-xs font-medium tracking-[0.06em] font-mono uppercase text-white/60'
 
 type Props = {
   kind: ServiceKind
@@ -114,8 +114,8 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
   if (submitted) {
     return (
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="border border-dxb-gold/50 bg-white/[0.03] p-10 text-center" role="status">
-        <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">{c.successEyebrow[locale]}</span>
-        <h3 className="font-cormorant text-3xl md:text-4xl font-light text-white mt-5 mb-4">{c.successTitle[locale]}</h3>
+        <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{c.successEyebrow[locale]}</span>
+        <h3 className="font-display text-3xl md:text-4xl text-white mt-5 mb-4">{c.successTitle[locale]}</h3>
         <p className="text-white/65 font-light leading-relaxed max-w-md mx-auto">{c.successCopy[locale]}</p>
       </motion.div>
     )
@@ -166,12 +166,12 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
         </label>
       )}
 
-      {error && <p className="text-sm text-red-400/90" role="alert">{error}</p>}
+      {error && <p className="text-sm text-dxb-red/90" role="alert">{error}</p>}
 
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full px-10 py-4 bg-dxb-gold text-white text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-dxb-gold-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
+        className="w-full px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold transition-all duration-300 hover:bg-dxb-orange-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
       >
         {isLoading ? c.sending[locale] : c.submit[locale]}
       </button>

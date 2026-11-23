@@ -22,13 +22,13 @@ const PLATFORMS = [
  * dimmed with a "coming soon" tooltip and are not links.
  */
 export function SocialLinks({ tone = 'light', comingSoonLabel = 'Coming soon' }: { tone?: 'light' | 'dark'; comingSoonLabel?: string }) {
-  const base = tone === 'light' ? 'text-white/70 hover:text-dxb-gold border-white/15' : 'text-dxb-ink/70 hover:text-dxb-gold border-dxb-ink/15'
+  const base = tone === 'light' ? 'text-white/70 hover:text-dxb-orange border-white/20' : 'text-dxb-navy hover:text-dxb-cobalt border-dxb-line'
   const dim = tone === 'light' ? 'text-white/25 border-white/10' : 'text-dxb-ink/25 border-dxb-ink/10'
   return (
     <ul className="flex gap-2.5">
       {PLATFORMS.map(({ key, label, Icon }) => {
         const url = site.social[key]
-        const cls = 'grid h-9 w-9 place-items-center rounded-full border transition-colors'
+        const cls = 'grid h-9 w-9 place-items-center border transition-colors'
         return (
           <li key={key}>
             {url ? (

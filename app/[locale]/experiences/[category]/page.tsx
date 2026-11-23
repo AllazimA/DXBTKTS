@@ -47,14 +47,14 @@ export default async function CategoryPage({ params: { locale, category: slug } 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <section className="pt-14 md:pt-16 pb-8 bg-gradient-to-b from-dxb-ivory to-dxb-band">
+      <section className="pt-14 md:pt-16 pb-8 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
           <nav className="text-xs text-dxb-slate mb-4" aria-label="Breadcrumb">
             <Link href="/experiences" className="hover:text-dxb-gold">{t('hubEyebrow')}</Link>
             <span className="mx-2">/</span>
             <span className="text-dxb-ink">{category.name[locale]}</span>
           </nav>
-          <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mb-4">{category.name[locale]}</h1>
+          <h1 className="font-display text-5xl md:text-6xl text-dxb-navy mb-4">{category.name[locale]}</h1>
           <p className="text-lg text-dxb-slate max-w-2xl leading-relaxed mb-2">{category.intro[locale]}</p>
           <p className="text-sm text-dxb-slate mb-6">{t('count', { count: list.length })}</p>
           <IndicativeNotice />
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params: { locale, category: slug } 
         </div>
       </section>
 
-      <section className="py-14 bg-dxb-ivory">
+      <section className="py-14 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
           <CatalogueBrowser locale={locale} category={category.slug} />
         </div>

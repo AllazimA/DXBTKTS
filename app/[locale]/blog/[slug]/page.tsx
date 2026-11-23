@@ -67,15 +67,15 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <header className="relative min-h-[72vh] flex items-end bg-dxb-ink text-white overflow-hidden">
+      <header className="relative min-h-[72vh] flex items-end bg-dxb-navy text-white overflow-hidden">
         {img.src && <Image src={img.src} alt={img.alt} fill priority sizes="100vw" className="object-cover" />}
         <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink via-dxb-ink/55 to-dxb-ink/10" />
         <div className="relative w-full max-w-4xl mx-auto px-6 pt-32 pb-14 md:pb-20">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70 hover:text-dxb-gold">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-medium font-mono uppercase tracking-[0.06em] text-white/70 hover:text-dxb-gold">
             <ArrowLeft className="w-4 h-4 rtl:rotate-180" /> {c.eyebrow[locale]}
           </Link>
-          <p className="mt-8 text-[11px] font-semibold uppercase tracking-[0.25em] text-dxb-gold">{cat.name[locale]}</p>
-          <h1 className="mt-4 font-cormorant font-light text-[2.6rem] leading-[1.05] md:text-6xl">{a.title[locale]}</h1>
+          <p className="mt-8 text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{cat.name[locale]}</p>
+          <h1 className="mt-4 font-display text-[2.6rem] leading-[1.05] md:text-6xl">{a.title[locale]}</h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/80 font-light">{a.excerpt[locale]}</p>
           <p className="mt-6 text-xs text-white/60">
             {c.byline[locale]} · {formatDate(locale, a.published)} · {c.minRead[locale].replace('{n}', String(minutes))}
@@ -83,21 +83,21 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
         </div>
       </header>
 
-      <div className="bg-dxb-ivory">
+      <div className="bg-dxb-sand">
         <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
           {locale !== 'en' && <p className="mb-10 border border-dxb-gold/40 bg-white/60 px-5 py-4 text-sm text-dxb-slate">{c.englishOnly[locale]}</p>}
           <div lang="en" dir="ltr" className="text-start">
             {a.body.map((b, i) => {
-              if ('h' in b) return <h2 key={i} className="mt-14 mb-5 font-cormorant text-3xl md:text-4xl text-dxb-ink">{b.h}</h2>
+              if ('h' in b) return <h2 key={i} className="mt-14 mb-5 font-display text-3xl md:text-4xl text-dxb-navy">{b.h}</h2>
               if ('p' in b)
                 return (
-                  <p key={i} className={`mt-5 text-[18px] leading-[1.8] text-dxb-ink/85 ${i === 0 ? 'first-letter:font-cormorant first-letter:text-6xl first-letter:float-left first-letter:me-3 first-letter:leading-[0.85] first-letter:text-dxb-gold' : ''}`}>
+                  <p key={i} className={`mt-5 text-[18px] leading-[1.8] text-dxb-navy/85 ${i === 0 ? 'first-letter:font-display first-letter:text-6xl first-letter:float-left first-letter:me-3 first-letter:leading-[0.85] first-letter:text-dxb-gold' : ''}`}>
                     {b.p}
                   </p>
                 )
               if ('tip' in b)
                 return (
-                  <aside key={i} className="my-10 border-s-2 border-dxb-gold bg-white/70 px-6 py-5 font-cormorant text-xl md:text-2xl leading-snug text-dxb-ink italic">
+                  <aside key={i} className="my-10 border-s-2 border-dxb-gold bg-white/70 px-6 py-5 font-display font-bold text-xl md:text-2xl leading-snug text-dxb-navy">
                     {b.tip}
                   </aside>
                 )
@@ -115,12 +115,12 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
           </div>
           <p className="mt-12 text-sm text-dxb-slate">{c.updatedNote[locale]}</p>
 
-          <div className="mt-14 bg-dxb-ink text-white p-8 md:p-10">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-dxb-gold">{c.takeItFurther[locale]}</p>
+          <div className="mt-14 bg-dxb-navy text-white p-8 md:p-10">
+            <p className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.takeItFurther[locale]}</p>
             <ul className="mt-5 space-y-3">
               {a.related.map(r => (
                 <li key={r.href}>
-                  <Link href={r.href} className="group inline-flex items-center gap-3 font-cormorant text-2xl hover:text-dxb-gold transition-colors">
+                  <Link href={r.href} className="group inline-flex items-center gap-3 font-display font-bold text-2xl hover:text-dxb-gold transition-colors">
                     {r.label[locale]} <ArrowRight className="w-5 h-5 rtl:rotate-180 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </li>
@@ -130,19 +130,19 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
         </div>
       </div>
 
-      <section className="bg-dxb-band">
+      <section className="bg-white">
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-20">
-          <h2 className="font-cormorant text-3xl md:text-4xl text-dxb-ink">{c.more[locale]}</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-dxb-navy">{c.more[locale]}</h2>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
             {more.map(m => {
               const mi = aiImage(m.image.slot, m.image.fallback, m.image.alt)
               return (
                 <Link key={m.slug} href={`/blog/${m.slug}`} className="group block">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-dxb-ivory">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-dxb-sand">
                     {mi.src && <Image src={mi.src} alt={mi.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />}
                   </div>
-                  <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-dxb-gold">{journalCategories.find(k => k.slug === m.category)!.name[locale]}</p>
-                  <h3 className="mt-2 font-cormorant text-2xl leading-tight text-dxb-ink group-hover:text-dxb-gold transition-colors">{m.title[locale]}</h3>
+                  <p className="mt-4 text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{journalCategories.find(k => k.slug === m.category)!.name[locale]}</p>
+                  <h3 className="mt-2 font-display font-bold text-2xl leading-tight text-dxb-navy group-hover:text-dxb-gold transition-colors">{m.title[locale]}</h3>
                 </Link>
               )
             })}

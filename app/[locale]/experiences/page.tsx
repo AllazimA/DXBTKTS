@@ -23,14 +23,14 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default async function ExperiencesHub({ params: { locale } }: { params: { locale: Locale } }) {
   const t = await getTranslations('catalogue')
   const th = await getTranslations('home')
-  const accent = (chunks: React.ReactNode) => <span className="italic text-dxb-gold">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-gold">{chunks}</span>
 
   return (
     <>
-      <section className="pt-16 md:pt-20 pb-10 bg-gradient-to-b from-dxb-ivory to-dxb-band">
+      <section className="pt-16 md:pt-20 pb-10 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
-          <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">{t('hubEyebrow')}</span>
-          <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mt-4 mb-5">{t.rich('hubTitle', { accent })}</h1>
+          <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{t('hubEyebrow')}</span>
+          <h1 className="font-display text-5xl md:text-6xl text-dxb-navy mt-4 mb-5">{t.rich('hubTitle', { accent })}</h1>
           <p className="text-lg text-dxb-slate max-w-2xl leading-relaxed mb-6">{t('hubSub')}</p>
           <IndicativeNotice />
           <div className="mt-8">
@@ -40,16 +40,16 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
       </section>
 
       {/* Category tiles */}
-      <section className="py-14 bg-dxb-band">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map(c => {
             const from = categoryFromPrice(c.slug)
             return (
-              <Link key={c.slug} href={`/experiences/${c.slug}`} className="group relative aspect-[4/3] overflow-hidden bg-dxb-ink">
+              <Link key={c.slug} href={`/experiences/${c.slug}`} className="group relative aspect-[4/3] overflow-hidden bg-dxb-navy">
                 <SceneImage image={categoryImage(c.slug, c.image, c.name[locale])} sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink/90 via-dxb-ink/20 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6">
-                  <h2 className="font-cormorant text-2xl md:text-3xl text-white">{c.name[locale]}</h2>
+                  <h2 className="font-display text-2xl md:text-3xl text-white">{c.name[locale]}</h2>
                   {from !== null && (
                     <p className="text-xs md:text-sm text-white/75 mt-1">
                       {t('from')} {formatAED(from, locale)}
@@ -63,12 +63,12 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
       </section>
 
       {/* Packages shelf */}
-      <section className="py-14 bg-dxb-ivory">
+      <section className="py-14 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">{pc.shelfTitle[locale]}</span>
-              <p className="mt-3 font-cormorant text-3xl md:text-4xl text-dxb-ink max-w-2xl">{pc.shelfCopy[locale]}</p>
+              <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{pc.shelfTitle[locale]}</span>
+              <p className="mt-3 font-display text-3xl md:text-4xl text-dxb-navy max-w-2xl">{pc.shelfCopy[locale]}</p>
             </div>
             <Link href="/packages" className="inline-flex items-center gap-2 text-sm font-semibold text-dxb-clay">
               {pc.shelfCta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
@@ -84,7 +84,7 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
       </section>
 
       {/* Products by category, with audience filters */}
-      <section className="py-16 bg-dxb-ivory">
+      <section className="py-16 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6">
           <CatalogueBrowser locale={locale} />
         </div>

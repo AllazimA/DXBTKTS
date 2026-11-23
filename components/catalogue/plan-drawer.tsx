@@ -1,5 +1,6 @@
 'use client'
 
+import { BrandIcon } from '@/components/brand'
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
@@ -114,11 +115,11 @@ export function PlanDrawer() {
             animate={{ x: 0 }}
             exit={{ x: locale === 'ar' ? '-100%' : '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="absolute inset-y-0 end-0 w-full max-w-md bg-dxb-ivory flex flex-col shadow-2xl"
+            className="absolute inset-y-0 end-0 w-full max-w-md bg-dxb-sand flex flex-col shadow-2xl"
           >
-            <header className="flex items-center justify-between px-6 py-5 bg-dxb-ink text-white">
+            <header className="flex items-center justify-between px-6 py-5 bg-dxb-navy text-white">
               <div>
-                <h2 className="font-cormorant text-3xl">{tp('title')}</h2>
+                <h2 className="font-display text-3xl">{tp('title')}</h2>
                 {items.length > 0 && <p className="text-xs text-white/60">{tp('items', { count: items.length })}</p>}
               </div>
               <button type="button" onClick={() => setOpen(false)} aria-label={tp('close')} className="p-2 hover:text-dxb-gold">
@@ -130,7 +131,7 @@ export function PlanDrawer() {
               {status === 'done' ? (
                 <div className="p-8 text-center">
                   <CheckCircle2 className="w-12 h-12 text-dxb-gold mx-auto" />
-                  <h3 className="font-cormorant text-3xl text-dxb-ink mt-4">{tp('successTitle')}</h3>
+                  <h3 className="font-display text-3xl text-dxb-navy mt-4">{tp('successTitle')}</h3>
                   <p className="text-dxb-slate mt-3 leading-relaxed">{tp('successCopy')}</p>
                   <p className="mt-5 text-sm text-dxb-ink">
                     {tp('reference')}: <span className="font-semibold" dir="ltr">{reference}</span>
@@ -139,7 +140,7 @@ export function PlanDrawer() {
               ) : priced.length === 0 ? (
                 <div className="p-8 text-center">
                   <p className="text-dxb-slate leading-relaxed">{tp('empty')}</p>
-                  <Link href="/experiences" onClick={() => setOpen(false)} className="inline-block mt-6 px-6 py-3 bg-dxb-clay text-white text-sm font-semibold">
+                  <Link href="/experiences" onClick={() => setOpen(false)} className="inline-block mt-6 px-6 py-3 bg-dxb-orange text-dxb-ink text-sm font-semibold">
                     {tp('browse')}
                   </Link>
                 </div>
@@ -179,7 +180,7 @@ export function PlanDrawer() {
                           </div>
                           <div className="text-end shrink-0">
                             <p className="font-semibold text-dxb-ink">{formatAED(p.total, locale)}</p>
-                            <button type="button" onClick={() => remove(p.item.key)} className="mt-2 inline-flex items-center gap-1 text-xs text-dxb-slate hover:text-red-700">
+                            <button type="button" onClick={() => remove(p.item.key)} className="mt-2 inline-flex items-center gap-1 text-xs text-dxb-slate hover:text-dxb-red">
                               <Trash2 className="w-3.5 h-3.5" /> {tp('remove')}
                             </button>
                           </div>
@@ -199,7 +200,7 @@ export function PlanDrawer() {
 
                   <form onSubmit={submit} className="relative px-6 py-6 space-y-4">
                     <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-                    <h3 className="text-xs font-semibold tracking-[0.2em] uppercase text-dxb-slate">{tp('yourDetails')}</h3>
+                    <h3 className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{tp('yourDetails')}</h3>
                     <label className="block text-sm text-dxb-ink">
                       {tp('name')} *
                       <input name="name" required autoComplete="name" className={input} />
@@ -231,23 +232,23 @@ export function PlanDrawer() {
                         {tp('datesFlexible')}
                       </label>
                     )}
-                    {datesError && <p role="alert" className="text-sm text-red-700">{datesError === 'pay' ? tp('datesNeededPay') : tp('datesNeeded')}</p>}
+                    {datesError && <p role="alert" className="text-sm text-dxb-red">{datesError === 'pay' ? tp('datesNeededPay') : tp('datesNeeded')}</p>}
                     <label className="flex items-start gap-2 text-xs text-dxb-slate">
                       <input name="consent" type="checkbox" required className="mt-0.5 accent-[#B08D3F]" />
                       {tp('consent')}
                     </label>
-                    {status === 'error' && <p className="text-sm text-red-700">{paying ? tp('payError') : tp('error')}</p>}
-                    <button type="submit" value="request" disabled={status === 'sending'} className="w-full px-6 py-3.5 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover disabled:opacity-60">
+                    {status === 'error' && <p className="text-sm text-dxb-red">{paying ? tp('payError') : tp('error')}</p>}
+                    <button type="submit" value="request" disabled={status === 'sending'} className="w-full px-6 py-3.5 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-60">
                       {status === 'sending' && !paying ? tp('sending') : tp('submit')}
                     </button>
                     {PAYMENTS && (
-                      <div id="plan-pay" className="border border-dxb-ink/15 bg-dxb-ivory p-4 scroll-mt-6">
-                        <button type="submit" value="pay" disabled={status === 'sending'} className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-ink text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-navy disabled:opacity-60">
+                      <div id="plan-pay" className="border border-dxb-ink/15 bg-dxb-sand p-4 scroll-mt-6">
+                        <button type="submit" value="pay" disabled={status === 'sending'} className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-navy text-white text-sm font-bold hover:bg-dxb-navy disabled:opacity-60">
                           <Lock className="w-4 h-4" />
                           {status === 'sending' && paying ? tp('sending') : `${tp('payNow')} · ${formatAED(total, locale)}`}
                         </button>
                         <p className="mt-2 text-[11px] leading-relaxed text-dxb-slate">
-                          {PAYMENTS === 'test' && <span className="me-1 inline-block bg-dxb-gold/15 px-1.5 py-0.5 font-semibold uppercase tracking-[0.12em] text-[#8A6A2B]">{tp('payTest')}</span>}
+                          {PAYMENTS === 'test' && <span className="me-1 inline-block bg-dxb-gold/15 px-1.5 py-0.5 font-medium font-mono uppercase tracking-[0.06em] text-[#8A6A2B]">{tp('payTest')}</span>}
                           {tp('payNote')}
                         </p>
                       </div>
@@ -271,12 +272,9 @@ export function PlanButton({ className = '' }: { className?: string }) {
   const t = useTranslations('nav')
   return (
     <button type="button" onClick={() => setOpen(true)} className={`relative inline-flex items-center gap-2 text-white/90 hover:text-dxb-gold transition-colors ${className}`} aria-label={t('plan')}>
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-        <path d="M4 5h16v14H4z" />
-        <path d="M8 5V3m8 2V3M4 9h16M8 13h4m-4 3h7" />
-      </svg>
+      <BrandIcon name="ticket" className="w-6 h-6" strokeWidth={1.75} />
       {ready && items.length > 0 && (
-        <span className="absolute -top-1.5 -end-2 min-w-[18px] h-[18px] px-1 rounded-full bg-dxb-gold text-white text-[10px] font-bold grid place-items-center">{items.length}</span>
+        <span className="absolute -top-1.5 -end-2 min-w-[18px] h-[18px] px-1 rounded-full bg-dxb-orange text-dxb-ink text-[10px] font-bold grid place-items-center">{items.length}</span>
       )}
     </button>
   )

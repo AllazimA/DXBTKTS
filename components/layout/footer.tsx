@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { site, whatsappLink } from '@/lib/site'
 import { SocialLinks } from '@/components/layout/social-links'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
+import { BrandIcon, Logo, Perforation, TearText } from '@/components/brand'
 
 export function Footer() {
   const t = useTranslations('footer')
@@ -45,42 +46,28 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-dxb-ink text-white">
-      {/* Gold hairline */}
-      <div className="h-px bg-gradient-to-r from-transparent via-dxb-gold/60 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-          {/* Brand story */}
-          <div className="lg:col-span-5">
-            <Link href="/" className="inline-flex flex-col leading-none">
-              <span className="font-cormorant text-3xl font-semibold tracking-wide">
-                DXB <span className="text-dxb-gold">TKTS</span>
-              </span>
-              <span className="text-[10px] font-semibold tracking-[0.4em] uppercase text-white/50 mt-1.5">
-                {t('tagline')}
-              </span>
+    <footer className="bg-dxb-navy text-white">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 pt-16 md:pt-20 pb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
+          {/* Brand */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-block" aria-label="DXB TKTS">
+              <Logo tone="reverse" className="h-9" />
             </Link>
-            <p className="mt-7 text-white/60 font-light leading-relaxed max-w-md">{t('story')}</p>
-            <p className="mt-6 text-xs font-semibold tracking-[0.3em] uppercase text-dxb-gold">
-              {t('appointment')}
-            </p>
+            <TearText text={t('tagline')} className="mt-3 block dxb-label text-[11px] text-white/50" />
+            <p className="mt-7 text-white/70 leading-relaxed max-w-md">{t('story')}</p>
+            <TearText text={t('appointment')} className="mt-6 block dxb-label text-[12px] text-dxb-orange" />
           </div>
 
           {/* Link columns */}
-          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
             {columns.map(col => (
               <div key={col.heading}>
-                <h4 className="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">
-                  {col.heading}
-                </h4>
+                <h4 className="dxb-label text-[11px] text-white/45 mb-5 pb-3 border-b border-white/15">{col.heading}</h4>
                 <ul className="space-y-3">
                   {col.links.map(link => (
                     <li key={`${col.heading}-${link.label}`}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-white/65 hover:text-dxb-gold transition-colors"
-                      >
+                      <Link href={link.href} className="text-[15px] text-white/80 hover:text-dxb-orange transition-colors">
                         {link.label}
                       </Link>
                     </li>
@@ -90,34 +77,33 @@ export function Footer() {
             ))}
           </div>
 
-          {/* Contact */}
+          {/* Contact as a small pass */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-5">
-              {t('reachUs')}
-            </h4>
-            <a
-              href={`mailto:${site.email}`}
-              className="block text-sm text-white/65 hover:text-dxb-gold transition-colors"
-            >
-              {t('contact')}
-            </a>
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-sm text-white/65 hover:text-dxb-gold transition-colors"
-            >
-              <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
-              {t('whatsapp')}
-            </a>
-            <h4 className="mt-10 text-xs font-semibold tracking-[0.25em] uppercase text-white/40 mb-4">{tx('follow')}</h4>
-            <SocialLinks tone="light" comingSoonLabel={tx('socialSoon')} />
+            <div className="bg-white text-dxb-ink dxb-cut p-6">
+              <h4 className="dxb-label text-[11px] text-dxb-cobalt">{t('reachUs')}</h4>
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center gap-2.5 font-bold text-dxb-navy hover:text-dxb-cobalt transition-colors"
+              >
+                <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+                {t('whatsapp')}
+              </a>
+              <a href={`mailto:${site.email}`} className="mt-3 flex items-center gap-2.5 text-[15px] text-dxb-muted hover:text-dxb-cobalt transition-colors">
+                <BrandIcon name="mail" className="w-5 h-5" />
+                {t('contact')}
+              </a>
+              <Perforation className="my-5 text-dxb-navy" />
+              <h4 className="dxb-label text-[11px] text-dxb-muted mb-3">{tx('follow')}</h4>
+              <SocialLinks tone="dark" comingSoonLabel={tx('socialSoon')} />
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40 tracking-wide">{t('copyright')}</p>
-          <p className="font-cormorant italic text-sm text-white/50">{t('quote')}</p>
+        <div className="border-t border-white/15 pt-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="text-[13px] text-white/50">{t('copyright')}</p>
+          <p className="text-[15px] font-bold text-white/70">{t('quote')}</p>
         </div>
       </div>
     </footer>

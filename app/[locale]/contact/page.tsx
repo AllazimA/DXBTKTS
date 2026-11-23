@@ -19,12 +19,12 @@ export default async function Contact() {
   return (
     <>
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-dxb-ivory to-dxb-band">
+      <section className="py-20 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <span className="block text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase mb-4">
+          <span className="block text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase mb-4">
             {t('eyebrow')}
           </span>
-          <h1 className="font-cormorant text-5xl md:text-6xl font-light text-dxb-ink mb-6">
+          <h1 className="font-display text-5xl md:text-6xl text-dxb-navy mb-6">
             {t('title')}
           </h1>
           <p className="text-lg text-dxb-slate max-w-2xl mx-auto">{t('sub')}</p>
@@ -32,12 +32,12 @@ export default async function Contact() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-dxb-ivory">
+      <section className="py-20 bg-dxb-sand">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
             <div>
-              <h3 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-8">
+              <h3 className="font-display font-bold text-2xl text-dxb-navy mb-8">
                 {t('reachOut')}
               </h3>
 
@@ -46,7 +46,7 @@ export default async function Contact() {
                 <div className="flex gap-4">
                   <Mail className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
                       {t('email')}
                     </p>
                     <a
@@ -62,7 +62,7 @@ export default async function Contact() {
                 <div className="flex gap-4">
                   <Phone className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
                       {t('phone')}
                     </p>
                     <a
@@ -79,7 +79,7 @@ export default async function Contact() {
                 <div className="flex gap-4">
                   <WhatsAppIcon className="w-6 h-6 text-[#25D366] flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
                       {t('whatsapp')}
                     </p>
                     <a
@@ -97,7 +97,7 @@ export default async function Contact() {
                 <div className="flex gap-4">
                   <MapPin className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-1">
+                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
                       {t('location')}
                     </p>
                     <p className="text-dxb-slate">{t('locationValue')}</p>
@@ -107,13 +107,13 @@ export default async function Contact() {
 
               {/* Social */}
               <div className="mt-10">
-                <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-3">{tx('follow')}</p>
+                <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-3">{tx('follow')}</p>
                 <SocialLinks tone="dark" comingSoonLabel={tx('socialSoon')} />
               </div>
 
               {/* Response Time */}
-              <div className="mt-12 p-6 bg-dxb-band rounded">
-                <p className="text-xs font-semibold tracking-widest text-dxb-gold uppercase mb-2">
+              <div className="mt-12 p-6 bg-white rounded">
+                <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-2">
                   {t('responseTime')}
                 </p>
                 <p className="text-sm text-dxb-slate">{t('responseCopy')}</p>

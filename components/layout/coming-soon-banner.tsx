@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { X } from 'lucide-react'
 import { site } from '@/lib/site'
+import { BrandSymbol, Tear } from '@/components/brand'
 
 const KEY = 'dxbtkts.comingSoon.dismissed'
 
@@ -27,12 +28,16 @@ export function ComingSoonBanner() {
   if (!site.comingSoon.enabled || hidden) return null
 
   return (
-    <div className="relative bg-[linear-gradient(90deg,#0B1420,#14202F_50%,#0B1420)] text-white border-b border-[#C9A45C]/30">
-      <div className="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap text-center pe-12">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-[#E6CB8E]">{t('label')}</span>
-        <span className="font-cormorant text-lg leading-tight">{t('title')}</span>
-        <span className="hidden md:inline text-xs text-white/65">{t('copy')}</span>
-        <Link href="/experiences" className="text-xs font-semibold text-[#E6CB8E] underline underline-offset-4 hover:text-white">
+    <div className="relative bg-dxb-ink text-white">
+      <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-center gap-x-3 gap-y-1 flex-wrap text-center pe-12 text-[13px]">
+        <span className="inline-flex items-center gap-2 dxb-label text-[11px] text-dxb-orange">
+          <BrandSymbol className="h-3.5 text-dxb-orange" />
+          {t('label')}
+        </span>
+        <Tear className="hidden sm:inline-flex text-white/30" />
+        <span className="font-semibold">{t('title')}</span>
+        <span className="hidden md:inline text-white/60">{t('copy')}</span>
+        <Link href="/experiences" className="font-semibold text-dxb-orange underline decoration-2 underline-offset-4 hover:text-white">
           {t('cta')}
         </Link>
       </div>

@@ -27,11 +27,11 @@ export default async function NightlifePage({ params: { locale } }: { params: { 
   const venues = await getNightlife(locale)
   return (
     <>
-      <CuratedHero image={HERO} eyebrow={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} cta={c.request[locale]} ctaHref={`#${FORM_ID}`} />
+      <CuratedHero image={HERO} family="events" locale={locale} eyebrow={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} cta={c.request[locale]} ctaHref={`#${FORM_ID}`} />
 
       <MoodStrip items={STRIP.map(s => ({ src: s.img.src, alt: s.img.alt, caption: s.caption[locale] }))} />
 
-      <section className="bg-dxb-ivory">
+      <section className="bg-dxb-sand">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
           <VenueList
             venues={venues.map(v => ({

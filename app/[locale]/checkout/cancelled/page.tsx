@@ -18,11 +18,11 @@ const c = {
 
 export default function CheckoutCancelled({ params: { locale } }: { params: { locale: Locale } }) {
   return (
-    <section className="bg-dxb-ivory">
+    <section className="bg-dxb-sand">
       <div className="max-w-2xl mx-auto px-6 py-28 md:py-36 text-center">
-        <h1 className="font-cormorant font-light text-4xl md:text-5xl text-dxb-ink">{c.title[locale]}</h1>
+        <h1 className="font-display text-4xl md:text-5xl text-dxb-navy">{c.title[locale]}</h1>
         <p className="mt-6 text-lg text-dxb-slate leading-relaxed">{c.copy[locale]}</p>
-        <Link href="/experiences" className="mt-10 inline-block px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover">
+        <Link href="/experiences" className="mt-10 inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
           {c.back[locale]}
         </Link>
       </div>

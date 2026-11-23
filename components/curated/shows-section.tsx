@@ -22,16 +22,16 @@ export function ShowsSection({ locale, events }: { locale: Locale; events: Curat
   return (
     <>
       {/* La Perle */}
-      <section className="bg-dxb-ivory" id="la-perle">
+      <section className="bg-dxb-sand" id="la-perle">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-dxb-gold">{c.perleEyebrow[locale]}</p>
-            <h2 className="mt-4 font-cormorant text-4xl md:text-6xl font-light text-dxb-ink">{c.perleTitle[locale]}</h2>
+            <p className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold">{c.perleEyebrow[locale]}</p>
+            <h2 className="mt-4 font-display text-4xl md:text-6xl text-dxb-navy">{c.perleTitle[locale]}</h2>
             <p className="mt-6 text-lg text-dxb-slate leading-relaxed">{c.perleCopy[locale]}</p>
             <p className="mt-4 text-sm text-dxb-slate/80 leading-relaxed">{c.perleNote[locale]}</p>
           </div>
           <div className="lg:col-span-5 lg:text-end">
-            <PrefillButton formId={FORM_ID} values={{ event: LA_PERLE }} className="inline-block px-8 py-4 bg-dxb-clay text-white text-sm font-semibold tracking-[0.12em] uppercase hover:bg-dxb-clay-hover transition-colors">
+            <PrefillButton formId={FORM_ID} values={{ event: LA_PERLE }} className="inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
               {c.request[locale]}
             </PrefillButton>
           </div>
@@ -39,10 +39,10 @@ export function ShowsSection({ locale, events }: { locale: Locale; events: Curat
       </section>
 
       {/* Dubai Opera */}
-      <section className="bg-dxb-band" id="dubai-opera">
+      <section className="bg-white" id="dubai-opera">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-dxb-gold">{c.operaEyebrow[locale]}</p>
-          <h2 className="mt-4 font-cormorant text-4xl md:text-6xl font-light text-dxb-ink whitespace-pre-line">{c.operaTitle[locale]}</h2>
+          <p className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold">{c.operaEyebrow[locale]}</p>
+          <h2 className="mt-4 font-display text-4xl md:text-6xl text-dxb-navy whitespace-pre-line">{c.operaTitle[locale]}</h2>
           <p className="mt-6 max-w-3xl text-lg text-dxb-slate leading-relaxed">{c.operaCopy[locale]}</p>
           {events.length === 0 ? (
             <p className="mt-10 max-w-2xl text-dxb-slate leading-relaxed border-s-2 border-dxb-gold/50 ps-5">{c.operaEmpty[locale]}</p>
@@ -51,14 +51,14 @@ export function ShowsSection({ locale, events }: { locale: Locale; events: Curat
               {events.map(e => (
                 <li key={e.id} className="py-7 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
                   <div className="md:col-span-3">
-                    <p className="font-cormorant text-2xl text-dxb-ink">{day(e.date)}</p>
+                    <p className="font-display font-bold text-2xl text-dxb-navy">{day(e.date)}</p>
                     <p className="text-sm text-dxb-slate">
                       {e.time}
                       {e.endDate && e.endDate !== e.date ? ` – ${day(e.endDate)}` : ''}
                     </p>
                   </div>
                   <div className="md:col-span-6">
-                    <h3 className="font-cormorant text-3xl text-dxb-ink leading-tight">{e.title}</h3>
+                    <h3 className="font-display text-3xl text-dxb-navy leading-tight">{e.title}</h3>
                     {e.venue && <p className="mt-1 text-sm text-dxb-slate">{e.venue}</p>}
                     {e.description && <p className="mt-3 text-dxb-slate leading-relaxed">{e.description}</p>}
                     {e.ticketCategories && (
@@ -68,8 +68,8 @@ export function ShowsSection({ locale, events }: { locale: Locale; events: Curat
                     )}
                   </div>
                   <div className="md:col-span-3 flex flex-col items-start md:items-end gap-3">
-                    <span className="text-[0.68rem] font-semibold tracking-[0.18em] uppercase text-dxb-gold">{c.status[e.status]?.[locale]}</span>
-                    <PrefillButton formId={FORM_ID} values={{ event: e.title, date: e.date, ...(e.time ? { time: e.time } : {}) }} className="inline-block px-6 py-3 bg-dxb-ink text-white text-xs font-semibold tracking-[0.16em] uppercase hover:bg-dxb-clay transition-colors">
+                    <span className="text-[0.68rem] font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold">{c.status[e.status]?.[locale]}</span>
+                    <PrefillButton formId={FORM_ID} values={{ event: e.title, date: e.date, ...(e.time ? { time: e.time } : {}) }} className="inline-block px-6 py-3 bg-dxb-navy text-white text-xs font-bold hover:bg-dxb-orange transition-colors">
                       {c.request[locale]}
                     </PrefillButton>
                     {e.officialUrl && (

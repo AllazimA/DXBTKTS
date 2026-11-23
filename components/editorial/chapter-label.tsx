@@ -1,11 +1,14 @@
-/** Editorial section marker: "01 — The founder" with a hairline. */
+import { Tear } from '@/components/brand'
+
+/** Editorial section marker: "01 ⁞ THE FOUNDER" in mono, with a short rule. */
 export function ChapterLabel({ index, label, tone = 'dark' }: { index?: string; label: string; tone?: 'dark' | 'light' }) {
-  const colour = tone === 'light' ? 'text-white/60' : 'text-dxb-slate'
-  const rule = tone === 'light' ? 'bg-white/25' : 'bg-dxb-ink/15'
+  const colour = tone === 'light' ? 'text-dxb-orange' : 'text-dxb-cobalt'
+  const rule = tone === 'light' ? 'bg-white/30' : 'bg-dxb-navy'
   return (
-    <div className={`flex items-center gap-4 text-[11px] font-semibold uppercase tracking-[0.3em] ${colour}`}>
-      {index && <span className="text-dxb-gold" dir="ltr">{index}</span>}
-      <span className={`h-px w-10 ${rule}`} />
+    <div className={`flex items-center gap-3 dxb-label ${colour}`}>
+      <span className={`h-[2px] w-8 ${rule}`} />
+      {index && <span dir="ltr">{index}</span>}
+      {index && <Tear />}
       <span>{label}</span>
     </div>
   )

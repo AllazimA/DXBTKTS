@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Amiri, Cormorant_Garamond, IBM_Plex_Sans_Arabic, Inter } from 'next/font/google'
+import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from 'next/font/google'
 import { site } from '@/lib/site'
 import '../globals.css'
 import { NextIntlClientProvider } from 'next-intl'
@@ -16,32 +16,27 @@ import en from '@/messages/en.json'
 import ar from '@/messages/ar.json'
 import fr from '@/messages/fr.json'
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+// Brand type (03_Typography): Archivo with its width axis for display and text,
+// IBM Plex Mono for labels and data, IBM Plex Sans Arabic for Arabic.
+const archivo = Archivo({
+  variable: '--font-archivo',
+  subsets: ['latin', 'latin-ext'],
+  axes: ['wdth'],
   display: 'swap',
 })
 
-const inter = Inter({
-  variable: '--font-inter',
+const plexMono = IBM_Plex_Mono({
+  variable: '--font-plex-mono',
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
   display: 'swap',
 })
 
-// Arabic faces: preloaded only on Arabic pages.
+// Arabic face: preloaded only on Arabic pages.
 const arabicSans = IBM_Plex_Sans_Arabic({
   variable: '--font-arabic-sans',
   subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  preload: false,
-})
-
-const arabicDisplay = Amiri({
-  variable: '--font-arabic-display',
-  subsets: ['arabic'],
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: false,
 })
@@ -57,13 +52,21 @@ export const metadata: Metadata = {
   description:
     'Private experiences and concierge in Dubai — yachts, desert, helicopter tours, chauffeurs and celebrations, arranged by a Dubai-based team.',
   applicationName: site.name,
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
   robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0E1B2C',
+  themeColor: '#00354E',
 }
 
 const organizationJsonLd = {
@@ -100,12 +103,12 @@ export default function LocaleLayout({ children, params: { locale } }: { childre
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={`${cormorant.variable} ${inter.variable} ${arabicDisplay.variable} ${locale === 'ar' ? arabicSans.variable : ''}`}>
+      <body className={`${archivo.variable} ${plexMono.variable} ${locale === 'ar' ? arabicSans.variable : ''}`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <NextIntlClientProvider locale={locale} messages={messages[locale]}>
           <Providers>
             <PlanProvider>
-              <div className="dxb-root flex flex-col min-h-screen bg-dxb-ivory text-dxb-ink">
+              <div className="dxb-root flex flex-col min-h-screen bg-dxb-sand text-dxb-ink">
                 <ComingSoonBanner />
                 <Header />
                 <main className="flex-1">{children}</main>

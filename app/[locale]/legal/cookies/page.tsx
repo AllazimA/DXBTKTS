@@ -9,16 +9,16 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 
 export default function Cookies() {
   return (
-    <div className="py-16 bg-dxb-ivory">
+    <div className="py-16 bg-dxb-sand">
       <div className="max-w-3xl mx-auto px-6">
         <Eyebrow className="mb-4">Legal</Eyebrow>
-        <h1 className="font-cormorant text-5xl font-light text-dxb-ink mb-12">
+        <h1 className="font-display text-5xl text-dxb-navy mb-12">
           Cookie Policy
         </h1>
 
         <div className="space-y-8 text-dxb-slate">
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               What Are Cookies?
             </h2>
             <p>
@@ -27,7 +27,7 @@ export default function Cookies() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Types of Cookies We Use
             </h2>
             <ul className="list-disc list-inside space-y-2">
@@ -39,7 +39,7 @@ export default function Cookies() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Managing Cookies
             </h2>
             <p>
@@ -48,7 +48,7 @@ export default function Cookies() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Your Privacy
             </h2>
             <p>
@@ -57,7 +57,7 @@ export default function Cookies() {
           </section>
 
           <section>
-            <h2 className="font-cormorant text-2xl font-semibold text-dxb-ink mb-4">
+            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
               Questions?
             </h2>
             <p>

@@ -18,11 +18,11 @@ export default async function RequestPage() {
   const t = await getTranslations('request')
   const promises = t.raw('promises') as { title: string; copy: string }[]
   const accent = (chunks: React.ReactNode) => (
-    <span className="italic text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-gold">{chunks}</span>
   )
 
   return (
-    <section className="relative bg-dxb-ink overflow-hidden">
+    <section className="relative bg-dxb-navy overflow-hidden">
       {/* Ambient backdrop */}
       <div className="absolute inset-0">
         <Image
@@ -39,10 +39,10 @@ export default async function RequestPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
           {/* Left: pitch */}
           <div className="lg:col-span-2 lg:sticky lg:top-32">
-            <span className="text-xs font-semibold tracking-[0.35em] text-dxb-gold uppercase">
+            <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">
               {t('eyebrow')}
             </span>
-            <h1 className="font-cormorant text-5xl md:text-6xl font-light text-white mt-6 mb-8 leading-[1.08]">
+            <h1 className="font-display text-5xl md:text-6xl text-white mt-6 mb-8 leading-[1.08]">
               {t.rich('title', { accent })}
             </h1>
             <p className="text-white/70 text-lg font-light leading-relaxed mb-12">{t('sub')}</p>
@@ -54,7 +54,7 @@ export default async function RequestPage() {
                   <div key={p.title} className="flex gap-5">
                     <Icon className="w-6 h-6 text-dxb-gold shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-cormorant text-2xl font-medium text-white mb-1">
+                      <h3 className="font-display font-bold text-2xl text-white mb-1">
                         {p.title}
                       </h3>
                       <p className="text-white/55 text-sm font-light leading-relaxed">{p.copy}</p>
@@ -68,9 +68,9 @@ export default async function RequestPage() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-12 inline-flex items-center gap-3 text-sm font-semibold tracking-[0.2em] uppercase text-dxb-gold group"
+              className="mt-12 inline-flex items-center gap-3 text-sm font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold group"
             >
-              <span className="h-px w-10 bg-dxb-gold transition-all duration-300 group-hover:w-16" />
+              <span className="h-px w-10 bg-dxb-orange transition-all duration-300 group-hover:w-16" />
               <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
               {t('whatsappCta')}
             </a>

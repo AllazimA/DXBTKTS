@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { whatsappLink } from '@/lib/site'
+import { BrandIcon } from '@/components/brand'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 type Option = 'booking' | 'tailored' | 'membership' | 'general' | 'other'
@@ -61,11 +62,11 @@ export function WhatsAppWidget() {
             transition={{ duration: 0.2 }}
             role="dialog"
             aria-label={t('title')}
-            className="absolute bottom-16 end-0 w-[min(88vw,340px)] bg-dxb-ivory text-dxb-ink shadow-[0_30px_60px_-20px_rgba(14,27,44,0.45)] border border-dxb-band"
+            className="absolute bottom-16 end-0 w-[min(88vw,340px)] bg-white text-dxb-ink shadow-ticket-lg"
           >
-            <div className="flex items-start justify-between gap-3 bg-dxb-ink text-white px-5 py-4">
+            <div className="flex items-start justify-between gap-3 bg-dxb-navy text-white px-5 py-4">
               <div>
-                <p className="flex items-center gap-2 font-cormorant text-2xl leading-tight"><WhatsAppIcon className="w-5 h-5 text-[#25D366]" />{t('title')}</p>
+                <p className="flex items-center gap-2 text-xl font-extrabold tracking-[-0.015em] leading-tight"><WhatsAppIcon className="w-5 h-5 text-[#25D366]" />{t('title')}</p>
                 <p className="text-xs text-white/60 mt-1">{t('subtitle')}</p>
               </div>
               <button type="button" onClick={() => setOpen(false)} aria-label={t('close')} className="p-1 text-white/70 hover:text-white">
@@ -80,7 +81,7 @@ export function WhatsAppWidget() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setOpen(false)}
-                    className="group flex items-center justify-between gap-3 px-3 py-3 hover:bg-white transition-colors"
+                    className="group flex items-center justify-between gap-3 px-3 py-3 hover:bg-dxb-sand transition-colors"
                   >
                     <span>
                       <span className="block text-sm font-semibold">{t(`labels.${o}`)}</span>
@@ -88,7 +89,7 @@ export function WhatsAppWidget() {
                         <span className="block text-xs text-dxb-slate mt-0.5 line-clamp-1">{context}</span>
                       ) : null}
                     </span>
-                    <span className="text-dxb-gold transition-transform group-hover:translate-x-0.5 rtl:rotate-180">→</span>
+                    <BrandIcon name="arrow" className="w-4 h-4 text-dxb-cobalt transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
                   </a>
                 </li>
               ))}

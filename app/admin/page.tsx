@@ -39,8 +39,8 @@ export default async function AdminDesk() {
     <main className="max-w-7xl mx-auto px-6 py-10">
       <header className="flex flex-wrap items-end justify-between gap-4 border-b border-dxb-ink/15 pb-6">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-dxb-gold">DXB TKTS</p>
-          <h1 className="font-cormorant text-4xl text-dxb-ink">Booking desk</h1>
+          <p className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">DXB TKTS</p>
+          <h1 className="font-display text-4xl text-dxb-navy">Booking desk</h1>
           <p className="text-sm text-dxb-slate mt-1">Plan requests, payments and enquiries from the website. Times in Dubai time.</p>
         </div>
         <dl className="grid grid-cols-3 gap-6 text-sm">
@@ -51,7 +51,7 @@ export default async function AdminDesk() {
       </header>
 
       <section className="mt-10">
-        <h2 className="font-cormorant text-3xl">Plans and bookings</h2>
+        <h2 className="font-display text-3xl">Plans and bookings</h2>
         {bookings.length === 0 ? (
           <p className="mt-4 text-dxb-slate">No plan requests yet.</p>
         ) : (
@@ -100,13 +100,13 @@ export default async function AdminDesk() {
       </section>
 
       <section className="mt-14">
-        <h2 className="font-cormorant text-3xl">Enquiries</h2>
+        <h2 className="font-display text-3xl">Enquiries</h2>
         {enquiries.length === 0 ? (
           <p className="mt-4 text-dxb-slate">No enquiries yet.</p>
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm bg-white border border-dxb-band">
-              <thead className="text-left text-xs uppercase tracking-wider text-dxb-slate">
+              <thead className="text-left text-xs font-mono uppercase tracking-[0.06em]r text-dxb-slate">
                 <tr><th className="p-3">Received</th><th className="p-3">Name</th><th className="p-3">Interest</th><th className="p-3">Date</th><th className="p-3">Message</th><th className="p-3">Contact</th></tr>
               </thead>
               <tbody className="divide-y divide-dxb-band">

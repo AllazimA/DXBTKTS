@@ -4,20 +4,21 @@ import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-cobalt focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
-        primary: 'bg-dxb-clay text-white hover:bg-dxb-clay-hover',
-        secondary: 'border-2 border-dxb-gold text-dxb-gold hover:bg-dxb-gold hover:text-white',
-        outline: 'border-2 border-dxb-slate text-dxb-slate hover:border-dxb-gold hover:text-dxb-gold',
-        ghost: 'text-dxb-slate hover:text-dxb-gold',
+        // Light orange with night-ink text: the brand's one action colour.
+        primary: 'bg-dxb-orange text-dxb-ink hover:bg-dxb-orange-hover dxb-cut dxb-cut-sm',
+        secondary: 'border-2 border-current text-dxb-navy hover:bg-dxb-navy hover:text-white hover:border-dxb-navy',
+        outline: 'border-2 border-dxb-line text-dxb-navy hover:border-dxb-navy',
+        ghost: 'text-dxb-cobalt hover:underline underline-offset-4',
       },
       size: {
-        sm: 'px-3 py-2 text-xs',
-        md: 'px-4 py-2 text-sm',
-        lg: 'px-6 py-3 text-base',
-        xl: 'px-8 py-4 text-lg',
+        sm: 'h-9 px-3.5 text-sm',
+        md: 'h-11 px-5 text-[15px]',
+        lg: 'h-12 px-6 text-base',
+        xl: 'h-14 px-8 text-lg',
       },
     },
     defaultVariants: {

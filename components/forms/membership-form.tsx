@@ -6,7 +6,7 @@ import { membership as m } from '@/content/membership'
 import type { CardFinish } from '@/components/membership/membership-card'
 
 const field = 'mt-2 w-full bg-transparent border-b border-white/25 px-0 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold'
-const label = 'block text-[11px] font-semibold uppercase tracking-[0.25em] text-white/55'
+const label = 'block text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-white/55'
 
 export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale; tier?: string; onTierChange?: (id: CardFinish) => void }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
@@ -41,7 +41,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
   }
 
   if (status === 'done') {
-    return <p className="font-cormorant text-3xl text-white leading-snug">{f.success[locale]}</p>
+    return <p className="font-display text-3xl text-white leading-snug">{f.success[locale]}</p>
   }
 
   return (
@@ -96,8 +96,8 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
         <input type="checkbox" required className="mt-1 accent-[#B08D3F]" />
         {f.consent[locale]}
       </label>
-      {status === 'error' && <p className="text-sm text-red-300">{f.error[locale]}</p>}
-      <button type="submit" disabled={status === 'sending'} className="px-10 py-4 bg-dxb-gold text-dxb-ink text-sm font-semibold tracking-[0.15em] uppercase hover:bg-white transition-colors disabled:opacity-60">
+      {status === 'error' && <p className="text-sm text-dxb-red">{f.error[locale]}</p>}
+      <button type="submit" disabled={status === 'sending'} className="px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-white transition-colors disabled:opacity-60">
         {status === 'sending' ? f.sending[locale] : f.submit[locale]}
       </button>
     </form>
