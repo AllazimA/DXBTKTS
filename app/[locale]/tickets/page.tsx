@@ -14,7 +14,6 @@ import { PageHero } from '@/components/brand/page-hero'
 // Dubai Opera events are published from the DXB CRM at any time: read them on every request.
 export const dynamic = 'force-dynamic'
 
-const HERO = aiImage('gallery-night', 'dubaiSkyline', 'Dubai skyline lit up at night')
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'whatsOn', '/tickets')
@@ -31,7 +30,7 @@ export default async function WhatsOnPage({ params: { locale } }: { params: { lo
 
   return (
     <>
-      <PageHero image={HERO} film={site.films.nightlifeLounge} family="events" locale={locale} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} />
+      <PageHero image={{ src: site.films.ticketsGrandPrix.poster, alt: 'A night race at Yas Marina, Abu Dhabi' }} film={site.films.ticketsGrandPrix} family="events" locale={locale} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} />
 
       <EventCalendar locale={locale} initialToday={new Date().toISOString().slice(0, 10)} />
 

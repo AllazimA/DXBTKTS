@@ -9,6 +9,7 @@ import { about } from '@/content/about'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { BrandIcon, Tear } from '@/components/brand'
 import { PageHero } from '@/components/brand/page-hero'
+import { site } from '@/lib/site'
 
 const STORY_IMAGE = aiImage('section-philosophy', 'burjAlArabAerial', 'A DXB TKTS lifestyle manager meeting a client in Dubai')
 
@@ -20,7 +21,7 @@ export default function About({ params: { locale } }: { params: { locale: Locale
   return (
     <>
       {/* Opening */}
-      <PageHero image={aiImage('section-philosophy', 'burjAlArabAerial', 'A DXB TKTS lifestyle manager meeting a guest in Dubai')} label={about.eyebrow[locale]} title={about.title[locale]} lede={about.lede[locale]} />
+      <PageHero image={{ src: site.films.membershipBox.poster, alt: 'A DXB TKTS concierge presents a welcome box to a guest' }} film={site.films.membershipBox} label={about.eyebrow[locale]} title={about.title[locale]} lede={about.lede[locale]} />
 
       {/* Story */}
       <section className="bg-white">

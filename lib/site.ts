@@ -30,6 +30,12 @@ export const site = {
     nightlifeClub: { mp4: '/videos/nightlife-club.mp4', mobile: '/videos/nightlife-club-mobile.mp4', poster: '/images/film-nightlife-club-poster.webp' },
     celebrationProposal: { mp4: '/videos/celebration-proposal.mp4', mobile: '/videos/celebration-proposal-mobile.mp4', poster: '/images/film-celebration-proposal-poster.webp' },
     diningArrival: { mp4: '/videos/dining-arrival.mp4', mobile: '/videos/dining-arrival-mobile.mp4', poster: '/images/film-dining-arrival-poster.webp' },
+    // Owner's films, round 3 (2026-11-23).
+    conciergeFulfilling: { mp4: '/videos/concierge-fulfilling.mp4', mobile: '/videos/concierge-fulfilling-mobile.mp4', poster: '/images/film-concierge-fulfilling-poster.webp' },
+    ticketsGrandPrix: { mp4: '/videos/tickets-grand-prix.mp4', mobile: '/videos/tickets-grand-prix-mobile.mp4', poster: '/images/film-tickets-grand-prix-poster.webp' }, // cropped: no F1 logo corner
+    transfersArrival: { mp4: '/videos/transfers-arrival.mp4', mobile: '/videos/transfers-arrival-mobile.mp4', poster: '/images/film-transfers-arrival-poster.webp' },
+    skyHelicopter: { mp4: '/videos/sky-helicopter.mp4', mobile: '/videos/sky-helicopter-mobile.mp4', poster: '/images/film-sky-helicopter-poster.webp' },
+    desertDunes: { mp4: '/videos/desert-dunes.mp4', mobile: '/videos/desert-dunes-mobile.mp4', poster: '/images/film-desert-dunes-poster.webp' },
     // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
     membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },

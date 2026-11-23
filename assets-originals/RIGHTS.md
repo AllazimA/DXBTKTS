@@ -25,6 +25,12 @@
 | `public/videos/nightlife-club.mp4` (+ `-mobile`, poster) — Nightlife hero (with extra shade) | `video/People_dancing_in_upscale_nightclub_b8b0e555.mp4` |
 | `public/videos/celebration-proposal.mp4` (+ `-mobile`, poster) — Services › Celebrations row, homepage Signature scene | `video/Man_proposing_to_woman_80589728.mp4` |
 | `public/videos/dining-arrival.mp4` (+ `-mobile`, poster) — Dining hero, homepage Lifestyle scene | `video/Luxury_car_arrives_at_venue_3ad4fa7d.mp4` |
+| `public/videos/concierge-fulfilling.mp4` (+ `-mobile`, poster) — Services hero; 1080p | `video/concierge_fulfilling_28e77562_1080p.mp4` |
+| `public/videos/tickets-grand-prix.mp4` (+ `-mobile`, poster) — Tickets hero; cropped to drop the F1 logo bug top-left. STILL SHOWS: small F1 marks on barriers and a misspelt hotel sign ("W ABU DIADA") — replace before launch if F1 trademark use is a concern | `video/formula_one_night_d7622198.mp4` |
+| `public/videos/transfers-arrival.mp4` (+ `-mobile`, poster) — Transfers category | `video/chauffeur_arriving_37b124f4.mp4` |
+| `public/videos/sky-helicopter.mp4` (+ `-mobile`, poster) — Sky category + homepage Sky chapter | `video/helicopter_dubai_4f556830.mp4` |
+| `public/videos/desert-dunes.mp4` (+ `-mobile`, poster) — Desert category + homepage Sand chapter; 1080p | `video/desert_travel_ec0e307a_1080p.mp4` |
+| About hero now uses `membership-box.mp4` (concierge welcome box) | — |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |

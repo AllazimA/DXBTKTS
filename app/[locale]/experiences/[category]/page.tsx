@@ -18,6 +18,9 @@ const CATEGORY_FILMS: Record<string, Film | undefined> = {
   'on-the-water': site.heroVideo ?? undefined,
   lifestyle: site.films.diningTerrace,
   signature: site.films.celebrationProposal,
+  sky: site.films.skyHelicopter,
+  desert: site.films.desertDunes,
+  transfers: site.films.transfersArrival,
 }
 
 type Props = { params: { locale: Locale; category: string } }

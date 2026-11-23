@@ -40,8 +40,8 @@ export function Hero() {
       still: hero,
       film: site.heroVideo ? { mp4: site.heroVideo.mp4, mobile: site.heroVideo.mobile, poster: site.heroVideo.poster } : undefined,
     },
-    { key: 'sand', href: '/experiences/desert', still: aiImage('gallery-dunes', 'desert', 'Riders on a dune ridge at sunset') },
-    { key: 'sky', href: '/experiences/sky', still: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter over Palm Jumeirah') },
+    { key: 'sand', href: '/experiences/desert', still: aiImage('gallery-dunes', 'desert', 'Riders on a dune ridge at sunset'), film: site.films.desertDunes },
+    { key: 'sky', href: '/experiences/sky', still: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter over Palm Jumeirah'), film: site.films.skyHelicopter },
     { key: 'city', href: '/dining', still: { src: site.films.diningTerrace.poster, alt: 'Dinner terrace above Dubai at dusk' }, film: site.films.diningTerrace },
   ]
 
