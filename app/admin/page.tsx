@@ -106,7 +106,7 @@ export default async function AdminDesk() {
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm bg-white border border-dxb-band">
-              <thead className="text-left text-xs font-mono uppercase tracking-[0.06em]r text-dxb-slate">
+              <thead className="text-left text-xs font-mono uppercase tracking-[0.06em] text-dxb-slate">
                 <tr><th className="p-3">Received</th><th className="p-3">Name</th><th className="p-3">Interest</th><th className="p-3">Date</th><th className="p-3">Message</th><th className="p-3">Contact</th></tr>
               </thead>
               <tbody className="divide-y divide-dxb-band">

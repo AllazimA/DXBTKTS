@@ -3,18 +3,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
+import { BrandIcon } from '@/components/brand'
 
 const inputStyles =
-  'mt-2 w-full bg-white/[0.04] border border-white/15 px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold/70 focus:bg-white/[0.06] transition-colors'
+  'mt-2 w-full h-12 bg-white border border-dxb-line px-4 text-[15px] text-dxb-ink placeholder:text-dxb-muted/60 focus:outline-none focus:border-dxb-cobalt focus:ring-2 focus:ring-dxb-cobalt/20 transition-colors'
 
-const labelStyles = 'block text-xs font-medium tracking-[0.06em] font-mono uppercase text-white/60'
+const labelStyles = 'block dxb-label text-[11px] text-dxb-muted'
 
 export function RequestForm() {
   const t = useTranslations('request.form')
   const serviceOptions = t.raw('serviceOptions') as string[]
   const contactOptions = t.raw('contactOptions') as Record<string, string>
   const accent = (chunks: React.ReactNode) => (
-    <span className="text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-cobalt">{chunks}</span>
   )
 
   const serviceRef = useRef<HTMLSelectElement>(null)
@@ -83,15 +84,15 @@ export function RequestForm() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="border border-dxb-gold/50 bg-white/[0.03] p-12 text-center"
+        className="p-10 md:p-12 text-center"
       >
-        <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">
-          {t('successEyebrow')}
+        <span className="inline-flex items-center gap-2 dxb-label text-dxb-cobalt">
+          <BrandIcon name="confirmed" className="w-5 h-5" />{t('successEyebrow')}
         </span>
-        <h3 className="font-display text-4xl text-white mt-5 mb-4">
+        <h3 className="font-display text-4xl text-dxb-navy mt-5 mb-4">
           {t.rich('successTitle', { accent })}
         </h3>
-        <p className="text-white/65 font-light leading-relaxed max-w-md mx-auto">
+        <p className="text-dxb-muted leading-relaxed max-w-md mx-auto">
           {t('successCopy')}
         </p>
       </motion.div>
@@ -134,7 +135,7 @@ export function RequestForm() {
           <label htmlFor="contact_method" className={labelStyles}>
             {t('contactMethod')}
           </label>
-          <select id="contact_method" name="contact_method" required className={`${inputStyles} [&>option]:text-dxb-ink`}>
+          <select id="contact_method" name="contact_method" required className={inputStyles}>
             <option value="">{t('contactMethodPlaceholder')}</option>
             {Object.entries(contactOptions).map(([value, label]) => (
               <option key={value} value={value}>
@@ -150,7 +151,7 @@ export function RequestForm() {
           <label htmlFor="service" className={labelStyles}>
             {t('service')}
           </label>
-          <select ref={serviceRef} id="service" name="service" required className={`${inputStyles} [&>option]:text-dxb-ink`}>
+          <select ref={serviceRef} id="service" name="service" required className={inputStyles}>
             <option value="">{t('servicePlaceholder')}</option>
             {serviceOptions.map(s => (
               <option key={s} value={s}>
@@ -163,7 +164,7 @@ export function RequestForm() {
           <label htmlFor="date" className={labelStyles}>
             {t('date')}
           </label>
-          <input ref={dateRef} id="date" name="date" type="date" className={`${inputStyles} [color-scheme:dark]`} />
+          <input ref={dateRef} id="date" name="date" type="date" className={`${inputStyles} dxb-data`} />
         </div>
       </div>
 
@@ -177,7 +178,7 @@ export function RequestForm() {
           name="message"
           rows={5}
           placeholder={t('messagePlaceholder')}
-          className={inputStyles}
+          className={`${inputStyles} !h-auto py-3`}
         />
       </div>
 
@@ -186,12 +187,12 @@ export function RequestForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold transition-all duration-300 hover:bg-dxb-orange-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
+        className="w-full inline-flex items-center justify-center gap-2 h-14 px-10 bg-dxb-orange text-dxb-ink text-base font-bold dxb-cut dxb-cut-sm transition-colors hover:bg-dxb-orange-hover disabled:opacity-60"
       >
         {isLoading ? t('sending') : t('submit')}
       </button>
 
-      <p className="text-center text-xs text-white/40 tracking-wide">{t('assurance')}</p>
+      <p className="text-center text-xs text-dxb-muted">{t('assurance')}</p>
     </form>
   )
 }

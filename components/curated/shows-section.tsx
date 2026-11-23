@@ -31,7 +31,7 @@ export function ShowsSection({ locale, events }: { locale: Locale; events: Curat
             <p className="mt-4 text-sm text-dxb-slate/80 leading-relaxed">{c.perleNote[locale]}</p>
           </div>
           <div className="lg:col-span-5 lg:text-end">
-            <PrefillButton formId={FORM_ID} values={{ event: LA_PERLE }} className="inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
+            <PrefillButton formId={FORM_ID} values={{ event: LA_PERLE }} className="inline-block px-8 py-4 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
               {c.request[locale]}
             </PrefillButton>
           </div>

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { whatsappLink } from '@/lib/site'
 import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
+import { BrandSymbol } from '@/components/brand'
 import type { Family } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
@@ -42,9 +43,14 @@ export function FormSection({ id, title, copy, note, whatsapp, backdrop, childre
             {whatsapp}
           </a>
         </div>
-        <div className="lg:col-span-3 relative bg-dxb-ink/60 backdrop-blur-sm dxb-cut dxb-cut-lg p-7 md:p-11">
-          <span aria-hidden="true" className="absolute top-0 inset-x-0 h-1.5 bg-dxb-orange" />
-          {children}
+        <div className="lg:col-span-3 dxb-lift">
+          <div className="relative bg-white text-dxb-ink dxb-cut dxb-cut-lg">
+            <div className="flex items-center justify-between gap-3 bg-dxb-sand px-7 md:px-11 py-3.5">
+              <span className="dxb-label text-[11px] text-dxb-navy inline-flex items-center"><BrandSymbol className="h-3.5 me-2 text-dxb-navy" />DXB TKTS</span>
+              <span className="dxb-label text-[11px] text-dxb-muted">{title}</span>
+            </div>
+            <div className="p-7 md:p-11">{children}</div>
+          </div>
         </div>
       </div>
     </section>

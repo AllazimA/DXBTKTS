@@ -156,7 +156,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
                 <div className="mt-4 flex flex-wrap items-center gap-4">
                   <Link
                     href={`/request?service=tickets&event=${encodeURIComponent(e.name.en)}${e.start ? `&date=${e.start}` : ''}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-dxb-orange text-dxb-ink text-xs font-bold hover:bg-dxb-orange-hover transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors"
                   >
                     {c.requestTickets[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                   </Link>
@@ -208,7 +208,7 @@ function EventEvening({ e, locale }: { e: CalendarEvent; locale: Locale }) {
       <div className="mt-3 flex flex-wrap items-center gap-4">
         <Link
           href={`/request?service=tickets&bundle=evening&event=${encodeURIComponent(e.name.en)}${e.start ? `&date=${e.start}` : ''}`}
-          className="inline-flex items-center gap-2 border border-dxb-ink px-5 py-2.5 text-xs font-medium font-mono uppercase tracking-[0.06em] text-dxb-ink hover:border-dxb-gold hover:text-dxb-gold"
+          className="inline-flex items-center gap-2 h-11 px-5 border-2 border-dxb-navy text-[15px] font-bold text-dxb-navy hover:bg-dxb-navy hover:text-white transition-colors"
         >
           {c.eveningCta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
         </Link>

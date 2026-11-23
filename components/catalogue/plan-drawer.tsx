@@ -140,7 +140,7 @@ export function PlanDrawer() {
               ) : priced.length === 0 ? (
                 <div className="p-8 text-center">
                   <p className="text-dxb-slate leading-relaxed">{tp('empty')}</p>
-                  <Link href="/experiences" onClick={() => setOpen(false)} className="inline-block mt-6 px-6 py-3 bg-dxb-orange text-dxb-ink text-sm font-semibold">
+                  <Link href="/experiences" onClick={() => setOpen(false)} className="inline-block mt-6 px-6 py-3 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold">
                     {tp('browse')}
                   </Link>
                 </div>
@@ -238,7 +238,7 @@ export function PlanDrawer() {
                       {tp('consent')}
                     </label>
                     {status === 'error' && <p className="text-sm text-dxb-red">{paying ? tp('payError') : tp('error')}</p>}
-                    <button type="submit" value="request" disabled={status === 'sending'} className="w-full px-6 py-3.5 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-60">
+                    <button type="submit" value="request" disabled={status === 'sending'} className="w-full px-6 py-3.5 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-60">
                       {status === 'sending' && !paying ? tp('sending') : tp('submit')}
                     </button>
                     {PAYMENTS && (

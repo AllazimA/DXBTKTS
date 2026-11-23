@@ -6,10 +6,11 @@ import { motion } from 'framer-motion'
 import type { Locale } from '@/i18n.config'
 import type { ServiceKind } from '@/lib/service-requests'
 import { FORM_FIELDS, formCopy as c, type FieldSpec, type Option } from '@/content/service-forms'
+import { BrandIcon } from '@/components/brand'
 
 const input =
-  'mt-2 w-full bg-white/[0.04] border border-white/15 px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold/70 focus:bg-white/[0.06] transition-colors'
-const labelCls = 'block text-xs font-medium tracking-[0.06em] font-mono uppercase text-white/60'
+  'mt-2 w-full h-12 bg-white border border-dxb-line px-4 text-[15px] text-dxb-ink placeholder:text-dxb-muted/60 focus:outline-none focus:border-dxb-cobalt focus:ring-2 focus:ring-dxb-cobalt/20 transition-colors'
+const labelCls = 'block dxb-label text-[11px] text-dxb-muted'
 
 type Props = {
   kind: ServiceKind
@@ -113,10 +114,10 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
 
   if (submitted) {
     return (
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="border border-dxb-gold/50 bg-white/[0.03] p-10 text-center" role="status">
-        <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{c.successEyebrow[locale]}</span>
-        <h3 className="font-display text-3xl md:text-4xl text-white mt-5 mb-4">{c.successTitle[locale]}</h3>
-        <p className="text-white/65 font-light leading-relaxed max-w-md mx-auto">{c.successCopy[locale]}</p>
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="p-8 md:p-10 text-center" role="status">
+        <span className="inline-flex items-center gap-2 dxb-label text-dxb-cobalt"><BrandIcon name="confirmed" className="w-5 h-5" />{c.successEyebrow[locale]}</span>
+        <h3 className="font-display text-3xl md:text-4xl text-dxb-navy mt-5 mb-4">{c.successTitle[locale]}</h3>
+        <p className="text-dxb-muted leading-relaxed max-w-md mx-auto">{c.successCopy[locale]}</p>
       </motion.div>
     )
   }
@@ -133,7 +134,7 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
           <div key={f.key} className={!compact && f.wide ? 'sm:col-span-2' : undefined}>
             <label htmlFor={fid(f.key)} className={labelCls}>
               {f.label[locale]}
-              {f.required && <span className="text-dxb-gold" aria-hidden="true"> *</span>}
+              {f.required && <span className="text-dxb-red" aria-hidden="true"> *</span>}
             </label>
             <Field f={f} id={fid(f.key)} locale={locale} suggest={f.key === suggestOn} />
           </div>
@@ -142,25 +143,25 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
 
       <div className={grid}>
         <div className={compact ? undefined : 'sm:col-span-2'}>
-          <label htmlFor={fid('name')} className={labelCls}>{c.name[locale]}<span className="text-dxb-gold" aria-hidden="true"> *</span></label>
+          <label htmlFor={fid('name')} className={labelCls}>{c.name[locale]}<span className="text-dxb-red" aria-hidden="true"> *</span></label>
           <input id={fid('name')} name="name" type="text" required autoComplete="name" className={input} />
         </div>
         <div>
-          <label htmlFor={fid('email')} className={labelCls}>{c.email[locale]}<span className="text-dxb-gold" aria-hidden="true"> *</span></label>
+          <label htmlFor={fid('email')} className={labelCls}>{c.email[locale]}<span className="text-dxb-red" aria-hidden="true"> *</span></label>
           <input id={fid('email')} name="email" type="email" required autoComplete="email" dir="ltr" className={input} />
         </div>
         <div>
-          <label htmlFor={fid('phone')} className={labelCls}>{c.phone[locale]}<span className="text-dxb-gold" aria-hidden="true"> *</span></label>
+          <label htmlFor={fid('phone')} className={labelCls}>{c.phone[locale]}<span className="text-dxb-red" aria-hidden="true"> *</span></label>
           <input id={fid('phone')} name="phone" type="tel" required autoComplete="tel" dir="ltr" className={input} />
         </div>
         <div className={compact ? undefined : 'sm:col-span-2'}>
           <label htmlFor={fid('message')} className={labelCls}>{c.message[locale]}</label>
-          <textarea id={fid('message')} name="message" rows={compact ? 3 : 4} className={input} />
+          <textarea id={fid('message')} name="message" rows={compact ? 3 : 4} className={`${input} !h-auto py-3`} />
         </div>
       </div>
 
       {requireTerms && (
-        <label className="flex items-start gap-3 text-sm text-white/75 leading-relaxed cursor-pointer">
+        <label className="flex items-start gap-3 text-sm text-dxb-ink/80 leading-relaxed cursor-pointer">
           <input type="checkbox" name="termsAccepted" required className="mt-1 h-4 w-4 accent-[#2F3DF0] shrink-0" />
           <span>{c.termsLabel[locale]}</span>
         </label>
@@ -171,11 +172,11 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold transition-all duration-300 hover:bg-dxb-orange-hover hover:shadow-[0_0_40px_rgba(176,141,63,0.4)] disabled:opacity-60"
+        className="w-full inline-flex items-center justify-center h-14 px-10 bg-dxb-orange text-dxb-ink text-base font-bold dxb-cut dxb-cut-sm transition-colors hover:bg-dxb-orange-hover disabled:opacity-60"
       >
         {isLoading ? c.sending[locale] : c.submit[locale]}
       </button>
-      <p className="text-center text-xs text-white/40 tracking-wide">{c.assurance[locale]}</p>
+      <p className="text-center text-xs text-dxb-muted">{c.assurance[locale]}</p>
     </form>
   )
 }
@@ -184,7 +185,7 @@ function Field({ f, id, locale, suggest }: { f: FieldSpec; id: string; locale: L
   const common = { id, name: f.key, required: f.required, placeholder: f.placeholder?.[locale] }
   switch (f.type) {
     case 'textarea':
-      return <textarea {...common} rows={3} className={input} />
+      return <textarea {...common} rows={3} className={`${input} !h-auto py-3`} />
     case 'select':
       return (
         <select {...common} className={`${input} [&>option]:text-dxb-ink`} defaultValue="">
@@ -206,9 +207,9 @@ function Field({ f, id, locale, suggest }: { f: FieldSpec; id: string; locale: L
         </select>
       )
     case 'date':
-      return <input {...common} type="date" min={new Date().toISOString().slice(0, 10)} className={`${input} [color-scheme:dark]`} />
+      return <input {...common} type="date" min={new Date().toISOString().slice(0, 10)} className={`${input} dxb-data`} />
     case 'time':
-      return <input {...common} type="time" step={900} className={`${input} [color-scheme:dark]`} />
+      return <input {...common} type="time" step={900} className={`${input} dxb-data`} />
     case 'number':
       return <input {...common} type="number" inputMode="numeric" min={f.min} max={f.max} className={input} />
     case 'url':

@@ -164,7 +164,7 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
               </li>
             ))}
           </ol>
-          <Link href="/request" className="mt-14 inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
+          <Link href="/request" className="mt-14 inline-block px-8 py-4 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
             {c.cta[locale]}
           </Link>
         </div>

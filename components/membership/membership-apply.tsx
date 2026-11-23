@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n.config'
 import { membership as m } from '@/content/membership'
 import { MembershipCard, type CardFinish } from '@/components/membership/membership-card'
 import { MembershipForm } from '@/components/forms/membership-form'
+import { BrandSymbol } from '@/components/brand'
 
 const OPTIONS: { id: CardFinish; name: string; arabicName: string; label: string }[] = [
   ...m.tiers.map(t => ({ id: t.id, name: t.name.en, arabicName: t.arabicName, label: m.cardLabel.en })),
@@ -53,8 +54,16 @@ export function MembershipApply({ locale, intro }: { locale: Locale; intro: Reac
           </AnimatePresence>
         </div>
       </div>
-      <div className="lg:col-span-7">
-        <MembershipForm locale={locale} tier={tier} onTierChange={setTier} />
+      <div className="lg:col-span-7 dxb-lift">
+        <div className="bg-white text-dxb-ink dxb-cut dxb-cut-lg">
+          <div className="flex items-center justify-between gap-3 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink px-7 md:px-10 py-3.5">
+            <span className="dxb-label text-[11px] inline-flex items-center"><BrandSymbol className="h-3.5 me-2" />DXB TKTS</span>
+            <span className="dxb-label text-[11px]">{card.name}</span>
+          </div>
+          <div className="p-7 md:p-10">
+            <MembershipForm locale={locale} tier={tier} onTierChange={setTier} />
+          </div>
+        </div>
       </div>
     </div>
   )

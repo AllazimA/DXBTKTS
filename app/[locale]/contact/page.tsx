@@ -1,12 +1,13 @@
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { EnquiryForm } from '@/components/forms/enquiry-form'
-import { Mail, Phone, MapPin } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { site, whatsappLink } from '@/lib/site'
 import { SocialLinks } from '@/components/layout/social-links'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
+import { BrandIcon, Perforation } from '@/components/brand'
+import { PageHero, heroPrimary } from '@/components/brand/page-hero'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'contact', '/contact')
@@ -16,114 +17,69 @@ export default async function Contact() {
   const t = await getTranslations('contact')
   const tx = await getTranslations('footerExtra')
 
+  const channels = [
+    { icon: 'mail' as const, label: t('email'), value: site.email, href: `mailto:${site.email}`, ltr: true },
+    { icon: 'phone' as const, label: t('phone'), value: site.whatsapp.display, href: `tel:${site.whatsapp.e164}`, ltr: true },
+    { icon: 'chat' as const, label: t('whatsapp'), value: t('whatsappCta'), href: whatsappLink(), external: true },
+    { icon: 'pickup' as const, label: t('location'), value: t('locationValue') },
+  ]
+
   return (
     <>
-      {/* Hero */}
-      <section className="py-20 bg-dxb-sand">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <span className="block text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase mb-4">
-            {t('eyebrow')}
-          </span>
-          <h1 className="font-display text-5xl md:text-6xl text-dxb-navy mb-6">
-            {t('title')}
-          </h1>
-          <p className="text-lg text-dxb-slate max-w-2xl mx-auto">{t('sub')}</p>
-        </div>
-      </section>
+      <PageHero label={t('eyebrow')} title={t('title')} lede={t('sub')}>
+        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={heroPrimary}>
+          <WhatsAppIcon className="w-5 h-5" />
+          {t('whatsappCta')}
+        </a>
+      </PageHero>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-dxb-sand">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Contact Info */}
-            <div>
-              <h3 className="font-display font-bold text-2xl text-dxb-navy mb-8">
-                {t('reachOut')}
-              </h3>
-
-              <div className="space-y-8">
-                {/* Email */}
-                <div className="flex gap-4">
-                  <Mail className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
-                      {t('email')}
-                    </p>
-                    <a
-                      href={`mailto:${site.email}`}
-                      className="text-dxb-slate hover:text-dxb-gold transition"
-                    >
-                      {site.email}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex gap-4">
-                  <Phone className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
-                      {t('phone')}
-                    </p>
-                    <a
-                      href={`tel:${site.whatsapp.e164}`}
-                      className="text-dxb-slate hover:text-dxb-gold transition"
-                      dir="ltr"
-                    >
-                      {site.whatsapp.display}
-                    </a>
-                  </div>
-                </div>
-
-                {/* WhatsApp */}
-                <div className="flex gap-4">
-                  <WhatsAppIcon className="w-6 h-6 text-[#25D366] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
-                      {t('whatsapp')}
-                    </p>
-                    <a
-                      href={whatsappLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-dxb-slate hover:text-dxb-gold transition"
-                    >
-                      {t('whatsappCta')}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex gap-4">
-                  <MapPin className="w-6 h-6 text-dxb-gold flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-1">
-                      {t('location')}
-                    </p>
-                    <p className="text-dxb-slate">{t('locationValue')}</p>
-                  </div>
-                </div>
+      <section className="py-14 md:py-20 bg-dxb-sand">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Contact pass */}
+          <aside className="lg:col-span-4 dxb-lift">
+            <div className="bg-white dxb-cut">
+              <div className="bg-dxb-navy text-white px-6 py-4">
+                <h2 className="text-xl font-extrabold tracking-[-0.015em]">{t('reachOut')}</h2>
               </div>
-
-              {/* Social */}
-              <div className="mt-10">
-                <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-3">{tx('follow')}</p>
-                <SocialLinks tone="dark" comingSoonLabel={tx('socialSoon')} />
-              </div>
-
-              {/* Response Time */}
-              <div className="mt-12 p-6 bg-white rounded">
-                <p className="text-xs font-medium tracking-[0.06em]st text-dxb-gold font-mono uppercase mb-2">
-                  {t('responseTime')}
-                </p>
-                <p className="text-sm text-dxb-slate">{t('responseCopy')}</p>
-              </div>
+              <ul className="divide-y divide-dxb-line">
+                {channels.map(c => {
+                  const body = (
+                    <>
+                      <span className="grid place-items-center w-10 h-10 shrink-0 bg-dxb-sand text-dxb-cobalt">
+                        <BrandIcon name={c.icon} className="w-5 h-5" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block dxb-label text-[10.5px] text-dxb-muted">{c.label}</span>
+                        <span className="block font-bold text-dxb-navy break-words" dir={c.ltr ? 'ltr' : undefined}>{c.value}</span>
+                      </span>
+                    </>
+                  )
+                  return (
+                    <li key={c.label}>
+                      {c.href ? (
+                        <a href={c.href} {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="flex items-center gap-4 px-6 py-4 hover:bg-dxb-sand/60 transition-colors">
+                          {body}
+                        </a>
+                      ) : (
+                        <div className="flex items-center gap-4 px-6 py-4">{body}</div>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
-
-            {/* Form */}
-            <div className="lg:col-span-2">
-              <EnquiryForm />
+            <div className="relative bg-white dxb-notch-top px-6 pt-5 pb-6">
+              <Perforation className="absolute top-0 inset-x-3 text-dxb-navy" />
+              <p className="dxb-label text-[10.5px] text-dxb-cobalt">{t('responseTime')}</p>
+              <p className="mt-1 text-sm text-dxb-ink/80">{t('responseCopy')}</p>
+              <p className="mt-5 dxb-label text-[10.5px] text-dxb-muted mb-3">{tx('follow')}</p>
+              <SocialLinks tone="dark" comingSoonLabel={tx('socialSoon')} />
             </div>
+          </aside>
+
+          {/* Form */}
+          <div className="lg:col-span-8">
+            <EnquiryForm />
           </div>
         </div>
       </section>

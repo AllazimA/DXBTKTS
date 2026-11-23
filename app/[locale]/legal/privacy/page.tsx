@@ -9,17 +9,17 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 
 export default function Privacy() {
   return (
-    <div className="py-16 bg-dxb-sand">
-      <div className="max-w-3xl mx-auto px-6">
+    <div className="py-12 md:py-16 bg-dxb-sand">
+      <div className="max-w-3xl mx-auto px-5 sm:px-6 bg-white dxb-cut dxb-cut-lg py-10 md:py-14 md:px-14">
         <Eyebrow className="mb-4">Legal</Eyebrow>
-        <h1 className="font-display text-5xl text-dxb-navy mb-12">
-          Privacy Policy
+        <h1 className="font-display text-4xl md:text-5xl text-dxb-navy mb-10 pb-6 border-b-2 border-dxb-navy">
+          Privacy policy
         </h1>
 
-        <div className="space-y-8 text-dxb-slate">
+        <div className="space-y-8 text-dxb-ink/80 leading-relaxed">
           <section>
-            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
-              Your Privacy Matters
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.015em] text-dxb-navy mb-3">
+              Your privacy matters
             </h2>
             <p>
               At DXB TKTS, your privacy is paramount. This Privacy Policy explains how we collect, use, and protect your personal information.
@@ -27,8 +27,8 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
-              Information We Collect
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.015em] text-dxb-navy mb-3">
+              Information we collect
             </h2>
             <p>
               When you contact us or make an enquiry, we collect information such as:
@@ -42,8 +42,8 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
-              How We Use Your Information
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.015em] text-dxb-navy mb-3">
+              How we use your information
             </h2>
             <p>
               We use your information to:
@@ -58,8 +58,8 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
-              Data Protection
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.015em] text-dxb-navy mb-3">
+              Data protection
             </h2>
             <p>
               We employ industry-standard security measures to protect your personal information from unauthorized access, alteration, and disclosure.
@@ -67,8 +67,8 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 className="font-display font-bold text-2xl text-dxb-navy mb-4">
-              Contact Us
+            <h2 className="text-xl md:text-2xl font-extrabold tracking-[-0.015em] text-dxb-navy mb-3">
+              Contact us
             </h2>
             <p>
               For privacy inquiries, please contact us at{' '}

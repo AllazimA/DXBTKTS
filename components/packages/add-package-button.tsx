@@ -31,7 +31,7 @@ export function AddPackageButton({ items, locale, multiDay }: { items: PackageIt
           plan.setOpen(true)
         }}
         disabled={added}
-        className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-80 transition-colors"
+        className="mt-5 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover disabled:opacity-80 transition-colors"
       >
         {added ? (
           <>

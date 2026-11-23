@@ -226,12 +226,12 @@ export default async function ProductPage({ params: { locale, category: category
             {/* Right: booking panel */}
             <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-none lg:pb-6 lg:-mx-3 lg:px-3" id="book">
               {product.quoteOnly && product.category === 'shopping' ? (
-                <div className="bg-dxb-navy text-white dxb-cut p-7 md:p-8">
-                  <p className="dxb-label text-dxb-orange">{sp.bespoke[locale]}</p>
-                  <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.02em]">{sp.title[locale]}</h2>
-                  <p className="mt-3 mb-7 text-white/70 text-sm leading-relaxed">{sp.copy[locale]}</p>
+                <div className="bg-white text-dxb-ink dxb-cut p-7 md:p-8">
+                  <p className="dxb-label text-dxb-cobalt">{sp.bespoke[locale]}</p>
+                  <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.02em] text-dxb-navy">{sp.title[locale]}</h2>
+                  <p className="mt-3 mb-7 text-dxb-muted text-sm leading-relaxed">{sp.copy[locale]}</p>
                   <ServiceRequestForm id="shopping-request" kind="shopping" compact hidden={{ product: product.name.en }} />
-                  <Link href="/sourcing" className="mt-6 block text-sm text-dxb-gold underline underline-offset-4">{sp.sourcingLink[locale]}</Link>
+                  <Link href="/sourcing" className="mt-6 block text-sm font-semibold text-dxb-cobalt underline underline-offset-4">{sp.sourcingLink[locale]}</Link>
                 </div>
               ) : product.quoteOnly ? (
                 <div className="bg-dxb-navy text-white dxb-cut p-8">

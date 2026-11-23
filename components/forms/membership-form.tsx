@@ -5,8 +5,8 @@ import type { Locale } from '@/i18n.config'
 import { membership as m } from '@/content/membership'
 import type { CardFinish } from '@/components/membership/membership-card'
 
-const field = 'mt-2 w-full bg-transparent border-b border-white/25 px-0 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-dxb-gold'
-const label = 'block text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-white/55'
+const field = 'mt-2 w-full h-12 bg-white border border-dxb-line px-4 text-[15px] normal-case tracking-normal font-sans text-dxb-ink focus:outline-none focus:border-dxb-cobalt focus:ring-2 focus:ring-dxb-cobalt/20'
+const label = 'block dxb-label text-[11px] text-dxb-muted'
 
 export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale; tier?: string; onTierChange?: (id: CardFinish) => void }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
@@ -41,7 +41,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
   }
 
   if (status === 'done') {
-    return <p className="font-display text-3xl text-white leading-snug">{f.success[locale]}</p>
+    return <p className="font-display text-3xl text-dxb-navy leading-snug">{f.success[locale]}</p>
   }
 
   return (
@@ -62,7 +62,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
         </label>
         <label className={label}>
           {f.residence[locale]}
-          <select name="residence" className={`${field} [&>option]:text-dxb-ink`}>
+          <select name="residence" className={field}>
             {f.residenceOptions[locale].map(o => (
               <option key={o}>{o}</option>
             ))}
@@ -81,7 +81,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
                 {...(tier ? { checked: tier === t.id, onChange: () => onTierChange?.(t.id) } : { defaultChecked: t.id === 'pearl' })}
                 className="peer sr-only"
               />
-              <span className="inline-block px-4 py-2 border border-white/25 text-sm text-white/80 peer-checked:border-dxb-gold peer-checked:text-dxb-gold transition-colors">
+              <span className="inline-flex items-center h-10 px-4 border-2 border-dxb-line text-sm font-semibold normal-case tracking-normal font-sans text-dxb-navy peer-checked:border-dxb-cobalt peer-checked:bg-dxb-cobalt peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-dxb-cobalt transition-colors">
                 {t.name[locale]}
               </span>
             </label>
@@ -90,14 +90,14 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
       </fieldset>
       <label className={label}>
         {f.message[locale]}
-        <textarea name="message" rows={3} className={field} />
+        <textarea name="message" rows={3} className={`${field} !h-auto py-3`} />
       </label>
-      <label className="flex items-start gap-3 text-sm text-white/60">
+      <label className="flex items-start gap-3 text-sm text-dxb-ink/75">
         <input type="checkbox" required className="mt-1 accent-[#2F3DF0]" />
         {f.consent[locale]}
       </label>
       {status === 'error' && <p className="text-sm text-dxb-red">{f.error[locale]}</p>}
-      <button type="submit" disabled={status === 'sending'} className="px-10 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-white transition-colors disabled:opacity-60">
+      <button type="submit" disabled={status === 'sending'} className="inline-flex items-center justify-center h-14 px-10 bg-dxb-orange text-dxb-ink text-base font-bold dxb-cut dxb-cut-sm hover:bg-dxb-orange-hover transition-colors disabled:opacity-60">
         {status === 'sending' ? f.sending[locale] : f.submit[locale]}
       </button>
     </form>

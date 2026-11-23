@@ -1,84 +1,69 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { RequestForm } from '@/components/forms/request-form'
-import { Clock, ShieldCheck, Sparkles } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { whatsappLink } from '@/lib/site'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
+import { BrandIcon, BrandSymbol, Tear } from '@/components/brand'
+import { heroSecondary } from '@/components/brand/page-hero'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'request', '/request')
 }
 
-const icons = [Clock, ShieldCheck, Sparkles]
+const ICONS = ['chat', 'secure', 'confirmed'] as const
 
 export default async function RequestPage() {
   const t = await getTranslations('request')
   const promises = t.raw('promises') as { title: string; copy: string }[]
   const accent = (chunks: React.ReactNode) => (
-    <span className="text-dxb-gold">{chunks}</span>
+    <span className="text-dxb-orange">{chunks}</span>
   )
 
   return (
-    <section className="relative bg-dxb-navy overflow-hidden">
-      {/* Ambient backdrop */}
-      <div className="absolute inset-0">
-        <Image
-          src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2400&auto=format&fit=crop"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-dxb-ink/80 via-dxb-ink/95 to-dxb-ink" />
-      </div>
+    <section className="relative bg-dxb-navy text-white overflow-hidden">
+      <div aria-hidden className="absolute inset-0 dxb-pattern-navy opacity-30" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-14 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left: pitch */}
-          <div className="lg:col-span-2 lg:sticky lg:top-32">
-            <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">
-              {t('eyebrow')}
-            </span>
-            <h1 className="font-display text-5xl md:text-6xl text-white mt-6 mb-8 leading-[1.08]">
-              {t.rich('title', { accent })}
-            </h1>
-            <p className="text-white/70 text-lg font-light leading-relaxed mb-12">{t('sub')}</p>
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <span className="dxb-label text-dxb-orange inline-flex items-center">DXB TKTS<Tear />{t('eyebrow')}</span>
+            <h1 className="mt-6 font-display text-[44px] leading-[0.98] sm:text-6xl tracking-[-0.035em]">{t.rich('title', { accent })}</h1>
+            <p className="mt-6 text-white/75 text-lg leading-relaxed">{t('sub')}</p>
 
-            <div className="space-y-8">
-              {promises.map((p, i) => {
-                const Icon = icons[i]
-                return (
-                  <div key={p.title} className="flex gap-5">
-                    <Icon className="w-6 h-6 text-dxb-gold shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-display font-bold text-2xl text-white mb-1">
-                        {p.title}
-                      </h3>
-                      <p className="text-white/55 text-sm font-light leading-relaxed">{p.copy}</p>
-                    </div>
+            <ul className="mt-10 border-t border-white/15">
+              {promises.map((p, i) => (
+                <li key={p.title} className="flex gap-4 py-5 border-b border-white/15">
+                  <span className="grid place-items-center w-10 h-10 shrink-0 bg-white/10 text-dxb-orange">
+                    <BrandIcon name={ICONS[i] ?? 'confirmed'} className="w-5 h-5" />
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-extrabold tracking-[-0.015em]">{p.title}</h3>
+                    <p className="mt-1 text-white/65 text-[15px] leading-relaxed">{p.copy}</p>
                   </div>
-                )
-              })}
-            </div>
+                </li>
+              ))}
+            </ul>
 
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-12 inline-flex items-center gap-3 text-sm font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold group"
-            >
-              <span className="h-px w-10 bg-dxb-orange transition-all duration-300 group-hover:w-16" />
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={`mt-10 ${heroSecondary}`}>
               <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
               {t('whatsappCta')}
             </a>
           </div>
 
-          {/* Right: form */}
-          <div className="lg:col-span-3 border border-white/10 bg-white/[0.02] backdrop-blur-sm p-8 md:p-12">
-            <RequestForm />
+          {/* Right: the request, as a boarding pass */}
+          <div className="lg:col-span-7 dxb-lift">
+            <div className="bg-white text-dxb-ink dxb-cut dxb-cut-lg">
+              <div className="flex items-center justify-between gap-3 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink px-7 md:px-10 py-3.5">
+                <span className="dxb-label text-[11px] inline-flex items-center"><BrandSymbol className="h-3.5 me-2" />DXB TKTS</span>
+                <span className="dxb-label text-[11px]">{t('eyebrow')}</span>
+              </div>
+              <div className="p-7 md:p-10">
+                <RequestForm />
+              </div>
+            </div>
           </div>
         </div>
       </div>

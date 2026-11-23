@@ -51,9 +51,9 @@ export function EnquiryForm() {
 
   if (submitted) {
     return (
-      <Card className="border-dxb-gold border-2">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-dxb-gold">{t('successTitle')}</CardTitle>
+          <CardTitle className="text-dxb-navy">{t('successTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-dxb-slate">{t('successCopy')}</p>
@@ -63,15 +63,16 @@ export function EnquiryForm() {
   }
 
   const selectStyles =
-    'mt-2 flex h-10 w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold'
+  'mt-2 flex h-12 w-full border border-dxb-line bg-white px-4 text-[15px] text-dxb-ink focus-visible:outline-none focus-visible:border-dxb-cobalt focus-visible:ring-2 focus-visible:ring-dxb-cobalt/25'
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t('title')}</CardTitle>
-        <CardDescription>{t('subtitle')}</CardDescription>
+    <div className="dxb-lift">
+    <Card className="dxb-cut-lg">
+      <CardHeader className="bg-dxb-orange border-0 px-7 md:px-10 py-5">
+        <CardTitle className="text-dxb-ink text-2xl font-extrabold">{t('title')}</CardTitle>
+        <CardDescription className="text-dxb-ink/75">{t('subtitle')}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-7 md:p-10 pt-7 md:pt-10">
         <form onSubmit={handleSubmit} className="relative space-y-6">
           <input
             type="text"
@@ -133,7 +134,7 @@ export function EnquiryForm() {
               name="message"
               placeholder={t('messagePlaceholder')}
               rows={4}
-              className="mt-2 flex w-full rounded border border-dxb-band bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
+              className="mt-2 flex w-full border border-dxb-line bg-white px-4 py-3 text-[15px] focus-visible:outline-none focus-visible:border-dxb-cobalt focus-visible:ring-2 focus-visible:ring-dxb-cobalt/25"
             />
           </div>
 
@@ -157,7 +158,7 @@ export function EnquiryForm() {
               id="privacy"
               name="privacy"
               required
-              className="mt-1 w-4 h-4 rounded border border-dxb-band bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dxb-gold"
+              className="mt-1 w-4 h-4 accent-[#2F3DF0]"
             />
             <Label htmlFor="privacy" className="mt-0">
               {t('privacy')}
@@ -171,5 +172,6 @@ export function EnquiryForm() {
         </form>
       </CardContent>
     </Card>
+    </div>
   )
 }

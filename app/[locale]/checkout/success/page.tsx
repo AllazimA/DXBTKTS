@@ -60,11 +60,11 @@ export default async function CheckoutSuccess({ params: { locale }, searchParams
           </>
         )}
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
+          <a href={whatsappLink(ref ? `Hello DXB TKTS, about my booking ${ref}` : undefined)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
             <WhatsAppIcon className="w-4 h-4" />
             {c.whatsapp[locale]}
           </a>
-          <Link href="/" className="px-8 py-4 border border-dxb-ink/20 text-dxb-ink text-sm font-medium tracking-[0.06em] font-mono uppercase hover:border-dxb-gold">
+          <Link href="/" className="inline-flex items-center justify-center h-12 px-7 border-2 border-dxb-navy text-dxb-navy font-bold hover:bg-dxb-navy hover:text-white transition-colors">
             {c.home[locale]}
           </Link>
         </div>

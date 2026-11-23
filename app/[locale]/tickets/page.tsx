@@ -42,7 +42,7 @@ export default async function WhatsOnPage({ params: { locale } }: { params: { lo
           <div className="lg:col-span-7">
             <h2 className="font-display text-4xl md:text-5xl text-dxb-navy">{c.planTitle[locale]}</h2>
             <p className="mt-4 text-dxb-slate text-lg leading-relaxed">{c.planCopy[locale]}</p>
-            <Link href="/request" className="mt-8 inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
+            <Link href="/request" className="mt-8 inline-block px-8 py-4 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover transition-colors">
               {c.planCta[locale]}
             </Link>
           </div>

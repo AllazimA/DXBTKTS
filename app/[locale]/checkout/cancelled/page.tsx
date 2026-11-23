@@ -22,7 +22,7 @@ export default function CheckoutCancelled({ params: { locale } }: { params: { lo
       <div className="max-w-2xl mx-auto px-6 py-28 md:py-36 text-center">
         <h1 className="font-display text-4xl md:text-5xl text-dxb-navy">{c.title[locale]}</h1>
         <p className="mt-6 text-lg text-dxb-slate leading-relaxed">{c.copy[locale]}</p>
-        <Link href="/experiences" className="mt-10 inline-block px-8 py-4 bg-dxb-orange text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
+        <Link href="/experiences" className="mt-10 inline-block px-8 py-4 bg-dxb-orange dxb-cut dxb-cut-sm text-dxb-ink text-sm font-bold hover:bg-dxb-orange-hover">
           {c.back[locale]}
         </Link>
       </div>
