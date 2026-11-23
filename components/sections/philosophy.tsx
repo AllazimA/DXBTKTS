@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { Unveil } from '@/components/brand/unveil'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { aiImage } from '@/lib/images'
@@ -17,9 +18,11 @@ export function Philosophy() {
     <section className="py-20 md:py-28 bg-dxb-sand overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <Reveal className="lg:col-span-6 relative pb-14 lg:pb-0">
-          <div className="relative aspect-[4/5] overflow-hidden dxb-cut dxb-cut-lg bg-dxb-navy">
-            <Image src={IMG} alt={t('imageAlt')} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-          </div>
+          <Unveil className="relative aspect-[4/5] overflow-hidden dxb-cut dxb-cut-lg bg-dxb-navy">
+            <div className="absolute inset-0">
+              <Image src={IMG} alt={t('imageAlt')} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+            </div>
+          </Unveil>
           {/* Quote as a navy ticket stub */}
           <div className="absolute bottom-0 lg:-bottom-8 end-4 lg:-end-8 max-w-[19rem] bg-dxb-navy text-white dxb-cut p-6 md:p-7">
             <BrandSymbol className="h-6 text-dxb-orange" />

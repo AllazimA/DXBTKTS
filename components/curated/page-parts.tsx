@@ -4,6 +4,7 @@ import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { whatsappLink } from '@/lib/site'
 import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
 import { BrandSymbol } from '@/components/brand'
+import { Unveil } from '@/components/brand/unveil'
 import type { Family } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
@@ -66,13 +67,18 @@ export function MoodStrip({ items }: { items: { src: string | null; alt: string;
     <section className="bg-dxb-sand">
       <div className="max-w-6xl mx-auto px-6 pt-20 md:pt-28">
         <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-          {shown.map(i => (
-            <li key={i.src}>
-              <figure>
-                <div className="relative aspect-[4/5] overflow-hidden bg-white">
-                  <Image src={i.src!} alt={i.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 33vw, 100vw" className="object-cover transition-transform duration-700 hover:scale-[1.03]" />
-                </div>
-                <figcaption className="mt-4 font-display font-bold text-xl text-dxb-navy">{i.caption}</figcaption>
+          {shown.map((i, n) => (
+            <li key={i.src} className={n === 1 ? 'sm:mt-16' : ''}>
+              <figure className="group">
+                <Unveil delay={n * 140} className="relative aspect-[4/5] overflow-hidden bg-dxb-navy">
+                  <div className="absolute inset-0">
+                    <Image src={i.src!} alt={i.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 33vw, 100vw" className="object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]" />
+                  </div>
+                </Unveil>
+                <figcaption className="mt-5 flex items-baseline gap-3 text-dxb-navy">
+                  <span className="dxb-label text-[11px] text-dxb-cobalt" dir="ltr">{String(n + 1).padStart(2, '0')}</span>
+                  <span className="font-display text-xl md:text-2xl tracking-[-0.02em]">{i.caption}</span>
+                </figcaption>
               </figure>
             </li>
           ))}

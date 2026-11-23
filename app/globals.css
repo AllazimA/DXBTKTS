@@ -325,3 +325,37 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* Curtain reveal for photographs (components/brand/unveil.tsx). */
+.dxb-unveil {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.3s cubic-bezier(0.77, 0, 0.18, 1) var(--unveil-delay, 0ms);
+}
+.dxb-unveil > * {
+  transform: scale(1.12);
+  transition: transform 1.9s cubic-bezier(0.16, 1, 0.3, 1) var(--unveil-delay, 0ms);
+}
+.dxb-unveil.is-shown {
+  clip-path: inset(0 0 0 0);
+}
+.dxb-unveil.is-shown > * {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dxb-unveil,
+  .dxb-unveil > * {
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Page arrival: a quiet fade on every navigation (opacity only, so sticky and
+   fixed elements inside the page keep working). */
+@keyframes dxb-page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.dxb-page-in {
+  animation: dxb-page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

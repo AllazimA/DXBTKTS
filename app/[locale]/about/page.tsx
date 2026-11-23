@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import { Unveil } from '@/components/brand/unveil'
 import Link from 'next/link'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
@@ -34,9 +35,11 @@ export default function About({ params: { locale } }: { params: { locale: Locale
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden bg-dxb-navy dxb-cut dxb-cut-lg">
-              <Image src={STORY_IMAGE.src ?? ''} alt={STORY_IMAGE.alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
-            </div>
+            <Unveil className="relative aspect-[4/5] overflow-hidden bg-dxb-navy dxb-cut dxb-cut-lg">
+              <div className="absolute inset-0">
+                <Image src={STORY_IMAGE.src ?? ''} alt={STORY_IMAGE.alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
+              </div>
+            </Unveil>
           </div>
         </div>
       </section>

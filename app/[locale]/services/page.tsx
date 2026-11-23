@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Unveil } from '@/components/brand/unveil'
 import { ArrowRight, MapPin, Clock } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
@@ -58,19 +59,24 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
 
       {/* Services — alternating editorial rows */}
       <section className="bg-dxb-sand">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 space-y-20 md:space-y-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 py-20 md:py-32 space-y-24 md:space-y-40">
           {c.services.map((s, i) => {
             const flip = i % 2 === 1
             return (
-              <article key={s.id} id={s.id} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center scroll-mt-32">
-                <div className={`md:col-span-6 ${flip ? 'md:order-2' : ''}`}>
-                  <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                    <Picture image={SERVICE_IMAGES[s.id]} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-[1.03]" />
-                  </div>
+              <article key={s.id} id={s.id} className="group/row grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center scroll-mt-32">
+                <div className={`md:col-span-7 ${flip ? 'md:order-2' : ''}`}>
+                  <Unveil className="relative aspect-[4/3] md:aspect-[5/4] overflow-hidden bg-dxb-navy dxb-cut">
+                    <div className="absolute inset-0">
+                      <Picture image={SERVICE_IMAGES[s.id]} sizes="(max-width: 768px) 100vw, 58vw" className="object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/row:scale-[1.05]" />
+                    </div>
+                  </Unveil>
                 </div>
-                <div className={`md:col-span-6 ${flip ? 'md:order-1' : ''}`}>
-                  <span className="font-display font-bold text-2xl text-dxb-gold" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
-                  <h2 className="mt-2 font-display text-4xl md:text-5xl text-dxb-navy leading-tight">{s.title[locale]}</h2>
+                <div className={`md:col-span-5 ${flip ? 'md:order-1' : ''}`}>
+                  <span className="flex items-center gap-4 dxb-label text-[11px] text-dxb-cobalt" dir="ltr">
+                    {String(i + 1).padStart(2, '0')} / {String(c.services.length).padStart(2, '0')}
+                    <span aria-hidden className="h-px w-12 bg-dxb-cobalt/40 transition-all duration-700 group-hover/row:w-24" />
+                  </span>
+                  <h2 className="mt-5 font-display text-[40px] md:text-[56px] text-dxb-navy leading-[0.98] tracking-[-0.035em]">{s.title[locale]}</h2>
                   <p className="mt-5 text-lg leading-relaxed text-dxb-ink/85">{s.line[locale]}</p>
 
                   {servicesDubai[s.id] && (
