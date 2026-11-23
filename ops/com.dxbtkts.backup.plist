@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.dxbtkts.backup</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/ahmeda/Cowork Playground/DXBTKTS/scripts/daily-backup.sh</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/ahmeda/Cowork Playground/DXBTKTS</string>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>21</integer>
+    <key>Minute</key>
+    <integer>45</integer>
+  </dict>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/Users/ahmeda/Library/Logs/DXBTKTS/backup.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/ahmeda/Library/Logs/DXBTKTS/backup.log</string>
+</dict>
+</plist>

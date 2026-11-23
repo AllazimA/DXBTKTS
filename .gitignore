@@ -26,3 +26,6 @@ assets-originals/video/
 # CRM outbox queue (customer data)
 data/crm-outbox/
 data/published/
+
+# daily data backups (scripts/daily-backup.sh)
+backups/
