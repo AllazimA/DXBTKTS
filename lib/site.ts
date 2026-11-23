@@ -25,6 +25,8 @@ export const site = {
   films: {
     diningTerrace: { mp4: '/videos/dining-terrace.mp4', mobile: '/videos/dining-terrace-mobile.mp4', poster: '/images/film-dining-terrace-poster.webp' },
     nightlifeLounge: { mp4: '/videos/nightlife-lounge.mp4', mobile: '/videos/nightlife-lounge-mobile.mp4', poster: '/images/film-nightlife-lounge-poster.webp' },
+    // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
+    membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },
   /** Pre-launch announcement bar. Set enabled: false on launch day. */
   comingSoon: { enabled: true },

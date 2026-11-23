@@ -10,6 +10,7 @@ import { heroImage, aiImage } from '@/lib/images'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { BrandIcon, BrandSymbol, Perforation, Tear } from '@/components/brand'
 import { categories } from '@/data/catalogue'
+import { FilmVideo, useFilmsAllowed, type Film } from '@/components/ui/background-film'
 import type { Locale } from '@/i18n.config'
 
 /**
@@ -26,22 +27,10 @@ type Chapter = {
 
 const DURATION = 8000
 
-/** Films play only when motion is allowed and data saving is off. */
-function useMotionOk() {
-  const [ok, setOk] = useState(false)
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
-    const slow = conn?.saveData || (conn?.effectiveType && /2g|3g/.test(conn.effectiveType))
-    setOk(!reduce && !slow)
-  }, [])
-  return ok
-}
-
 export function Hero() {
   const t = useTranslations('hero')
   const locale = useLocale() as Locale
-  const motionOk = useMotionOk()
+  const motionOk = useFilmsAllowed()
   const hero = heroImage()
 
   const chapters: Chapter[] = [
@@ -185,20 +174,8 @@ export function Hero() {
   )
 }
 
-function HeroFilm({ film, playing }: { film: { mp4: string; mobile?: string; poster?: string }; playing: boolean }) {
-  const ref = useRef<HTMLVideoElement>(null)
-  useEffect(() => {
-    const v = ref.current
-    if (!v) return
-    if (playing) v.play().catch(() => {})
-    else v.pause()
-  }, [playing])
-  return (
-    <video ref={ref} className="absolute inset-0 h-full w-full object-cover" muted loop playsInline preload="auto" poster={film.poster} aria-hidden="true">
-      {film.mobile && <source src={film.mobile} media="(max-width: 767px)" type="video/mp4" />}
-      <source src={film.mp4} type="video/mp4" />
-    </video>
-  )
+function HeroFilm({ film, playing }: { film: Film; playing: boolean }) {
+  return <FilmVideo film={film} playing={playing} />
 }
 
 /**

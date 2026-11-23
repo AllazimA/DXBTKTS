@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { whatsappLink } from '@/lib/site'
 import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
@@ -78,5 +79,58 @@ export function MoodStrip({ items }: { items: { src: string | null; alt: string;
         </ul>
       </div>
     </section>
+  )
+}
+
+const DINING_SECTIONS = [
+  {
+    key: 'dining',
+    href: '/dining',
+    img: '/images/ai/dining-hero.webp',
+    title: { en: 'Restaurants', fr: 'Restaurants', ar: 'المطاعم' },
+    line: { en: 'The tables we recommend', fr: 'Les tables que nous recommandons', ar: 'الطاولات التي نوصي بها' },
+  },
+  {
+    key: 'nightlife',
+    href: '/nightlife',
+    img: '/images/ai/nightlife-hero.webp',
+    title: { en: 'Nightlife', fr: 'Vie nocturne', ar: 'الحياة الليلية' },
+    line: { en: 'Lounges, rooftops and late nights', fr: 'Lounges, rooftops et nuits tardives', ar: 'صالات وأسطح وسهرات متأخرة' },
+  },
+] as const
+
+/**
+ * The two sections of Dining & Nightlife, shown straight under the opening of
+ * either page, so the header link needs no dropdown.
+ */
+export function DiningSections({ current, locale }: { current: 'dining' | 'nightlife'; locale: Locale }) {
+  const l = (locale in DINING_SECTIONS[0].title ? locale : 'en') as 'en' | 'fr' | 'ar'
+  return (
+    <nav aria-label={locale === 'ar' ? 'المطاعم والحياة الليلية' : locale === 'fr' ? 'Restaurants et vie nocturne' : 'Dining & nightlife'} className="bg-dxb-ink text-white border-t border-white/10">
+      <ol className="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-2">
+        {DINING_SECTIONS.map((s, i) => {
+          const active = s.key === current
+          return (
+            <li key={s.key} className={i === 0 ? 'border-e border-white/10' : ''}>
+              <Link
+                href={s.href}
+                aria-current={active ? 'page' : undefined}
+                className={`group relative flex items-center gap-4 md:gap-6 py-5 md:py-7 ${i === 0 ? 'pe-4 md:pe-8' : 'ps-4 md:ps-8'} transition-colors ${active ? 'text-white' : 'text-white/55 hover:text-white'}`}
+              >
+                <span className={`absolute top-0 start-0 h-[2px] bg-dxb-orange transition-all duration-500 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                <span className="relative hidden sm:block shrink-0 w-20 h-14 md:w-28 md:h-[72px] overflow-hidden">
+                  <Image src={s.img} alt="" fill sizes="112px" className={`object-cover transition-all duration-700 group-hover:scale-110 ${active ? '' : 'grayscale-[60%] opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`} />
+                </span>
+                <span className="min-w-0">
+                  <span className="dxb-label text-[11px] opacity-70" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="block mt-0.5 text-xl md:text-[28px] font-extrabold tracking-[-0.02em] leading-tight">{s.title[l]}</span>
+                  <span className="hidden md:block text-sm text-white/55">{s.line[l]}</span>
+                </span>
+              </Link>
+            </li>
+          )
+        })}
+      </ol>
+    </nav>
   )
 }

@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { locales, localeMeta, type Locale } from '@/i18n.config'
 import { ChevronDown, Menu, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PlanButton } from '@/components/catalogue/plan-drawer'
 import { Flag } from '@/components/ui/flag'
-import { BrandIcon, Logo, TearText } from '@/components/brand'
+import { Logo, TearText } from '@/components/brand'
 
 export function Header() {
   const t = useTranslations('nav')
@@ -19,11 +19,9 @@ export function Header() {
   const [localeOpen, setLocaleOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [diningOpen, setDiningOpen] = useState(false)
   // Pages that open with a full-bleed film or photo mark it with [data-hero-overlay];
   // the header then floats transparent over it until the visitor scrolls.
   const [overlay, setOverlay] = useState(false)
-  const diningRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -40,18 +38,7 @@ export function Header() {
   useEffect(() => {
     setMenuOpen(false)
     setLocaleOpen(false)
-    setDiningOpen(false)
   }, [pathname])
-
-  // Close the Dining & Nightlife menu on an outside click or Escape
-  useEffect(() => {
-    if (!diningOpen) return
-    const onDown = (e: MouseEvent) => { if (!diningRef.current?.contains(e.target as Node)) setDiningOpen(false) }
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setDiningOpen(false) }
-    document.addEventListener('mousedown', onDown)
-    document.addEventListener('keydown', onKey)
-    return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey) }
-  }, [diningOpen])
 
   const getLocalizedPath = (newLocale: Locale) => {
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/'
@@ -109,42 +96,21 @@ export function Header() {
             {navLinks.map(link => {
               if (link.href === '/' || link.href === '/nightlife') return null
               if (link.href === '/dining') {
+                // Dining & Nightlife opens its page directly; Restaurants and Nightlife are sections on it.
                 const active = isActive('/dining') || isActive('/nightlife')
                 return (
-                  <div key="dining" ref={diningRef} className="relative" onMouseEnter={() => setDiningOpen(true)} onMouseLeave={() => setDiningOpen(false)}>
-                    <button
-                      type="button"
-                      onClick={() => setDiningOpen(o => !o)}
-                      aria-expanded={diningOpen}
-                      aria-haspopup="menu"
-                      className={`group relative flex items-center gap-1 py-2 text-[14px] 2xl:text-[15px] font-semibold whitespace-nowrap transition-colors ${
-                        active ? 'text-white' : 'text-white/75 hover:text-white'
-                      }`}
-                    >
-                      <span className="2xl:hidden">{t('diningShort')}</span>
-                      <span className="hidden 2xl:inline">{t('diningNightlife')}</span>
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${diningOpen ? 'rotate-180' : ''}`} />
-                      <span className={`absolute -bottom-1 start-0 h-[3px] bg-dxb-orange transition-all duration-300 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                    </button>
-                    {diningOpen && (
-                      <div role="menu" className="absolute top-full start-0 pt-3 min-w-[13rem]">
-                        <div className="bg-white text-dxb-ink dxb-cut dxb-cut-sm shadow-ticket-lg py-2">
-                          {[{ href: '/dining', label: t('restaurants'), icon: 'dining' as const }, { href: '/nightlife', label: t('nightlife'), icon: 'nightlife' as const }].map(item => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              role="menuitem"
-                              onClick={() => setDiningOpen(false)}
-                              className={`flex items-center gap-3 px-5 py-2.5 text-[15px] font-semibold transition-colors ${isActive(item.href) ? 'text-dxb-cobalt' : 'text-dxb-ink hover:bg-dxb-sand'}`}
-                            >
-                              <BrandIcon name={item.icon} className="w-[18px] h-[18px] text-dxb-muted" />
-                              {item.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    key="dining"
+                    href="/dining"
+                    aria-current={active ? 'page' : undefined}
+                    className={`group relative py-2 text-[14px] 2xl:text-[15px] font-semibold whitespace-nowrap transition-colors ${
+                      active ? 'text-white' : 'text-white/75 hover:text-white'
+                    }`}
+                  >
+                    <span className="2xl:hidden">{t('diningShort')}</span>
+                    <span className="hidden 2xl:inline">{t('diningNightlife')}</span>
+                    <span className={`absolute -bottom-1 start-0 h-[3px] bg-dxb-orange transition-all duration-300 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  </Link>
                 )
               }
               const active = isActive(link.href)

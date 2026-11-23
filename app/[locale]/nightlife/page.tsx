@@ -4,7 +4,7 @@ import { pageMetadata } from '@/lib/metadata'
 import { aiImage } from '@/lib/images'
 import { getNightlife } from '@/lib/curated'
 import { nightlifePage as c, moodCaptions as mc } from '@/content/curated-pages'
-import { CuratedHero, FormSection, MoodStrip } from '@/components/curated/page-parts'
+import { CuratedHero, DiningSections, FormSection, MoodStrip } from '@/components/curated/page-parts'
 import { VenueList } from '@/components/curated/venue-list'
 import { ServiceRequestForm } from '@/components/forms/service-request-form'
 import { site } from '@/lib/site'
@@ -29,6 +29,7 @@ export default async function NightlifePage({ params: { locale } }: { params: { 
   return (
     <>
       <CuratedHero image={HERO} film={site.films.nightlifeLounge} family="events" locale={locale} eyebrow={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} cta={c.request[locale]} ctaHref={`#${FORM_ID}`} />
+      <DiningSections current="nightlife" locale={locale} />
 
       <MoodStrip items={STRIP.map(s => ({ src: s.img.src, alt: s.img.alt, caption: s.caption[locale] }))} />
 

@@ -2,15 +2,14 @@ import type { Metadata } from 'next'
 import { Check } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
-import { aiImage } from '@/lib/images'
 import { membership as m } from '@/content/membership'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { MembershipCard } from '@/components/membership/membership-card'
 import { MembershipApply } from '@/components/membership/membership-apply'
 import { BrandIcon } from '@/components/brand'
 import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
+import { site } from '@/lib/site'
 
-const BAND = aiImage('page-membership', 'eveningEvent', 'Members in a private lounge overlooking an evening concert in Dubai')
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'membership', '/membership')
@@ -21,9 +20,10 @@ export default function Membership({ params: { locale } }: { params: { locale: L
 
   return (
     <>
-      {/* Opening — full-bleed photograph, fanned cards beside the headline */}
+      {/* Opening — the membership film (a concierge presents the welcome box), fanned cards beside the headline */}
       <PageHero
-        image={BAND}
+        image={{ src: site.films.membershipBox.poster, alt: 'A concierge presents a DXB TKTS membership box to a guest' }}
+        film={site.films.membershipBox}
         label={m.eyebrow[locale]}
         title={m.title[locale]}
         lede={m.lede[locale]}
