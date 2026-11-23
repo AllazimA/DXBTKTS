@@ -86,25 +86,28 @@ export function buildAck(a: AckInput): { subject: string; html: string; text: st
     '', `${t.next}: ${t.next_body}`, `${t.whatsapp}: ${wa}`, '', t.signoff, t.team, site.url,
   ].filter((l, i, all) => l !== '' || all[i - 1] !== '').join('\n')
 
-  const row = (k: string, v: string) => `<tr><td style="padding:6px 0;color:#6B7280;font-size:13px;width:40%">${esc(k)}</td><td style="padding:6px 0;color:#0F1B2D;font-size:14px;font-weight:600">${esc(v)}</td></tr>`
-  const html = `<!doctype html><html lang="${lang}" dir="${rtl ? 'rtl' : 'ltr'}"><body style="margin:0;background:#F5F1EA;font-family:Helvetica,Arial,sans-serif">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F1EA;padding:24px 12px"><tr><td align="center">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#FFFFFF;border:1px solid #E7E0D3">
-<tr><td style="background:#0F1B2D;padding:22px 28px;color:#FFFFFF;font-family:Georgia,serif;font-size:22px;letter-spacing:.5px">DXB <span style="color:#B08D3F">TKTS</span><div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:3px;color:#B08D3F;margin-top:4px">PRIVATE CONCIERGE · DUBAI</div></td></tr>
-<tr><td style="padding:28px;color:#0F1B2D;font-size:15px;line-height:1.6;text-align:${rtl ? 'right' : 'left'}">
+  // Brand email layout (DXB TKTS Brand 10_Documents/email): navy header with the logo image, Night Ink text,
+  // light-orange button with Night Ink label, sand panels, Arial only. Images are served from /email on the website.
+  const img = (f: string) => `${site.url.replace(/\/$/, '')}/email/${f}`
+  const side = rtl ? 'right' : 'left'
+  const label = (k: string) => `<p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#5A5D66">${esc(k)}</p>`
+  const row = (k: string, v: string) => `<tr><td style="padding:8px 0;border-bottom:1px solid #E6E1D7;font-size:12px;color:#5A5D66;width:40%;text-transform:uppercase;letter-spacing:1px;text-align:${side}">${esc(k)}</td><td dir="ltr" style="padding:8px 0;border-bottom:1px solid #E6E1D7;font-size:14px;color:#0A0E2A;font-family:'Courier New',monospace;font-weight:bold;text-align:${side}">${esc(v)}</td></tr>`
+  const html = `<!doctype html><html lang="${lang}" dir="${rtl ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(subject)}</title></head><body style="margin:0;padding:0;background:#F2EEE6">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F2EEE6"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#FFFFFF;font-family:Arial,Helvetica,sans-serif;color:#0A0E2A">
+<tr><td style="background:#00354E;padding:22px 28px;text-align:${side}"><img src="${img('dxbtkts-email-logo-reverse.png')}" width="160" alt="DXB TKTS" style="display:inline-block;border:0;color:#FFFFFF;font-size:20px;font-weight:bold"></td></tr>
+<tr><td style="padding:32px 28px 8px;font-size:15px;line-height:1.55;text-align:${side}">
 <p style="margin:0 0 14px">${esc(fill(t.hello, { name: first }))}</p>
-<p style="margin:0 0 20px">${esc(t[`intro_${a.kind}`])}</p>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #E7E0D3;border-bottom:1px solid #E7E0D3;margin:0 0 20px">
-${ref ? row(t.reference, ref) : ''}${a.amount ? row(amountLabel, money(a.amount.value, a.amount.currency)) : ''}
-</table>
-${amountNote ? `<p style="margin:-12px 0 18px;color:#8A6A2B;font-size:12px">${esc(amountNote)}</p>` : ''}
-${a.lines.length ? `<p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6B7280">${esc(t.asked)}</p><ul style="margin:0 0 20px;padding-${rtl ? 'right' : 'left'}:18px">${a.lines.map(l => `<li style="margin:0 0 4px">${esc(l)}</li>`).join('')}</ul>` : ''}
-<p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6B7280">${esc(t.next)}</p>
-<p style="margin:0 0 22px">${esc(t.next_body)}</p>
-<p style="margin:0 0 26px"><a href="${esc(wa)}" style="display:inline-block;background:#B4532A;color:#FFFFFF;text-decoration:none;padding:12px 22px;font-size:13px;font-weight:600;letter-spacing:1px">${esc(t.whatsapp)}</a></p>
-<p style="margin:0">${esc(t.signoff)}<br>${esc(t.team)}</p>
-</td></tr>
-<tr><td style="padding:16px 28px;border-top:1px solid #E7E0D3;color:#6B7280;font-size:12px">${esc(site.url.replace(/^https?:\/\//, ''))} · WhatsApp ${esc(site.whatsapp.display ?? '')}</td></tr>
+<p style="margin:0">${esc(t[`intro_${a.kind}`])}</p></td></tr>
+${ref || a.amount ? `<tr><td style="padding:16px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${ref ? row(t.reference, ref) : ''}${a.amount ? row(amountLabel, money(a.amount.value, a.amount.currency)) : ''}</table>${amountNote ? `<p style="margin:8px 0 0;color:#5A5D66;font-size:12px;text-align:${side}">${esc(amountNote)}</p>` : ''}</td></tr>` : ''}
+${a.lines.length ? `<tr><td style="padding:12px 28px;font-size:14px;line-height:1.55;text-align:${side}">${label(t.asked)}<ul style="margin:0;padding-${side}:18px">${a.lines.map(l => `<li style="margin:0 0 4px">${esc(l)}</li>`).join('')}</ul></td></tr>` : ''}
+<tr><td style="padding:12px 28px;font-size:14px;line-height:1.55;text-align:${side}">${label(t.next)}<p style="margin:0">${esc(t.next_body)}</p></td></tr>
+<tr><td style="padding:12px 28px 8px;text-align:${side}"><a href="${esc(wa)}" style="display:inline-block;background:#FAA61C;color:#0A0E2A;font-weight:bold;font-size:15px;text-decoration:none;padding:14px 26px">${esc(t.whatsapp)}</a></td></tr>
+<tr><td style="padding:16px 28px 4px;font-size:14px;line-height:1.55;text-align:${side}">${esc(t.signoff)}<br>${esc(t.team)}</td></tr>
+<tr><td style="padding:24px 28px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F2EEE6"><tr>
+<td style="padding:16px;width:56px"><img src="${img('dxbtkts-email-symbol.png')}" width="48" alt="" style="display:block;border:0"></td>
+<td style="padding:16px;font-size:13px;line-height:1.5;text-align:${side}">WhatsApp <a href="${esc(wa)}" dir="ltr" style="color:#00354E;font-weight:bold">${esc(site.whatsapp.display ?? '')}</a></td></tr></table></td></tr>
+<tr><td style="background:#00354E;color:#B9CBD5;padding:18px 28px;font-size:11px;line-height:1.6;text-align:${side}"><a href="${esc(site.url)}" style="color:#FFFFFF">${esc(site.url.replace(/^https?:\/\//, ''))}</a></td></tr>
 </table></td></tr></table></body></html>`
   return { subject, html, text }
 }

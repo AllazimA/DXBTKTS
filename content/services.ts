@@ -17,9 +17,9 @@ export const servicesPage = {
     ar: 'كل ما لا يمكن\nحجزه بضغطة زر.',
   } as L,
   lede: {
-    en: 'Our experiences are ready to book. Our concierge is for the rest: the table that is full, the itinerary for six people with six opinions, the watch that is not in the window, the birthday that has to be unforgettable. Tell us once — we arrange it, confirm it in writing and stay with you until it is done.',
-    fr: 'Nos expériences se réservent en ligne. Notre conciergerie s’occupe du reste : la table complète, le programme pour six personnes aux six avis différents, la montre absente de la vitrine, l’anniversaire qui doit être inoubliable. Dites-le-nous une fois — nous organisons, confirmons par écrit et restons à vos côtés jusqu’au bout.',
-    ar: 'تجاربنا جاهزة للحجز. أما الكونسيرج فللباقي: الطاولة المحجوزة بالكامل، وبرنامج لستة أشخاص بستة آراء، والساعة غير المعروضة في الواجهة، وعيد الميلاد الذي يجب ألا يُنسى. أخبرنا مرة واحدة — ونحن نرتّب ونؤكد كتابياً ونبقى معك حتى النهاية.',
+    en: 'Our experiences are ready to book. Our concierge is for the rest: the table that is full, the itinerary for six people with six opinions, the watch that is not in the window, the birthday that has to be just right. Tell us once — we arrange it, confirm it in writing and stay with you until it is done.',
+    fr: 'Nos expériences se réservent en ligne. Notre conciergerie s’occupe du reste : la table complète, le programme pour six personnes aux six avis différents, la montre absente de la vitrine, l’anniversaire qui doit être réussi. Dites-le-nous une fois — nous organisons, confirmons par écrit et restons à vos côtés jusqu’au bout.',
+    ar: 'تجاربنا جاهزة للحجز. أما الكونسيرج فللباقي: الطاولة المحجوزة بالكامل، وبرنامج لستة أشخاص بستة آراء، والساعة غير المعروضة في الواجهة، وعيد الميلاد الذي يجب أن يكون كما تريده. أخبرنا مرة واحدة — ونحن نرتّب ونؤكد كتابياً ونبقى معك حتى النهاية.',
   } as L,
   services: [
     {

@@ -1,3 +1,4 @@
+import { shareImage } from '@/lib/metadata'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { absolute: title },
     description,
     alternates: alternatesFor(params.locale, `/experiences/${product.category}/${product.slug}`),
-    openGraph: { title, description, siteName: site.name, type: 'website' },
+    openGraph: { title, description, siteName: site.name, type: 'website', images: [shareImage] },
   }
 }
 

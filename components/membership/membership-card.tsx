@@ -1,298 +1,36 @@
 import { useId } from 'react'
 import { memberCardSample } from '@/content/membership'
-import { LOGO_SYMBOL, LOGO_WORDMARK } from '@/components/brand/logo-paths'
+import { LOGO_SYMBOL, LOGO_WORDMARK, SYMBOL_D } from '@/components/brand/logo-paths'
 
 /**
- * DXB TKTS membership card — drawn as one scalable SVG (no images), so it
- * stays sharp at any size and every card renders identically.
+ * DXB TKTS membership card, drawn as one scalable SVG to the approved brand card
+ * (DXB TKTS Brand, 11_Membership, Phase 5): a flat tier colour, the horizontal logo
+ * top left, the tier label top right, a ghost T symbol, the tier name in Archivo,
+ * member details in IBM Plex Mono and the perforation line at 79% of the width.
  *
- * Finishes
- *  oasis  — green, night-ink embossing
- *  pearl  — gulf cobalt, white embossing with a soft nacre sheen
- *  najm   — night ink, light-orange foil
- *  majlis — navy, engraved sand linework (company account)
+ *  oasis  — green, navy logo, Night Ink type
+ *  pearl  — gulf cobalt with a soft light, white logo and type
+ *  najm   — Night Ink with light-orange type, a fine orange frame and a star
+ *  majlis — navy with an orange edge (company account)
  *
- * Emblems tell each name: Oasis — a date palm over water; Pearl — an open
- * pearl shell; Najm — a five-pointed star; Majlis — traditional majlis seating.
- * No birds or animals appear on any card.
+ * Units are tenths of a millimetre on an 85.6 × 54 mm card. No birds or animals.
  */
 
 export type CardFinish = 'oasis' | 'pearl' | 'najm' | 'majlis'
 
-type Palette = {
-  base: string[] // card metal, left → right
-  ink: string[] // embossed lettering + emblem
-  hi: string // emboss highlight
-  lo: string // emboss shadow
-  muted: string
-  line: string // guilloche / engraving
-  brush: number // brushed-texture strength
-  engraved?: boolean // light/shadow reversed: cut into the card, not raised
-}
-
-// Tier colours from the approved palette (brand round 4): Oasis green,
-// Pearl gulf cobalt, Najm night ink with light-orange foil, Majlis navy.
-// Each base is a tonal sweep of one brand colour to give the card depth.
-const P: Record<CardFinish, Palette> = {
-  oasis: {
-    base: ['#4F9839', '#6DBA54', '#5FAD46', '#76C25D', '#4C9437', '#64B24B'],
-    ink: ['#0A0E2A', '#00354E', '#0A0E2A'],
-    hi: 'rgba(255,255,255,0.45)',
-    lo: 'rgba(10,14,42,0.45)',
-    muted: 'rgba(10,14,42,0.66)',
-    line: 'rgba(10,14,42,0.10)',
-    brush: 0.2,
-  },
-  pearl: {
-    base: ['#2733D8', '#3F4DFF', '#2F3DF0', '#4654FF', '#2430CF', '#3644F5'],
-    ink: ['#FFFFFF', '#F2EEE6', '#FFFFFF'],
-    hi: 'rgba(255,255,255,0.35)',
-    lo: 'rgba(10,14,42,0.6)',
-    muted: 'rgba(255,255,255,0.72)',
-    line: 'rgba(255,255,255,0.11)',
-    brush: 0.16,
-  },
-  najm: {
-    base: ['#06081C', '#121738', '#0A0E2A', '#171D44', '#05071A', '#0E1331'],
-    ink: ['#FFC766', '#FAA61C', '#D98A0A', '#FBB43F'],
-    hi: 'rgba(255,222,160,0.32)',
-    lo: 'rgba(0,0,0,0.9)',
-    muted: 'rgba(250,166,28,0.66)',
-    line: 'rgba(250,166,28,0.11)',
-    brush: 0.12,
-  },
-  majlis: {
-    base: ['#002A3E', '#00435F', '#00354E', '#004A68', '#002638', '#003B57'],
-    ink: ['#FFFFFF', '#F2EEE6', '#CFC8BA', '#F2EEE6'],
-    hi: 'rgba(255,255,255,0.22)',
-    lo: 'rgba(0,0,0,0.8)',
-    muted: 'rgba(242,238,230,0.66)',
-    line: 'rgba(242,238,230,0.13)',
-    brush: 0.1,
-    engraved: true,
-  },
-}
-
 const W = 856
 const H = 540
+const PERF = Math.round(W * 0.79)
 const DISPLAY = "var(--font-archivo), Archivo, 'Helvetica Neue', Arial, sans-serif"
 const MONO = "var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace"
 const ARABIC = "var(--font-arabic-sans), 'IBM Plex Sans Arabic', Tahoma, sans-serif"
 
-/** 2n-point star polygon. */
-function star(cx: number, cy: number, n: number, outer: number, inner: number, rot = -90) {
-  const pts: string[] = []
-  for (let i = 0; i < n * 2; i++) {
-    const r = i % 2 === 0 ? outer : inner
-    const a = ((rot + (i * 180) / n) * Math.PI) / 180
-    pts.push(`${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`)
-  }
-  return pts.join(' ')
-}
-
-/** Regular polygon. */
-function poly(cx: number, cy: number, n: number, r: number, rot = -90) {
-  return Array.from({ length: n }, (_, i) => {
-    const a = ((rot + (i * 360) / n) * Math.PI) / 180
-    return `${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`
-  }).join(' ')
-}
-
-/** Wave rings: r(θ) = base + amp·sin(k·θ + phase), drawn once and reused. */
-const GUILLOCHE: string[] = Array.from({ length: 22 }, (_, i) => {
-  const base = 170 + i * 7
-  const amp = 26
-  const phase = i * 0.42
-  const pts: string[] = []
-  for (let s = 0; s <= 720; s++) {
-    const th = (s / 720) * Math.PI * 2
-    const r = base + amp * Math.sin(14 * th + phase)
-    pts.push(`${(r * Math.cos(th)).toFixed(1)},${(r * Math.sin(th)).toFixed(1)}`)
-  }
-  return `M${pts.join('L')}Z`
-})
-
-/** Palm frond: a tapered, drooping leaf pointing along +x from the crown. */
-const FROND = 'M0 0 C 14 -13 40 -16 62 3 C 55 -1 48 0 42 4 C 36 -1 29 -1 23 4 C 17 0 9 -1 0 0 Z'
-
-/** Scalloped fan between two angles around a hinge (pearl shell lid). */
-function fan(cx: number, cy: number, r: number, from: number, to: number, ribs: number) {
-  const pt = (a: number, rr: number) => [cx + rr * Math.cos((a * Math.PI) / 180), cy + rr * Math.sin((a * Math.PI) / 180)]
-  const step = (to - from) / ribs
-  let d = `M${cx} ${cy} L${pt(from, r).map(n => n.toFixed(1)).join(' ')}`
-  const ribLines: string[] = []
-  for (let i = 0; i < ribs; i++) {
-    const a1 = from + step * (i + 1)
-    const mid = pt(from + step * (i + 0.5), r * 1.07)
-    const end = pt(a1, r)
-    d += ` Q${mid[0].toFixed(1)} ${mid[1].toFixed(1)} ${end[0].toFixed(1)} ${end[1].toFixed(1)}`
-    if (i < ribs - 1) ribLines.push(`M${cx} ${cy} L${end[0].toFixed(1)} ${end[1].toFixed(1)}`)
-  }
-  return { outline: `${d} Z`, ribs: ribLines.join(' ') }
-}
-
-/** Tier insignia, drawn around (0,0) within radius ~80. */
-function Emblem({ finish, ink, pearl }: { finish: CardFinish; ink: string; pearl: string }) {
-  const s = { fill: 'none', stroke: ink, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
-
-  if (finish === 'oasis') {
-    // Oasis: date palms over still water, inside a double ring.
-    const Palm = ({ x, y, k, lean }: { x: number; y: number; k: number; lean: number }) => (
-      <g transform={`translate(${x} ${y}) scale(${k})`}>
-        <path d={`M-3 0 C ${-1 + lean * 0.2} -24 ${lean * 0.7} -46 ${lean} -64 L ${lean + 6} -65 C ${lean * 0.7 + 8} -46 ${6 + lean * 0.2} -24 6 0 Z`} fill={ink} />
-        {[-10, -22, -34, -46, -56].map((yy, i) => (
-          <path key={yy} d={`M${-2 + (lean * (i + 1)) / 6} ${yy} l 8 -2`} stroke="rgba(0,0,0,0.35)" strokeWidth="1.2" />
-        ))}
-        {[-178, -152, -126, -100, -72, -42, -12].map(a => (
-          <path key={a} d={FROND} fill={ink} transform={`translate(${lean + 3} -66) rotate(${a})${a < -90 ? ' scale(1 -1)' : ''}`} />
-        ))}
-        {[[-2, -60], [5, -58], [1, -55], [8, -61]].map(([dx, dy]) => (
-          <circle key={`${dx}${dy}`} cx={lean + dx} cy={dy} r="2.6" fill={ink} />
-        ))}
-      </g>
-    )
-    return (
-      <g>
-        <circle r="78" {...s} strokeWidth="2.2" />
-        <circle r="70" {...s} strokeWidth="0.9" />
-        <Palm x={30} y={40} k={0.58} lean={6} />
-        <Palm x={-8} y={42} k={0.92} lean={-14} />
-        <path d="M-50 44 C -32 39 -14 48 2 43 S 34 39 50 44" {...s} strokeWidth="2" />
-        <path d="M-38 53 C -22 49 -8 56 8 52 S 28 49 38 53" {...s} strokeWidth="1.3" />
-      </g>
-    )
-  }
-
-  if (finish === 'pearl') {
-    // An open pearl shell: fluted lid raised behind, the lower valve cradling the pearl.
-    const lid = fan(0, 16, 60, -168, -12, 9)
-    return (
-      <g>
-        <circle r="78" {...s} strokeWidth="1" />
-        <path d={lid.outline} {...s} strokeWidth="2.6" />
-        <path d={lid.ribs} {...s} strokeWidth="1.1" />
-        <path d="M-58 16 C -52 52 52 52 58 16 C 34 30 -34 30 -58 16 Z" fill={ink} opacity="0.92" />
-        <path d="M-44 24 C -30 40 30 40 44 24" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
-        <circle cx="0" cy="13" r="15" fill={pearl} stroke={ink} strokeWidth="1.2" />
-        <circle cx="-5" cy="8" r="4" fill="#fff" opacity="0.8" />
-      </g>
-    )
-  }
-
-  if (finish === 'najm') {
-    // Najm: a faceted five-pointed star inside a compass ring.
-    const outer = 62
-    const inner = 25
-    const v = Array.from({ length: 10 }, (_, i) => {
-      const r = i % 2 === 0 ? outer : inner
-      const a = ((-90 + i * 36) * Math.PI) / 180
-      return [r * Math.cos(a), r * Math.sin(a)]
-    })
-    return (
-      <g>
-        <circle r="80" {...s} strokeWidth="1.2" />
-        <circle r="74" {...s} strokeWidth="2.4" />
-        {Array.from({ length: 60 }).map((_, i) => (
-          <line key={i} x1="0" y1={-74} x2="0" y2={i % 5 === 0 ? -64 : -69} stroke={ink} strokeWidth={i % 5 === 0 ? 1.6 : 0.8} transform={`rotate(${i * 6})`} />
-        ))}
-        {v.map((p, i) => {
-          const q = v[(i + 1) % 10]
-          return (
-            <g key={i}>
-              <polygon points={`0,0 ${p[0].toFixed(2)},${p[1].toFixed(2)} ${q[0].toFixed(2)},${q[1].toFixed(2)}`} fill={ink} />
-              {i % 2 === 1 && <polygon points={`0,0 ${p[0].toFixed(2)},${p[1].toFixed(2)} ${q[0].toFixed(2)},${q[1].toFixed(2)}`} fill="rgba(0,0,0,0.38)" />}
-            </g>
-          )
-        })}
-      </g>
-    )
-  }
-
-  // Majlis: traditional floor seating framed by an arch, a lantern above and a dallah on the tray.
-  return (
-    <g>
-      <path d="M-70 66 V -8 C -70 -46 -34 -66 0 -80 C 34 -66 70 -46 70 -8 V 66 Z" {...s} strokeWidth="2.4" />
-      <path d="M-62 66 V -6 C -62 -40 -30 -58 0 -71 C 30 -58 62 -40 62 -6 V 66" {...s} strokeWidth="0.9" />
-      {/* lantern */}
-      <line x1="0" y1="-71" x2="0" y2="-52" stroke={ink} strokeWidth="1.2" />
-      <path d="M-6 -52 H 6 L 9 -42 L 5 -32 H -5 L -9 -42 Z" fill={ink} />
-      {/* back cushions */}
-      {[-52, -17, 18].map(x => (
-        <rect key={x} x={x} y="-8" width="34" height="30" rx="7" {...s} strokeWidth="2" />
-      ))}
-      {/* seat with woven stripes */}
-      <rect x="-58" y="20" width="116" height="22" rx="3" fill={ink} />
-      {[25, 31, 37].map(y => (
-        <line key={y} x1="-56" y1={y} x2="56" y2={y} stroke="rgba(0,0,0,0.38)" strokeWidth="1.4" strokeDasharray="5 3" />
-      ))}
-      {/* arm bolsters */}
-      <rect x="-68" y="4" width="13" height="38" rx="6.5" fill={ink} />
-      <rect x="55" y="4" width="13" height="38" rx="6.5" fill={ink} />
-      {/* rug and tray with dallah */}
-      <line x1="-62" y1="58" x2="62" y2="58" stroke={ink} strokeWidth="1.6" />
-      <line x1="-50" y1="63" x2="50" y2="63" stroke={ink} strokeWidth="0.9" />
-      <rect x="-16" y="50" width="32" height="5" rx="1.5" fill={ink} />
-      <path d="M-3 50 C -7 46 -6 40 -2 38 L -2 35 L 2 35 L 2 38 C 6 40 7 46 3 50 Z M 3 42 C 8 40 11 37 13 34" fill={ink} stroke={ink} strokeWidth="1" />
-    </g>
-  )
-}
-
-/** Engraved background pattern per finish. */
-function Pattern({ finish, line }: { finish: CardFinish; line: string }) {
-  // Guilloche band — interlaced wave rings, the banknote-engraving look shared by all cards.
-  const cx = finish === 'majlis' ? 720 : 610
-  const cy = finish === 'majlis' ? 150 : 330
-  const rosette = (
-    <g transform={`translate(${cx} ${cy})`} fill="none" stroke={line} strokeWidth="0.75">
-      {GUILLOCHE.map((d, i) => (
-        <path key={i} d={d} />
-      ))}
-    </g>
-  )
-  if (finish === 'oasis') {
-    return (
-      <g>
-        {rosette}
-        {Array.from({ length: 9 }).map((_, i) => (
-          <path key={i} d={`M-20 ${430 + i * 14} C 180 ${390 + i * 14}, 420 ${470 + i * 14}, 880 ${410 + i * 14}`} fill="none" stroke={line} strokeWidth="1" />
-        ))}
-      </g>
-    )
-  }
-  if (finish === 'pearl') {
-    return (
-      <g>
-        {rosette}
-        {Array.from({ length: 10 }).map((_, i) => (
-          <circle key={i} cx={735} cy={120} r={95 + i * 26} fill="none" stroke={line} strokeWidth="0.8" />
-        ))}
-      </g>
-    )
-  }
-  if (finish === 'najm') {
-    return (
-      <g>
-        {rosette}
-        <g transform="translate(735 120)" stroke={line} strokeWidth="0.8">
-          {Array.from({ length: 72 }).map((_, i) => (
-            <line key={i} x1="0" y1="-110" x2="0" y2="-900" transform={`rotate(${i * 5})`} />
-          ))}
-        </g>
-      </g>
-    )
-  }
-  // majlis — a colonnade of engraved arches along the base
-  return (
-    <g>
-      {rosette}
-      {Array.from({ length: 13 }).map((_, i) => {
-        const x = -10 + i * 70
-        return (
-          <path key={i} d={`M ${x} 560 V 470 C ${x} 440 ${x + 22} 424 ${x + 32} 410 C ${x + 42} 424 ${x + 64} 440 ${x + 64} 470 V 560`} fill="none" stroke={line} strokeWidth="1.1" />
-        )
-      })}
-    </g>
-  )
+type Look = { fg: string; sub: string; symbol: string; wordmark: string; ghost: string; ghostOpacity: number; label: string }
+const LOOK: Record<CardFinish, Look> = {
+  oasis: { fg: '#0A0E2A', sub: '#0A0E2A', symbol: '#00354E', wordmark: '#00354E', ghost: '#00354E', ghostOpacity: 0.14, label: 'Annual membership' },
+  pearl: { fg: '#FFFFFF', sub: '#FFFFFF', symbol: '#FFFFFF', wordmark: '#FFFFFF', ghost: '#FFFFFF', ghostOpacity: 0.14, label: 'Household membership' },
+  najm: { fg: '#FAA61C', sub: '#FAA61C', symbol: '#FAA61C', wordmark: '#FFFFFF', ghost: '#FAA61C', ghostOpacity: 0.1, label: 'Private membership' },
+  majlis: { fg: '#FFFFFF', sub: '#FAA61C', symbol: '#FAA61C', wordmark: '#FFFFFF', ghost: '#FAA61C', ghostOpacity: 0.07, label: 'Company account' },
 }
 
 export function MembershipCard({
@@ -309,176 +47,82 @@ export function MembershipCard({
   finish: CardFinish
   name: string
   arabicName: string
-  label: string
+  /** Kept for callers; the card shows the tier's own label from the brand card. */
+  label?: string
   memberName?: string
   memberNumber?: string
   expiry?: string
   showMember?: boolean
   className?: string
 }) {
-  const p = P[finish]
+  const k = LOOK[finish]
   const uid = useId().replace(/[^a-zA-Z0-9]/g, '')
-  const id = (k: string) => `${k}${uid}`
-  const ref = (k: string) => `url(#${id(k)})`
-  const dark = finish === 'najm' || finish === 'majlis'
-  // Engraved = cut in (shadow top-left); embossed = raised (shadow bottom-right).
-  const d = p.engraved ? -1 : 1
+  const id = (s: string) => `${s}${uid}`
+  // Logo: 4.6 mm tall at 5.5 mm from the left and 5.2 mm from the top.
+  const logoScale = 46 / 170
+  // Ghost symbol: 44 mm tall, bleeding off the bottom right.
+  const gs = 440 / 76
+  const gx = W + 60 - 88 * gs
+  const gy = H + 100 - 440
+  const nameSize = name.length > 8 ? 60 : 81
+  const fields: [string, string][] = [['Member', memberName], ['No.', memberNumber], ['Valid', expiry]]
+  let fx = 55
 
   return (
     <div
       dir="ltr"
-      className={`relative w-full aspect-[1.586] rounded-[4.2%/6.6%] shadow-[0_2px_3px_rgba(0,0,0,0.18),0_34px_60px_-26px_rgba(0,0,0,0.65)] ${className}`}
+      className={`relative w-full aspect-[1.586] rounded-[3.7%/5.9%] shadow-[0_2px_3px_rgba(0,0,0,0.18),0_34px_60px_-26px_rgba(0,0,0,0.65)] ${className}`}
       role="img"
-      aria-label={`DXB TKTS ${name} membership card${showMember ? ` — ${memberName}` : ''}`}
+      aria-label={`DXB TKTS ${name} membership card${showMember ? `, ${memberName}` : ''}`}
     >
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full" aria-hidden="true">
         <defs>
-          <clipPath id={id('clip')}>
-            <rect width={W} height={H} rx="36" />
-          </clipPath>
-          <linearGradient id={id('base')} x1="0" y1="0" x2="1" y2="0.62">
-            {p.base.map((c, i) => (
-              <stop key={i} offset={i / (p.base.length - 1)} stopColor={c} />
-            ))}
-          </linearGradient>
-          <linearGradient id={id('ink')} x1="0" y1="0" x2="1" y2="1">
-            {p.ink.map((c, i) => (
-              <stop key={i} offset={i / (p.ink.length - 1)} stopColor={c} />
-            ))}
-          </linearGradient>
-          <linearGradient id={id('sheen')} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0.28" stopColor="#fff" stopOpacity="0" />
-            <stop offset="0.44" stopColor="#fff" stopOpacity={dark ? 0.1 : 0.42} />
-            <stop offset="0.52" stopColor="#fff" stopOpacity="0" />
-            <stop offset="0.7" stopColor="#fff" stopOpacity={dark ? 0.04 : 0.16} />
-            <stop offset="0.8" stopColor="#fff" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id={id('edge')} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#fff" stopOpacity={dark ? 0.28 : 0.85} />
-            <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
-            <stop offset="1" stopColor="#000" stopOpacity={dark ? 0.6 : 0.25} />
-          </linearGradient>
-          <radialGradient id={id('nacre')} cx="0.78" cy="0.2" r="0.75">
-            <stop offset="0" stopColor="#F7E8EE" stopOpacity="0.75" />
-            <stop offset="0.35" stopColor="#E2EEF1" stopOpacity="0.5" />
-            <stop offset="0.7" stopColor="#EFE8DA" stopOpacity="0.25" />
-            <stop offset="1" stopColor="#fff" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id={id('pearl')} cx="0.36" cy="0.32" r="0.75">
-            <stop offset="0" stopColor="#FFFFFF" />
-            <stop offset="0.45" stopColor="#EEE8EC" />
-            <stop offset="0.8" stopColor="#C9CDD6" />
-            <stop offset="1" stopColor="#9AA0AC" />
-          </radialGradient>
-          <linearGradient id={id('chip')} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#FFE3A8" />
-            <stop offset="0.35" stopColor="#FAA61C" />
-            <stop offset="0.6" stopColor="#FFD27A" />
-            <stop offset="1" stopColor="#C98410" />
-          </linearGradient>
-          {/* Brushed metal: noise stretched along the x axis */}
-          <filter id={id('brush')} filterUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
-            <feTurbulence type="fractalNoise" baseFrequency="0.0016 0.75" numOctaves="3" seed="7" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <filter id={id('grain')} filterUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          {/* Emboss / engrave: a highlight and a shadow either side of the shape */}
-          <filter id={id('emboss')} x="-20%" y="-30%" width="140%" height="160%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="0.7" result="b" />
-            <feOffset in="b" dx={1.8 * d} dy={1.8 * d} result="o1" />
-            <feFlood floodColor={p.lo} />
-            <feComposite in2="o1" operator="in" result="shadow" />
-            <feOffset in="b" dx={-1.2 * d} dy={-1.2 * d} result="o2" />
-            <feFlood floodColor={p.hi} />
-            <feComposite in2="o2" operator="in" result="light" />
-            <feMerge>
-              <feMergeNode in="shadow" />
-              <feMergeNode in="light" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+          <clipPath id={id('clip')}><rect width={W} height={H} rx="32" /></clipPath>
+          <radialGradient id={id('pearl')} cx="0.85" cy="0.1" r="0.9"><stop offset="0" stopColor="#FFFFFF" stopOpacity="0.26" /><stop offset="0.5" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient>
+          <linearGradient id={id('majlis')} x1="0" y1="0" x2="0.75" y2="1"><stop offset="0" stopColor="#0A4662" /><stop offset="0.55" stopColor="#00354E" /><stop offset="1" stopColor="#002536" /></linearGradient>
+          <radialGradient id={id('najm')} cx="0.18" cy="0" r="1.1"><stop offset="0" stopColor="#151B45" /><stop offset="0.6" stopColor="#0A0E2A" /></radialGradient>
+          <pattern id={id('brush')} width="7.5" height="10" patternUnits="userSpaceOnUse"><rect width="2.5" height="10" fill="#FFFFFF" opacity="0.02" /></pattern>
         </defs>
+        <g clipPath={`url(#${id('clip')})`}>
+          {finish === 'oasis' && <rect width={W} height={H} fill="#5FAD46" />}
+          {finish === 'pearl' && <><rect width={W} height={H} fill="#2F3DF0" /><rect width={W} height={H} fill={`url(#${id('pearl')})`} /></>}
+          {finish === 'majlis' && <><rect width={W} height={H} fill={`url(#${id('majlis')})`} /><rect width="14" height={H} fill="#FAA61C" /></>}
+          {finish === 'najm' && <><rect width={W} height={H} fill={`url(#${id('najm')})`} /><rect width={W} height={H} fill={`url(#${id('brush')})`} />
+            <rect x="24" y="24" width={W - 48} height={H - 48} rx="20" fill="none" stroke="#FAA61C" strokeOpacity="0.45" strokeWidth="2.5" /></>}
 
-        <g clipPath={ref('clip')}>
-          <rect width={W} height={H} fill={ref('base')} />
-          {finish === 'pearl' && <rect width={W} height={H} fill={ref('nacre')} />}
-          <rect width={W} height={H} filter={ref('brush')} opacity={p.brush} style={{ mixBlendMode: 'overlay' }} />
-          <rect width={W} height={H} filter={ref('grain')} opacity={dark ? 0.07 : 0.05} style={{ mixBlendMode: 'overlay' }} />
-          <Pattern finish={finish} line={p.line} />
-          <rect width={W} height={H} fill={ref('sheen')} />
+          {/* Ghost T symbol */}
+          <path d={SYMBOL_D} fill={k.ghost} opacity={k.ghostOpacity} transform={`translate(${gx - 6 * gs} ${gy - 14 * gs}) scale(${gs})`} />
 
-          {/* Brand */}
-          <g filter={ref('emboss')} fill={ref('ink')}>
-            {/* Outlined T-Ticket logo: never live type */}
-            <g transform="translate(64 62) scale(0.3) translate(0 35)">
-              <path transform={LOGO_SYMBOL.transform ?? undefined} d={LOGO_SYMBOL.d} />
-              <path transform={LOGO_WORDMARK.transform ?? undefined} d={LOGO_WORDMARK.d} />
-            </g>
-            <text x="66" y="142" fontFamily={MONO} fontSize="14" fontWeight="500" letterSpacing="2">
-              {label.toUpperCase()}
-            </text>
+          {/* Logo, outlined paths from the brand masters */}
+          <g transform={`translate(55 ${52 + 35 * logoScale}) scale(${logoScale})`}>
+            <path d={LOGO_SYMBOL.d} transform={LOGO_SYMBOL.transform} fill={k.symbol} />
+            <path d={LOGO_WORDMARK.d} transform={LOGO_WORDMARK.transform} fill={k.wordmark} />
           </g>
-
-          {/* Emblem */}
-          <g transform="translate(735 122)" filter={ref('emboss')}>
-            <Emblem finish={finish} ink={ref('ink')} pearl={ref('pearl')} />
-          </g>
-
-          {/* Chip */}
-          <g transform="translate(66 182)">
-            <rect width="104" height="80" rx="13" fill={ref('chip')} stroke="rgba(90,66,24,0.6)" strokeWidth="1.2" />
-            <g fill="none" stroke="rgba(92,68,26,0.55)" strokeWidth="1.4">
-              <path d="M0 27 H34 M0 53 H34 M70 27 H104 M70 53 H104" />
-              <path d="M34 0 V80 M70 0 V80" />
-              <rect x="34" y="20" width="36" height="40" rx="6" />
-            </g>
-            <rect width="104" height="80" rx="13" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="0.8" />
-          </g>
-          {/* Contactless */}
-          <g transform="translate(196 222)" fill="none" stroke={ref('ink')} strokeWidth="3" strokeLinecap="round" filter={ref('emboss')} opacity="0.85">
-            <path d="M0 -12 C6 -4 6 4 0 12" />
-            <path d="M10 -21 C20 -7 20 7 10 21" />
-            <path d="M20 -30 C34 -10 34 10 20 30" />
-          </g>
-
-          {showMember && (
-            <g filter={ref('emboss')} fill={ref('ink')}>
-              <text x="66" y="312" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
-                MEMBER NO.
-              </text>
-              <text x="66" y="356" fontFamily={MONO} fontSize="42" fontWeight="500" letterSpacing="6" style={{ fontVariantNumeric: 'tabular-nums' }}>
-                {memberNumber}
-              </text>
-              <text x="66" y="394" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
-                VALID
-              </text>
-              <text x="66" y="407" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
-                THRU
-              </text>
-              <text x="126" y="408" fontFamily={MONO} fontSize="26" fontWeight="500" letterSpacing="2" style={{ fontVariantNumeric: 'tabular-nums' }}>
-                {expiry}
-              </text>
-              <text x="66" y="482" fontFamily={DISPLAY} fontSize="28" fontWeight="700" letterSpacing="1.5">
-                {memberName.toUpperCase()}
-              </text>
-            </g>
-          )}
+          <text x={W - 55} y="76" textAnchor="end" fontFamily={MONO} fontSize="16" fontWeight="500" letterSpacing="1.3" fill={k.sub}>
+            {(k.label || label || '').toUpperCase()}
+          </text>
 
           {/* Tier */}
-          <g filter={ref('emboss')} fill={ref('ink')}>
-            <text x="790" y="420" textAnchor="start" fontFamily={ARABIC} fontSize="32" fontWeight="600" direction="rtl">
-              {arabicName}
-            </text>
-            <text x="792" y="484" textAnchor="end" fontFamily={DISPLAY} fontSize="58" fontWeight="800" letterSpacing="-1.5" style={{ fontStretch: '110%' }}>
-              {name}
-            </text>
-          </g>
+          <text x="55" y="262" fontFamily={DISPLAY} fontSize={nameSize} fontWeight="800" letterSpacing={-0.04 * nameSize} fill={k.fg} style={{ fontStretch: '122%' }}>
+            {name}
+            {finish === 'najm' && <tspan dx="6" dy={-nameSize * 0.5} fontSize={nameSize * 0.42} fill="#FAA61C">★</tspan>}
+          </text>
+          <text x="55" y="300" fontFamily={ARABIC} fontSize="25" fontWeight="700" fill={k.sub} textAnchor="start">{arabicName}</text>
 
-          {/* Bevelled edge */}
-          <rect x="1.5" y="1.5" width={W - 3} height={H - 3} rx="35" fill="none" stroke={ref('edge')} strokeWidth="3" />
+          {/* Member details */}
+          {showMember && fields.map(([l, v]) => {
+            const x = fx
+            fx += Math.max(l.length * 8, v.length * 11.8) + 60
+            return (
+              <g key={l} fontFamily={MONO} fill={k.fg}>
+                <text x={x} y="462" fontSize="12.7" fontWeight="500" letterSpacing="1" opacity="0.7">{l.toUpperCase()}</text>
+                <text x={x} y="490" fontSize="19.7" fontWeight="500" style={{ fontVariantNumeric: 'tabular-nums' }}>{v}</text>
+              </g>
+            )
+          })}
+
+          {/* Perforation at 79% */}
+          <line x1={PERF} y1="40" x2={PERF} y2={H - 40} stroke={k.fg} strokeOpacity="0.4" strokeWidth="3" strokeDasharray="9 7" />
         </g>
       </svg>
     </div>

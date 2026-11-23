@@ -24,6 +24,9 @@ export type PageKey =
   | 'nightlife'
   | 'sourcing'
 
+/** Brand share image (1200 × 630) for link previews on WhatsApp and social. */
+export const shareImage = { url: '/og/dxbtkts-share.jpg', width: 1200, height: 630, alt: 'DXB TKTS, private concierge in Dubai' }
+
 /** Localised title, description, canonical and hreflang for a page. */
 export async function pageMetadata(locale: Locale, key: PageKey, path: string): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: `meta.${key}` })
@@ -40,7 +43,8 @@ export async function pageMetadata(locale: Locale, key: PageKey, path: string): 
       siteName: site.name,
       locale: ogLocale[locale],
       type: 'website',
+      images: [shareImage],
     },
-    twitter: { card: 'summary_large_image', title, description },
+    twitter: { card: 'summary_large_image', title, description, images: [shareImage.url] },
   }
 }

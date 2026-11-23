@@ -147,7 +147,7 @@ export const shoppingProducts: Product[] = [
     ...base,
     slug: 'ultimate-dubai-shopping-day',
     image: 'privateVilla',
-    name: t('The Ultimate Dubai Shopping Day', 'La journée shopping ultime à Dubaï', 'يوم التسوق المثالي في دبي'),
+    name: t('A Full Dubai Shopping Day', 'Une journée complète de shopping à Dubaï', 'يوم تسوّق كامل في دبي'),
     tagline: t('A personal shopper and a car all day, from Fashion Avenue to the souks.', 'Un personal shopper et une voiture toute la journée, de la Fashion Avenue aux souks.', 'متسوق شخصي وسيارة طوال اليوم، من فاشن أفينيو إلى الأسواق.'),
     description: t(
       'Fashion Avenue in the morning, lunch, then a second destination chosen for you — Mall of the Emirates, Souk Madinat Jumeirah or the Gold Souk — with a driver for the day and everything delivered to your hotel. An evening at Burj Khalifa SKY 148 can end it.',

@@ -501,7 +501,7 @@ export const moreProducts: Product[] = [
     image: 'burjAlArabAerial',
     name: t('Seaplane Flight over Dubai', 'Vol en Hydravion au-dessus de Dubaï', 'رحلة بالطائرة المائية فوق دبي'),
     tagline: t('Take off from the water, land on the water, see everything in between.', 'Décoller de l’eau, amerrir, et tout voir entre les deux.', 'أقلع من الماء وانزل عليه، وشاهد كل ما بينهما.'),
-    description: t('A scenic seaplane flight with wide windows over the Palm, the World Islands, Burj Al Arab and Downtown — a different angle from the helicopter, and an unforgettable take-off.', 'Un vol panoramique en hydravion avec de larges hublots au-dessus de la Palm, The World, du Burj Al Arab et de Downtown — un autre regard que l’hélicoptère, et un décollage inoubliable.', 'رحلة بالطائرة المائية بنوافذ واسعة فوق النخلة وجزر العالم وبرج العرب ووسط المدينة — زاوية مختلفة عن الهليكوبتر وإقلاع لا يُنسى.'),
+    description: t('A scenic seaplane flight with wide windows over the Palm, the World Islands, Burj Al Arab and Downtown — a different angle from the helicopter, with a take-off from the water.', 'Un vol panoramique en hydravion avec de larges hublots au-dessus de la Palm, The World, du Burj Al Arab et de Downtown — un autre regard que l’hélicoptère, avec un décollage sur l’eau.', 'رحلة بالطائرة المائية بنوافذ واسعة فوق النخلة وجزر العالم وبرج العرب ووسط المدينة — زاوية مختلفة عن الهليكوبتر مع إقلاع من فوق الماء.'),
     duration: t('About 40 minutes in the air', 'Environ 40 minutes de vol', 'نحو 40 دقيقة في الجو'),
     groupSize: t('Per seat', 'Par siège', 'للمقعد'),
     priceType: 'per_person',

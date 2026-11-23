@@ -297,7 +297,7 @@ export function EventCalendar({ locale, initialToday }: { locale: Locale; initia
                 <span className={`absolute top-0 start-0 h-1 w-full ${CATEGORY_TONE[e.category]}`} aria-hidden="true" />
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.categories[e.category][locale]}</span>
-                  {isLive(e) && <span className="shrink-0 whitespace-nowrap bg-dxb-orange px-2 py-0.5 text-[10px] font-bold">{c.onNow[locale]}</span>}
+                  {isLive(e) && <span className="shrink-0 whitespace-nowrap bg-dxb-orange px-2 py-0.5 text-[10px] font-bold text-dxb-ink">{c.onNow[locale]}</span>}
                 </div>
                 <h3 className="mt-5 font-display text-3xl leading-tight group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
                 <p className="mt-3 text-sm text-white/70">{dateRange(locale, e)}</p>

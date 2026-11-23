@@ -1,3 +1,4 @@
+import { shareImage } from '@/lib/metadata'
 import type { Metadata, Viewport } from 'next'
 import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from 'next/font/google'
 import { site } from '@/lib/site'
@@ -52,6 +53,8 @@ export const metadata: Metadata = {
   description:
     'Private experiences and concierge in Dubai — yachts, desert, helicopter tours, chauffeurs and celebrations, arranged by a Dubai-based team.',
   applicationName: site.name,
+  openGraph: { siteName: site.name, type: 'website', images: [shareImage] },
+  twitter: { card: 'summary_large_image', images: [shareImage.url] },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },

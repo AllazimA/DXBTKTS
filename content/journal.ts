@@ -456,7 +456,7 @@ export const articles: Article[] = [
       { p: 'Abu Dhabi is the capital of the UAE and the largest of the seven emirates — greener, calmer and more spacious than Dubai, with some of the most remarkable cultural sites in the region. It is roughly ninety minutes from Dubai by road, which makes a day trip easy, provided you do not try to see everything.' },
       { h: 'Sheikh Zayed Grand Mosque' },
       { p: 'For most visitors this is the reason to come: a vast white mosque of marble, gold and reflecting pools, among the largest in the world, and open to visitors of all faiths. Entry is free; check the mosque’s official website for visiting hours and book a time online before you go. Visitors must dress modestly — women with hair, arms and legs covered, men in long trousers — and the mosque closes to visitors on Friday mornings for prayer.' },
-      { tip: 'Go in the late afternoon and stay until the lights come on: the mosque at dusk is unforgettable, and it is cooler too.' },
+      { tip: 'Go in the late afternoon and stay until the lights come on: the mosque is lit at dusk, and it is cooler too.' },
       { h: 'Louvre Abu Dhabi' },
       { p: 'On Saadiyat Island, Jean Nouvel’s museum sits under a great perforated dome that filters the sun into a “rain of light”. The collection tells the story of humanity across civilisations rather than by country, with loans from French museums alongside its own works. Allow two to three hours.' },
       { h: 'Qasr Al Watan' },

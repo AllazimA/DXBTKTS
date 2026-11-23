@@ -59,8 +59,8 @@
     "places": "Dubai|Abu Dhabi|UAE"
   },
   "whatWeDo": {
-    "anticipate": "Anticipate, don't react",
-    "anticipateDesc": "We study your preferences, your patterns, your world. Before you need something, we're ready.",
+    "anticipate": "Anticipate, do not react",
+    "anticipateDesc": "We study your preferences, your patterns, your world. Before you need something, we are ready.",
     "discretion": "Absolute confidentiality",
     "discretionDesc": "Your privacy is sacred. Every conversation, every transaction, every detail stays between us and you.",
     "access": "One team, start to finish",
@@ -277,7 +277,7 @@
     "eyebrow": "Plan with us",
     "title": "One message. <accent>Everything arranged.</accent>",
     "sub": "Tell us what you have in mind — a yacht at sunset, a desert evening, a celebration or a full day. Our team takes it from here.",
-    "whatsappCta": "Prefer WhatsApp? We're there too",
+    "whatsappCta": "Prefer WhatsApp? We are there too",
     "promises": [
       {
         "title": "A personal reply",

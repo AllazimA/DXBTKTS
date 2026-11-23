@@ -27,9 +27,9 @@ const allCategories: Category[] = [
     image: 'dubaiSkyline',
     name: { en: 'Signature & VIP', fr: 'Signature & VIP', ar: 'التجارب المميزة وكبار الشخصيات' },
     intro: {
-      en: 'Our most exclusive experiences — private, hosted and tailored to you. Every detail can be adapted.',
-      fr: 'Nos expériences les plus exclusives — privées, accompagnées et adaptées à vous. Chaque détail peut être personnalisé.',
-      ar: 'أكثر تجاربنا تميّزاً — خاصة ومُرافَقة ومصممة لك. يمكن تعديل كل تفصيل.',
+      en: 'Our signature collection: private, hosted and tailored to you. Every detail can be adapted.',
+      fr: 'Notre collection signature : privée, accompagnée et adaptée à vous. Chaque détail peut être personnalisé.',
+      ar: 'مجموعتنا المميّزة: خاصة ومُرافَقة ومصممة لك. يمكن تعديل كل تفصيل.',
     },
   },
   {

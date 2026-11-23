@@ -18,7 +18,7 @@ export default async function Corporate({ params }: { params: { locale: Locale }
   const t = await getTranslations('corporatePage')
   const uses = t.raw('uses') as { title: string; copy: string }[]
   const process = t.raw('process') as string[]
-  const accent = (chunks: React.ReactNode) => <span className="text-dxb-cobalt">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-gold">{chunks}</span>
 
   return (
     <>
