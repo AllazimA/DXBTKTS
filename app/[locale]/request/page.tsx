@@ -23,7 +23,6 @@ export default async function RequestPage() {
 
   return (
     <section className="relative bg-dxb-navy text-white overflow-hidden">
-      <div aria-hidden className="absolute inset-0 dxb-pattern-navy opacity-30" />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-14 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

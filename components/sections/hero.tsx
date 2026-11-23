@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { site, whatsappLink, localePath } from '@/lib/site'
 import { heroImage, aiImage } from '@/lib/images'
@@ -37,14 +36,6 @@ function useHeroVideo() {
   return enabled
 }
 
-function rise(delay: number) {
-  return {
-    initial: { opacity: 0, y: 18 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
-  } as const
-}
-
 export function Hero() {
   const t = useTranslations('hero')
   const locale = useLocale() as Locale
@@ -57,7 +48,7 @@ export function Hero() {
     <section className="relative bg-dxb-sand overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 pt-6 md:pt-8 pb-14 md:pb-20">
         {/* Family chips: the six kinds of day, in their colours */}
-        <motion.nav {...rise(0)} aria-label={t('chaptersLabel')} className="-mx-5 px-5 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-none">
+        <nav style={{ animationDelay: '0ms' }} aria-label={t('chaptersLabel')} className="dxb-rise -mx-5 px-5 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-none">
           <ul className="flex gap-2 w-max">
             {FAMILY_LINKS.map(({ family, href }) => {
               const f = FAMILY[family]
@@ -74,25 +65,25 @@ export function Hero() {
               )
             })}
           </ul>
-        </motion.nav>
+        </nav>
 
         <div className="mt-8 md:mt-12 grid lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
           {/* Copy + planner */}
           <div className="lg:col-span-6 xl:col-span-5 flex flex-col">
-            <motion.div {...rise(0.05)}>
-              <MonoLabel parts={['Dubai', 'Abu Dhabi', 'UAE']} className="text-dxb-cobalt" />
-            </motion.div>
-            <motion.h1
-              {...rise(0.12)}
-              className="mt-5 font-display text-dxb-navy text-[52px] leading-[0.92] sm:text-7xl xl:text-[88px] tracking-[-0.04em] [font-stretch:112%]"
+            <div style={{ animationDelay: '50ms' }} className="dxb-rise">
+              <MonoLabel parts={t('places').split('|')} className="text-dxb-cobalt" />
+            </div>
+            <h1
+              style={{ animationDelay: '120ms' }}
+              className="dxb-rise mt-5 font-display text-dxb-navy text-[52px] leading-[0.92] sm:text-7xl xl:text-[88px] tracking-[-0.04em] [font-stretch:112%]"
             >
               {t('headline')}
-            </motion.h1>
-            <motion.p {...rise(0.2)} className="mt-6 text-lg md:text-xl text-dxb-ink/80 max-w-xl leading-relaxed">
+            </h1>
+            <p style={{ animationDelay: '200ms' }} className="dxb-rise mt-6 text-lg md:text-xl text-dxb-ink/80 max-w-xl leading-relaxed">
               {t('subheading')}
-            </motion.p>
+            </p>
 
-            <motion.div {...rise(0.28)} className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div style={{ animationDelay: '280ms' }} className="dxb-rise mt-8 flex flex-col sm:flex-row gap-3">
               <Link
                 href="/request"
                 className="inline-flex items-center justify-center gap-2 h-14 px-7 whitespace-nowrap bg-dxb-orange text-dxb-ink text-base font-bold dxb-cut transition-colors hover:bg-dxb-orange-hover"
@@ -109,19 +100,17 @@ export function Hero() {
                 <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
                 {t('whatsapp')}
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div {...rise(0.36)} className="mt-auto pt-10 dxb-lift">
+            <div style={{ animationDelay: '360ms' }} className="dxb-rise mt-auto pt-10 dxb-lift">
               <HeroPlanner locale={locale} />
-            </motion.div>
+            </div>
           </div>
 
           {/* Cut-corner frames: the film plus two families */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-6 xl:col-span-7 grid grid-cols-2 sm:grid-cols-5 gap-3 min-h-[420px] sm:min-h-[520px] lg:min-h-[600px]"
+          <div
+            style={{ animationDelay: '150ms' }}
+            className="dxb-rise lg:col-span-6 xl:col-span-7 grid grid-cols-2 sm:grid-cols-5 gap-3 min-h-[420px] sm:min-h-[520px] lg:min-h-[600px]"
           >
             <HeroFrame
               href="/experiences/on-the-water"
@@ -166,7 +155,7 @@ export function Hero() {
             >
               <Image src={events.src ?? ''} alt={events.alt} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
             </HeroFrame>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

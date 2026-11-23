@@ -55,7 +55,8 @@
       "guests": "Guests",
       "anything": "Anything in Dubai",
       "submit": "Plan it"
-    }
+    },
+    "places": "Dubai|Abu Dhabi|UAE"
   },
   "whatWeDo": {
     "anticipate": "Anticipate, don't react",

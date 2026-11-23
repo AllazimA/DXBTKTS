@@ -1,6 +1,6 @@
 'use client'
 
-import { BrandIcon } from '@/components/brand'
+import { BrandIcon, Perforation, Tear } from '@/components/brand'
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
@@ -14,7 +14,7 @@ import { usePlan } from './plan-provider'
 import { productHref } from './product-card'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
-const input = 'mt-1.5 w-full border border-dxb-band bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-dxb-gold'
+const input = 'mt-1.5 w-full h-11 border border-dxb-line bg-white px-3 text-[15px] text-dxb-ink focus:outline-none focus:border-dxb-cobalt focus:ring-2 focus:ring-dxb-cobalt/20'
 
 /** Online payment shows only when a Stripe publishable key is configured. */
 const PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ''
@@ -119,10 +119,10 @@ export function PlanDrawer() {
           >
             <header className="flex items-center justify-between px-6 py-5 bg-dxb-navy text-white">
               <div>
-                <h2 className="font-display text-3xl">{tp('title')}</h2>
-                {items.length > 0 && <p className="text-xs text-white/60">{tp('items', { count: items.length })}</p>}
+                <h2 className="flex items-center gap-2.5 text-2xl font-extrabold tracking-[-0.02em]"><BrandIcon name="ticket" className="w-6 h-6 text-dxb-orange" />{tp('title')}</h2>
+                {items.length > 0 && <p className="dxb-label text-[11px] text-white/60 mt-1">{tp('items', { count: items.length })}</p>}
               </div>
-              <button type="button" onClick={() => setOpen(false)} aria-label={tp('close')} className="p-2 hover:text-dxb-gold">
+              <button type="button" onClick={() => setOpen(false)} aria-label={tp('close')} className="p-2 hover:text-dxb-orange">
                 <X className="w-6 h-6" />
               </button>
             </header>
@@ -130,11 +130,11 @@ export function PlanDrawer() {
             <div className="flex-1 overflow-y-auto">
               {status === 'done' ? (
                 <div className="p-8 text-center">
-                  <CheckCircle2 className="w-12 h-12 text-dxb-gold mx-auto" />
+                  <CheckCircle2 className="w-12 h-12 text-dxb-cobalt mx-auto" />
                   <h3 className="font-display text-3xl text-dxb-navy mt-4">{tp('successTitle')}</h3>
                   <p className="text-dxb-slate mt-3 leading-relaxed">{tp('successCopy')}</p>
                   <p className="mt-5 text-sm text-dxb-ink">
-                    {tp('reference')}: <span className="font-semibold" dir="ltr">{reference}</span>
+                    {tp('reference')}: <span className="dxb-data font-semibold text-dxb-navy" dir="ltr">{reference}</span>
                   </p>
                 </div>
               ) : priced.length === 0 ? (
@@ -146,12 +146,12 @@ export function PlanDrawer() {
                 </div>
               ) : (
                 <>
-                  <ul className="divide-y divide-dxb-band">
+                  <ul className="divide-y divide-dxb-line bg-white">
                     {priced.map(p => (
                       <li key={p.item.key} className="px-6 py-4">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
-                            <Link href={productHref(p.product)} onClick={() => setOpen(false)} className="font-semibold text-dxb-ink hover:text-dxb-gold">
+                            <Link href={productHref(p.product)} onClick={() => setOpen(false)} className="font-bold text-dxb-navy hover:text-dxb-cobalt">
                               {p.product.name[locale]}
                             </Link>
                             <p className="text-sm text-dxb-slate">{p.variant.name[locale]}</p>
@@ -163,12 +163,12 @@ export function PlanDrawer() {
                             ) : (
                               // No date yet: pick it right here, so the request arrives complete.
                               <label className="mt-1.5 flex items-center gap-2 text-xs text-dxb-ink">
-                                <CalendarDays className="w-3.5 h-3.5 text-dxb-gold" />
+                                <CalendarDays className="w-3.5 h-3.5 text-dxb-cobalt" />
                                 <span className="sr-only">{tp('pickDate')}</span>
                                 <input type="date" min={tomorrow()} aria-label={`${tp('pickDate')} — ${p.product.name[locale]}`} value=""
                                   onChange={e => { update(p.item.key, { date: e.target.value }); setDatesError('') }}
-                                  className="border border-dxb-gold/60 bg-white px-2 py-1 text-xs focus:outline-none focus:border-dxb-gold" />
-                                <span className="text-dxb-slate">· {t(`timeOptions.${p.item.time}`)}</span>
+                                  className="border border-dxb-cobalt/50 bg-white px-2 py-1 text-xs dxb-data focus:outline-none focus:border-dxb-cobalt" />
+                                <span className="text-dxb-slate"><Tear />{t(`timeOptions.${p.item.time}`)}</span>
                               </label>
                             )}
                             {p.product.priceType !== 'per_group' && (
@@ -179,7 +179,7 @@ export function PlanDrawer() {
                             )}
                           </div>
                           <div className="text-end shrink-0">
-                            <p className="font-semibold text-dxb-ink">{formatAED(p.total, locale)}</p>
+                            <p className="dxb-data font-semibold text-dxb-navy">{formatAED(p.total, locale)}</p>
                             <button type="button" onClick={() => remove(p.item.key)} className="mt-2 inline-flex items-center gap-1 text-xs text-dxb-slate hover:text-dxb-red">
                               <Trash2 className="w-3.5 h-3.5" /> {tp('remove')}
                             </button>
@@ -189,18 +189,19 @@ export function PlanDrawer() {
                     ))}
                   </ul>
 
-                  <div className="px-6 py-4 bg-white border-y border-dxb-band">
+                  <div className="relative px-6 py-4 bg-white dxb-notch-top">
+                    <Perforation className="absolute top-0 inset-x-3 text-dxb-navy" />
                     <div className="flex items-baseline justify-between">
-                      <span className="text-sm text-dxb-slate">{t('total')}</span>
-                      <span className="text-2xl font-semibold text-dxb-ink">{formatAED(total, locale)}</span>
+                      <span className="dxb-label text-[11px] text-dxb-muted">{t('total')}</span>
+                      <span className="dxb-data text-2xl font-semibold text-dxb-navy">{formatAED(total, locale)}</span>
                     </div>
                     <p className="text-xs text-dxb-slate mt-2">{t('whatHappens')}</p>
-                    {priced.some(p => !p.product.priceVerified) && <p className="text-xs text-dxb-gold mt-1">{t('indicativeNote')}</p>}
+                    {priced.some(p => !p.product.priceVerified) && <p className="text-xs text-dxb-muted mt-1">{t('indicativeNote')}</p>}
                   </div>
 
                   <form onSubmit={submit} className="relative px-6 py-6 space-y-4">
                     <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-                    <h3 className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{tp('yourDetails')}</h3>
+                    <h3 className="dxb-label text-[11px] text-dxb-cobalt">{tp('yourDetails')}</h3>
                     <label className="block text-sm text-dxb-ink">
                       {tp('name')} *
                       <input name="name" required autoComplete="name" className={input} />
@@ -224,7 +225,7 @@ export function PlanDrawer() {
                     </label>
                     <label className="block text-sm text-dxb-ink">
                       {tp('notes')}
-                      <textarea name="notes" rows={3} className={input} />
+                      <textarea name="notes" rows={3} className={`${input} !h-auto py-2.5`} />
                     </label>
                     {undated > 0 && (
                       <label className="flex items-start gap-2 text-xs text-dxb-ink">

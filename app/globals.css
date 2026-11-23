@@ -62,7 +62,19 @@
   html[lang='ar'] .font-display,
   html[lang='ar'] .font-cormorant {
     font-stretch: 100%;
-    line-height: 1.25;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  /* Arabic has no capitals: small mono labels become readable 13px semibold text. */
+  html[lang='ar'] .dxb-label,
+  html[lang='ar'] .font-mono.uppercase {
+    font-size: 13px !important;
+    font-weight: 600;
+    text-transform: none;
+  }
+  /* Prices, dates and references keep Latin mono digits inside Arabic text. */
+  html[lang='ar'] .dxb-data {
+    font-family: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace;
   }
   /* Letter-spacing breaks Arabic joining; neutralise tracking utilities. */
   html[lang='ar'] [class*='tracking-'],
@@ -237,6 +249,15 @@
     background-image: url('/brand/DXBTKTS_TearPattern_Navy-on-Sand.svg');
     background-size: 240px auto;
   }
+}
+
+/* CSS entrance: runs before hydration, so above-the-fold text is never held back by JS. */
+@keyframes dxb-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.dxb-rise {
+  animation: dxb-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @layer utilities {

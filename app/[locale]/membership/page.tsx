@@ -24,7 +24,7 @@ export default function Membership({ params: { locale } }: { params: { locale: L
     <>
       {/* Opening — copy left, fanned cards right */}
       <section className="relative bg-dxb-navy text-white overflow-hidden">
-        <div aria-hidden className="absolute inset-0 dxb-pattern-navy opacity-40" />
+        <div aria-hidden className="hidden lg:block absolute inset-y-0 end-0 w-1/2 dxb-pattern-navy opacity-20" />
         <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-14 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
           <div className="lg:col-span-6">
             <span className="dxb-label text-dxb-orange inline-flex items-center">DXB TKTS<Tear />{m.eyebrow[locale]}</span>
