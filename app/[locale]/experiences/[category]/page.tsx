@@ -11,6 +11,14 @@ import { BrandIcon } from '@/components/brand'
 import { familyOf } from '@/lib/brand'
 import { categoryImage } from '@/lib/images'
 import { PageHero, heroPrimary } from '@/components/brand/page-hero'
+import type { Film } from '@/components/ui/background-film'
+
+/** Category openings with a film (none repeats another page's opening). */
+const CATEGORY_FILMS: Record<string, Film | undefined> = {
+  'on-the-water': site.heroVideo ?? undefined,
+  lifestyle: site.films.diningTerrace,
+  signature: site.films.celebrationProposal,
+}
 
 type Props = { params: { locale: Locale; category: string } }
 
@@ -52,6 +60,7 @@ export default async function CategoryPage({ params: { locale, category: slug } 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <PageHero
         image={categoryImage(category.slug, category.image, category.name[locale])}
+        film={CATEGORY_FILMS[category.slug]}
         family={familyOf(category.slug)}
         locale={locale}
         label={t('hubEyebrow')}
