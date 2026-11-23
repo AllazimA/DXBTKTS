@@ -23,6 +23,7 @@ export function PageHero({
   aside,
   className,
   size = 'tall',
+  dim = false,
 }: {
   image?: { src: string | null; alt: string }
   film?: { mp4: string; mobile?: string; poster?: string }
@@ -37,6 +38,8 @@ export function PageHero({
   aside?: React.ReactNode
   className?: string
   size?: 'tall' | 'medium'
+  /** Extra shade for very bright films, so the headline stays legible */
+  dim?: boolean
 }) {
   const fam = family ? FAMILY[family] : null
   const cinematic = Boolean(image?.src)
@@ -59,6 +62,7 @@ export function PageHero({
             {film && <BackgroundFilm {...film} />}
           </div>
           <div className="absolute inset-0 dxb-vignette" />
+          {dim && <div className="absolute inset-0 bg-gradient-to-r from-dxb-ink/75 via-dxb-ink/45 to-dxb-ink/20 rtl:bg-gradient-to-l" />}
         </>
       ) : (
         <div aria-hidden className="absolute inset-y-0 end-0 w-1/2 dxb-pattern-navy opacity-20 hidden lg:block" />

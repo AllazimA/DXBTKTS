@@ -9,9 +9,9 @@ import type { Family } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
 /** Opening used by the curated service pages (dining, nightlife, sourcing). */
-export function CuratedHero({ image, film, eyebrow, title, lede, cta, ctaHref, family = 'city-life', locale }: { image: { src: string | null; alt: string }; film?: { mp4: string; mobile?: string; poster?: string }; eyebrow: string; title: string; lede: string; cta?: string; ctaHref?: string; family?: Family; locale?: Locale }) {
+export function CuratedHero({ image, film, eyebrow, title, lede, cta, ctaHref, family = 'city-life', locale, dim }: { image: { src: string | null; alt: string }; film?: { mp4: string; mobile?: string; poster?: string }; eyebrow: string; title: string; lede: string; cta?: string; ctaHref?: string; family?: Family; locale?: Locale; dim?: boolean }) {
   return (
-    <PageHero image={image} film={film} label={eyebrow} title={title} lede={lede} family={locale ? family : undefined} locale={locale}>
+    <PageHero dim={dim} image={image} film={film} label={eyebrow} title={title} lede={lede} family={locale ? family : undefined} locale={locale}>
       {cta && ctaHref && (
         <a href={ctaHref} className={heroPrimary}>
           {cta}

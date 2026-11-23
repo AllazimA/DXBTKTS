@@ -25,6 +25,11 @@ export const site = {
   films: {
     diningTerrace: { mp4: '/videos/dining-terrace.mp4', mobile: '/videos/dining-terrace-mobile.mp4', poster: '/images/film-dining-terrace-poster.webp' },
     nightlifeLounge: { mp4: '/videos/nightlife-lounge.mp4', mobile: '/videos/nightlife-lounge-mobile.mp4', poster: '/images/film-nightlife-lounge-poster.webp' },
+    // Owner's films, 2026-11-23 (720p masters in assets-originals/video).
+    membershipCard: { mp4: '/videos/membership-card.mp4', mobile: '/videos/membership-card-mobile.mp4', poster: '/images/film-membership-card-poster.webp' }, // cropped: no champagne flute
+    nightlifeClub: { mp4: '/videos/nightlife-club.mp4', mobile: '/videos/nightlife-club-mobile.mp4', poster: '/images/film-nightlife-club-poster.webp' },
+    celebrationProposal: { mp4: '/videos/celebration-proposal.mp4', mobile: '/videos/celebration-proposal-mobile.mp4', poster: '/images/film-celebration-proposal-poster.webp' },
+    diningArrival: { mp4: '/videos/dining-arrival.mp4', mobile: '/videos/dining-arrival-mobile.mp4', poster: '/images/film-dining-arrival-poster.webp' },
     // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
     membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },

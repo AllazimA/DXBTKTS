@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Unveil } from '@/components/brand/unveil'
+import { BackgroundFilm, type Film } from '@/components/ui/background-film'
 import { ArrowRight, MapPin, Clock } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
@@ -12,7 +13,6 @@ import { site, whatsappLink } from '@/lib/site'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
 
-const HERO = aiImage('page-services', 'fineDining', 'A DXB TKTS concierge meeting a client in Dubai')
 
 /** Photo for each service (owner's AI imagery; falls back to registry images). */
 const SERVICE_IMAGES: Record<string, SceneImage> = {
@@ -27,6 +27,11 @@ const SERVICE_IMAGES: Record<string, SceneImage> = {
   lifestyle: aiImage('product-private-chef-villa', 'privateVilla', 'A private chef preparing dinner at a family villa'),
 }
 
+/** Rows that carry a film instead of a still. */
+const SERVICE_FILMS: Record<string, Film | undefined> = {
+  occasions: site.films.celebrationProposal,
+}
+
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'services', '/services')
 }
@@ -35,7 +40,7 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
   return (
     <>
       {/* Opening — copy over a full-bleed photograph */}
-      <PageHero image={HERO} film={site.films.diningTerrace} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]}>
+      <PageHero image={{ src: site.films.membershipBox.poster, alt: 'A DXB TKTS concierge presents a welcome box to a guest' }} film={site.films.membershipBox} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]}>
         <Link href="/request" className={heroPrimary}>
           {c.cta[locale]}
         </Link>
@@ -68,6 +73,7 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
                   <Unveil className="relative aspect-[4/3] md:aspect-[5/4] overflow-hidden bg-dxb-navy dxb-cut">
                     <div className="absolute inset-0">
                       <Picture image={SERVICE_IMAGES[s.id]} sizes="(max-width: 768px) 100vw, 58vw" className="object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/row:scale-[1.05]" />
+                      {SERVICE_FILMS[s.id] && <BackgroundFilm {...SERVICE_FILMS[s.id]!} />}
                     </div>
                   </Unveil>
                 </div>

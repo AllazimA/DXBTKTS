@@ -21,6 +21,10 @@
 | `public/videos/nightlife-lounge-mobile.mp4` (960×540) and `public/images/film-nightlife-lounge-poster.webp` | same master |
 | `public/videos/membership-box.mp4` (1080p, first 3.4 s only with fades — the opened box shows garbled AI text: 'MEMPOBER', 'Helcome to DXB TKTS'; membership hero) | `video/Concierge_presenting_membership_box_f0687bc0_1080p.mp4` |
 | `public/videos/membership-box-mobile.mp4` (960×540) and `public/images/film-membership-box-poster.webp` | same master |
+| `public/videos/membership-card.mp4` (+ `-mobile`, poster) — Membership hero; cropped to the right 80% so the champagne flute never shows; 720p master | `video/Concierge_presenting_luxury_membership_3131f509.mp4` |
+| `public/videos/nightlife-club.mp4` (+ `-mobile`, poster) — Nightlife hero (with extra shade) | `video/People_dancing_in_upscale_nightclub_b8b0e555.mp4` |
+| `public/videos/celebration-proposal.mp4` (+ `-mobile`, poster) — Services › Celebrations row, homepage Signature scene | `video/Man_proposing_to_woman_80589728.mp4` |
+| `public/videos/dining-arrival.mp4` (+ `-mobile`, poster) — Dining hero, homepage Lifestyle scene | `video/Luxury_car_arrives_at_venue_3ad4fa7d.mp4` |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |

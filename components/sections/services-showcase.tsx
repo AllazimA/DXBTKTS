@@ -13,9 +13,9 @@ import type { Locale } from '@/i18n.config'
 
 const visuals = [
   { image: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter flying over Palm Jumeirah'), category: 'sky' },
-  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water', film: site.heroVideo ? { mp4: site.heroVideo.mp4, mobile: site.heroVideo.mobile, poster: site.heroVideo.poster } : undefined },
-  { image: aiImage('category-lifestyle', 'fineDining', 'Dinner table on a terrace above Dubai Marina'), category: 'lifestyle', film: site.films.diningTerrace },
-  { image: aiImage('page-proposal', 'privateVilla', 'Proposal on a beachfront terrace at sunset'), category: 'signature' },
+  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water' }, // the yacht film already opens the page
+  { image: aiImage('category-lifestyle', 'fineDining', 'Dinner table on a terrace above Dubai Marina'), category: 'lifestyle', film: site.films.diningArrival },
+  { image: aiImage('page-proposal', 'privateVilla', 'Proposal on a beachfront terrace at sunset'), category: 'signature', film: site.films.celebrationProposal },
   { image: aiImage('category-desert', 'desert', 'Riders on a dune ridge at sunset'), category: 'desert' },
   { image: aiImage('category-transfers', 'arrival', 'Chauffeur opening the door of a luxury car'), category: 'transfers' },
 ]

@@ -20,10 +20,10 @@ export default function Membership({ params: { locale } }: { params: { locale: L
 
   return (
     <>
-      {/* Opening — the membership film (a concierge presents the welcome box), fanned cards beside the headline */}
+      {/* Opening — the membership film (a concierge unboxes the DXB TKTS card), fanned cards beside the headline */}
       <PageHero
-        image={{ src: site.films.membershipBox.poster, alt: 'A concierge presents a DXB TKTS membership box to a guest' }}
-        film={site.films.membershipBox}
+        image={{ src: site.films.membershipCard.poster, alt: 'A DXB TKTS concierge presents the Najm membership card' }}
+        film={site.films.membershipCard}
         label={m.eyebrow[locale]}
         title={m.title[locale]}
         lede={m.lede[locale]}

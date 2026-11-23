@@ -29,7 +29,7 @@ export default async function DiningPage({ params: { locale } }: { params: { loc
   const restaurants = await getRestaurants(locale)
   return (
     <>
-      <CuratedHero image={HERO} film={site.films.diningTerrace} family="city-life" locale={locale} eyebrow={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} cta={c.request[locale]} ctaHref={`#${FORM_ID}`} />
+      <CuratedHero image={HERO} film={site.films.diningArrival} family="city-life" locale={locale} eyebrow={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} cta={c.request[locale]} ctaHref={`#${FORM_ID}`} />
       <DiningSections current="dining" locale={locale} />
 
       <MoodStrip items={STRIP.map(s => ({ src: s.img.src, alt: s.img.alt, caption: s.caption[locale] }))} />
