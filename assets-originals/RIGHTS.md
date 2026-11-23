@@ -19,6 +19,8 @@
 | `public/videos/hero-loop-mobile.mp4` (960×540) | same master |
 | `public/videos/nightlife-lounge.mp4` (1080p, played forward then backward, no audio; hero film on /tickets) | `video/Animate_image_into_luxury_video_1080p.mp4` |
 | `public/videos/nightlife-lounge-mobile.mp4` (960×540) and `public/images/film-nightlife-lounge-poster.webp` | same master |
+| `public/videos/membership-box.mp4` (1080p, first 3.4 s only with fades — the opened box shows garbled AI text: 'MEMPOBER', 'Helcome to DXB TKTS'; membership hero) | `video/Concierge_presenting_membership_box_f0687bc0_1080p.mp4` |
+| `public/videos/membership-box-mobile.mp4` (960×540) and `public/images/film-membership-box-poster.webp` | same master |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |
