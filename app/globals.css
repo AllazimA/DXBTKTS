@@ -131,12 +131,11 @@
 
   /* Tear mark ⁞ — three rounded dashes, sized to the text. */
   .dxb-tear {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.09em;
-    height: 0.8em;
-    vertical-align: -0.05em;
+    /* inline-block with block children: its baseline is its bottom edge,
+       so the mark sits on the text baseline and rises to cap height. */
+    display: inline-block;
+    height: 0.72em;
+    vertical-align: -0.02em;
     margin: 0 0.45em;
   }
   .dxb-tear i {
@@ -146,6 +145,9 @@
     height: 0.2em;
     border-radius: 1px;
     background: currentColor;
+  }
+  .dxb-tear i + i {
+    margin-top: 0.06em;
   }
 
   /* Stub cut: one concave notch at the top-right corner (start-end in RTL). */

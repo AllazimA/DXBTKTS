@@ -36,14 +36,16 @@ export function FormSection({ id, title, copy, note, whatsapp, backdrop, childre
         <div className="lg:col-span-2 lg:sticky lg:top-32">
           <h2 className="font-display text-4xl md:text-5xl text-white leading-[1.1]">{title}</h2>
           <p className="mt-6 text-white/70 text-lg font-light leading-relaxed">{copy}</p>
-          {note && <p className="mt-6 text-sm text-white/45 leading-relaxed border-s border-dxb-gold/40 ps-4">{note}</p>}
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex items-center gap-3 text-sm font-medium tracking-[0.06em] font-mono uppercase text-dxb-gold group">
-            <span className="h-px w-10 bg-dxb-orange transition-all duration-300 group-hover:w-16" />
+          {note && <p className="mt-6 text-sm text-white/60 leading-relaxed border-s-4 border-dxb-orange ps-4">{note}</p>}
+          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={`mt-10 ${heroSecondary}`}>
             <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
             {whatsapp}
           </a>
         </div>
-        <div className="lg:col-span-3 border border-white/10 bg-white/[0.02] p-7 md:p-11">{children}</div>
+        <div className="lg:col-span-3 relative bg-dxb-ink/60 backdrop-blur-sm dxb-cut dxb-cut-lg p-7 md:p-11">
+          <span aria-hidden="true" className="absolute top-0 inset-x-0 h-1.5 bg-dxb-orange" />
+          {children}
+        </div>
       </div>
     </section>
   )

@@ -224,7 +224,7 @@ export default async function ProductPage({ params: { locale, category: category
             </div>
 
             {/* Right: booking panel */}
-            <aside className="lg:sticky lg:top-24" id="book">
+            <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-none lg:pb-6 lg:-mx-3 lg:px-3" id="book">
               {product.quoteOnly && product.category === 'shopping' ? (
                 <div className="bg-dxb-navy text-white dxb-cut p-7 md:p-8">
                   <p className="dxb-label text-dxb-orange">{sp.bespoke[locale]}</p>
