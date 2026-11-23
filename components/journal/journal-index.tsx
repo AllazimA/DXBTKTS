@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Locale } from '@/i18n.config'
 import { journalCategories, journalCopy as c, type JournalCategory } from '@/content/journal'
+import { Tear } from '@/components/brand'
 
 export type CardData = {
   slug: string
@@ -54,7 +55,7 @@ export function JournalIndex({ locale, cards }: { locale: Locale; cards: CardDat
                   <h2 className="mt-2 font-display font-bold text-[1.7rem] leading-tight text-dxb-navy group-hover:text-dxb-gold transition-colors">{a.title}</h2>
                   <p className="mt-3 text-dxb-slate leading-relaxed line-clamp-3">{a.excerpt}</p>
                   <p className="mt-4 text-xs text-dxb-slate">
-                    {a.date} · {c.minRead[locale].replace('{n}', String(a.minutes))}
+                    {a.date} <Tear /> {c.minRead[locale].replace('{n}', String(a.minutes))}
                   </p>
                 </Link>
               </article>

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
-import { ArrowRight } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { categories, categoryFromPrice } from '@/data/catalogue'
 import { formatAED } from '@/lib/catalogue/money'
@@ -15,6 +14,9 @@ import { CTABand } from '@/components/ui/cta-band'
 import { packages } from '@/data/packages'
 import { packagesCopy as pc } from '@/content/packages'
 import { PackageCard } from '@/components/packages/package-card'
+import { BrandIcon, Tear } from '@/components/brand'
+import { SectionHeading } from '@/components/brand/section-heading'
+import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'experiences', '/experiences')
@@ -23,15 +25,15 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default async function ExperiencesHub({ params: { locale } }: { params: { locale: Locale } }) {
   const t = await getTranslations('catalogue')
   const th = await getTranslations('home')
-  const accent = (chunks: React.ReactNode) => <span className="text-dxb-gold">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-cobalt">{chunks}</span>
 
   return (
     <>
-      <section className="pt-16 md:pt-20 pb-10 bg-dxb-sand">
-        <div className="max-w-7xl mx-auto px-6">
-          <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{t('hubEyebrow')}</span>
-          <h1 className="font-display text-5xl md:text-6xl text-dxb-navy mt-4 mb-5">{t.rich('hubTitle', { accent })}</h1>
-          <p className="text-lg text-dxb-slate max-w-2xl leading-relaxed mb-6">{t('hubSub')}</p>
+      <section className="pt-12 md:pt-16 pb-10 bg-dxb-sand">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <span className="dxb-label text-dxb-cobalt inline-flex items-center">DXB TKTS<Tear />{t('hubEyebrow')}</span>
+          <h1 className="font-display text-[44px] leading-[0.98] sm:text-6xl lg:text-[72px] tracking-[-0.035em] text-dxb-navy mt-5 mb-5">{t.rich('hubTitle', { accent })}</h1>
+          <p className="text-lg md:text-xl text-dxb-ink/75 max-w-2xl leading-relaxed mb-6">{t('hubSub')}</p>
           <IndicativeNotice />
           <div className="mt-8">
             <CategoryChips />
@@ -39,22 +41,32 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
         </div>
       </section>
 
-      {/* Category tiles */}
-      <section className="py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-3 gap-4">
-          {categories.map(c => {
+      {/* Category tiles: cut-corner photo over a caption band in the family colour */}
+      <section className="pt-4 pb-16 bg-dxb-sand">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {categories.map((c, i) => {
             const from = categoryFromPrice(c.slug)
+            const fam = FAMILY[familyOf(c.slug)]
             return (
-              <Link key={c.slug} href={`/experiences/${c.slug}`} className="group relative aspect-[4/3] overflow-hidden bg-dxb-navy">
-                <SceneImage image={categoryImage(c.slug, c.image, c.name[locale])} sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink/90 via-dxb-ink/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6">
-                  <h2 className="font-display text-2xl md:text-3xl text-white">{c.name[locale]}</h2>
-                  {from !== null && (
-                    <p className="text-xs md:text-sm text-white/75 mt-1">
-                      {t('from')} {formatAED(from, locale)}
-                    </p>
-                  )}
+              <Link key={c.slug} href={`/experiences/${c.slug}`} className="group flex flex-col dxb-cut dxb-cut-lg">
+                <div className="relative aspect-[16/10] overflow-hidden bg-dxb-navy">
+                  <SceneImage image={categoryImage(c.slug, c.image, c.name[locale])} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                </div>
+                <div className={`flex items-end justify-between gap-4 px-5 py-4 ${fam.bg} ${fam.text}`}>
+                  <div className="min-w-0">
+                    <span className="flex items-center gap-2 dxb-label text-[11px] opacity-80">
+                      <BrandIcon name={CATEGORY_ICON[c.slug] ?? fam.icon} className="w-4 h-4" />
+                      <span dir="ltr">{String(i + 1).padStart(2, '0')}</span>
+                      {from !== null && (
+                        <>
+                          <Tear />
+                          {t('from')} <span className="dxb-data">{formatAED(from, locale)}</span>
+                        </>
+                      )}
+                    </span>
+                    <h2 className="mt-1.5 text-2xl font-extrabold tracking-[-0.02em] leading-tight">{c.name[locale]}</h2>
+                  </div>
+                  <BrandIcon name="arrow" className="w-5 h-5 mb-1 shrink-0 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                 </div>
               </Link>
             )
@@ -63,17 +75,9 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
       </section>
 
       {/* Packages shelf */}
-      <section className="py-14 bg-dxb-sand">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div>
-              <span className="text-xs font-medium tracking-[0.06em] text-dxb-gold font-mono uppercase">{pc.shelfTitle[locale]}</span>
-              <p className="mt-3 font-display text-3xl md:text-4xl text-dxb-navy max-w-2xl">{pc.shelfCopy[locale]}</p>
-            </div>
-            <Link href="/packages" className="inline-flex items-center gap-2 text-sm font-semibold text-dxb-clay">
-              {pc.shelfCta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
-            </Link>
-          </div>
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <SectionHeading label={pc.shelfTitle[locale]} title={pc.shelfCopy[locale]} action={{ href: '/packages', label: pc.shelfCta[locale] }} />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {['burj-khalifa-sunset-evening', 'palm-day-to-sunset', 'private-desert-evening'].map(slug => {
               const pkg = packages.find(x => x.slug === slug)!
@@ -84,8 +88,8 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
       </section>
 
       {/* Products by category, with audience filters */}
-      <section className="py-16 bg-dxb-sand">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16 md:py-20 bg-dxb-sand">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <CatalogueBrowser locale={locale} />
         </div>
       </section>

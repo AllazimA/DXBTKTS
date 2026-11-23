@@ -228,13 +228,13 @@ export function PlanDrawer() {
                     </label>
                     {undated > 0 && (
                       <label className="flex items-start gap-2 text-xs text-dxb-ink">
-                        <input type="checkbox" checked={flexible} onChange={e => { setFlexible(e.target.checked); setDatesError('') }} className="mt-0.5 accent-[#B08D3F]" />
+                        <input type="checkbox" checked={flexible} onChange={e => { setFlexible(e.target.checked); setDatesError('') }} className="mt-0.5 accent-[#2F3DF0]" />
                         {tp('datesFlexible')}
                       </label>
                     )}
                     {datesError && <p role="alert" className="text-sm text-dxb-red">{datesError === 'pay' ? tp('datesNeededPay') : tp('datesNeeded')}</p>}
                     <label className="flex items-start gap-2 text-xs text-dxb-slate">
-                      <input name="consent" type="checkbox" required className="mt-0.5 accent-[#B08D3F]" />
+                      <input name="consent" type="checkbox" required className="mt-0.5 accent-[#2F3DF0]" />
                       {tp('consent')}
                     </label>
                     {status === 'error' && <p className="text-sm text-dxb-red">{paying ? tp('payError') : tp('error')}</p>}
@@ -248,7 +248,7 @@ export function PlanDrawer() {
                           {status === 'sending' && paying ? tp('sending') : `${tp('payNow')} · ${formatAED(total, locale)}`}
                         </button>
                         <p className="mt-2 text-[11px] leading-relaxed text-dxb-slate">
-                          {PAYMENTS === 'test' && <span className="me-1 inline-block bg-dxb-gold/15 px-1.5 py-0.5 font-medium font-mono uppercase tracking-[0.06em] text-[#8A6A2B]">{tp('payTest')}</span>}
+                          {PAYMENTS === 'test' && <span className="me-1 inline-block bg-dxb-orange px-1.5 py-0.5 font-medium font-mono uppercase tracking-[0.06em] text-dxb-ink">{tp('payTest')}</span>}
                           {tp('payNote')}
                         </p>
                       </div>

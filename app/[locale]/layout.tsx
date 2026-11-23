@@ -103,7 +103,7 @@ export default function LocaleLayout({ children, params: { locale } }: { childre
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={`${archivo.variable} ${plexMono.variable} ${locale === 'ar' ? arabicSans.variable : ''}`}>
+      <body className={`${archivo.variable} ${plexMono.variable} ${arabicSans.variable}`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <NextIntlClientProvider locale={locale} messages={messages[locale]}>
           <Providers>

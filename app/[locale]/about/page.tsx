@@ -7,6 +7,7 @@ import { pageMetadata } from '@/lib/metadata'
 import { aiImage } from '@/lib/images'
 import { about } from '@/content/about'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
+import { Tear } from '@/components/brand'
 
 const STORY_IMAGE = aiImage('section-philosophy', 'burjAlArabAerial', 'A DXB TKTS lifestyle manager meeting a client in Dubai')
 
@@ -99,7 +100,7 @@ export default function About({ params: { locale } }: { params: { locale: Locale
             <ChapterLabel index="04" label={about.founderLabel[locale]} />
             <p className="mt-6 font-display text-2xl md:text-3xl leading-snug text-dxb-navy">{about.founderNote[locale]}</p>
             <p className="mt-6 text-sm font-mono uppercase tracking-[0.06em] text-dxb-gold">
-              {about.founderName} · {about.founderRole[locale]}
+              {about.founderName} <Tear /> {about.founderRole[locale]}
             </p>
             <p className="mt-4 text-sm text-dxb-ink/80">{about.houses[locale]}</p>
             <p className="mt-1 text-xs text-dxb-slate">{about.housesNote[locale]}</p>

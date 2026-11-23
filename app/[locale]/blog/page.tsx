@@ -42,12 +42,12 @@ export default function JournalPage({ params: { locale } }: { params: { locale: 
             </div>
             <div className="lg:col-span-5">
               <p className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">
-                {c.featured[locale]} · {catName}
+                {c.featured[locale]} <Tear /> {catName}
               </p>
               <h2 className="mt-4 font-display text-4xl md:text-5xl leading-tight group-hover:text-dxb-gold transition-colors">{featured.title[locale]}</h2>
               <p className="mt-5 text-white/70 leading-relaxed">{featured.excerpt[locale]}</p>
               <p className="mt-5 text-xs text-white/50">
-                {formatDate(locale, featured.published)} · {c.minRead[locale].replace('{n}', String(readingMinutes(featured)))}
+                {formatDate(locale, featured.published)} <Tear /> {c.minRead[locale].replace('{n}', String(readingMinutes(featured)))}
               </p>
               <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">
                 {c.read[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />

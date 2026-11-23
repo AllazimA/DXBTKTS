@@ -161,7 +161,7 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
 
       {requireTerms && (
         <label className="flex items-start gap-3 text-sm text-white/75 leading-relaxed cursor-pointer">
-          <input type="checkbox" name="termsAccepted" required className="mt-1 h-4 w-4 accent-[#B08D3F] shrink-0" />
+          <input type="checkbox" name="termsAccepted" required className="mt-1 h-4 w-4 accent-[#2F3DF0] shrink-0" />
           <span>{c.termsLabel[locale]}</span>
         </label>
       )}

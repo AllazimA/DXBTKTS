@@ -1,15 +1,16 @@
 import { useId } from 'react'
 import { memberCardSample } from '@/content/membership'
+import { LOGO_SYMBOL, LOGO_WORDMARK } from '@/components/brand/logo-paths'
 
 /**
  * DXB TKTS membership card — drawn as one scalable SVG (no images), so it
  * stays sharp at any size and every card renders identically.
  *
  * Finishes
- *  oasis  — brushed champagne metal, dark-bronze embossing
- *  pearl  — platinum / silver with a soft nacre sheen
- *  najm   — black card, champagne-gold embossing
- *  majlis — deep emerald, engraved gold linework (company account)
+ *  oasis  — green, night-ink embossing
+ *  pearl  — gulf cobalt, white embossing with a soft nacre sheen
+ *  najm   — night ink, light-orange foil
+ *  majlis — navy, engraved sand linework (company account)
  *
  * Emblems tell each name: Oasis — a date palm over water; Pearl — an open
  * pearl shell; Najm — a five-pointed star; Majlis — traditional majlis seating.
@@ -29,41 +30,44 @@ type Palette = {
   engraved?: boolean // light/shadow reversed: cut into the card, not raised
 }
 
+// Tier colours from the approved palette (brand round 4): Oasis green,
+// Pearl gulf cobalt, Najm night ink with light-orange foil, Majlis navy.
+// Each base is a tonal sweep of one brand colour to give the card depth.
 const P: Record<CardFinish, Palette> = {
   oasis: {
-    base: ['#B99A66', '#E4D1A8', '#C8AC7C', '#EEDFBD', '#B8975F', '#D9C293'],
-    ink: ['#5A4323', '#3A2B16', '#6B5230'],
-    hi: 'rgba(255,246,222,0.85)',
-    lo: 'rgba(70,48,18,0.55)',
-    muted: 'rgba(58,43,22,0.62)',
-    line: 'rgba(90,67,35,0.16)',
-    brush: 0.32,
+    base: ['#4F9839', '#6DBA54', '#5FAD46', '#76C25D', '#4C9437', '#64B24B'],
+    ink: ['#0A0E2A', '#00354E', '#0A0E2A'],
+    hi: 'rgba(255,255,255,0.45)',
+    lo: 'rgba(10,14,42,0.45)',
+    muted: 'rgba(10,14,42,0.66)',
+    line: 'rgba(10,14,42,0.10)',
+    brush: 0.2,
   },
   pearl: {
-    base: ['#C9CDD2', '#F3F4F4', '#D6DADE', '#FAFAF8', '#BFC4CA', '#E6E8EA'],
-    ink: ['#3B444F', '#1D242D', '#4C5562'],
-    hi: 'rgba(255,255,255,0.95)',
-    lo: 'rgba(40,48,60,0.42)',
-    muted: 'rgba(29,36,45,0.55)',
-    line: 'rgba(60,70,84,0.13)',
-    brush: 0.26,
+    base: ['#2733D8', '#3F4DFF', '#2F3DF0', '#4654FF', '#2430CF', '#3644F5'],
+    ink: ['#FFFFFF', '#F2EEE6', '#FFFFFF'],
+    hi: 'rgba(255,255,255,0.35)',
+    lo: 'rgba(10,14,42,0.6)',
+    muted: 'rgba(255,255,255,0.72)',
+    line: 'rgba(255,255,255,0.11)',
+    brush: 0.16,
   },
   najm: {
-    base: ['#0B0B0C', '#1E1D1B', '#121212', '#262420', '#0A0A0A', '#171615'],
-    ink: ['#F4E3B5', '#C9A45C', '#8C6C31', '#E8CD90'],
-    hi: 'rgba(255,238,196,0.32)',
+    base: ['#06081C', '#121738', '#0A0E2A', '#171D44', '#05071A', '#0E1331'],
+    ink: ['#FFC766', '#FAA61C', '#D98A0A', '#FBB43F'],
+    hi: 'rgba(255,222,160,0.32)',
     lo: 'rgba(0,0,0,0.9)',
-    muted: 'rgba(230,203,142,0.6)',
-    line: 'rgba(201,164,92,0.12)',
-    brush: 0.14,
+    muted: 'rgba(250,166,28,0.66)',
+    line: 'rgba(250,166,28,0.11)',
+    brush: 0.12,
   },
   majlis: {
-    base: ['#071C19', '#0F3A34', '#0A2925', '#124640', '#061714', '#0C302B'],
-    ink: ['#EBD49A', '#C29A4E', '#8E6C2E', '#DCC07F'],
-    hi: 'rgba(255,236,190,0.22)',
-    lo: 'rgba(0,0,0,0.85)',
-    muted: 'rgba(225,200,140,0.62)',
-    line: 'rgba(209,176,106,0.16)',
+    base: ['#002A3E', '#00435F', '#00354E', '#004A68', '#002638', '#003B57'],
+    ink: ['#FFFFFF', '#F2EEE6', '#CFC8BA', '#F2EEE6'],
+    hi: 'rgba(255,255,255,0.22)',
+    lo: 'rgba(0,0,0,0.8)',
+    muted: 'rgba(242,238,230,0.66)',
+    line: 'rgba(242,238,230,0.13)',
     brush: 0.1,
     engraved: true,
   },
@@ -71,9 +75,9 @@ const P: Record<CardFinish, Palette> = {
 
 const W = 856
 const H = 540
-const SERIF = "var(--font-display font-bold), 'Cormorant Garamond', Georgia, serif"
-const SANS = "var(--font-inter), Inter, system-ui, sans-serif"
-const ARABIC = "var(--font-arabic-display), Amiri, serif"
+const DISPLAY = "var(--font-archivo), Archivo, 'Helvetica Neue', Arial, sans-serif"
+const MONO = "var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, monospace"
+const ARABIC = "var(--font-arabic-sans), 'IBM Plex Sans Arabic', Tahoma, sans-serif"
 
 /** 2n-point star polygon. */
 function star(cx: number, cy: number, n: number, outer: number, inner: number, rot = -90) {
@@ -367,10 +371,10 @@ export function MembershipCard({
             <stop offset="1" stopColor="#9AA0AC" />
           </radialGradient>
           <linearGradient id={id('chip')} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#F6E6B4" />
-            <stop offset="0.35" stopColor="#D4B26A" />
-            <stop offset="0.6" stopColor="#F0DBA0" />
-            <stop offset="1" stopColor="#9C7A38" />
+            <stop offset="0" stopColor="#FFE3A8" />
+            <stop offset="0.35" stopColor="#FAA61C" />
+            <stop offset="0.6" stopColor="#FFD27A" />
+            <stop offset="1" stopColor="#C98410" />
           </linearGradient>
           {/* Brushed metal: noise stretched along the x axis */}
           <filter id={id('brush')} filterUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
@@ -408,10 +412,12 @@ export function MembershipCard({
 
           {/* Brand */}
           <g filter={ref('emboss')} fill={ref('ink')}>
-            <text x="64" y="104" fontFamily={SERIF} fontSize="50" fontWeight="600" letterSpacing="2">
-              DXB TKTS
-            </text>
-            <text x="66" y="140" fontFamily={SANS} fontSize="13" fontWeight="600" letterSpacing="6.5">
+            {/* Outlined T-Ticket logo: never live type */}
+            <g transform="translate(64 62) scale(0.3) translate(0 35)">
+              <path transform={LOGO_SYMBOL.transform ?? undefined} d={LOGO_SYMBOL.d} />
+              <path transform={LOGO_WORDMARK.transform ?? undefined} d={LOGO_WORDMARK.d} />
+            </g>
+            <text x="66" y="142" fontFamily={MONO} fontSize="14" fontWeight="500" letterSpacing="2">
               {label.toUpperCase()}
             </text>
           </g>
@@ -440,22 +446,22 @@ export function MembershipCard({
 
           {showMember && (
             <g filter={ref('emboss')} fill={ref('ink')}>
-              <text x="66" y="312" fontFamily={SANS} fontSize="10.5" fontWeight="600" letterSpacing="3">
+              <text x="66" y="312" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
                 MEMBER NO.
               </text>
-              <text x="66" y="356" fontFamily={SANS} fontSize="44" fontWeight="500" letterSpacing="10" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              <text x="66" y="356" fontFamily={MONO} fontSize="42" fontWeight="500" letterSpacing="6" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {memberNumber}
               </text>
-              <text x="66" y="394" fontFamily={SANS} fontSize="10.5" fontWeight="600" letterSpacing="3">
+              <text x="66" y="394" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
                 VALID
               </text>
-              <text x="66" y="407" fontFamily={SANS} fontSize="10.5" fontWeight="600" letterSpacing="3">
+              <text x="66" y="407" fontFamily={MONO} fontSize="10.5" fontWeight="600" letterSpacing="3">
                 THRU
               </text>
-              <text x="126" y="408" fontFamily={SANS} fontSize="26" fontWeight="500" letterSpacing="4" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              <text x="126" y="408" fontFamily={MONO} fontSize="26" fontWeight="500" letterSpacing="2" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {expiry}
               </text>
-              <text x="66" y="482" fontFamily={SANS} fontSize="29" fontWeight="500" letterSpacing="3.5">
+              <text x="66" y="482" fontFamily={DISPLAY} fontSize="28" fontWeight="700" letterSpacing="1.5">
                 {memberName.toUpperCase()}
               </text>
             </g>
@@ -463,10 +469,10 @@ export function MembershipCard({
 
           {/* Tier */}
           <g filter={ref('emboss')} fill={ref('ink')}>
-            <text x="790" y="420" textAnchor="start" fontFamily={ARABIC} fontSize="34" direction="rtl">
+            <text x="790" y="420" textAnchor="start" fontFamily={ARABIC} fontSize="32" fontWeight="600" direction="rtl">
               {arabicName}
             </text>
-            <text x="792" y="484" textAnchor="end" fontFamily={SERIF} fontSize="56" fontStyle="italic" fontWeight="500" letterSpacing="1">
+            <text x="792" y="484" textAnchor="end" fontFamily={DISPLAY} fontSize="58" fontWeight="800" letterSpacing="-1.5" style={{ fontStretch: '110%' }}>
               {name}
             </text>
           </g>

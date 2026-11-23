@@ -11,17 +11,19 @@ import { usePlan } from '@/components/catalogue/plan-provider'
 import { getProduct } from '@/data/catalogue'
 import { formatAED } from '@/lib/catalogue/money'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
+import { Tear } from '@/components/brand'
 
 const intlLocale: Record<Locale, string> = { en: 'en-GB', fr: 'fr-FR', ar: 'ar-AE-u-nu-latn' }
 const CATEGORIES: EventCategory[] = ['entertainment', 'sport', 'culture', 'lifestyle', 'business']
 const EMIRATES: Emirate[] = ['dubai', 'abu-dhabi', 'sharjah', 'uae']
 
 const CATEGORY_TONE: Record<EventCategory, string> = {
-  business: 'bg-dxb-sea',
-  sport: 'bg-dxb-orange',
+  // Events sit in the red family; the dot tells the sub-type apart.
+  business: 'bg-dxb-navy',
+  sport: 'bg-dxb-green',
   culture: 'bg-dxb-orange',
-  lifestyle: 'bg-[#8C4A5E]',
-  entertainment: 'bg-[#5B4B8A]',
+  lifestyle: 'bg-dxb-cobalt',
+  entertainment: 'bg-dxb-red',
 }
 
 const d = (iso: string) => new Date(`${iso}T12:00:00Z`)
@@ -76,7 +78,7 @@ function DateBlock({ e, locale }: { e: CalendarEvent; locale: Locale }) {
   return (
     <div className="w-20 shrink-0 text-center">
       <span className="block text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{fmt(locale, e.start, { month: 'short' })}</span>
-      <span className="block font-display text-4xl leading-none text-dxb-navy mt-1" dir="ltr">
+      <span className="block dxb-data text-4xl font-semibold leading-none text-dxb-navy mt-1" dir="ltr">
         {fmt('en', e.start, { day: 'numeric' })}
       </span>
       {e.end && e.end !== e.start && (
@@ -91,13 +93,13 @@ function DateBlock({ e, locale }: { e: CalendarEvent; locale: Locale }) {
 function StatusBadge({ e, locale }: { e: CalendarEvent; locale: Locale }) {
   const tone =
     e.status === 'confirmed'
-      ? 'border-dxb-sea/30 text-dxb-sea'
+      ? 'border-dxb-cobalt/40 text-dxb-cobalt'
       : e.status === 'expected'
-        ? 'border-dxb-gold/40 text-[#8A6A2B]'
-        : 'border-dxb-ink/15 text-dxb-slate'
+        ? 'border-dxb-navy/30 text-dxb-navy'
+        : 'border-dxb-ink/15 text-dxb-muted'
   return (
     <span className={`inline-flex items-center gap-1.5 border px-2 py-0.5 text-[10px] font-medium font-mono uppercase tracking-[0.06em] ${tone}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${e.status === 'confirmed' ? 'bg-dxb-sea' : e.status === 'expected' ? 'bg-dxb-orange' : 'bg-dxb-slate/50'}`} />
+      <span className={`h-1.5 w-1.5 ${e.status === 'confirmed' ? 'bg-dxb-cobalt' : e.status === 'expected' ? 'bg-dxb-orange' : 'bg-dxb-slate/50'}`} />
       {c.status[e.status][locale]}
     </span>
   )
@@ -112,17 +114,17 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
         <DateBlock e={e} locale={locale} />
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className={`h-2 w-2 rounded-full ${CATEGORY_TONE[e.category]}`} aria-hidden="true" />
+            <span className={`h-2.5 w-2.5 ${CATEGORY_TONE[e.category]}`} aria-hidden="true" />
             <span className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate">{c.categories[e.category][locale]}</span>
             <StatusBadge e={e} locale={locale} />
             {live && <span className="bg-dxb-orange px-2 py-0.5 text-[10px] font-bold text-dxb-ink">{c.onNow[locale]}</span>}
-            {e.ticketable && <span className="border border-dxb-clay/40 px-2 py-0.5 text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-clay">{c.ticketsOnRequest[locale]}</span>}
+            {e.ticketable && <span className="border border-dxb-cobalt/40 px-2 py-0.5 text-[10px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-cobalt">{c.ticketsOnRequest[locale]}</span>}
           </div>
           <h3 className="mt-2 font-display text-2xl md:text-3xl leading-tight text-dxb-navy group-hover:text-dxb-gold transition-colors">{e.name[locale]}</h3>
           <p className="mt-1 flex items-center gap-1.5 text-sm text-dxb-slate">
             <MapPin className="w-3.5 h-3.5 text-dxb-gold shrink-0" />
             <span className="truncate">{e.venue[locale]}</span>
-            <span className="text-dxb-ink/25">·</span>
+            <Tear className="text-dxb-ink/30 !mx-0" />
             <span className="shrink-0">{c.emirates[e.emirate][locale]}</span>
           </p>
         </div>
@@ -145,7 +147,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
               </dd>
               <dt className="text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-slate pt-0.5">{c.where[locale]}</dt>
               <dd className="text-dxb-ink">
-                {e.venue[locale]} · {c.emirates[e.emirate][locale]}
+                {e.venue[locale]} <Tear /> {c.emirates[e.emirate][locale]}
               </dd>
             </dl>
             {e.ticketable && (
@@ -182,7 +184,7 @@ function EventRow({ e, locale, open, onToggle, live }: { e: CalendarEvent; local
           </div>
           <aside className="lg:col-span-5 self-start border-s-2 border-dxb-gold bg-white/70 px-6 py-5">
             <p className="text-sm text-dxb-ink/85 leading-relaxed">{help.copy[locale]}</p>
-            <Link href={help.href} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-dxb-clay">
+            <Link href={help.href} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-dxb-cobalt">
               {help.cta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
             </Link>
           </aside>

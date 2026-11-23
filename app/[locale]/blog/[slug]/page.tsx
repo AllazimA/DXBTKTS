@@ -7,6 +7,7 @@ import type { Locale } from '@/i18n.config'
 import { aiImage } from '@/lib/images'
 import { absoluteUrl, alternatesFor, site } from '@/lib/site'
 import { articles, formatDate, journalCategories, journalCopy as c, readingMinutes } from '@/content/journal'
+import { Tear } from '@/components/brand'
 
 type Props = { params: { locale: Locale; slug: string } }
 
@@ -78,7 +79,7 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
           <h1 className="mt-4 font-display text-[2.6rem] leading-[1.05] md:text-6xl">{a.title[locale]}</h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/80 font-light">{a.excerpt[locale]}</p>
           <p className="mt-6 text-xs text-white/60">
-            {c.byline[locale]} · {formatDate(locale, a.published)} · {c.minRead[locale].replace('{n}', String(minutes))}
+            {c.byline[locale]} <Tear /> {formatDate(locale, a.published)} <Tear /> {c.minRead[locale].replace('{n}', String(minutes))}
           </p>
         </div>
       </header>

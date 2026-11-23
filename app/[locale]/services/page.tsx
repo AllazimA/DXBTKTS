@@ -91,7 +91,7 @@ export default function Services({ params: { locale } }: { params: { locale: Loc
                     <span className="text-dxb-ink">{s.charged[locale]}</span>
                   </div>
                   <div className="mt-7 flex flex-wrap gap-5">
-                    <Link href="/request" className="inline-flex items-center gap-2 text-sm font-semibold text-dxb-clay">
+                    <Link href="/request" className="inline-flex items-center gap-2 text-sm font-semibold text-dxb-cobalt">
                       {c.cta[locale]} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                     </Link>
                     {s.link && (

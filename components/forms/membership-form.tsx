@@ -93,7 +93,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
         <textarea name="message" rows={3} className={field} />
       </label>
       <label className="flex items-start gap-3 text-sm text-white/60">
-        <input type="checkbox" required className="mt-1 accent-[#B08D3F]" />
+        <input type="checkbox" required className="mt-1 accent-[#2F3DF0]" />
         {f.consent[locale]}
       </label>
       {status === 'error' && <p className="text-sm text-dxb-red">{f.error[locale]}</p>}

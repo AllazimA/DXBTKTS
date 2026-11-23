@@ -26,8 +26,8 @@ function messageFor(key: TemplateKey, b: PlanRecord) {
 
 function Status({ b }: { b: Awaited<ReturnType<typeof loadDesk>>['bookings'][number] }) {
   if (b.paid) return <span className="bg-dxb-sea/10 text-dxb-sea px-2 py-0.5 text-xs font-semibold">Paid {aed(b.paid.amount_aed)}{b.paid.livemode ? '' : ' · test'}</span>
-  if (b.status === 'awaiting_payment') return <span className="bg-dxb-clay/10 text-dxb-clay px-2 py-0.5 text-xs font-semibold">Checkout not completed</span>
-  return <span className="bg-dxb-gold/15 text-[#8A6A2B] px-2 py-0.5 text-xs font-semibold">Request — confirm & send payment</span>
+  if (b.status === 'awaiting_payment') return <span className="bg-dxb-clay/10 text-dxb-cobalt px-2 py-0.5 text-xs font-semibold">Checkout not completed</span>
+  return <span className="bg-dxb-orange text-dxb-ink px-2 py-0.5 text-xs font-semibold">Request — confirm & send payment</span>
 }
 
 export default async function AdminDesk() {
