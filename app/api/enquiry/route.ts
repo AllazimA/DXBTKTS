@@ -4,6 +4,7 @@ import path from 'path'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { queueForCrm, type RequestType } from '@/lib/crm-outbox'
 import { sendAck } from '@/lib/ack-email'
+import { honeypotHit } from '@/lib/honeypot'
 
 /**
  * Enquiry intake (request + contact forms).
@@ -59,8 +60,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 
-  // Honeypot: real users never fill the hidden "company_website" field.
-  if (typeof body.company_website === 'string' && body.company_website.trim()) {
+  // Honeypot: real users never fill the hidden field (lib/honeypot.ts).
+  if (await honeypotHit(body, 'enquiry')) {
     return NextResponse.json({ success: true }, { status: 200 })
   }
 

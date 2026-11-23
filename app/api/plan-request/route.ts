@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { appendJsonl, parsePlan, planLines, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
 import { sendAck } from '@/lib/ack-email'
+import { honeypotHit } from '@/lib/honeypot'
 
 /**
  * Booking request from the visitor's plan ("request to book").
@@ -19,9 +20,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 
+  if (await honeypotHit(body, 'plan')) return NextResponse.json({ success: true, reference: reference() })
   const plan = parsePlan(body)
   if (!plan.ok) {
-    if (plan.honeypot) return NextResponse.json({ success: true, reference: reference() })
     return NextResponse.json({ error: plan.error }, { status: plan.status })
   }
 

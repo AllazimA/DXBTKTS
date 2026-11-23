@@ -1,5 +1,6 @@
 'use client'
 
+import { HONEYPOT_FIELD } from '@/lib/honeypot-field'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
@@ -32,7 +33,7 @@ export function EnquiryForm() {
           interest: formData.get('interest'),
           message: formData.get('message'),
           referral_source: formData.get('referral_source'),
-          company_website: formData.get('company_website'),
+          [HONEYPOT_FIELD]: formData.get(HONEYPOT_FIELD),
           page: window.location.pathname,
           locale: document.documentElement.lang,
         }),
@@ -76,7 +77,7 @@ export function EnquiryForm() {
         <form onSubmit={handleSubmit} className="relative space-y-6">
           <input
             type="text"
-            name="company_website"
+            name={HONEYPOT_FIELD} data-1p-ignore data-lpignore="true" data-form-type="other"
             tabIndex={-1}
             autoComplete="off"
             aria-hidden="true"

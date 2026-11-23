@@ -1,5 +1,6 @@
 'use client'
 
+import { HONEYPOT_FIELD } from '@/lib/honeypot-field'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
@@ -98,7 +99,7 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
           phone: fd.get('phone'),
           message: fd.get('message'),
           fields: values,
-          company_website: fd.get('company_website'),
+          [HONEYPOT_FIELD]: fd.get(HONEYPOT_FIELD),
           page: window.location.pathname,
           locale,
         }),
@@ -127,7 +128,7 @@ export function ServiceRequestForm({ kind, options = {}, hidden = {}, prefill = 
 
   return (
     <form ref={formRef} onSubmit={onSubmit} className="relative space-y-6 scroll-mt-28" id={id}>
-      <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+      <input type="text" name={HONEYPOT_FIELD} data-1p-ignore data-lpignore="true" data-form-type="other" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
 
       <div className={grid}>
         {fields.map(f => (

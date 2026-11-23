@@ -1,5 +1,6 @@
 'use client'
 
+import { HONEYPOT_FIELD } from '@/lib/honeypot-field'
 import { BrandIcon, Perforation, Tear } from '@/components/brand'
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
@@ -85,7 +86,7 @@ export function PlanDrawer() {
           notes: form.get('notes'),
           datesFlexible: undated > 0 && flexible,
           consent: form.get('consent') === 'on',
-          company_website: form.get('company_website'),
+          [HONEYPOT_FIELD]: form.get(HONEYPOT_FIELD),
           locale,
           items: items.map(({ key, ...rest }) => rest),
         }),
@@ -200,7 +201,7 @@ export function PlanDrawer() {
                   </div>
 
                   <form onSubmit={submit} className="relative px-6 py-6 space-y-4">
-                    <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+                    <input type="text" name={HONEYPOT_FIELD} data-1p-ignore data-lpignore="true" data-form-type="other" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
                     <h3 className="dxb-label text-[11px] text-dxb-cobalt">{tp('yourDetails')}</h3>
                     <label className="block text-sm text-dxb-ink">
                       {tp('name')} *

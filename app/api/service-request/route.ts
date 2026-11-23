@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { honeypotHit } from '@/lib/honeypot'
 import { promises as fs } from 'fs'
 import path from 'path'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
-  if (str(body.company_website, 200)) return NextResponse.json({ success: true })
+  if (await honeypotHit(body, 'service')) return NextResponse.json({ success: true })
 
   const kind = body.type as ServiceKind
   if (!SERVICE_KINDS.includes(kind)) return NextResponse.json({ error: 'Unknown request type' }, { status: 400 })

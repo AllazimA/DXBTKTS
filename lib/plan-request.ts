@@ -32,8 +32,6 @@ export type ParsedPlan =
     }
 
 export function parsePlan(body: Record<string, unknown>): ParsedPlan {
-  if (str(body.company_website, 200)) return { ok: false, status: 200, error: 'honeypot', honeypot: true }
-
   const name = str(body.name, 120)
   const email = str(body.email, 200)
   const whatsapp = str(body.whatsapp, 40)

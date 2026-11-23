@@ -1,5 +1,6 @@
 'use client'
 
+import { HONEYPOT_FIELD } from '@/lib/honeypot-field'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
@@ -63,7 +64,7 @@ export function RequestForm() {
           message: formData.get('message'),
           date: formData.get('date'),
           referral_source: 'request_page',
-          company_website: formData.get('company_website'),
+          [HONEYPOT_FIELD]: formData.get(HONEYPOT_FIELD),
           page: window.location.pathname,
           locale: document.documentElement.lang,
         }),
@@ -103,7 +104,7 @@ export function RequestForm() {
     <form onSubmit={handleSubmit} className="relative space-y-7">
           <input
             type="text"
-            name="company_website"
+            name={HONEYPOT_FIELD} data-1p-ignore data-lpignore="true" data-form-type="other"
             tabIndex={-1}
             autoComplete="off"
             aria-hidden="true"

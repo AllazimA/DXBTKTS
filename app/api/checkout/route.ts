@@ -3,6 +3,7 @@ import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { appendJsonl, parsePlan, planLines, planRecord, PLAN_FILE, queuePlanForCrm, reference } from '@/lib/plan-request'
 import { stripeClient, stripeMode } from '@/lib/stripe'
 import { site } from '@/lib/site'
+import { honeypotHit } from '@/lib/honeypot'
 
 /**
  * Pay now: records the plan and opens a Stripe Checkout Session.
@@ -25,9 +26,9 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
+  if (await honeypotHit(body, 'checkout')) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   const plan = parsePlan(body)
   if (!plan.ok) {
-    if (plan.honeypot) return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
     return NextResponse.json({ error: plan.error }, { status: plan.status })
   }
   // Paying online books real dates: every experience needs one (flexible dates go through a request instead).

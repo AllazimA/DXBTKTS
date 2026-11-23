@@ -1,5 +1,6 @@
 'use client'
 
+import { HONEYPOT_FIELD } from '@/lib/honeypot-field'
 import { useState } from 'react'
 import type { Locale } from '@/i18n.config'
 import { membership as m } from '@/content/membership'
@@ -28,7 +29,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
           interest: `Membership — ${data.get('level')}`,
           message: [`Residence: ${data.get('residence')}`, data.get('message') || ''].filter(Boolean).join('\n'),
           referral_source: 'membership_page',
-          company_website: data.get('company_website'),
+          [HONEYPOT_FIELD]: data.get(HONEYPOT_FIELD),
           page: window.location.pathname,
           locale,
         }),
@@ -46,7 +47,7 @@ export function MembershipForm({ locale, tier, onTierChange }: { locale: Locale;
 
   return (
     <form onSubmit={submit} className="relative space-y-7">
-      <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+      <input type="text" name={HONEYPOT_FIELD} data-1p-ignore data-lpignore="true" data-form-type="other" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
         <label className={label}>
           {f.name[locale]} *
