@@ -55,7 +55,7 @@ export function Experiences() {
   return (
     <section className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        <SectionHeading index="05" label={t('eyebrow')} title={t.rich('title', { accent })} className="mb-14" />
+        <SectionHeading index="04" label={t('eyebrow')} title={t.rich('title', { accent })} className="mb-14" />
         <div className="space-y-20 md:space-y-28">
           {stories.map((s, i) => (
             <StoryRow key={s.title} story={s} visual={visuals[i]} flip={i % 2 === 1} cta={t('cta')} index={i} />

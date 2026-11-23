@@ -2,65 +2,92 @@
 
 import { SceneImage } from '@/components/ui/scene-image'
 import { aiImage } from '@/lib/images'
+import { site } from '@/lib/site'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { BrandIcon } from '@/components/brand'
-import { SectionHeading } from '@/components/brand/section-heading'
-import { Reveal } from '@/components/brand/reveal'
+import { BackgroundFilm } from '@/components/ui/background-film'
+import { BrandIcon, MonoLabel, Tear } from '@/components/brand'
 import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
 const visuals = [
   { image: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter flying over Palm Jumeirah'), category: 'sky' },
-  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water' },
-  { image: aiImage('category-lifestyle', 'fineDining', 'Dinner table on a terrace above Dubai Marina'), category: 'lifestyle' },
+  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water', film: site.heroVideo ? { mp4: site.heroVideo.mp4, mobile: site.heroVideo.mobile, poster: site.heroVideo.poster } : undefined },
+  { image: aiImage('category-lifestyle', 'fineDining', 'Dinner table on a terrace above Dubai Marina'), category: 'lifestyle', film: site.films.diningTerrace },
   { image: aiImage('page-proposal', 'privateVilla', 'Proposal on a beachfront terrace at sunset'), category: 'signature' },
   { image: aiImage('category-desert', 'desert', 'Riders on a dune ridge at sunset'), category: 'desert' },
   { image: aiImage('category-transfers', 'arrival', 'Chauffeur opening the door of a luxury car'), category: 'transfers' },
 ]
 
+/**
+ * Six full-screen chapters that stack as you scroll: each panel is sticky,
+ * so the next one slides over it like the next ticket in a book.
+ */
 export function ServicesShowcase() {
   const t = useTranslations('showcase')
   const locale = useLocale() as Locale
   const items = t.raw('items') as { title: string; desc: string }[]
-  const accent = (chunks: React.ReactNode) => <span className="text-dxb-cobalt">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-orange">{chunks}</span>
 
   return (
-    <section className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        <SectionHeading index="02" label={t('eyebrow')} title={t.rich('title', { accent })} className="mb-12" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
-          {items.map((s, i) => {
-            const visual = visuals[i]
-            const fam = FAMILY[familyOf(visual.category)]
-            return (
-              <Reveal key={s.title} delay={(i % 3) * 0.08}>
-                <Link href={`/experiences/${visual.category}`} className="group flex h-full flex-col dxb-cut dxb-cut-lg">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-dxb-navy">
-                    <SceneImage image={visual.image} sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-                  </div>
-                  <div className={`flex flex-1 flex-col p-5 md:p-6 ${fam.bg} ${fam.text}`}>
-                    <span className="flex items-center justify-between gap-3">
-                      <span className="inline-flex items-center gap-2 dxb-label text-[11px] opacity-85">
-                        <BrandIcon name={CATEGORY_ICON[visual.category] ?? fam.icon} className="w-4 h-4" />
-                        {fam.label[locale]}
-                      </span>
-                      <span className="dxb-label text-[11px] opacity-60" dir="ltr">{String(i + 1).padStart(2, '0')}</span>
-                    </span>
-                    <h3 className="mt-4 text-2xl md:text-[26px] font-extrabold tracking-[-0.02em] leading-tight">{s.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed opacity-85">{s.desc}</p>
-                    <span className="mt-auto pt-5 inline-flex items-center gap-2 text-[15px] font-bold">
-                      {t('explore')}
-                      <BrandIcon name="arrow" className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            )
-          })}
+    <section className="relative bg-dxb-ink text-white">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 pt-20 md:pt-28 pb-14 md:pb-20 grid md:grid-cols-12 gap-8 items-end">
+        <div className="md:col-span-8">
+          <MonoLabel parts={['02', t('eyebrow')]} className="text-dxb-orange" />
+          <h2 className="mt-5 font-display text-5xl md:text-7xl lg:text-[88px] leading-[0.92] tracking-[-0.04em]">{t.rich('title', { accent })}</h2>
         </div>
+        <p className="md:col-span-4 dxb-label text-[11px] text-white/50 md:text-end" dir="ltr">
+          01 <Tear /> {String(items.length).padStart(2, '0')}
+        </p>
       </div>
+
+      {items.map((s, i) => {
+        const v = visuals[i]
+        const fam = FAMILY[familyOf(v.category)]
+        return (
+          <Fragment key={s.title}>
+          {/* A transparent spacer lets each scene hold full-screen before the next slides over it. */}
+          {i > 0 && <div aria-hidden className="h-[40svh]" />}
+          <div className="sticky top-0 h-[100svh] min-h-[560px] overflow-hidden" style={{ zIndex: i + 1 }}>
+            <div className="absolute inset-0 bg-dxb-ink">
+              <SceneImage image={v.image} sizes="100vw" className="object-cover" />
+              {v.film && <BackgroundFilm {...v.film} />}
+            </div>
+            <div className="absolute inset-0 dxb-vignette" />
+            <div className="relative h-full max-w-7xl mx-auto px-5 sm:px-6 flex flex-col justify-end pb-14 md:pb-20">
+              <div className="grid md:grid-cols-12 gap-6 items-end">
+                <div className="md:col-span-8">
+                  <span className="inline-flex items-center gap-2.5 dxb-glass h-9 px-3 dxb-label text-[11px]">
+                    <span className={`h-2.5 w-2.5 ${fam.bg}`} aria-hidden="true" />
+                    <BrandIcon name={CATEGORY_ICON[v.category] ?? fam.icon} className="w-4 h-4" />
+                    {fam.label[locale]}
+                  </span>
+                  <h3 className="mt-5 font-display text-[52px] leading-[0.9] sm:text-7xl lg:text-[104px] tracking-[-0.045em]">{s.title}</h3>
+                </div>
+                <div className="md:col-span-4">
+                  <p className="text-lg text-white/80 leading-relaxed font-light">{s.desc}</p>
+                  <Link
+                    href={`/experiences/${v.category}`}
+                    className="group mt-6 inline-flex items-center gap-2 h-12 px-6 bg-white text-dxb-navy font-bold dxb-cut dxb-cut-sm transition-colors hover:bg-dxb-orange hover:text-dxb-ink"
+                  >
+                    {t('explore')}
+                    <BrandIcon name="arrow" className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+                  </Link>
+                </div>
+              </div>
+              <div className="mt-10 flex items-center gap-4 dxb-label text-[11px] text-white/55" dir="ltr">
+                <span>{String(i + 1).padStart(2, '0')}</span>
+                <span className="relative h-[2px] flex-1 bg-white/15">
+                  <span className="absolute inset-y-0 start-0 bg-dxb-orange" style={{ width: `${((i + 1) / items.length) * 100}%` }} />
+                </span>
+                <span>{String(items.length).padStart(2, '0')}</span>
+              </div>
+            </div>
+          </div>
+          </Fragment>
+        )
+      })}
     </section>
   )
 }

@@ -20,6 +20,9 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [diningOpen, setDiningOpen] = useState(false)
+  // Pages that open with a full-bleed film or photo mark it with [data-hero-overlay];
+  // the header then floats transparent over it until the visitor scrolls.
+  const [overlay, setOverlay] = useState(false)
   const diningRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,6 +31,10 @@ export function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    setOverlay(Boolean(document.querySelector('[data-hero-overlay]')))
+  }, [pathname])
 
   // Close the mobile menu on navigation
   useEffect(() => {
@@ -76,8 +83,10 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-dxb-navy text-white transition-shadow duration-300 ${
-        scrolled ? 'shadow-[0_14px_32px_-20px_rgba(10,14,42,0.8)]' : ''
+      className={`sticky top-0 z-50 text-white transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
+        overlay && !scrolled && !menuOpen
+          ? 'bg-gradient-to-b from-dxb-ink/70 to-transparent'
+          : 'bg-dxb-navy/95 backdrop-blur-xl shadow-[0_14px_32px_-20px_rgba(10,14,42,0.8)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6">

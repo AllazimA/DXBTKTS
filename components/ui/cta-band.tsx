@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { BackgroundFilm } from './background-film'
 import { BrandIcon, BrandSymbol, MonoLabel, Perforation } from '@/components/brand'
 import { Reveal } from '@/components/brand/reveal'
 import { WhatsAppIcon } from './whatsapp-icon'
@@ -15,21 +17,35 @@ interface CTABandProps {
   secondaryCtaLabel?: string
   secondaryCtaHref?: string
   className?: string
+  /** Optional full-bleed film (and its poster) behind the pass. */
+  film?: { mp4: string; mobile?: string; poster?: string }
 }
 
 /**
  * Closing call to action: a large boarding-pass on the navy tear-pattern
  * ground. Primary action in light orange, secondary (usually WhatsApp) beside it.
  */
-function CTABand({ className, heading, subheading, ctaLabel, ctaHref = '#', secondaryCtaLabel, secondaryCtaHref = '#' }: CTABandProps) {
+function CTABand({ className, heading, subheading, ctaLabel, ctaHref = '#', secondaryCtaLabel, secondaryCtaHref = '#', film }: CTABandProps) {
   const t = useTranslations('ctaBand')
   const isWhatsApp = secondaryCtaHref.includes('wa.me')
 
   return (
-    <section className={cn('relative dxb-pattern-navy py-16 md:py-24 text-white', className)}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+    <section className={cn('relative overflow-hidden text-white', film ? 'bg-dxb-ink py-28 md:py-40' : 'dxb-pattern-navy py-16 md:py-24', className)}>
+      {film && (
+        <>
+          {film.poster && <Image src={film.poster} alt="" fill sizes="100vw" className="object-cover" />}
+          <BackgroundFilm {...film} />
+          <div className="absolute inset-0 bg-dxb-ink/55" />
+        </>
+      )}
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <Reveal className="dxb-lift">
-          <div className="grid md:grid-cols-[1fr_auto] bg-dxb-navy dxb-stub [--stub-x:100%] md:[--stub-x:calc(100%_-_220px)] md:rtl:[--stub-x:220px] [--stub-r:16px] ring-1 ring-white/10">
+          <div
+            className={cn(
+              'grid md:grid-cols-[1fr_auto] dxb-stub [--stub-x:100%] md:[--stub-x:calc(100%_-_220px)] md:rtl:[--stub-x:220px] [--stub-r:16px]',
+              film ? 'bg-dxb-navy/75 backdrop-blur-xl' : 'bg-dxb-navy',
+            )}
+          >
             <div className="p-8 md:p-12">
               <MonoLabel className="text-dxb-orange">{t('eyebrow')}</MonoLabel>
               {heading && <h2 className="font-display text-4xl md:text-[56px] mt-4 text-white">{heading}</h2>}

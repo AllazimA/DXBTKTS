@@ -11,9 +11,11 @@ import { aiImage } from '@/lib/images'
 import { formatAED } from '@/lib/catalogue/money'
 import { packageLines, packageTotal } from '@/lib/catalogue/packages'
 import { absoluteUrl, alternatesFor, site } from '@/lib/site'
-import { SceneImage } from '@/components/ui/scene-image'
 import { AddPackageButton } from '@/components/packages/add-package-button'
 import { PackageCard } from '@/components/packages/package-card'
+import { PageHero, heroPrimary } from '@/components/brand/page-hero'
+import { SectionHeading } from '@/components/brand/section-heading'
+import { Tear } from '@/components/brand'
 
 type Props = { params: { locale: Locale; slug: string } }
 
@@ -52,25 +54,25 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="bg-dxb-sand pt-8 pb-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <nav className="text-xs text-dxb-slate mb-6" aria-label="Breadcrumb">
-            <Link href="/packages" className="hover:text-dxb-gold">{c.eyebrow[locale]}</Link>
-            <span className="mx-2">/</span>
-            <span className="text-dxb-ink">{p.name[locale]}</span>
+      <PageHero size="medium" image={img} label={c.themes[p.theme][locale]} title={p.name[locale]} lede={p.tagline[locale]}>
+        <a href="#book" className={heroPrimary}>
+          {c.from[locale]} {formatAED(total, locale)}
+        </a>
+      </PageHero>
+
+      <section className="bg-dxb-sand pt-10 pb-16 md:pb-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <nav className="dxb-label text-[11px] text-dxb-muted mb-6 flex flex-wrap items-center" aria-label="Breadcrumb">
+            <Link href="/packages" className="hover:text-dxb-cobalt">{c.eyebrow[locale]}</Link>
+            <Tear />
+            <span className="text-dxb-navy">{p.name[locale]}</span>
           </nav>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_400px] gap-10 lg:gap-14 items-start">
             <div className="min-w-0">
-              <div className="relative aspect-[16/10] overflow-hidden bg-dxb-navy">
-                <SceneImage image={img} sizes="(max-width: 1024px) 100vw, 60vw" priority className="object-cover" />
-              </div>
-              <span className="mt-8 inline-block text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{c.themes[p.theme][locale]}</span>
-              <h1 className="font-display text-4xl md:text-5xl text-dxb-navy mt-2 leading-tight">{p.name[locale]}</h1>
-              <p className="text-lg text-dxb-slate mt-3 leading-relaxed">{p.tagline[locale]}</p>
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-dxb-ink">
-                <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-dxb-gold" /> {p.duration[locale]}</span>
-                <span className="inline-flex items-center gap-2"><Users className="w-4 h-4 text-dxb-gold" /> {p.party[locale]}</span>
-                <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-dxb-gold" /> {p.booking === 'instant' ? c.instant[locale] : c.concierge[locale]}</span>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-dxb-ink">
+                <span className="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-dxb-cobalt" /> {p.duration[locale]}</span>
+                <span className="inline-flex items-center gap-2"><Users className="w-4 h-4 text-dxb-cobalt" /> {p.party[locale]}</span>
+                <span className="inline-flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-dxb-cobalt" /> {p.booking === 'instant' ? c.instant[locale] : c.concierge[locale]}</span>
               </div>
               <p className="mt-8 text-dxb-slate text-lg leading-relaxed">{p.description[locale]}</p>
 
@@ -78,7 +80,7 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
               <ol className="mt-5 space-y-3">
                 {p.flow[locale].map((step, i) => (
                   <li key={step} className="flex gap-4 text-dxb-ink">
-                    <span className="font-display font-bold text-2xl leading-none text-dxb-gold w-7 shrink-0" dir="ltr">{i + 1}</span>
+                    <span className="dxb-data text-2xl font-semibold leading-none text-dxb-cobalt w-8 shrink-0" dir="ltr">{i + 1}</span>
                     <span className="pt-0.5">{step}</span>
                   </li>
                 ))}
@@ -90,8 +92,8 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
               )}
             </div>
 
-            <aside className="lg:sticky lg:top-28 bg-white border border-dxb-band p-6 md:p-7">
-              <h2 className="text-xs font-medium tracking-[0.06em] font-mono uppercase text-dxb-slate">{c.inThePackage[locale]}</h2>
+            <aside id="book" className="scroll-mt-24 lg:sticky lg:top-24 bg-white dxb-cut p-6 md:p-7">
+              <h2 className="dxb-label text-[11px] text-dxb-cobalt">{c.inThePackage[locale]}</h2>
               <ul className="mt-4 divide-y divide-dxb-band">
                 {lines.map(l => {
                   const cat = getCategory(l.product.category)
@@ -101,14 +103,14 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
                         <Link href={`/experiences/${cat?.slug}/${l.product.slug}`} className="text-sm font-semibold text-dxb-ink hover:text-dxb-gold">{l.product.name[locale]}</Link>
                         <p className="text-xs text-dxb-slate mt-0.5">{l.variant.name[locale]}</p>
                       </div>
-                      <span className="text-sm text-dxb-ink whitespace-nowrap">{formatAED(l.total, locale)}</span>
+                      <span className="dxb-data text-sm text-dxb-navy whitespace-nowrap">{formatAED(l.total, locale)}</span>
                     </li>
                   )
                 })}
               </ul>
               <div className="mt-4 flex items-baseline justify-between border-t border-dxb-ink/20 pt-4">
                 <span className="text-sm text-dxb-slate">{c.from[locale]}</span>
-                <span className="text-2xl font-semibold text-dxb-ink">{formatAED(total, locale)}</span>
+                <span className="dxb-data text-2xl font-semibold text-dxb-navy">{formatAED(total, locale)}</span>
               </div>
               <p className="mt-1 text-xs text-dxb-slate">{p.party[locale]}</p>
               {unverified && <p className="mt-2 text-xs text-dxb-gold">{t('indicativeNote')}</p>}
@@ -128,7 +130,7 @@ export default async function PackagePage({ params: { locale, slug } }: Props) {
       {more.length > 0 && (
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="font-display text-3xl md:text-4xl text-dxb-navy mb-8">{c.shelfTitle[locale]}</h2>
+            <SectionHeading title={c.shelfTitle[locale]} className="mb-10" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {more.map(x => (
                 <PackageCard key={x.slug} pkg={x} locale={locale} />

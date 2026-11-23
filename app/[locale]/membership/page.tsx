@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { Check } from 'lucide-react'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
@@ -8,8 +7,8 @@ import { membership as m } from '@/content/membership'
 import { ChapterLabel } from '@/components/editorial/chapter-label'
 import { MembershipCard } from '@/components/membership/membership-card'
 import { MembershipApply } from '@/components/membership/membership-apply'
-import { BrandIcon, Tear } from '@/components/brand'
-import { heroPrimary, heroSecondary } from '@/components/brand/page-hero'
+import { BrandIcon } from '@/components/brand'
+import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
 
 const BAND = aiImage('page-membership', 'eveningEvent', 'Members in a private lounge overlooking an evening concert in Dubai')
 
@@ -22,37 +21,35 @@ export default function Membership({ params: { locale } }: { params: { locale: L
 
   return (
     <>
-      {/* Opening — copy left, fanned cards right */}
-      <section className="relative bg-dxb-navy text-white overflow-hidden">
-        <div aria-hidden className="hidden lg:block absolute inset-y-0 end-0 w-1/2 dxb-pattern-navy opacity-20" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 py-14 md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
-          <div className="lg:col-span-6">
-            <span className="dxb-label text-dxb-orange inline-flex items-center">DXB TKTS<Tear />{m.eyebrow[locale]}</span>
-            <h1 className="mt-6 font-display text-[44px] leading-[0.98] sm:text-6xl lg:text-[72px] tracking-[-0.035em] whitespace-pre-line">{m.title[locale]}</h1>
-            <p className="mt-6 text-lg md:text-xl leading-relaxed text-white/75">{m.lede[locale]}</p>
-            <p className="mt-6 flex items-start gap-2 text-[15px] text-white/85"><BrandIcon name="membership" className="w-5 h-5 text-dxb-orange" />{m.founding[locale]}</p>
-            <a href="#apply" className={`mt-9 ${heroPrimary}`}>
-              {m.apply[locale]}
-            </a>
-          </div>
-          <div className="lg:col-span-6">
-            <div className="relative mx-auto max-w-[520px] h-[300px] sm:h-[380px]" dir="ltr">
+      {/* Opening — full-bleed photograph, fanned cards beside the headline */}
+      <PageHero
+        image={BAND}
+        label={m.eyebrow[locale]}
+        title={m.title[locale]}
+        lede={m.lede[locale]}
+        aside={
+          <div className="hidden lg:block">
+            <div className="relative ms-auto max-w-[400px] h-[300px]" dir="ltr">
               {[oasis, pearl, najm].map((tier, i) => (
                 <div
                   key={tier.id}
-                  className="absolute left-1/2 top-1/2 w-[78%]"
+                  className="absolute left-1/2 top-1/2 w-[86%] drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)]"
                   style={{
-                    transform: `translate(-50%, -50%) translate(${(i - 1) * 16}%, ${(i - 1) * 12}%) rotate(${(i - 1) * 7}deg)`,
+                    transform: `translate(-50%, -50%) translate(${(i - 1) * 12}%, ${(i - 1) * 14}%) rotate(${(i - 1) * 7}deg)`,
                     zIndex: i + 1,
                   }}
                 >
                   <MembershipCard finish={tier.id} name={tier.name.en} arabicName={tier.arabicName} label={m.cardLabel.en} />
                 </div>
-              ))}
-            </div>
+              ))}</div>
           </div>
-        </div>
-      </section>
+        }
+      >
+        <a href="#apply" className={heroPrimary}>
+          {m.apply[locale]}
+        </a>
+        <p className="sm:self-center flex items-start gap-2 text-[15px] text-white/80 max-w-sm"><BrandIcon name="membership" className="w-5 h-5 shrink-0 text-dxb-orange" />{m.founding[locale]}</p>
+      </PageHero>
 
       {/* The cards */}
       <section className="bg-dxb-sand">
@@ -75,12 +72,6 @@ export default function Membership({ params: { locale } }: { params: { locale: L
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Image band */}
-      <section className="relative h-[42vh] min-h-[280px] md:h-[60vh] bg-dxb-navy">
-        <Image src={BAND.src ?? ''} alt={BAND.alt} fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-dxb-ink/40 via-transparent to-dxb-ink/30" />
       </section>
 
       {/* Privileges */}

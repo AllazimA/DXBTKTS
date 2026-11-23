@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
 import { PageHero } from '@/components/brand/page-hero'
 import { SectionHeading } from '@/components/brand/section-heading'
+import { aiImage } from '@/lib/images'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'corporate', '/corporate')
@@ -21,7 +22,7 @@ export default async function Corporate({ params }: { params: { locale: Locale }
 
   return (
     <>
-      <PageHero label={t('eyebrow')} title={t('title')} lede={t('sub')} family="city-life" locale={params.locale} />
+      <PageHero image={aiImage('gallery-night', 'eveningEvent', 'Guests in a private lounge overlooking an evening event')} label={t('eyebrow')} title={t('title')} lede={t('sub')} family="city-life" locale={params.locale} />
 
       <section className="py-16 md:py-20 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">

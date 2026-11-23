@@ -760,5 +760,18 @@
     "dining": "Restaurants",
     "nightlife": "Vie nocturne",
     "sourcing": "Éditions limitées"
+  },
+  "manifesto": {
+    "label": "La maison",
+    "statement": "Dubaï offre mille façons de passer une soirée. Nous trouvons la vôtre, et organisons chaque détail autour d’elle.",
+    "stats": {
+      "experiences": "Expériences",
+      "categories": "Catégories",
+      "languages": "Langues",
+      "team": "Équipe sur WhatsApp"
+    },
+    "carouselHint": "Faites glisser",
+    "membershipCta": "Découvrir l’adhésion",
+    "marquee": "Dubaï, telle que nous l’organisons"
   }
 }

@@ -28,7 +28,7 @@ export function Philosophy() {
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-6">
-          <MonoLabel parts={['04', t('eyebrow')]} className="text-dxb-cobalt" />
+          <MonoLabel parts={['06', t('eyebrow')]} className="text-dxb-cobalt" />
           <h2 className="font-display text-4xl md:text-5xl lg:text-[56px] text-dxb-navy mt-4 mb-7">{t.rich('title', { accent })}</h2>
           <div className="space-y-5 text-dxb-ink/80 leading-relaxed text-lg">
             <p>{t('p1')}</p>

@@ -68,15 +68,19 @@ export default function ArticlePage({ params: { locale, slug } }: Props) {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <header className="relative min-h-[72vh] flex items-end bg-dxb-navy text-white overflow-hidden">
-        {img.src && <Image src={img.src} alt={img.alt} fill priority sizes="100vw" className="object-cover" />}
-        <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink via-dxb-ink/55 to-dxb-ink/10" />
-        <div className="relative w-full max-w-4xl mx-auto px-6 pt-32 pb-14 md:pb-20">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-medium font-mono uppercase tracking-[0.06em] text-white/70 hover:text-dxb-gold">
+      <header data-hero-overlay className="dxb-under-header relative min-h-[86svh] flex items-end bg-dxb-ink text-white overflow-hidden">
+        {img.src && (
+          <div className="absolute inset-0 dxb-drift">
+            <Image src={img.src} alt={img.alt} fill priority sizes="100vw" className="object-cover" />
+          </div>
+        )}
+        <div className="absolute inset-0 dxb-vignette" />
+        <div className="relative w-full max-w-5xl mx-auto px-5 sm:px-6 pt-40 pb-14 md:pb-20">
+          <Link href="/blog" className="inline-flex items-center gap-2 dxb-label text-white/70 hover:text-dxb-orange">
             <ArrowLeft className="w-4 h-4 rtl:rotate-180" /> {c.eyebrow[locale]}
           </Link>
-          <p className="mt-8 text-[11px] font-medium font-mono uppercase tracking-[0.06em] text-dxb-gold">{cat.name[locale]}</p>
-          <h1 className="mt-4 font-display text-[2.6rem] leading-[1.05] md:text-6xl">{a.title[locale]}</h1>
+          <p className="mt-8 dxb-label text-dxb-orange">{cat.name[locale]}</p>
+          <h1 className="mt-4 font-display text-[44px] leading-[0.95] md:text-7xl tracking-[-0.04em]"><span className="dxb-line"><span>{a.title[locale]}</span></span></h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/80 font-light">{a.excerpt[locale]}</p>
           <p className="mt-6 text-xs text-white/60">
             {c.byline[locale]} <Tear /> {formatDate(locale, a.published)} <Tear /> {c.minRead[locale].replace('{n}', String(minutes))}

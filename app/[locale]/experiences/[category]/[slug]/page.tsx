@@ -7,8 +7,7 @@ import type { Locale } from '@/i18n.config'
 import { getCategory, getProduct, products, fromPrice } from '@/data/catalogue'
 import { formatAED } from '@/lib/catalogue/money'
 import { productImage } from '@/lib/images'
-import { alternatesFor, site } from '@/lib/site'
-import { SceneImage } from '@/components/ui/scene-image'
+import { alternatesFor, site, whatsappLink } from '@/lib/site'
 import { BookingPanel } from '@/components/catalogue/booking-panel'
 import { ProductCard } from '@/components/catalogue/product-card'
 import { DoorToDoor } from '@/components/catalogue/door-to-door'
@@ -18,7 +17,9 @@ import { shoppingPanel as sp } from '@/content/curated-pages'
 import { ServiceRequestForm } from '@/components/forms/service-request-form'
 import { BrandIcon, Tear } from '@/components/brand'
 import { SectionHeading } from '@/components/brand/section-heading'
-import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
+import { familyOf } from '@/lib/brand'
+import { PageHero, heroPrimary, heroSecondary } from '@/components/brand/page-hero'
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 
 type Props = { params: { locale: Locale; category: string; slug: string } }
 
@@ -84,7 +85,7 @@ export default async function ProductPage({ params: { locale, category: category
     // agreements (priceVerified), so search engines never show placeholders.
   ]
 
-  const fam = FAMILY[familyOf(category.slug)]
+  const fam = familyOf(category.slug)
   const stepUps = (upgrades[product.slug] ?? []).map(slug => getProduct(slug)).filter((x): x is NonNullable<typeof x> => !!x)
 
   const sections: { title: string; items: string[]; icon: 'check' | 'x' | 'info' }[] = [
@@ -97,6 +98,25 @@ export default async function ProductPage({ params: { locale, category: category
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      <PageHero
+        size="medium"
+        image={productImage(product.slug, product.image, product.name[locale])}
+        family={fam}
+        locale={locale}
+        label={category.name[locale]}
+        title={product.name[locale]}
+        lede={product.tagline[locale]}
+      >
+        <a href="#book" className={heroPrimary}>
+          {fromPrice(product) === null ? t('conciergeCta') : `${t('from')} ${formatAED(fromPrice(product)!, locale)}`}
+          <BrandIcon name="arrow" className="w-5 h-5 rotate-90" />
+        </a>
+        <a href={whatsappLink(`Hello DXB TKTS, I'm interested in ${product.name.en}`)} target="_blank" rel="noopener noreferrer" className={heroSecondary}>
+          <WhatsAppIcon className="w-5 h-5 text-[#25D366]" />
+          WhatsApp
+        </a>
+      </PageHero>
 
       <section className="bg-dxb-sand pt-8 pb-16 md:pb-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
@@ -111,19 +131,8 @@ export default async function ProductPage({ params: { locale, category: category
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_400px] gap-10 lg:gap-14 items-start">
             {/* Left: content */}
             <div className="min-w-0">
-              <div className="relative aspect-[16/10] overflow-hidden bg-dxb-navy dxb-cut dxb-cut-lg">
-                <SceneImage image={productImage(product.slug, product.image, product.name[locale])} sizes="(max-width: 1024px) 100vw, 60vw" priority className="object-cover" />
-                <Link href={`/experiences/${category.slug}`} className={`absolute top-4 start-4 inline-flex items-center gap-1.5 h-8 px-3 dxb-label text-[11px] font-semibold ${fam.chip}`}>
-                  <BrandIcon name={CATEGORY_ICON[category.slug] ?? fam.icon} className="w-4 h-4" />
-                  {category.name[locale]}
-                </Link>
-              </div>
-
-              <h1 className="font-display text-[40px] md:text-[56px] tracking-[-0.03em] text-dxb-navy mt-8">{product.name[locale]}</h1>
-              <p className="text-lg md:text-xl text-dxb-ink/75 mt-4 leading-relaxed">{product.tagline[locale]}</p>
-
               {/* Data strip: the ticket's facts, in mono */}
-              <div className="mt-7 dxb-lift">
+              <div className="dxb-lift">
                 <div className="bg-white dxb-stub-h [--stub-y:50%] grid grid-cols-1 sm:grid-cols-[1fr_1fr_1fr_auto] divide-y sm:divide-y-0 sm:divide-x divide-dxb-line rtl:divide-x-reverse">
                   {[
                     { icon: 'clock' as const, value: product.duration[locale] },
@@ -224,7 +233,7 @@ export default async function ProductPage({ params: { locale, category: category
             </div>
 
             {/* Right: booking panel */}
-            <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-none lg:pb-6 lg:-mx-3 lg:px-3" id="book">
+            <aside className="scroll-mt-24 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto scrollbar-none lg:pb-6 lg:-mx-3 lg:px-3" id="book">
               {product.quoteOnly && product.category === 'shopping' ? (
                 <div className="bg-white text-dxb-ink dxb-cut p-7 md:p-8">
                   <p className="dxb-label text-dxb-cobalt">{sp.bespoke[locale]}</p>

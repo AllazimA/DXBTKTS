@@ -21,7 +21,7 @@ export function Clientele() {
   return (
     <section className="py-20 md:py-28 bg-dxb-cobalt text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        <SectionHeading index="06" label={t('eyebrow')} title={t.rich('title', { accent })} tone="dark" className="mb-12" />
+        <SectionHeading index="07" label={t('eyebrow')} title={t.rich('title', { accent })} tone="dark" className="mb-12" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {tiers.map((tier, i) => {
             const visual = visuals[i]

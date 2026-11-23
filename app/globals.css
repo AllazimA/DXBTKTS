@@ -251,6 +251,60 @@
   }
 }
 
+/* A full-bleed hero slides under the sticky header (76px tall at rest). */
+.dxb-under-header {
+  margin-top: -76px;
+}
+
+/* Slow cinematic drift for still photographs. */
+@keyframes dxb-drift {
+  from { transform: scale(1.12) translate3d(0, 0, 0); }
+  to { transform: scale(1.0) translate3d(0, 0, 0); }
+}
+.dxb-drift {
+  animation: dxb-drift 18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Film grain + vignette for cinematic grounds. */
+.dxb-vignette {
+  background:
+    radial-gradient(120% 80% at 50% 40%, transparent 40%, rgba(10, 14, 42, 0.55) 100%),
+    linear-gradient(to top, rgba(10, 14, 42, 0.92) 0%, rgba(10, 14, 42, 0.35) 38%, rgba(10, 14, 42, 0.1) 60%, rgba(10, 14, 42, 0.45) 100%);
+}
+
+/* Line-by-line headline reveal. */
+@keyframes dxb-line {
+  from { transform: translate3d(0, 105%, 0); }
+  to { transform: none; }
+}
+.dxb-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.dxb-line > span {
+  display: block;
+  animation: dxb-line 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes dxb-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes dxb-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Glass ticket on films. */
+.dxb-glass {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 /* CSS entrance: runs before hydration, so above-the-fold text is never held back by JS. */
 @keyframes dxb-rise {
   from { opacity: 0; transform: translateY(16px); }

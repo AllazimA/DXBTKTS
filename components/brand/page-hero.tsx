@@ -7,8 +7,9 @@ import { FAMILY, type Family } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
 /**
- * Inner-page opening: navy ground, mono label, display headline and lede on
- * one side, the page photograph (or film) in a cut-corner frame on the other.
+ * Inner-page opening: a full-bleed film or slowly drifting photograph under a
+ * transparent header, with an oversized headline set low on the frame.
+ * Without an image it falls back to a compact navy opening.
  */
 export function PageHero({
   image,
@@ -21,6 +22,7 @@ export function PageHero({
   children,
   aside,
   className,
+  size = 'tall',
 }: {
   image?: { src: string | null; alt: string }
   film?: { mp4: string; mobile?: string; poster?: string }
@@ -31,26 +33,50 @@ export function PageHero({
   locale?: Locale
   /** Actions under the lede */
   children?: React.ReactNode
-  /** Replaces the photo frame (e.g. membership cards) */
+  /** Shown beside the copy on wide screens (e.g. membership cards) */
   aside?: React.ReactNode
   className?: string
+  size?: 'tall' | 'medium'
 }) {
   const fam = family ? FAMILY[family] : null
-  const hasMedia = Boolean(aside || image?.src)
+  const cinematic = Boolean(image?.src)
 
   return (
-    <section className={cn('relative bg-dxb-navy text-white overflow-hidden', className)}>
+    <section
+      data-hero-overlay
+      className={cn(
+        'dxb-under-header relative overflow-hidden text-white',
+        cinematic ? 'bg-dxb-ink' : 'bg-dxb-navy',
+        cinematic && (size === 'tall' ? 'min-h-[88svh] md:min-h-[92svh]' : 'min-h-[68svh]'),
+        'flex flex-col justify-end',
+        className,
+      )}
+    >
+      {cinematic ? (
+        <>
+          <div className="absolute inset-0 dxb-drift">
+            <Image src={image!.src!} alt={image!.alt} fill priority sizes="100vw" className="object-cover" />
+            {film && <BackgroundFilm {...film} />}
+          </div>
+          <div className="absolute inset-0 dxb-vignette" />
+        </>
+      ) : (
+        <div aria-hidden className="absolute inset-y-0 end-0 w-1/2 dxb-pattern-navy opacity-20 hidden lg:block" />
+      )}
+
       <div
         className={cn(
-          'relative max-w-7xl mx-auto px-5 sm:px-6 py-12 md:py-16 lg:py-20 grid grid-cols-1 gap-10 lg:gap-14 items-center',
-          hasMedia && 'lg:grid-cols-12',
+          'relative w-full max-w-7xl mx-auto px-5 sm:px-6 grid gap-10 items-end',
+          cinematic ? 'pt-40 pb-14 md:pb-20' : 'pt-36 pb-14 md:pt-40 md:pb-20',
+          aside && 'lg:grid-cols-12',
         )}
       >
-        <div className={cn(hasMedia ? 'lg:col-span-6' : 'max-w-4xl', 'order-2 lg:order-1')}>
-          <div className="flex flex-wrap items-center gap-3">
+        <div className={cn(aside ? 'lg:col-span-7' : 'max-w-5xl')}>
+          <div className="dxb-rise flex flex-wrap items-center gap-3" style={{ animationDelay: '60ms' }}>
             {fam && locale && (
-              <span className={cn('inline-flex items-center gap-1.5 h-7 px-2.5 dxb-label text-[11px] font-semibold', fam.chip)}>
-                <BrandIcon name={fam.icon} className="w-3.5 h-3.5" />
+              <span className="inline-flex items-center gap-2 dxb-glass h-8 px-3 dxb-label text-[11px]">
+                <span className={cn('h-2.5 w-2.5', fam.bg)} aria-hidden="true" />
+                <BrandIcon name={fam.icon} className="w-4 h-4" />
                 {fam.label[locale]}
               </span>
             )}
@@ -60,30 +86,30 @@ export function PageHero({
               {label}
             </span>
           </div>
-          <h1 className="mt-6 font-display text-[44px] leading-[0.98] sm:text-6xl lg:text-[72px] tracking-[-0.035em] [font-stretch:110%] whitespace-pre-line">
-            {title}
+          <h1 className="mt-6 font-display text-[48px] leading-[0.92] sm:text-7xl lg:text-[96px] tracking-[-0.045em] [font-stretch:110%] whitespace-pre-line">
+            <span className="dxb-line">
+              <span style={{ animationDelay: '140ms' }}>{title}</span>
+            </span>
           </h1>
-          {lede && <p className="mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/75">{lede}</p>}
-          {children && <div className="mt-9 flex flex-col sm:flex-row flex-wrap gap-3">{children}</div>}
+          {lede && (
+            <p className="dxb-rise mt-6 max-w-2xl text-lg md:text-xl leading-relaxed text-white/80 font-light" style={{ animationDelay: '360ms' }}>
+              {lede}
+            </p>
+          )}
+          {children && (
+            <div className="dxb-rise mt-9 flex flex-col sm:flex-row flex-wrap gap-3" style={{ animationDelay: '480ms' }}>
+              {children}
+            </div>
+          )}
         </div>
-
-        {hasMedia && (
-          <div className="lg:col-span-6 order-1 lg:order-2">
-            {aside ?? (
-              <div className="relative aspect-[16/11] lg:aspect-[5/4] overflow-hidden dxb-cut dxb-cut-lg bg-dxb-ink">
-                <Image src={image!.src!} alt={image!.alt} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                {film && <BackgroundFilm {...film} />}
-              </div>
-            )}
-          </div>
-        )}
+        {aside && <div className="lg:col-span-5">{aside}</div>}
       </div>
     </section>
   )
 }
 
-/** Primary and secondary hero actions, sized for the navy ground. */
+/** Primary and secondary hero actions, sized for dark and cinematic grounds. */
 export const heroPrimary =
-  'inline-flex items-center justify-center gap-2 h-14 px-7 whitespace-nowrap bg-dxb-orange text-dxb-ink font-bold dxb-cut transition-colors hover:bg-dxb-orange-hover'
+  'group inline-flex items-center justify-center gap-2 h-14 px-7 whitespace-nowrap bg-dxb-orange text-dxb-ink font-bold dxb-cut transition-colors hover:bg-white'
 export const heroSecondary =
-  'inline-flex items-center justify-center gap-2.5 h-14 px-7 whitespace-nowrap border-2 border-white/40 text-white font-bold transition-colors hover:border-white hover:bg-white hover:text-dxb-navy'
+  'inline-flex items-center justify-center gap-2.5 h-14 px-7 whitespace-nowrap dxb-glass text-white font-bold transition-colors hover:bg-white hover:text-dxb-navy'

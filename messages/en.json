@@ -760,5 +760,18 @@
     "dining": "Dining",
     "nightlife": "Nightlife",
     "sourcing": "Limited-edition sourcing"
+  },
+  "manifesto": {
+    "label": "The house",
+    "statement": "Dubai has a thousand ways to spend an evening. We find the one that is yours, and arrange every detail around it.",
+    "stats": {
+      "experiences": "Experiences",
+      "categories": "Categories",
+      "languages": "Languages",
+      "team": "Team on WhatsApp"
+    },
+    "carouselHint": "Drag or scroll",
+    "membershipCta": "Discover membership",
+    "marquee": "Dubai, as we arrange it"
   }
 }

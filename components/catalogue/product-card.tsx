@@ -7,7 +7,7 @@ import { formatAED } from '@/lib/catalogue/money'
 import { productImage } from '@/lib/images'
 import { SceneImage } from '@/components/ui/scene-image'
 import { BrandIcon, Perforation } from '@/components/brand'
-import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
+import { FAMILY, familyOf } from '@/lib/brand'
 
 export function productHref(product: Product) {
   return `/experiences/${product.category}/${product.slug}`
@@ -33,13 +33,14 @@ export function ProductCard({ product }: { product: Product }) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <span className={`absolute top-3 start-3 inline-flex items-center gap-1.5 h-7 px-2.5 dxb-label text-[10.5px] font-semibold ${fam.chip}`}>
-            <BrandIcon name={CATEGORY_ICON[product.category] ?? fam.icon} className="w-3.5 h-3.5" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dxb-ink/50 via-transparent to-dxb-ink/30" />
+          <span className="absolute top-3 start-3 inline-flex items-center gap-2 h-7 px-2.5 dxb-glass dxb-label text-[10.5px] text-white">
+            <span className={`h-2 w-2 ${fam.bg}`} aria-hidden="true" />
             {category?.name[locale] ?? fam.label[locale]}
           </span>
         </div>
         <div className="flex flex-1 flex-col px-5 pt-5 pb-4">
-          <h3 className="text-[21px] font-extrabold leading-[1.15] tracking-[-0.02em] text-dxb-navy">{product.name[locale]}</h3>
+          <h3 className="text-[22px] font-extrabold leading-[1.12] tracking-[-0.025em] text-dxb-navy">{product.name[locale]}</h3>
           <p className="mt-2 text-[15px] text-dxb-muted leading-relaxed line-clamp-2">{product.tagline[locale]}</p>
           <div className="mt-auto pt-4 flex flex-wrap gap-x-4 gap-y-1.5 dxb-label text-[11px] text-dxb-muted">
             <span className="inline-flex items-center gap-1.5">

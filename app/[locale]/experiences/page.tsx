@@ -17,6 +17,8 @@ import { PackageCard } from '@/components/packages/package-card'
 import { BrandIcon, Tear } from '@/components/brand'
 import { SectionHeading } from '@/components/brand/section-heading'
 import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
+import { PageHero } from '@/components/brand/page-hero'
+import { aiImage } from '@/lib/images'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'experiences', '/experiences')
@@ -25,18 +27,17 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default async function ExperiencesHub({ params: { locale } }: { params: { locale: Locale } }) {
   const t = await getTranslations('catalogue')
   const th = await getTranslations('home')
-  const accent = (chunks: React.ReactNode) => <span className="text-dxb-cobalt">{chunks}</span>
+  const accent = (chunks: React.ReactNode) => <span className="text-dxb-orange">{chunks}</span>
 
   return (
     <>
-      <section className="pt-12 md:pt-16 pb-10 bg-dxb-sand">
+      <PageHero image={aiImage('category-signature', 'dubaiSkyline', 'A private experience in the Dubai desert at golden hour')} label={t('hubEyebrow')} title={t.rich('hubTitle', { accent })} lede={t('hubSub')} />
+
+      <section className="pt-10 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <span className="dxb-label text-dxb-cobalt inline-flex items-center">DXB TKTS<Tear />{t('hubEyebrow')}</span>
-          <h1 className="font-display text-[44px] leading-[0.98] sm:text-6xl lg:text-[72px] tracking-[-0.035em] text-dxb-navy mt-5 mb-5">{t.rich('hubTitle', { accent })}</h1>
-          <p className="text-lg md:text-xl text-dxb-ink/75 max-w-2xl leading-relaxed mb-6">{t('hubSub')}</p>
-          <IndicativeNotice />
-          <div className="mt-8">
-            <CategoryChips />
+          <CategoryChips />
+          <div className="mt-5">
+            <IndicativeNotice />
           </div>
         </div>
       </section>

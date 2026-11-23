@@ -19,7 +19,7 @@ export default function About({ params: { locale } }: { params: { locale: Locale
   return (
     <>
       {/* Opening */}
-      <PageHero label={about.eyebrow[locale]} title={about.title[locale]} lede={about.lede[locale]} />
+      <PageHero image={aiImage('section-philosophy', 'burjAlArabAerial', 'A DXB TKTS lifestyle manager meeting a guest in Dubai')} label={about.eyebrow[locale]} title={about.title[locale]} lede={about.lede[locale]} />
 
       {/* Story */}
       <section className="bg-white">
