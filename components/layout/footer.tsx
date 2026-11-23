@@ -11,6 +11,7 @@ export function Footer() {
   const t = useTranslations('footer')
   const th = useTranslations('header')
   const tx = useTranslations('footerExtra')
+  const th2 = useTranslations('hero')
 
   const columns = [
     {
@@ -46,8 +47,16 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-dxb-navy text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 pt-16 md:pt-20 pb-10">
+    <footer className="relative bg-dxb-ink text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 pt-16 md:pt-24 pb-10">
+        {/* Sign-off line */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-14 md:pb-20 mb-14 border-b border-white/15">
+          <p className="font-display text-5xl md:text-7xl lg:text-[96px] leading-[0.9] tracking-[-0.045em] max-w-[12ch]">{th2('headline')}</p>
+          <Link href="/request" className="group inline-flex items-center gap-2 h-14 px-7 bg-dxb-orange text-dxb-ink font-bold dxb-cut self-start md:self-end transition-colors hover:bg-white">
+            {th('enquire')}
+            <BrandIcon name="arrow" className="w-5 h-5 transition-transform group-hover:translate-x-1 rtl:rotate-180" />
+          </Link>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
           {/* Brand */}
           <div className="lg:col-span-4">
@@ -105,6 +114,10 @@ export function Footer() {
           <p className="text-[13px] text-white/50">{t('copyright')}</p>
           <p className="text-[15px] font-bold text-white/70">{t('quote')}</p>
         </div>
+      </div>
+      {/* Ghost signature */}
+      <div aria-hidden className="max-w-7xl mx-auto px-5 sm:px-6 -mb-[2%] select-none pointer-events-none">
+        <Logo tone="white" className="w-full h-auto opacity-[0.05]" title="" />
       </div>
     </footer>
   )
