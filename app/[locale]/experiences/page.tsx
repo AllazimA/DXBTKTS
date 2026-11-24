@@ -18,7 +18,7 @@ import { BrandIcon } from '@/components/brand'
 import { SectionHeading } from '@/components/brand/section-heading'
 import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
 import { PageHero } from '@/components/brand/page-hero'
-import { aiImage } from '@/lib/images'
+import { site } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'experiences', '/experiences')
@@ -31,7 +31,7 @@ export default async function ExperiencesHub({ params: { locale } }: { params: {
 
   return (
     <>
-      <PageHero image={aiImage('category-signature', 'dubaiSkyline', 'A private experience in the Dubai desert at golden hour')} label={t('hubEyebrow')} title={t.rich('hubTitle', { accent })} lede={t('hubSub')} />
+      <PageHero image={{ src: site.films.experiencesBeach.poster, alt: 'A couple walking along a quiet UAE beach at sunset' }} film={site.films.experiencesBeach} label={t('hubEyebrow')} title={t.rich('hubTitle', { accent })} lede={t('hubSub')} />
 
       <section className="pt-10 bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">

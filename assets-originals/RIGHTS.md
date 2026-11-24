@@ -36,6 +36,7 @@
 | `public/videos/attractions-burj.mp4` (+ `-mobile`, poster) — Attractions category; 1080p | `video/burj_view_08057cb3_1080p.mp4` |
 | `public/videos/shopping-personal.mp4` (+ `-mobile`, poster) — Shopping category + Services › Shopping row; first 1.3 s cut and cropped to the left 75 % so no "DIOR" shop sign is ever visible (third-party trademark) | `video/shopping_26451a2f_1080p.mp4` |
 | `public/videos/corporate-meeting.mp4` (+ `-mobile`, poster) — Corporate hero; 1080p | `video/business_meeting_6c57fcde_1080p.mp4` |
+| `public/videos/experiences-beach.mp4` (+ `-mobile`, poster) — Experiences overview hero | `video/beach_walk_experiences.mp4` |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |
