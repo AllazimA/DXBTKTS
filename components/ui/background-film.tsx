@@ -112,10 +112,10 @@ export function FilmVideo({ film, playing = true, eager = false, className = '' 
  * allowed and the connection is not slow or in data-saver mode; otherwise the
  * page keeps its still image underneath.
  */
-export function BackgroundFilm({ mp4, mobile, poster, className = '', eager = false }: Film & { className?: string; eager?: boolean }) {
+export function BackgroundFilm({ mp4, mobile, poster, className = '', eager = false, playing = true }: Film & { className?: string; eager?: boolean; playing?: boolean }) {
   const allowed = useFilmsAllowed()
   // Eager films render from the server and are removed only if the browser
   // turns out to ask for reduced motion or data saving.
   if (allowed === false || (allowed === null && !eager)) return null
-  return <FilmVideo film={{ mp4, mobile, poster }} className={className} eager={eager} />
+  return <FilmVideo film={{ mp4, mobile, poster }} className={className} eager={eager} playing={playing} />
 }

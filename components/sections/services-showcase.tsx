@@ -4,7 +4,7 @@ import { SceneImage } from '@/components/ui/scene-image'
 import { aiImage } from '@/lib/images'
 import { site } from '@/lib/site'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { BackgroundFilm } from '@/components/ui/background-film'
 import { BrandIcon, MonoLabel, Tear } from '@/components/brand'
@@ -12,12 +12,12 @@ import { CATEGORY_ICON, FAMILY, familyOf } from '@/lib/brand'
 import type { Locale } from '@/i18n.config'
 
 const visuals = [
-  { image: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter flying over Palm Jumeirah'), category: 'sky' },
-  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water' }, // the yacht film already opens the page
+  { image: aiImage('category-sky', 'burjAlArabAerial', 'Helicopter flying over Palm Jumeirah'), category: 'sky', film: site.films.skyHelicopter },
+  { image: aiImage('category-on-the-water', 'yacht', 'Private yacht anchored off the Dubai coast'), category: 'on-the-water', film: site.heroVideo ?? undefined },
   { image: aiImage('category-lifestyle', 'fineDining', 'Dinner table on a terrace above Dubai Marina'), category: 'lifestyle', film: site.films.diningArrival },
   { image: aiImage('page-proposal', 'privateVilla', 'Proposal on a beachfront terrace at sunset'), category: 'signature', film: site.films.celebrationProposal },
-  { image: aiImage('category-desert', 'desert', 'Riders on a dune ridge at sunset'), category: 'desert' },
-  { image: aiImage('category-transfers', 'arrival', 'Chauffeur opening the door of a luxury car'), category: 'transfers' },
+  { image: aiImage('category-desert', 'desert', 'Riders on a dune ridge at sunset'), category: 'desert', film: site.films.desertDunes },
+  { image: aiImage('category-transfers', 'arrival', 'Chauffeur opening the door of a luxury car'), category: 'transfers', film: site.films.transfersArrival },
 ]
 
 /**
@@ -29,6 +29,30 @@ export function ServicesShowcase() {
   const locale = useLocale() as Locale
   const items = t.raw('items') as { title: string; desc: string }[]
   const accent = (chunks: React.ReactNode) => <span className="text-dxb-orange">{chunks}</span>
+
+  // Scenes stack: once the next one has slid fully over, the one beneath is
+  // hidden, so only scenes actually showing play their film.
+  const panels = useRef<(HTMLDivElement | null)[]>([])
+  const [showing, setShowing] = useState<boolean[]>(() => items.map(() => false))
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const vh = window.innerHeight
+      const tops = panels.current.map(el => (el ? el.getBoundingClientRect().top : Infinity))
+      const next = tops.map((top, i) => top < vh && !(i + 1 < tops.length && tops[i + 1] <= 0))
+      setShowing(prev => (prev.length === next.length && prev.every((v, i) => v === next[i]) ? prev : next))
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
 
   return (
     <section className="relative bg-dxb-ink text-white">
@@ -49,10 +73,10 @@ export function ServicesShowcase() {
           <Fragment key={s.title}>
           {/* A transparent spacer lets each scene hold full-screen before the next slides over it. */}
           {i > 0 && <div aria-hidden className="h-[40svh]" />}
-          <div className="sticky top-0 h-[100svh] min-h-[560px] overflow-hidden" style={{ zIndex: i + 1 }}>
+          <div ref={el => { panels.current[i] = el }} className="sticky top-0 h-[100svh] min-h-[560px] overflow-hidden" style={{ zIndex: i + 1 }}>
             <div className="absolute inset-0 bg-dxb-ink">
               <SceneImage image={v.image} sizes="100vw" className="object-cover" />
-              {v.film && <BackgroundFilm {...v.film} />}
+              {v.film && <BackgroundFilm {...v.film} playing={showing[i]} />}
             </div>
             <div className="absolute inset-0 dxb-vignette" />
             <div className="relative h-full max-w-7xl mx-auto px-5 sm:px-6 flex flex-col justify-end pb-14 md:pb-20">

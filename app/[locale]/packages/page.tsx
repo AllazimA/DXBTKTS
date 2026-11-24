@@ -1,14 +1,13 @@
 import type { Metadata } from 'next'
 import type { Locale } from '@/i18n.config'
 import { pageMetadata } from '@/lib/metadata'
-import { aiImage } from '@/lib/images'
 import { packages, type Package } from '@/data/packages'
 import { packagesCopy as c } from '@/content/packages'
 import { PackageCard } from '@/components/packages/package-card'
 import { IndicativeNotice } from '@/components/catalogue/catalogue-header'
 import { PageHero } from '@/components/brand/page-hero'
+import { site } from '@/lib/site'
 
-const HERO = aiImage('gallery-icons', 'dubaiSkyline', 'Dubai skyline in the evening light')
 const THEMES: Package['theme'][] = ['first-visit', 'downtown', 'palm', 'family', 'desert', 'romance']
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
@@ -18,7 +17,7 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 export default function PackagesPage({ params: { locale } }: { params: { locale: Locale } }) {
   return (
     <>
-      <PageHero image={HERO} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} />
+      <PageHero image={{ src: site.films.transfersArrival.poster, alt: 'A chauffeur opening the car door for a guest at a Dubai hotel' }} film={site.films.transfersArrival} label={c.eyebrow[locale]} title={c.title[locale]} lede={c.lede[locale]} />
 
       <section className="bg-dxb-sand">
         <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
