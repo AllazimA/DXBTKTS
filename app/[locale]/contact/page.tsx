@@ -8,7 +8,6 @@ import { SocialLinks } from '@/components/layout/social-links'
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon'
 import { BrandIcon, Perforation } from '@/components/brand'
 import { PageHero, heroPrimary } from '@/components/brand/page-hero'
-import { aiImage } from '@/lib/images'
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   return pageMetadata(params.locale, 'contact', '/contact')
@@ -27,7 +26,7 @@ export default async function Contact() {
 
   return (
     <>
-      <PageHero image={aiImage('gallery-journey', 'arrival', 'Chauffeur waiting beside a car at the hotel entrance')} size="medium" label={t('eyebrow')} title={t('title')} lede={t('sub')}>
+      <PageHero image={{ src: site.films.contactConcierge.poster, alt: 'A DXB TKTS concierge answering a call at a lobby desk at golden hour' }} film={site.films.contactConcierge} size="medium" label={t('eyebrow')} title={t('title')} lede={t('sub')}>
         <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className={heroPrimary}>
           <WhatsAppIcon className="w-5 h-5" />
           {t('whatsappCta')}

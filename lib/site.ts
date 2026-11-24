@@ -42,6 +42,7 @@ export const site = {
     shoppingPersonal: { mp4: '/videos/shopping-personal.mp4', mobile: '/videos/shopping-personal-mobile.mp4', poster: '/images/film-shopping-personal-poster.webp' }, // trimmed + cropped: no designer shop signs
     corporateMeeting: { mp4: '/videos/corporate-meeting.mp4', mobile: '/videos/corporate-meeting-mobile.mp4', poster: '/images/film-corporate-meeting-poster.webp' },
     experiencesBeach: { mp4: '/videos/experiences-beach.mp4', mobile: '/videos/experiences-beach-mobile.mp4', poster: '/images/film-experiences-beach-poster.webp' },
+    contactConcierge: { mp4: '/videos/contact-concierge.mp4', mobile: '/videos/contact-concierge-mobile.mp4', poster: '/images/film-contact-concierge-poster.webp' },
     // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
     membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },
