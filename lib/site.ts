@@ -40,6 +40,7 @@ export const site = {
     daytripsHatta: { mp4: '/videos/daytrips-hatta.mp4', mobile: '/videos/daytrips-hatta-mobile.mp4', poster: '/images/film-daytrips-hatta-poster.webp' },
     attractionsBurj: { mp4: '/videos/attractions-burj.mp4', mobile: '/videos/attractions-burj-mobile.mp4', poster: '/images/film-attractions-burj-poster.webp' },
     shoppingPersonal: { mp4: '/videos/shopping-personal.mp4', mobile: '/videos/shopping-personal-mobile.mp4', poster: '/images/film-shopping-personal-poster.webp' }, // trimmed + cropped: no designer shop signs
+    corporateMeeting: { mp4: '/videos/corporate-meeting.mp4', mobile: '/videos/corporate-meeting-mobile.mp4', poster: '/images/film-corporate-meeting-poster.webp' },
     // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
     membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },
