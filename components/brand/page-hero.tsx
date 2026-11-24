@@ -59,7 +59,7 @@ export function PageHero({
         <>
           <div className="absolute inset-0 dxb-drift">
             <Image src={image!.src!} alt={image!.alt} fill priority sizes="100vw" className="object-cover" />
-            {film && <BackgroundFilm {...film} />}
+            {film && <BackgroundFilm {...film} eager />}
           </div>
           <div className="absolute inset-0 dxb-vignette" />
           {dim && <div className="absolute inset-0 bg-gradient-to-r from-dxb-ink/75 via-dxb-ink/45 to-dxb-ink/20 rtl:bg-gradient-to-l" />}

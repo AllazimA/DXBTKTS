@@ -72,7 +72,7 @@ export function Hero() {
               {c.still.src && (
                 <Image src={c.still.src} alt={c.still.alt} fill priority={i === 0} sizes="100vw" className="object-cover" />
               )}
-              {motionOk && c.film && Math.abs(i - active) <= 1 && <HeroFilm film={c.film} playing={i === active} />}
+              {c.film && (motionOk || (motionOk === null && i === 0)) && Math.abs(i - active) <= 1 && <HeroFilm film={c.film} playing={i === active} eager={i === 0} />}
             </div>
           </div>
         ))}
@@ -174,8 +174,8 @@ export function Hero() {
   )
 }
 
-function HeroFilm({ film, playing }: { film: Film; playing: boolean }) {
-  return <FilmVideo film={film} playing={playing} />
+function HeroFilm({ film, playing, eager }: { film: Film; playing: boolean; eager?: boolean }) {
+  return <FilmVideo film={film} playing={playing} eager={eager} />
 }
 
 /**

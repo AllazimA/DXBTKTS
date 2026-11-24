@@ -30,6 +30,7 @@ const SERVICE_IMAGES: Record<string, SceneImage> = {
 /** Rows that carry a film instead of a still. */
 const SERVICE_FILMS: Record<string, Film | undefined> = {
   occasions: site.films.celebrationProposal,
+  shopping: site.films.shoppingPersonal,
 }
 
 export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {

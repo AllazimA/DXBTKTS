@@ -26,7 +26,7 @@ export const site = {
     diningTerrace: { mp4: '/videos/dining-terrace.mp4', mobile: '/videos/dining-terrace-mobile.mp4', poster: '/images/film-dining-terrace-poster.webp' },
     nightlifeLounge: { mp4: '/videos/nightlife-lounge.mp4', mobile: '/videos/nightlife-lounge-mobile.mp4', poster: '/images/film-nightlife-lounge-poster.webp' },
     // Owner's films, 2026-11-23 (720p masters in assets-originals/video).
-    membershipCard: { mp4: '/videos/membership-card.mp4', mobile: '/videos/membership-card-mobile.mp4', poster: '/images/film-membership-card-poster.webp' }, // cropped: no champagne flute
+    membershipCard: { mp4: '/videos/membership-welcome.mp4', mobile: '/videos/membership-welcome-mobile.mp4', poster: '/images/film-membership-welcome-poster.webp' }, // owner's corrected cut (2026-11-24): 'Welcome to DXB TKTS World', no glass
     nightlifeClub: { mp4: '/videos/nightlife-club.mp4', mobile: '/videos/nightlife-club-mobile.mp4', poster: '/images/film-nightlife-club-poster.webp' },
     celebrationProposal: { mp4: '/videos/celebration-proposal.mp4', mobile: '/videos/celebration-proposal-mobile.mp4', poster: '/images/film-celebration-proposal-poster.webp' },
     diningArrival: { mp4: '/videos/dining-arrival.mp4', mobile: '/videos/dining-arrival-mobile.mp4', poster: '/images/film-dining-arrival-poster.webp' },
@@ -36,6 +36,10 @@ export const site = {
     transfersArrival: { mp4: '/videos/transfers-arrival.mp4', mobile: '/videos/transfers-arrival-mobile.mp4', poster: '/images/film-transfers-arrival-poster.webp' },
     skyHelicopter: { mp4: '/videos/sky-helicopter.mp4', mobile: '/videos/sky-helicopter-mobile.mp4', poster: '/images/film-sky-helicopter-poster.webp' },
     desertDunes: { mp4: '/videos/desert-dunes.mp4', mobile: '/videos/desert-dunes-mobile.mp4', poster: '/images/film-desert-dunes-poster.webp' },
+    // Owner's films, round 4 (2026-11-24).
+    daytripsHatta: { mp4: '/videos/daytrips-hatta.mp4', mobile: '/videos/daytrips-hatta-mobile.mp4', poster: '/images/film-daytrips-hatta-poster.webp' },
+    attractionsBurj: { mp4: '/videos/attractions-burj.mp4', mobile: '/videos/attractions-burj-mobile.mp4', poster: '/images/film-attractions-burj-poster.webp' },
+    shoppingPersonal: { mp4: '/videos/shopping-personal.mp4', mobile: '/videos/shopping-personal-mobile.mp4', poster: '/images/film-shopping-personal-poster.webp' }, // trimmed + cropped: no designer shop signs
     // First 3.4 s of the master only: the box's inner lid and welcome card carry garbled AI text.
     membershipBox: { mp4: '/videos/membership-box.mp4', mobile: '/videos/membership-box-mobile.mp4', poster: '/images/film-membership-box-poster.webp' },
   },

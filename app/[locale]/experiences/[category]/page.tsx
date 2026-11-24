@@ -22,6 +22,9 @@ const CATEGORY_FILMS: Record<string, Film | undefined> = {
   sky: site.films.skyHelicopter,
   desert: site.films.desertDunes,
   transfers: site.films.transfersArrival,
+  'day-trips': site.films.daytripsHatta,
+  attractions: site.films.attractionsBurj,
+  shopping: site.films.shoppingPersonal,
 }
 
 type Props = { params: { locale: Locale; category: string } }

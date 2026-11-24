@@ -31,6 +31,10 @@
 | `public/videos/sky-helicopter.mp4` (+ `-mobile`, poster) — Sky category + homepage Sky chapter | `video/helicopter_dubai_4f556830.mp4` |
 | `public/videos/desert-dunes.mp4` (+ `-mobile`, poster) — Desert category + homepage Sand chapter; 1080p | `video/desert_travel_ec0e307a_1080p.mp4` |
 | About hero now uses `membership-box.mp4` (concierge welcome box) | — |
+| `public/videos/membership-welcome.mp4` (+ `-mobile`, `film-membership-welcome-poster.webp`) — Membership hero; owner's corrected cut 2026-11-24 ("Welcome to DXB TKTS World", no glass); replaces `membership-card.mp4` (renamed so browsers don't keep the cached old film) | `video/membership_card_v2_832d6441.mp4` |
+| `public/videos/daytrips-hatta.mp4` (+ `-mobile`, poster) — Day trips category; 1080p | `video/hatta_9ff4f836_1080p.mp4` |
+| `public/videos/attractions-burj.mp4` (+ `-mobile`, poster) — Attractions category; 1080p | `video/burj_view_08057cb3_1080p.mp4` |
+| `public/videos/shopping-personal.mp4` (+ `-mobile`, poster) — Shopping category + Services › Shopping row; first 1.3 s cut and cropped to the left 75 % so no "DIOR" shop sign is ever visible (third-party trademark) | `video/shopping_26451a2f_1080p.mp4` |
 
 ## Images (59 web files from 45 masters)
 | Web file | Master (`assets-originals/ai/`) |

@@ -4,9 +4,12 @@ import { useEffect, useRef, useState } from 'react'
 
 export type Film = { mp4: string; mobile?: string; poster?: string }
 
-/** Films play when motion is allowed and data saving is off. */
+/**
+ * Films play when motion is allowed and data saving is off.
+ * null until the browser has been asked (i.e. on the server and before hydration).
+ */
 export function useFilmsAllowed() {
-  const [ok, setOk] = useState(false)
+  const [ok, setOk] = useState<boolean | null>(null)
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
@@ -25,11 +28,14 @@ export function useFilmsAllowed() {
  * play() is called explicitly (and again when the tab becomes visible), and
  * the film fades in over its poster once real frames are moving.
  */
-export function FilmVideo({ film, playing = true, className = '' }: { film: Film; playing?: boolean; className?: string }) {
+export function FilmVideo({ film, playing = true, eager = false, className = '' }: { film: Film; playing?: boolean; eager?: boolean; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null)
-  const [live, setLive] = useState(false)
+  // An eager film (a page opening) is in the server HTML with autoplay, so the
+  // browser starts it before any JavaScript runs; it shows at once, its poster
+  // being the same frame as the still underneath. Other films fade in once playing.
+  const [live, setLive] = useState(eager)
   // Films off screen stay paused, so the six homepage scenes don't all play at once.
-  const [inView, setInView] = useState(false)
+  const [inView, setInView] = useState(eager)
   useEffect(() => {
     const v = ref.current
     if (!v || !('IntersectionObserver' in window)) return setInView(true)
@@ -51,6 +57,7 @@ export function FilmVideo({ film, playing = true, className = '' }: { film: Film
     v.setAttribute('playsinline', '')
     v.setAttribute('webkit-playsinline', '')
     const onPlaying = () => setLive(true)
+    if (!v.paused) setLive(true)
     v.addEventListener('playing', onPlaying)
     return () => v.removeEventListener('playing', onPlaying)
   }, [])
@@ -105,8 +112,10 @@ export function FilmVideo({ film, playing = true, className = '' }: { film: Film
  * allowed and the connection is not slow or in data-saver mode; otherwise the
  * page keeps its still image underneath.
  */
-export function BackgroundFilm({ mp4, mobile, poster, className = '' }: Film & { className?: string }) {
+export function BackgroundFilm({ mp4, mobile, poster, className = '', eager = false }: Film & { className?: string; eager?: boolean }) {
   const allowed = useFilmsAllowed()
-  if (!allowed) return null
-  return <FilmVideo film={{ mp4, mobile, poster }} className={className} />
+  // Eager films render from the server and are removed only if the browser
+  // turns out to ask for reduced motion or data saving.
+  if (allowed === false || (allowed === null && !eager)) return null
+  return <FilmVideo film={{ mp4, mobile, poster }} className={className} eager={eager} />
 }
