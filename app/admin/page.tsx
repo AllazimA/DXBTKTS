@@ -1,5 +1,5 @@
 import { loadDesk, type PlanRecord } from '@/lib/admin-data'
-import { templates, templateLabels, fillTemplate, type TemplateKey } from '@/content/whatsapp-templates'
+import { templates, templateLabels, fillTemplate, greetingFor, type TemplateKey } from '@/content/whatsapp-templates'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,6 +16,8 @@ function messageFor(key: TemplateKey, b: PlanRecord) {
   const items = b.items.map(i => `${i.product}${i.date ? ` (${i.date})` : ''}`).join(', ')
   const firstDate = b.items.map(i => i.date).filter(Boolean).sort()[0] ?? ''
   return fillTemplate(templates[key][lang], {
+    greeting: greetingFor(lang),
+    fullname: b.customer.name.trim(),
     name: b.customer.name.split(' ')[0],
     ref: b.reference,
     items,

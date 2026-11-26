@@ -2,7 +2,8 @@ import type { L } from '@/lib/catalogue/types'
 
 /**
  * Guest messages sent by the team from the admin view (wa.me links, prefilled).
- * Placeholders: {name} {ref} {items} {first} {date}
+ * Placeholders: {greeting} {fullname} {name} {ref} {items} {first} {date}
+ * Register: brand voice v1.1 (luxury): courteous, full sentences, signed by the concierge, no emoji.
  * Strategy report: opportunity 9 (pre-arrival upsell) and 10 (reviews).
  * Reviews are asked for honestly — never incentivised, never filtered.
  */
@@ -20,25 +21,34 @@ export const templateLabels: Record<TemplateKey, string> = {
 
 export const templates: Record<TemplateKey, L> = {
   received: t(
-    'Hello {name}, thank you for your request {ref} with DXB TKTS. Your concierge is checking availability for {items} and will confirm everything with you here shortly.',
-    'Bonjour {name}, merci pour votre demande {ref} auprès de DXB TKTS. Votre concierge vérifie les disponibilités pour {items} et vous confirme tout ici très vite.',
-    'مرحباً {name}، شكراً لطلبك {ref} لدى DXB TKTS. يتحقق فريق الكونسيرج من توفر {items} وسنؤكد لك كل شيء هنا قريباً.',
+    '{greeting}, {fullname}. Thank you for your request with DXB TKTS (reference {ref}). Your concierge is now confirming availability for {items}, and will return to you here shortly with every detail. — Your concierge, DXB TKTS',
+    '{greeting} {fullname}, nous vous remercions de votre demande auprès de DXB TKTS (référence {ref}). Votre concierge confirme actuellement les disponibilités pour {items} et reviendra vers vous ici très prochainement avec tous les détails. — Votre concierge, DXB TKTS',
+    '{greeting} {fullname}، نشكركم على طلبكم لدى DXB TKTS (المرجع {ref}). يقوم الكونسيرج الخاص بكم حالياً بتأكيد توفر {items}، وسيعود إليكم هنا قريباً بكامل التفاصيل. — الكونسيرج الخاص بكم، DXB TKTS',
   ),
   preArrival: t(
-    'Hello {name}, we look forward to welcoming you to Dubai. Your plan ({ref}): {items}. Would you like us to add anything before you arrive — a car from the airport, a table for your first evening, or Burj Khalifa at sunset?',
-    'Bonjour {name}, nous avons hâte de vous accueillir à Dubaï. Votre programme ({ref}) : {items}. Souhaitez-vous ajouter quelque chose avant votre arrivée — une voiture depuis l’aéroport, une table pour votre premier soir ou Burj Khalifa au coucher du soleil ?',
-    'مرحباً {name}، نتطلع إلى استقبالك في دبي. خطتك ({ref}): {items}. هل تود أن نضيف شيئاً قبل وصولك — سيارة من المطار، أو طاولة لأمسيتك الأولى، أو برج خليفة عند الغروب؟',
+    '{greeting}, {fullname}. We look forward to welcoming you to Dubai. Your arrangements ({ref}): {items}. May we prepare anything further before you arrive? A chauffeur from the airport, a table for your first evening or Burj Khalifa at sunset would be our pleasure to arrange. — Your concierge, DXB TKTS',
+    '{greeting} {fullname}, nous nous réjouissons de vous accueillir à Dubaï. Vos réservations ({ref}) : {items}. Pouvons-nous préparer autre chose avant votre arrivée ? Un chauffeur à l’aéroport, une table pour votre première soirée ou Burj Khalifa au coucher du soleil : ce serait avec plaisir. — Votre concierge, DXB TKTS',
+    '{greeting} {fullname}، يسعدنا أن نستقبلكم في دبي. ترتيباتكم ({ref}): {items}. هل تودّون أن نُعدّ لكم أي شيء آخر قبل وصولكم؟ سائق خاص من المطار، أو طاولة لأمسيتكم الأولى، أو برج خليفة عند الغروب، يسعدنا ترتيب ذلك. — الكونسيرج الخاص بكم، DXB TKTS',
   ),
   dayBefore: t(
-    'Hello {name}, a quick reminder for {date}: {items}. Your driver and guide details will follow here. Message us any time if anything changes.',
-    'Bonjour {name}, petit rappel pour le {date} : {items}. Les coordonnées de votre chauffeur et de votre guide suivront ici. Écrivez-nous à tout moment en cas de changement.',
-    'مرحباً {name}، تذكير سريع ليوم {date}: {items}. ستصلك تفاصيل السائق والمرشد هنا. راسلنا في أي وقت إذا تغيّر شيء.',
+    '{greeting}, {fullname}. Everything is in place for {date}: {items}. Your chauffeur’s and guide’s details will follow here. Should anything change, simply message us and we will take care of it. — Your concierge, DXB TKTS',
+    '{greeting} {fullname}, tout est prêt pour le {date} : {items}. Les coordonnées de votre chauffeur et de votre guide suivront ici. En cas de changement, il vous suffit de nous écrire et nous nous en occuperons. — Votre concierge, DXB TKTS',
+    '{greeting} {fullname}، كل شيء جاهز ليوم {date}: {items}. ستصلكم تفاصيل السائق والمرشد هنا. وإن طرأ أي تغيير، يكفي أن تراسلونا وسنتولى الأمر. — الكونسيرج الخاص بكم، DXB TKTS',
   ),
   review: t(
-    'Hello {name}, thank you for spending part of your stay with DXB TKTS. How was {first}? A few honest lines from you help us — and other travellers — more than anything.',
-    'Bonjour {name}, merci d’avoir passé une partie de votre séjour avec DXB TKTS. Comment s’est passé {first} ? Quelques lignes sincères de votre part nous aident — ainsi que d’autres voyageurs — plus que tout.',
-    'مرحباً {name}، شكراً لقضائك جزءاً من إقامتك مع DXB TKTS. كيف كانت تجربة {first}؟ بضع كلمات صادقة منك تساعدنا — وتساعد المسافرين الآخرين — أكثر من أي شيء.',
+    '{greeting}, {fullname}. Thank you for allowing us to arrange {first} during your stay. We would be grateful for a few honest words about your experience: they help us, and future guests, more than anything. — Your concierge, DXB TKTS',
+    '{greeting} {fullname}, nous vous remercions de nous avoir confié {first} pendant votre séjour. Quelques mots sincères sur votre expérience nous seraient précieux : ils nous aident, ainsi que nos futurs hôtes, plus que tout. — Votre concierge, DXB TKTS',
+    '{greeting} {fullname}، نشكركم على منحنا شرف ترتيب {first} خلال إقامتكم. يسعدنا أن نسمع منكم بضع كلمات صادقة عن تجربتكم، فهي تساعدنا وتساعد ضيوفنا القادمين أكثر من أي شيء. — الكونسيرج الخاص بكم، DXB TKTS',
   ),
+}
+
+/** Time-of-day greeting in Dubai, per language (luxury register, brand voice v1.1). */
+export function greetingFor(lang: 'en' | 'fr' | 'ar', now: Date = new Date()) {
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Dubai', hour: '2-digit', hourCycle: 'h23' }).format(now))
+  const part = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening'
+  if (lang === 'fr') return part === 'evening' ? 'Bonsoir' : 'Bonjour'
+  if (lang === 'ar') return part === 'morning' ? 'صباح الخير' : 'مساء الخير'
+  return part === 'morning' ? 'Good morning' : part === 'afternoon' ? 'Good afternoon' : 'Good evening'
 }
 
 export function fillTemplate(text: string, values: Record<string, string>) {
